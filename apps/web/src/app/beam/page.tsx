@@ -18,6 +18,7 @@ export default function BeamDetailing() {
     stirrupSpacing: 150,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [KonvaComps, setKonvaComps] = useState<any>(null);
   
   useEffect(() => {

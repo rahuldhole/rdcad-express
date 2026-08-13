@@ -18,6 +18,7 @@ export default function GridUtilities() {
   const [findText, setFindText] = useState("");
   const [replaceText, setReplaceText] = useState("");
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [KonvaComps, setKonvaComps] = useState<any>(null);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function GridUtilities() {
     });
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleCanvasClick = (e: any) => {
     // only add if we clicked on the stage, not on an existing label
     if (e.target === e.target.getStage()) {
@@ -44,6 +46,7 @@ export default function GridUtilities() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleDragEnd = (e: any, id: string) => {
     const updatedNodes = nodes.map(node => {
       if (node.id === id) {
@@ -103,7 +106,7 @@ export default function GridUtilities() {
                 <label className="block text-sm text-slate-400 mb-1">Next Number</label>
                 <input type="number" value={startNum} onChange={e => setStartNum(Number(e.target.value))} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
               </div>
-              <p className="text-xs text-slate-500">Click on the canvas to place '{prefix}{startNum}'</p>
+              <p className="text-xs text-slate-500">Click on the canvas to place &apos;{prefix}{startNum}&apos;</p>
             </div>
 
             <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
@@ -140,6 +143,7 @@ export default function GridUtilities() {
                       fontSize={24}
                       fill="#e2e8f0"
                       draggable
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       onDragEnd={(e: any) => handleDragEnd(e, node.id)}
                     />
                   ))}

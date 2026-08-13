@@ -39,7 +39,7 @@ export default function BBSGenerator() {
 
   const handleChange = (index: number, field: keyof RebarElement, value: string | number) => {
     const newRows = [...rows];
-    // @ts-ignore
+    // @ts-expect-error Dynamic field assignment
     newRows[index][field] = value;
     setRows(newRows);
   };
