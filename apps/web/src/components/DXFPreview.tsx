@@ -33,8 +33,14 @@ export default function DXFPreview({ dxfString }: DXFPreviewProps) {
 
         if (dxfString && isMounted) {
           setError(null);
-          // Wait for load to finish
-          await viewerRef.current.Load(dxfString);
+          const blob = new Blob([dxfString], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+          try {
+            // Wait for load to finish
+            await viewerRef.current.Load({ url });
+          } finally {
+            URL.revokeObjectURL(url);
+          }
         }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
