@@ -222,11 +222,11 @@ export function exportTankSectionToDXF(data: TankScheduleRow): string {
   // Right wall outer
   dxf.drawLine(outerW - cover, cover, outerW - cover, outerH - cover);
   // Right wall inner
-  dxf.drawLine(outerW - wt + cover, outerH - cover, outerW - wt + cover, wt + cover);
+  dxf.drawLine(outerW - wt + cover, outerH - cover, outerW - wt + cover, wt - cover);
   // Base slab top
-  dxf.drawLine(outerW - wt + cover, wt + cover, wt - cover, wt + cover);
+  dxf.drawLine(outerW - wt + cover, wt - cover, wt - cover, wt - cover);
   // Left wall inner
-  dxf.drawLine(wt - cover, wt + cover, wt - cover, outerH - cover);
+  dxf.drawLine(wt - cover, wt - cover, wt - cover, outerH - cover);
   // Left wall outer
   dxf.drawLine(cover, outerH - cover, cover, cover);
   // Connect at tops (hooks)
@@ -244,7 +244,7 @@ export function exportTankSectionToDXF(data: TankScheduleRow): string {
     const x = cover + i * actualBaseSpacing;
     dxf.drawCircle(x, cover + barRadius * 2, barRadius); // bottom
     if (x > wt && x < outerW - wt) {
-      dxf.drawCircle(x, wt + cover - barRadius * 2, barRadius); // top inner
+      dxf.drawCircle(x, wt - cover - barRadius * 2, barRadius); // top inner
     }
   }
   
