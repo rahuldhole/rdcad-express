@@ -41,11 +41,13 @@ export default function BeamDetailing() {
 
   const scale = 0.5; // Scale down for display
   const cover = 40 * scale;
-  const w = beamData.width * scale;
-  const d = beamData.depth * scale;
-  const barR = (beamData.bottomBarDia / 2) * scale;
+  const w = Math.max(0, beamData.width * scale);
+  const d = Math.max(0, beamData.depth * scale);
+  const barR = Math.max(0, (beamData.bottomBarDia / 2) * scale);
   const cx = 300 - w / 2;
   const cy = 250 - d / 2;
+  const stirrupW = Math.max(0, w - 2 * cover);
+  const stirrupH = Math.max(0, d - 2 * cover);
 
   const Stage = KonvaComps?.Stage;
   const Layer = KonvaComps?.Layer;
@@ -102,12 +104,12 @@ export default function BeamDetailing() {
                   {/* Concrete */}
                   <Rect x={cx} y={cy} width={w} height={d} stroke="white" strokeWidth={2} />
                   {/* Stirrup */}
-                  <Rect x={cx + cover} y={cy + cover} width={w - 2 * cover} height={d - 2 * cover} stroke="#3b82f6" strokeWidth={2} cornerRadius={4} />
+                  <Rect x={cx + cover} y={cy + cover} width={stirrupW} height={stirrupH} stroke="#3b82f6" strokeWidth={2} cornerRadius={Math.min(4, stirrupW/2, stirrupH/2)} />
                   {/* Bottom Bars */}
                   {Array.from({ length: beamData.bottomBarCount }).map((_, i) => (
                     <Circle 
                       key={`b-${i}`} 
-                      x={cx + cover + i * ((w - 2 * cover) / Math.max(1, beamData.bottomBarCount - 1))} 
+                      x={cx + cover + i * (stirrupW / Math.max(1, beamData.bottomBarCount - 1))} 
                       y={cy + d - cover} 
                       radius={barR} 
                       fill="#ef4444" 
@@ -117,7 +119,7 @@ export default function BeamDetailing() {
                   {Array.from({ length: 2 }).map((_, i) => (
                     <Circle 
                       key={`t-${i}`} 
-                      x={cx + cover + i * ((w - 2 * cover) / 1)} 
+                      x={cx + cover + i * (stirrupW / 1)} 
                       y={cy + cover} 
                       radius={barR} 
                       fill="#ef4444" 

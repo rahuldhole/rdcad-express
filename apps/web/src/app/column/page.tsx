@@ -41,14 +41,16 @@ export default function ColumnDetailing() {
   const Rect = KonvaComps?.Rect;
   const Circle = KonvaComps?.Circle;
 
-  const side = 400 * 0.6; // Visual scaling
-  const cover = 40 * 0.6;
-  const barR = (colData.mainBarDia / 2) * 0.6;
+  const scale = 0.6;
+  const side = Math.max(0, 400 * scale); // Visual scaling
+  const cover = 40 * scale;
+  const barR = Math.max(0, (colData.mainBarDia / 2) * scale);
   const cx = 300 - side / 2;
   const cy = 250 - side / 2;
+  const tieW = Math.max(0, side - 2 * cover);
 
   // Simple arrangement for 8 bars
-  const spacing = (side - 2 * cover) / 2;
+  const spacing = tieW / 2;
 
   return (
     <div className="p-8">
@@ -91,7 +93,7 @@ export default function ColumnDetailing() {
                   {/* Concrete */}
                   <Rect x={cx} y={cy} width={side} height={side} stroke="white" strokeWidth={2} />
                   {/* Tie */}
-                  <Rect x={cx + cover} y={cy + cover} width={side - 2 * cover} height={side - 2 * cover} stroke="#3b82f6" strokeWidth={2} cornerRadius={4} />
+                  <Rect x={cx + cover} y={cy + cover} width={tieW} height={tieW} stroke="#3b82f6" strokeWidth={2} cornerRadius={Math.min(4, tieW / 2)} />
                   {/* Main Bars (8 bars layout) */}
                   {[0, 1, 2].map(x => 
                     [0, 1, 2].map(y => {
