@@ -37,14 +37,14 @@ This document outlines the milestones and progress for fully replacing the legac
 - [x] Real-time 2D Canvas preview for staircase sections
 - [x] Export DXF stair details
 
-## 🟡 Milestone 7: Architectural Asset Library (DXF Gallery)
-*Status: Not Started*
-- [ ] Convert legacy `.dwg` block libraries (doors, windows, furniture, vehicles, north symbols) to accessible `.dxf` or `.svg`
-- [ ] Build a searchable visual gallery page (`/app/library`)
-- [ ] Allow instant download of DXF blocks to drag-and-drop into drawings
+## 🟢 Milestone 7: Architectural Asset Library (DXF Gallery)
+*Status: Completed*
+- [x] Web Gallery interface to browse architectural standard symbols
+- [x] Generator for standard DXF blocks (Doors, Windows, North Symbol)
+- [x] Direct download mechanism to obtain standalone `dxf` asset files
 
-## 🟡 Milestone 8: Drawing Templates & Title Blocks
-*Status: Not Started*
-- [ ] Auto-generate standard A1/A2/A3 drawing sheet borders as DXF
-- [ ] Parameterized Title Blocks (Project Name, Client, Date)
-- [ ] Auto-generate legends and standard structural notes
+## 🟢 Milestone 8: Drawing Templates & Title Blocks
+*Status: Completed*
+- [x] Implement standard Sheet borders (A1, A2, A3)
+- [x] Parametric input for project metadata (Project Name, Client, Date)
+- [x] Generator for exporting the Title Block as a DXF sheetandard structural notes
