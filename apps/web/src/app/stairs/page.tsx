@@ -37,7 +37,7 @@ export default function StairsDetailing() {
   return (
     <div className="p-8">
       <div className="max-w-7xl mx-auto space-y-8">
-        <header className="flex justify-between items-center pb-6 border-b border-slate-800">
+        <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
           <div>
             <h1 className="text-3xl font-bold text-white">Stairs Detailing</h1>
             <p className="text-slate-400 mt-2">Parametric staircase calculation and preview</p>

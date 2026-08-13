@@ -37,14 +37,14 @@ export default function ColumnDetailing() {
   return (
     <div className="p-8">
       <div className="max-w-7xl mx-auto space-y-8">
-        <header className="flex justify-between items-center pb-6 border-b border-slate-800">
+        <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
           <div>
             <h1 className="text-3xl font-bold text-white">Column Detailing</h1>
             <p className="text-slate-400 mt-2">Parametric column sections with real-time 2D preview</p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
             <ExampleSelector examples={columnExamples} onSelect={setColData} />
-            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+            <button onClick={handleExport} className="flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20 whitespace-nowrap">
               <Download className="w-4 h-4" /> Export DXF
             </button>
           </div>
@@ -54,7 +54,7 @@ export default function ColumnDetailing() {
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
             <h3 className="text-xl font-bold border-b border-slate-800 pb-2">Properties</h3>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-slate-400 mb-1">Mark</label>
                 <input type="text" value={colData.columnId} onChange={e => setColData({...colData, columnId: e.target.value})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
