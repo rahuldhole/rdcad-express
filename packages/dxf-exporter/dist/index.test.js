@@ -42,8 +42,9 @@ if (!fs_1.default.existsSync(tmpDir)) {
             parsedDxf = parser.parseSync(dxfString);
         }).not.toThrow();
         // Ensure the parser populated extents from our fix
-        (0, vitest_1.expect)(parsedDxf.header['$EXTMIN']).toBeDefined();
-        (0, vitest_1.expect)(parsedDxf.header['$EXTMAX']).toBeDefined();
+        (0, vitest_1.expect)(parsedDxf).toBeDefined();
+        (0, vitest_1.expect)(parsedDxf === null || parsedDxf === void 0 ? void 0 : parsedDxf.header['$EXTMIN']).toBeDefined();
+        (0, vitest_1.expect)(parsedDxf === null || parsedDxf === void 0 ? void 0 : parsedDxf.header['$EXTMAX']).toBeDefined();
     });
     (0, vitest_1.it)("should generate a valid DXF string for a slab section and parse without errors", () => {
         const dxfString = (0, index_1.exportSlabSectionToDXF)({

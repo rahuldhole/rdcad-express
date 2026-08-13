@@ -43,8 +43,9 @@ describe("dxf-exporter tests", () => {
     }).not.toThrow();
     
     // Ensure the parser populated extents from our fix
-    expect(parsedDxf.header['$EXTMIN']).toBeDefined();
-    expect(parsedDxf.header['$EXTMAX']).toBeDefined();
+    expect(parsedDxf).toBeDefined();
+    expect(parsedDxf?.header['$EXTMIN']).toBeDefined();
+    expect(parsedDxf?.header['$EXTMAX']).toBeDefined();
   });
 
   it("should generate a valid DXF string for a slab section and parse without errors", () => {
