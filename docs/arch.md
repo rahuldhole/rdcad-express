@@ -179,8 +179,6 @@ rdcad-express/
 
 ---
 
-## 5. Immediate Next Step
+## 5. Next Steps
 
-To kick off development without getting bogged down in CAD terminology, start by creating **Milestone 1 (The Bar Bending Schedule - BBS Generator)**. It requires no visual spatial math—just a clean data grid, simple formulas, and a table export.
-
-Which web framework (Next.js or Nuxt) would you prefer to initialize `rdcad-express/` with so we can draft the initial TypeScript schema for Milestone 1?
+With the core structural detailing modules complete (BBS, Beams, Columns, Slabs, Foundations, Tanks), the next step is to bridge the gap with the legacy tool's massive architectural block library and specialized calculators (e.g. Stairs).

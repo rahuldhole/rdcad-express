@@ -22,11 +22,11 @@ This document outlines the milestones and progress for fully replacing the legac
 - [x] Find & Replace prefix/suffix tools for drawing labels
 
 ## 🟡 Milestone 4: Slab & Foundation Modules
-*Status: In Progress*
-- [ ] 1-Way and 2-Way slab rebar calculator and schedule generator
-- [ ] Isolated footing & pile cap parametric section generator
+*Status: Completed*
+- [x] 1-Way and 2-Way slab rebar calculator and schedule generator
+- [x] Isolated footing & pile cap parametric section generator
 
 ## 🟡 Milestone 5: Specialized Structural Tanks (Water Tanks)
-*Status: In Progress*
-- [ ] Rectangular and Circular underground tank sections
-- [ ] Overhead water tank section generators
+*Status: Completed*
+- [x] Rectangular and Circular underground tank sections
+- [x] Overhead water tank section generators
