@@ -5,7 +5,7 @@ const index_1 = require("./index");
 (0, vitest_1.describe)("dxf-exporter tests", () => {
     (0, vitest_1.it)("should generate a valid DXF string for a beam section", () => {
         const dxfString = (0, index_1.exportBeamSectionToDXF)({
-            beamId: "B1",
+            elementId: "B1",
             width: 300,
             depth: 600,
             bottomBarCount: 3,

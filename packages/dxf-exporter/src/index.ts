@@ -40,7 +40,7 @@ export function exportBeamSectionToDXF(data: BeamScheduleRow): string {
     dxf.drawCircle(cover + i * topSpacingX, d - cover, barRadius);
   }
 
-  return dxf.toDxfString();
+  return getDxfStringWithExtents(dxf);
 }
 
 export function exportColumnSectionToDXF(data: ColumnScheduleRow): string {
@@ -58,7 +58,7 @@ export function exportColumnSectionToDXF(data: ColumnScheduleRow): string {
   dxf.drawLine(side, side, 0, side);
   dxf.drawLine(0, side, 0, 0);
   
-  return dxf.toDxfString();
+  return getDxfStringWithExtents(dxf);
 }
 
 export function exportTextNodesToDXF(nodes: { id: string, text: string, x: number, y: number }[]): string {
@@ -77,7 +77,7 @@ export function exportTextNodesToDXF(nodes: { id: string, text: string, x: numbe
     }
   });
   
-  return dxf.toDxfString();
+  return getDxfStringWithExtents(dxf);
 }
 
 export function exportSlabSectionToDXF(data: SlabScheduleRow): string {
@@ -94,7 +94,7 @@ export function exportSlabSectionToDXF(data: SlabScheduleRow): string {
   // Basic cross hatch or line indication for rebar
   dxf.setActiveLayer('REBAR');
   dxf.drawLine(50, 50, data.lx - 50, 50); // main rebar indication
-  return dxf.toDxfString();
+  return getDxfStringWithExtents(dxf);
 }
 
 export function exportFoundationSectionToDXF(data: FoundationScheduleRow): string {
@@ -110,7 +110,7 @@ export function exportFoundationSectionToDXF(data: FoundationScheduleRow): strin
   
   dxf.setActiveLayer('REBAR');
   dxf.drawLine(50, 50, data.lx - 50, 50); 
-  return dxf.toDxfString();
+  return getDxfStringWithExtents(dxf);
 }
 
 export function exportTankSectionToDXF(data: TankScheduleRow): string {
@@ -134,5 +134,12 @@ export function exportTankSectionToDXF(data: TankScheduleRow): string {
   dxf.drawLine(outerW - wt, outerH - wt, wt, outerH - wt);
   dxf.drawLine(wt, outerH - wt, wt, wt);
 
-  return dxf.toDxfString();
+  return getDxfStringWithExtents(dxf);
+}
+
+function getDxfStringWithExtents(dxf: any): string {
+  let str = dxf.toDxfString();
+  const extents = `9\n$EXTMIN\n10\n-10000.0\n20\n-10000.0\n30\n0.0\n9\n$EXTMAX\n10\n10000.0\n20\n10000.0\n30\n0.0\n`;
+  str = str.replace('0\nENDSEC\n0\nSECTION\n2\nCLASSES', extents + '0\nENDSEC\n0\nSECTION\n2\nCLASSES');
+  return str;
 }

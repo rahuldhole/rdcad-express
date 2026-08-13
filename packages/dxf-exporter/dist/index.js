@@ -42,7 +42,7 @@ function exportBeamSectionToDXF(data) {
     for (let i = 0; i < topBars; i++) {
         dxf.drawCircle(cover + i * topSpacingX, d - cover, barRadius);
     }
-    return dxf.toDxfString();
+    return getDxfStringWithExtents(dxf);
 }
 function exportColumnSectionToDXF(data) {
     const dxf = new dxf_writer_1.default();
@@ -55,7 +55,7 @@ function exportColumnSectionToDXF(data) {
     dxf.drawLine(side, 0, side, side);
     dxf.drawLine(side, side, 0, side);
     dxf.drawLine(0, side, 0, 0);
-    return dxf.toDxfString();
+    return getDxfStringWithExtents(dxf);
 }
 function exportTextNodesToDXF(nodes) {
     const dxf = new dxf_writer_1.default();
@@ -71,7 +71,7 @@ function exportTextNodesToDXF(nodes) {
             // fallback for different library signatures if needed
         }
     });
-    return dxf.toDxfString();
+    return getDxfStringWithExtents(dxf);
 }
 function exportSlabSectionToDXF(data) {
     const dxf = new dxf_writer_1.default();
@@ -85,7 +85,7 @@ function exportSlabSectionToDXF(data) {
     // Basic cross hatch or line indication for rebar
     dxf.setActiveLayer('REBAR');
     dxf.drawLine(50, 50, data.lx - 50, 50); // main rebar indication
-    return dxf.toDxfString();
+    return getDxfStringWithExtents(dxf);
 }
 function exportFoundationSectionToDXF(data) {
     const dxf = new dxf_writer_1.default();
@@ -98,7 +98,7 @@ function exportFoundationSectionToDXF(data) {
     dxf.drawLine(0, data.depth, 0, 0);
     dxf.setActiveLayer('REBAR');
     dxf.drawLine(50, 50, data.lx - 50, 50);
-    return dxf.toDxfString();
+    return getDxfStringWithExtents(dxf);
 }
 function exportTankSectionToDXF(data) {
     const dxf = new dxf_writer_1.default();
@@ -117,5 +117,11 @@ function exportTankSectionToDXF(data) {
     dxf.drawLine(outerW - wt, wt, outerW - wt, outerH - wt);
     dxf.drawLine(outerW - wt, outerH - wt, wt, outerH - wt);
     dxf.drawLine(wt, outerH - wt, wt, wt);
-    return dxf.toDxfString();
+    return getDxfStringWithExtents(dxf);
+}
+function getDxfStringWithExtents(dxf) {
+    let str = dxf.toDxfString();
+    const extents = `9\n$EXTMIN\n10\n-10000.0\n20\n-10000.0\n30\n0.0\n9\n$EXTMAX\n10\n10000.0\n20\n10000.0\n30\n0.0\n`;
+    str = str.replace('0\nENDSEC\n0\nSECTION\n2\nCLASSES', extents + '0\nENDSEC\n0\nSECTION\n2\nCLASSES');
+    return str;
 }

@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { Download } from "lucide-react";
 import { exportFoundationSectionToDXF } from "@rdcad-express/dxf-exporter";
-import type { FoundationScheduleRow } from "@rdcad-express/dwg-schemas";
 import { useAppStore } from "@/store/useStore";
 
 export default function FoundationDetailing() {

@@ -4,7 +4,7 @@ import { exportBeamSectionToDXF, exportSlabSectionToDXF } from "./index";
 describe("dxf-exporter tests", () => {
   it("should generate a valid DXF string for a beam section", () => {
     const dxfString = exportBeamSectionToDXF({
-      beamId: "B1",
+      elementId: "B1",
       width: 300,
       depth: 600,
       bottomBarCount: 3,

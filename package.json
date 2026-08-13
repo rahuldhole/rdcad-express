@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "dxf-parser": "^1.1.2"
   }
 }

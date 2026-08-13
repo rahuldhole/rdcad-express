@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { Download } from "lucide-react";
 import { exportColumnSectionToDXF } from "@rdcad-express/dxf-exporter";
-import type { ColumnScheduleRow } from "@rdcad-express/dwg-schemas";
 import { useAppStore } from "@/store/useStore";
 
 export default function ColumnDetailing() {
