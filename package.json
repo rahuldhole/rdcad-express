@@ -1,0 +1,9 @@
+{
+  "name": "rdcad-express",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter \"*\" run dev",
+    "build": "pnpm --filter \"*\" run build"
+  }
+}
