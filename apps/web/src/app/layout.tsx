@@ -28,8 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-slate-950 text-slate-200" suppressHydrationWarning>
         <header className="bg-slate-900 border-b border-slate-800 px-8 py-4">
           <div className="max-w-7xl mx-auto flex items-center gap-8">
-            <div className="font-bold text-xl text-blue-400">RDCAD Express</div>
+            <Link href="/" className="flex items-center gap-2">
+              <img src="/logo.svg" alt="RDCAD Express Logo" className="w-8 h-8" />
+              <div className="font-bold text-xl text-blue-400">RDCAD Express</div>
+            </Link>
             <nav className="flex gap-4">
+              <Link href="/" className="text-sm font-medium hover:text-white text-slate-400 transition">Home</Link>
               <Link href="/bbs" className="text-sm font-medium hover:text-white text-slate-400 transition">BBS Generator</Link>
               <Link href="/beam" className="text-sm font-medium hover:text-white text-slate-400 transition">Beam</Link>
               <Link href="/column" className="text-sm font-medium hover:text-white text-slate-400 transition">Column</Link>
