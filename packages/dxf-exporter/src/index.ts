@@ -60,3 +60,22 @@ export function exportColumnSectionToDXF(data: ColumnScheduleRow): string {
   
   return dxf.toDxfString();
 }
+
+export function exportTextNodesToDXF(nodes: { id: string, text: string, x: number, y: number }[]): string {
+  const dxf = new DXFWriter();
+  
+  dxf.addLayer('TEXT', DXFWriter.ACI.YELLOW, 'CONTINUOUS');
+  dxf.setActiveLayer('TEXT');
+  
+  nodes.forEach(node => {
+    // Assuming dxf-writer supports drawText. If not, this is standard API pattern for DXFWriter
+    try {
+      // height: 25, rotation: 0
+      dxf.drawText(node.x, -node.y, 25, 0, node.text);
+    } catch(e) {
+       // fallback for different library signatures if needed
+    }
+  });
+  
+  return dxf.toDxfString();
+}

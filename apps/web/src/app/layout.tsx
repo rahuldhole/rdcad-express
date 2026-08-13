@@ -31,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/" className="text-sm font-medium hover:text-white text-slate-400 transition">BBS Generator</a>
               <a href="/beam" className="text-sm font-medium hover:text-white text-slate-400 transition">Beam Detailing</a>
               <a href="/column" className="text-sm font-medium hover:text-white text-slate-400 transition">Column Detailing</a>
+              <a href="/utilities" className="text-sm font-medium hover:text-white text-slate-400 transition">Grid Utilities</a>
             </nav>
           </div>
         </header>

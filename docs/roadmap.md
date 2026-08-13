@@ -9,15 +9,15 @@ This document outlines the milestones and progress for fully replacing the legac
 - [x] Build interactive, parametric data grid for BBS data entry
 - [x] Setup modern Next.js architecture with Tailwind CSS
 
-## 🟡 Milestone 2: Beam & Column Detailing Modules
-*Status: In Progress*
-- [ ] Implement parametric forms for beam and column dimensions/reinforcement
-- [ ] Build a live 2D preview engine using HTML5 Canvas (`konva.js` or `fabric.js`)
-- [ ] Develop the DXF Vector Generator to export native `.dxf` CAD files
-- [ ] Integrate DXF exporting with the UI
+## 🟢 Milestone 2: Beam & Column Detailing Modules
+*Status: Completed*
+- [x] Implement parametric forms for beam and column dimensions/reinforcement
+- [x] Build a live 2D preview engine using HTML5 Canvas (`konva.js` or `fabric.js`)
+- [x] Develop the DXF Vector Generator to export native `.dxf` CAD files
+- [x] Integrate DXF exporting with the UI
 
-## ⚪ Milestone 3: Sequential Renumbering & Grid Utilities
-*Status: Planned*
+## 🟡 Milestone 3: Sequential Renumbering & Grid Utilities
+*Status: In Progress*
 - [ ] Interactive canvas tool to place and auto-number elements (e.g. B1, B2)
 - [ ] Find & Replace prefix/suffix tools for drawing labels
 
