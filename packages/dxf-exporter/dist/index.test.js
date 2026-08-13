@@ -85,4 +85,29 @@ if (!fs_1.default.existsSync(tmpDir)) {
             parser.parseSync(dxfString);
         }).not.toThrow();
     });
+    (0, vitest_1.it)("should generate valid DXF strings for starter assets", () => {
+        const doorDXF = (0, index_1.exportDoorDXF)();
+        const windowDXF = (0, index_1.exportWindowDXF)();
+        const northDXF = (0, index_1.exportNorthSymbolDXF)();
+        const parser = new dxf_parser_1.default();
+        (0, vitest_1.expect)(() => parser.parseSync(doorDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(windowDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(northDXF)).not.toThrow();
+    });
+    (0, vitest_1.it)("should generate a valid DXF string for a title block template", () => {
+        const dxfString = (0, index_1.exportTemplateToDXF)({
+            sheetSize: 'A1',
+            projectName: 'Test Project',
+            clientName: 'Test Client',
+            date: '2026-01-01',
+            drawnBy: 'Engineer',
+            drawingTitle: 'Test Drawing'
+        });
+        const filePath = path_1.default.join(tmpDir, "test-template-output.dxf");
+        fs_1.default.writeFileSync(filePath, dxfString);
+        const parser = new dxf_parser_1.default();
+        (0, vitest_1.expect)(() => {
+            parser.parseSync(dxfString);
+        }).not.toThrow();
+    });
 });

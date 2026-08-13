@@ -6,7 +6,8 @@ import type {
   ColumnScheduleRow, 
   SlabScheduleRow, 
   FoundationScheduleRow,
-  StairsScheduleRow
+  StairsScheduleRow,
+  TitleBlockRow
 } from '@rdcad-express/dwg-schemas';
 
 type TextNode = {
@@ -34,6 +35,9 @@ interface AppState {
   
   stairsData: StairsScheduleRow;
   setStairsData: (data: StairsScheduleRow) => void;
+  
+  templateData: TitleBlockRow;
+  setTemplateData: (data: TitleBlockRow) => void;
   
   // Utility states
   nodes: TextNode[];
@@ -126,6 +130,16 @@ export const useAppStore = create<AppState>()(
         distBarSpacing: 200,
       },
       setStairsData: (data) => set({ stairsData: data }),
+      
+      templateData: {
+        sheetSize: 'A1',
+        projectName: 'Residential Building',
+        clientName: 'Acme Corp',
+        date: new Date().toISOString().split('T')[0],
+        drawnBy: 'Engineer',
+        drawingTitle: 'Structural Details'
+      },
+      setTemplateData: (data) => set({ templateData: data }),
       
       nodes: [],
       setNodes: (nodes) => set({ nodes }),

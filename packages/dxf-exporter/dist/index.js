@@ -10,6 +10,10 @@ exports.exportSlabSectionToDXF = exportSlabSectionToDXF;
 exports.exportFoundationSectionToDXF = exportFoundationSectionToDXF;
 exports.exportTankSectionToDXF = exportTankSectionToDXF;
 exports.exportStairsSectionToDXF = exportStairsSectionToDXF;
+exports.exportDoorDXF = exportDoorDXF;
+exports.exportWindowDXF = exportWindowDXF;
+exports.exportNorthSymbolDXF = exportNorthSymbolDXF;
+exports.exportTemplateToDXF = exportTemplateToDXF;
 const dxf_writer_1 = __importDefault(require("dxf-writer"));
 function exportBeamSectionToDXF(data) {
     const dxf = new dxf_writer_1.default();
@@ -286,6 +290,131 @@ function exportStairsSectionToDXF(data) {
     const rx2 = bottomEndX - cover;
     const ry2 = bottomEndY + cover;
     dxf.drawLine(rx1, ry1, rx2, ry2);
+    return getDxfStringWithExtents(dxf);
+}
+// ==========================================
+// Milestone 7: Starter Asset Library
+// ==========================================
+function exportDoorDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('DOOR', dxf_writer_1.default.ACI.CYAN, 'CONTINUOUS');
+    dxf.setActiveLayer('DOOR');
+    // Standard 900mm door
+    const width = 900;
+    const frameThickness = 50;
+    // Left frame
+    dxf.drawLine(0, 0, frameThickness, 0);
+    dxf.drawLine(frameThickness, 0, frameThickness, 150);
+    dxf.drawLine(frameThickness, 150, 0, 150);
+    dxf.drawLine(0, 150, 0, 0);
+    // Right frame
+    dxf.drawLine(width - frameThickness, 0, width, 0);
+    dxf.drawLine(width, 0, width, 150);
+    dxf.drawLine(width, 150, width - frameThickness, 150);
+    dxf.drawLine(width - frameThickness, 150, width - frameThickness, 0);
+    // Door leaf
+    dxf.drawLine(frameThickness, 150, frameThickness, width - frameThickness + 150);
+    // Door swing (arc simulation)
+    const steps = 10;
+    for (let i = 0; i < steps; i++) {
+        const a1 = (Math.PI / 2) * (i / steps);
+        const a2 = (Math.PI / 2) * ((i + 1) / steps);
+        const r = width - 2 * frameThickness;
+        const x1 = frameThickness + r * Math.sin(a1);
+        const y1 = 150 + r * Math.cos(a1);
+        const x2 = frameThickness + r * Math.sin(a2);
+        const y2 = 150 + r * Math.cos(a2);
+        dxf.drawLine(x1, y1, x2, y2);
+    }
+    return getDxfStringWithExtents(dxf);
+}
+function exportWindowDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('WINDOW', dxf_writer_1.default.ACI.GREEN, 'CONTINUOUS');
+    dxf.setActiveLayer('WINDOW');
+    // Standard 1200mm window
+    const width = 1200;
+    const depth = 200;
+    // Outer frame
+    dxf.drawLine(0, 0, width, 0);
+    dxf.drawLine(width, 0, width, depth);
+    dxf.drawLine(width, depth, 0, depth);
+    dxf.drawLine(0, depth, 0, 0);
+    // Glass panes (3 lines)
+    dxf.drawLine(0, depth / 2 - 10, width, depth / 2 - 10);
+    dxf.drawLine(0, depth / 2, width, depth / 2);
+    dxf.drawLine(0, depth / 2 + 10, width, depth / 2 + 10);
+    return getDxfStringWithExtents(dxf);
+}
+function exportNorthSymbolDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('SYMBOL', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
+    dxf.setActiveLayer('SYMBOL');
+    // Draw an N
+    dxf.drawLine(-50, 200, -50, 300);
+    dxf.drawLine(-50, 300, 50, 200);
+    dxf.drawLine(50, 200, 50, 300);
+    // Draw arrow
+    dxf.drawLine(0, 0, 0, 150);
+    dxf.drawLine(0, 150, -30, 100);
+    dxf.drawLine(0, 150, 30, 100);
+    // Draw base circle
+    const steps = 16;
+    const r = 50;
+    for (let i = 0; i < steps; i++) {
+        const a1 = (Math.PI * 2) * (i / steps);
+        const a2 = (Math.PI * 2) * ((i + 1) / steps);
+        dxf.drawLine(r * Math.cos(a1), r * Math.sin(a1), r * Math.cos(a2), r * Math.sin(a2));
+    }
+    return getDxfStringWithExtents(dxf);
+}
+// ==========================================
+// Milestone 8: Drawing Templates & Title Blocks
+// ==========================================
+function exportTemplateToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('BORDER', dxf_writer_1.default.ACI.CYAN, 'CONTINUOUS');
+    dxf.addLayer('TEXT', dxf_writer_1.default.ACI.YELLOW, 'CONTINUOUS');
+    // Sheet sizes (landscape)
+    const sizes = {
+        A1: { w: 841, h: 594 },
+        A2: { w: 594, h: 420 },
+        A3: { w: 420, h: 297 }
+    };
+    const dim = sizes[data.sheetSize] || sizes['A3'];
+    const margin = 10;
+    dxf.setActiveLayer('BORDER');
+    // Outer Border
+    dxf.drawLine(margin, margin, dim.w - margin, margin);
+    dxf.drawLine(dim.w - margin, margin, dim.w - margin, dim.h - margin);
+    dxf.drawLine(dim.w - margin, dim.h - margin, margin, dim.h - margin);
+    dxf.drawLine(margin, dim.h - margin, margin, margin);
+    // Title Block (Bottom Right corner)
+    const tbWidth = 180;
+    const tbHeight = 60;
+    const startX = dim.w - margin - tbWidth;
+    const startY = margin;
+    // Title block outline
+    dxf.drawLine(startX, startY, startX, startY + tbHeight);
+    dxf.drawLine(startX, startY + tbHeight, dim.w - margin, startY + tbHeight);
+    // Title block grid lines (simplified 4 rows)
+    const rowHeight = tbHeight / 4;
+    for (let i = 1; i < 4; i++) {
+        dxf.drawLine(startX, startY + i * rowHeight, dim.w - margin, startY + i * rowHeight);
+    }
+    // Text insertion
+    dxf.setActiveLayer('TEXT');
+    const textHeight = 4;
+    // Try/catch for drawText because dxf-writer text API can be finicky
+    try {
+        dxf.drawText(startX + 5, startY + tbHeight - rowHeight + 5, textHeight, 0, `PROJ: ${data.projectName}`);
+        dxf.drawText(startX + 5, startY + tbHeight - 2 * rowHeight + 5, textHeight, 0, `TITLE: ${data.drawingTitle}`);
+        dxf.drawText(startX + 5, startY + tbHeight - 3 * rowHeight + 5, textHeight, 0, `CLIENT: ${data.clientName}`);
+        dxf.drawText(startX + 5, startY + 5, textHeight, 0, `DATE: ${data.date} | DRAWN BY: ${data.drawnBy}`);
+    }
+    catch (e) {
+        console.error("Text rendering failed", e);
+    }
     return getDxfStringWithExtents(dxf);
 }
 function getDxfStringWithExtents(dxf) {

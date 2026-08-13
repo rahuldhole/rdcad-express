@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF } from "./index";
+import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF, exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF, exportTemplateToDXF } from "./index";
 import DxfParser from "dxf-parser";
 import fs from "fs";
 import path from "path";
@@ -84,6 +84,36 @@ describe("dxf-exporter tests", () => {
 
     // Write to tmp dir for manual inspection
     const filePath = path.join(tmpDir, "test-stairs-output.dxf");
+    fs.writeFileSync(filePath, dxfString);
+
+    const parser = new DxfParser();
+    expect(() => {
+      parser.parseSync(dxfString);
+    }).not.toThrow();
+  });
+
+  it("should generate valid DXF strings for starter assets", () => {
+    const doorDXF = exportDoorDXF();
+    const windowDXF = exportWindowDXF();
+    const northDXF = exportNorthSymbolDXF();
+
+    const parser = new DxfParser();
+    expect(() => parser.parseSync(doorDXF)).not.toThrow();
+    expect(() => parser.parseSync(windowDXF)).not.toThrow();
+    expect(() => parser.parseSync(northDXF)).not.toThrow();
+  });
+
+  it("should generate a valid DXF string for a title block template", () => {
+    const dxfString = exportTemplateToDXF({
+      sheetSize: 'A1',
+      projectName: 'Test Project',
+      clientName: 'Test Client',
+      date: '2026-01-01',
+      drawnBy: 'Engineer',
+      drawingTitle: 'Test Drawing'
+    });
+
+    const filePath = path.join(tmpDir, "test-template-output.dxf");
     fs.writeFileSync(filePath, dxfString);
 
     const parser = new DxfParser();

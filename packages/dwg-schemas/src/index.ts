@@ -77,3 +77,12 @@ export interface StairsScheduleRow {
   distBarDia: number;      // Distribution bar diameter
   distBarSpacing: number;  // Spacing of distribution bars
 }
+
+export interface TitleBlockRow {
+  sheetSize: 'A1' | 'A2' | 'A3';
+  projectName: string;
+  clientName: string;
+  date: string;
+  drawnBy: string;
+  drawingTitle: string;
+}

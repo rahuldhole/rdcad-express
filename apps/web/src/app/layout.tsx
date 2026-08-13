@@ -42,6 +42,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/tank" className="text-sm font-medium hover:text-white text-slate-400 transition">Tank</Link>
               <Link href="/stairs" className="text-sm font-medium hover:text-white text-slate-400 transition">Stairs</Link>
               <Link href="/utilities" className="text-sm font-medium hover:text-white text-slate-400 transition">Grid Utils</Link>
+              <Link href="/library" className="text-sm font-medium hover:text-emerald-400 text-emerald-500/70 transition">Library</Link>
+              <Link href="/templates" className="text-sm font-medium hover:text-emerald-400 text-emerald-500/70 transition">Templates</Link>
             </nav>
           </div>
         </header>

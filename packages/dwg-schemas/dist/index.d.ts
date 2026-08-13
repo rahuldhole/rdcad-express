@@ -71,3 +71,11 @@ export interface StairsScheduleRow {
     distBarDia: number;
     distBarSpacing: number;
 }
+export interface TitleBlockRow {
+    sheetSize: 'A1' | 'A2' | 'A3';
+    projectName: string;
+    clientName: string;
+    date: string;
+    drawnBy: string;
+    drawingTitle: string;
+}
