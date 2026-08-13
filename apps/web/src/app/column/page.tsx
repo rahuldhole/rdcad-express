@@ -1,25 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Download } from "lucide-react";
 import { exportColumnSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
+import DXFPreview from "@/components/DXFPreview";
 
 export default function ColumnDetailing() {
   const colData = useAppStore(state => state.colData);
   const setColData = useAppStore(state => state.setColData);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [KonvaComps, setKonvaComps] = useState<any>(null);
-  
-  useEffect(() => {
-    import("react-konva").then(mod => {
-      setKonvaComps(mod);
-    });
-  }, []);
+  const dxfString = React.useMemo(() => exportColumnSectionToDXF(colData), [colData]);
 
   const handleExport = () => {
-    const dxfString = exportColumnSectionToDXF(colData);
     const blob = new Blob([dxfString], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -28,22 +20,6 @@ export default function ColumnDetailing() {
     a.click();
     URL.revokeObjectURL(url);
   };
-
-  const Stage = KonvaComps?.Stage;
-  const Layer = KonvaComps?.Layer;
-  const Rect = KonvaComps?.Rect;
-  const Circle = KonvaComps?.Circle;
-
-  const scale = 0.6;
-  const side = Math.max(0, 400 * scale); // Visual scaling
-  const cover = 40 * scale;
-  const barR = Math.max(0, (colData.mainBarDia / 2) * scale);
-  const cx = 300 - side / 2;
-  const cy = 250 - side / 2;
-  const tieW = Math.max(0, side - 2 * cover);
-
-  // Simple arrangement for 8 bars
-  const spacing = tieW / 2;
 
   return (
     <div className="p-8">
@@ -79,32 +55,8 @@ export default function ColumnDetailing() {
           </div>
 
           <div className="bg-slate-900 rounded border border-slate-800 flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>
-            <div className="absolute top-4 left-4 text-xs font-mono text-slate-500 bg-slate-950 px-2 py-1 rounded">Live Canvas Render</div>
-            {Stage && (
-              <Stage width={600} height={500}>
-                <Layer>
-                  {/* Concrete */}
-                  <Rect x={cx} y={cy} width={side} height={side} stroke="white" strokeWidth={2} />
-                  {/* Tie */}
-                  <Rect x={cx + cover} y={cy + cover} width={tieW} height={tieW} stroke="#3b82f6" strokeWidth={2} cornerRadius={Math.min(4, tieW / 2)} />
-                  {/* Main Bars (8 bars layout) */}
-                  {[0, 1, 2].map(x => 
-                    [0, 1, 2].map(y => {
-                      if (x === 1 && y === 1) return null; // Skip center
-                      return (
-                        <Circle 
-                          key={`${x}-${y}`} 
-                          x={cx + cover + x * spacing} 
-                          y={cy + cover + y * spacing} 
-                          radius={barR} 
-                          fill="#ef4444" 
-                        />
-                      );
-                    })
-                  )}
-                </Layer>
-              </Stage>
-            )}
+            <div className="absolute top-4 left-4 text-xs font-mono text-slate-500 bg-slate-950 px-2 py-1 rounded z-10">Live DXF Render</div>
+            {dxfString && <DXFPreview dxfString={dxfString} />}
           </div>
         </div>
       </div>

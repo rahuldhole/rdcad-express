@@ -1,25 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Download } from "lucide-react";
 import { exportTankSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
+import DXFPreview from "@/components/DXFPreview";
 
 export default function TankDetailing() {
   const tankData = useAppStore(state => state.tankData);
   const setTankData = useAppStore(state => state.setTankData);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [KonvaComps, setKonvaComps] = useState<any>(null);
-  
-  useEffect(() => {
-    import("react-konva").then(mod => {
-      setKonvaComps(mod);
-    });
-  }, []);
+  const dxfString = React.useMemo(() => exportTankSectionToDXF(tankData), [tankData]);
 
   const handleExport = () => {
-    const dxfString = exportTankSectionToDXF(tankData);
     const blob = new Blob([dxfString], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -28,19 +20,6 @@ export default function TankDetailing() {
     a.click();
     URL.revokeObjectURL(url);
   };
-
-  const Stage = KonvaComps?.Stage;
-  const Layer = KonvaComps?.Layer;
-  const Rect = KonvaComps?.Rect;
-
-  const scale = 0.08;
-  const cx = 50;
-  const cy = 50;
-  const outerW = (tankData.width + 2 * tankData.wallThickness) * scale;
-  const outerH = (tankData.length + 2 * tankData.wallThickness) * scale;
-  const innerW = tankData.width * scale;
-  const innerH = tankData.length * scale;
-  const wt = tankData.wallThickness * scale;
 
   return (
     <div className="p-8">
@@ -79,14 +58,8 @@ export default function TankDetailing() {
           </div>
 
           <div className="bg-slate-900 rounded border border-slate-800 flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>
-            {Stage && (
-              <Stage width={500} height={500}>
-                <Layer>
-                  <Rect x={cx} y={cy} width={outerW} height={outerH} stroke="white" strokeWidth={2} />
-                  <Rect x={cx + wt} y={cy + wt} width={innerW} height={innerH} stroke="white" strokeWidth={2} />
-                </Layer>
-              </Stage>
-            )}
+            <div className="absolute top-4 left-4 text-xs font-mono text-slate-500 bg-slate-950 px-2 py-1 rounded z-10">Live DXF Render</div>
+            {dxfString && <DXFPreview dxfString={dxfString} />}
           </div>
         </div>
       </div>

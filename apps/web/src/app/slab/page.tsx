@@ -1,25 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Download } from "lucide-react";
 import { exportSlabSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
+import DXFPreview from "@/components/DXFPreview";
 
 export default function SlabDetailing() {
   const slabData = useAppStore(state => state.slabData);
   const setSlabData = useAppStore(state => state.setSlabData);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [KonvaComps, setKonvaComps] = useState<any>(null);
-  
-  useEffect(() => {
-    import("react-konva").then(mod => {
-      setKonvaComps(mod);
-    });
-  }, []);
+  const dxfString = React.useMemo(() => exportSlabSectionToDXF(slabData), [slabData]);
 
   const handleExport = () => {
-    const dxfString = exportSlabSectionToDXF(slabData);
     const blob = new Blob([dxfString], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -28,17 +20,6 @@ export default function SlabDetailing() {
     a.click();
     URL.revokeObjectURL(url);
   };
-
-  const Stage = KonvaComps?.Stage;
-  const Layer = KonvaComps?.Layer;
-  const Rect = KonvaComps?.Rect;
-  const Line = KonvaComps?.Line;
-
-  const scale = 0.08;
-  const cx = 50;
-  const cy = 50;
-  const w = slabData.lx * scale;
-  const h = slabData.ly * scale;
 
   return (
     <div className="p-8">
@@ -74,15 +55,8 @@ export default function SlabDetailing() {
           </div>
 
           <div className="bg-slate-900 rounded border border-slate-800 flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>
-            {Stage && (
-              <Stage width={500} height={500}>
-                <Layer>
-                  <Rect x={cx} y={cy} width={w} height={h} stroke="white" strokeWidth={2} />
-                  <Line points={[cx, cy + h/2, cx + w, cy + h/2]} stroke="#ef4444" strokeWidth={2} dash={[5, 5]} />
-                  <Line points={[cx + w/2, cy, cx + w/2, cy + h]} stroke="#ef4444" strokeWidth={2} dash={[5, 5]} />
-                </Layer>
-              </Stage>
-            )}
+            <div className="absolute top-4 left-4 text-xs font-mono text-slate-500 bg-slate-950 px-2 py-1 rounded z-10">Live DXF Render</div>
+            {dxfString && <DXFPreview dxfString={dxfString} />}
           </div>
         </div>
       </div>
