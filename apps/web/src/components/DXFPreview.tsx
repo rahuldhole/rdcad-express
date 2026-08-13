@@ -10,13 +10,30 @@ interface DXFPreviewProps {
 }
 
 export default function DXFPreview({ dxfString, staticMode = false }: DXFPreviewProps) {
+  const containerWrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const viewerRef = useRef<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(!staticMode);
 
-    useEffect(() => {
-    if (!containerRef.current || typeof window === "undefined") return;
+  useEffect(() => {
+    if (!staticMode) return; // Only use intersection observer for static thumbnails
+    if (!containerWrapperRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsVisible(entries[0].isIntersecting);
+      },
+      { rootMargin: "200px" } // Pre-load slightly before coming into view
+    );
+    
+    observer.observe(containerWrapperRef.current);
+    return () => observer.disconnect();
+  }, [staticMode]);
+
+  useEffect(() => {
+    if (!containerRef.current || typeof window === "undefined" || !isVisible) return;
 
     let isMounted = true;
 
@@ -79,7 +96,7 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
         viewerRef.current = null;
       }
     };
-  }, [dxfString]);
+  }, [dxfString, isVisible]);
 
   const handleZoom = (factor: number) => {
     if (!viewerRef.current) return;
@@ -102,7 +119,7 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
   };
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden" style={staticMode ? {} : { minHeight: "500px" }}>
+    <div ref={containerWrapperRef} className="w-full h-full flex flex-col relative overflow-hidden" style={staticMode ? {} : { minHeight: "500px" }}>
       {!staticMode && (
         <div className="flex items-center gap-2 p-2 border-b border-slate-800 bg-slate-950/80 z-10 relative shadow-sm">
           <button onClick={handleFit} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Reset View">
@@ -121,7 +138,7 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
       )}
       <div className="flex-1 relative w-full h-full">
         {staticMode && <div className="absolute inset-0 z-20 cursor-pointer" />}
-        <div ref={containerRef} className="w-full h-full absolute inset-0" />
+        {isVisible && <div ref={containerRef} className="w-full h-full absolute inset-0" />}
       </div>
       {error && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 text-red-500 z-30 font-medium p-4 text-center">

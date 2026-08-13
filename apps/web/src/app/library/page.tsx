@@ -41,7 +41,6 @@ type AssetType = { id: string; name: string; category: string; generate: () => s
 
 export default function AssetLibrary() {
   const [search, setSearch] = React.useState("");
-  const [selectedAsset, setSelectedAsset] = React.useState<AssetType | null>(null);
 
   const filteredAssets = ASSETS.filter(a => 
     a.name.toLowerCase().includes(search.toLowerCase()) || 
@@ -95,14 +94,23 @@ export default function AssetLibrary() {
                   return (
                     <div 
                       key={asset.id} 
-                      onClick={() => setSelectedAsset(asset)}
-                      className="bg-slate-900 rounded-lg border border-slate-800 overflow-hidden flex flex-col group hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-900/20 cursor-pointer transition-all"
+                      className="bg-slate-900 rounded-lg border border-slate-800 overflow-hidden flex flex-col group hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-900/20 transition-all"
                     >
                       <div className="h-48 bg-slate-950 p-0 relative flex items-center justify-center pointer-events-none">
                         <DXFPreview dxfString={dxfString} staticMode={true} />
                       </div>
-                      <div className="p-4 border-t border-slate-800 bg-slate-900">
+                      <div className="p-4 border-t border-slate-800 bg-slate-900 flex justify-between items-center">
                         <h3 className="font-medium text-slate-200 group-hover:text-blue-400 transition-colors">{asset.name}</h3>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleExport(asset);
+                          }}
+                          className="p-2 bg-blue-600/10 text-blue-400 hover:bg-blue-600 hover:text-white rounded-md transition-colors"
+                          title="Download DXF"
+                        >
+                          <Download className="w-4 h-4" />
+                        </button>
                       </div>
                     </div>
                   );
@@ -118,51 +126,6 @@ export default function AssetLibrary() {
           </div>
         )}
       </div>
-
-      {selectedAsset && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={() => setSelectedAsset(null)}
-        >
-          <div 
-            className="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <div>
-                <h2 className="text-xl font-bold text-white">{selectedAsset.name}</h2>
-                <p className="text-sm text-slate-400">{selectedAsset.category}</p>
-              </div>
-              <button 
-                onClick={() => setSelectedAsset(null)}
-                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            
-            <div className="flex-1 min-h-[500px] relative bg-slate-950">
-              <DXFPreview dxfString={selectedAsset.generate()} staticMode={false} />
-            </div>
-            
-            <div className="p-4 border-t border-slate-800 flex justify-end gap-3 bg-slate-900 rounded-b-xl">
-              <button 
-                onClick={() => setSelectedAsset(null)}
-                className="px-4 py-2 text-slate-300 hover:bg-slate-800 rounded-md transition"
-              >
-                Close
-              </button>
-              <button 
-                onClick={() => handleExport(selectedAsset)}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md font-medium flex items-center gap-2 transition shadow-lg shadow-blue-900/50"
-              >
-                <Download className="w-4 h-4" />
-                Download DXF
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
