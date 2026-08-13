@@ -14,4 +14,11 @@ export declare function exportStairsSectionToDXF(data: StairsScheduleRow): strin
 export declare function exportDoorDXF(): string;
 export declare function exportWindowDXF(): string;
 export declare function exportNorthSymbolDXF(): string;
+export declare function exportDoubleDoorDXF(): string;
+export declare function exportSlidingDoorDXF(): string;
+export declare function exportGarageDoorDXF(): string;
+export declare function exportSectionMarkerDXF(): string;
+export declare function exportElevationTargetDXF(): string;
+export declare function exportRevisionCloudDXF(): string;
+export declare function exportGridBubbleDXF(): string;
 export declare function exportTemplateToDXF(data: TitleBlockRow): string;

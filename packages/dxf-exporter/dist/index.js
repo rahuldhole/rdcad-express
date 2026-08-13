@@ -13,6 +13,13 @@ exports.exportStairsSectionToDXF = exportStairsSectionToDXF;
 exports.exportDoorDXF = exportDoorDXF;
 exports.exportWindowDXF = exportWindowDXF;
 exports.exportNorthSymbolDXF = exportNorthSymbolDXF;
+exports.exportDoubleDoorDXF = exportDoubleDoorDXF;
+exports.exportSlidingDoorDXF = exportSlidingDoorDXF;
+exports.exportGarageDoorDXF = exportGarageDoorDXF;
+exports.exportSectionMarkerDXF = exportSectionMarkerDXF;
+exports.exportElevationTargetDXF = exportElevationTargetDXF;
+exports.exportRevisionCloudDXF = exportRevisionCloudDXF;
+exports.exportGridBubbleDXF = exportGridBubbleDXF;
 exports.exportTemplateToDXF = exportTemplateToDXF;
 const dxf_writer_1 = __importDefault(require("dxf-writer"));
 function exportBeamSectionToDXF(data) {
@@ -366,6 +373,186 @@ function exportNorthSymbolDXF() {
         const a2 = (Math.PI * 2) * ((i + 1) / steps);
         dxf.drawLine(r * Math.cos(a1), r * Math.sin(a1), r * Math.cos(a2), r * Math.sin(a2));
     }
+    return getDxfStringWithExtents(dxf);
+}
+function exportDoubleDoorDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('DOOR', dxf_writer_1.default.ACI.CYAN, 'CONTINUOUS');
+    dxf.setActiveLayer('DOOR');
+    const width = 1800; // Total width for double doors
+    const halfWidth = width / 2;
+    const frameThickness = 50;
+    // Left frame
+    dxf.drawLine(0, 0, frameThickness, 0);
+    dxf.drawLine(frameThickness, 0, frameThickness, 150);
+    dxf.drawLine(frameThickness, 150, 0, 150);
+    dxf.drawLine(0, 150, 0, 0);
+    // Right frame
+    dxf.drawLine(width - frameThickness, 0, width, 0);
+    dxf.drawLine(width, 0, width, 150);
+    dxf.drawLine(width, 150, width - frameThickness, 150);
+    dxf.drawLine(width - frameThickness, 150, width - frameThickness, 0);
+    // Left leaf
+    dxf.drawLine(frameThickness, 150, frameThickness, halfWidth + 150);
+    // Right leaf
+    dxf.drawLine(width - frameThickness, 150, width - frameThickness, halfWidth + 150);
+    // Left door swing
+    const steps = 10;
+    for (let i = 0; i < steps; i++) {
+        const a1 = (Math.PI / 2) * (i / steps);
+        const a2 = (Math.PI / 2) * ((i + 1) / steps);
+        const r = halfWidth - frameThickness;
+        const x1 = frameThickness + r * Math.sin(a1);
+        const y1 = 150 + r * Math.cos(a1);
+        const x2 = frameThickness + r * Math.sin(a2);
+        const y2 = 150 + r * Math.cos(a2);
+        dxf.drawLine(x1, y1, x2, y2);
+    }
+    // Right door swing
+    for (let i = 0; i < steps; i++) {
+        const a1 = (Math.PI / 2) * (i / steps);
+        const a2 = (Math.PI / 2) * ((i + 1) / steps);
+        const r = halfWidth - frameThickness;
+        const x1 = width - frameThickness - r * Math.sin(a1);
+        const y1 = 150 + r * Math.cos(a1);
+        const x2 = width - frameThickness - r * Math.sin(a2);
+        const y2 = 150 + r * Math.cos(a2);
+        dxf.drawLine(x1, y1, x2, y2);
+    }
+    return getDxfStringWithExtents(dxf);
+}
+function exportSlidingDoorDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('DOOR', dxf_writer_1.default.ACI.CYAN, 'CONTINUOUS');
+    dxf.setActiveLayer('DOOR');
+    const width = 2000;
+    const frameThickness = 50;
+    const depth = 150;
+    // Frames
+    dxf.drawLine(0, 0, frameThickness, 0);
+    dxf.drawLine(frameThickness, 0, frameThickness, depth);
+    dxf.drawLine(frameThickness, depth, 0, depth);
+    dxf.drawLine(0, depth, 0, 0);
+    dxf.drawLine(width - frameThickness, 0, width, 0);
+    dxf.drawLine(width, 0, width, depth);
+    dxf.drawLine(width, depth, width - frameThickness, depth);
+    dxf.drawLine(width - frameThickness, depth, width - frameThickness, 0);
+    // Track
+    dxf.drawLine(frameThickness, depth / 2, width - frameThickness, depth / 2);
+    // Sliding Panels
+    const panelWidth = (width - 2 * frameThickness) / 2 + 50; // overlapping
+    dxf.drawLine(frameThickness, depth / 2 - 20, frameThickness + panelWidth, depth / 2 - 20); // Inner panel
+    dxf.drawLine(width - frameThickness - panelWidth, depth / 2 + 20, width - frameThickness, depth / 2 + 20); // Outer panel
+    return getDxfStringWithExtents(dxf);
+}
+function exportGarageDoorDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('DOOR', dxf_writer_1.default.ACI.CYAN, 'CONTINUOUS');
+    dxf.setActiveLayer('DOOR');
+    const width = 2400;
+    const depth = 200;
+    const frameThickness = 100;
+    // Pillar frames
+    dxf.drawLine(0, 0, frameThickness, 0);
+    dxf.drawLine(frameThickness, 0, frameThickness, depth);
+    dxf.drawLine(frameThickness, depth, 0, depth);
+    dxf.drawLine(0, depth, 0, 0);
+    dxf.drawLine(width - frameThickness, 0, width, 0);
+    dxf.drawLine(width, 0, width, depth);
+    dxf.drawLine(width, depth, width - frameThickness, depth);
+    dxf.drawLine(width - frameThickness, depth, width - frameThickness, 0);
+    // Roller line
+    dxf.drawLine(frameThickness, depth / 2, width - frameThickness, depth / 2);
+    // Dash lines for roller track
+    dxf.drawLine(frameThickness + 100, depth / 2 + 50, frameThickness + 100, depth + 1000);
+    dxf.drawLine(width - frameThickness - 100, depth / 2 + 50, width - frameThickness - 100, depth + 1000);
+    return getDxfStringWithExtents(dxf);
+}
+function exportSectionMarkerDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('ANNOTATION', dxf_writer_1.default.ACI.MAGENTA, 'CONTINUOUS');
+    dxf.setActiveLayer('ANNOTATION');
+    // Bubble
+    const r = 50;
+    const steps = 16;
+    for (let i = 0; i < steps; i++) {
+        const a1 = (Math.PI * 2) * (i / steps);
+        const a2 = (Math.PI * 2) * ((i + 1) / steps);
+        dxf.drawLine(r * Math.cos(a1), r * Math.sin(a1), r * Math.cos(a2), r * Math.sin(a2));
+    }
+    // Horizontal line through bubble
+    dxf.drawLine(-r, 0, r, 0);
+    // Directional arrow
+    dxf.drawLine(0, r, 0, r + 50); // Stem
+    dxf.drawLine(0, r + 50, -20, r + 20); // Left arrow tip
+    dxf.drawLine(0, r + 50, 20, r + 20); // Right arrow tip
+    // Tail line
+    dxf.drawLine(0, -r, 0, -r - 100);
+    dxf.drawLine(0, -r - 100, 200, -r - 100);
+    return getDxfStringWithExtents(dxf);
+}
+function exportElevationTargetDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('ANNOTATION', dxf_writer_1.default.ACI.MAGENTA, 'CONTINUOUS');
+    dxf.setActiveLayer('ANNOTATION');
+    const r = 40;
+    const steps = 16;
+    for (let i = 0; i < steps; i++) {
+        const a1 = (Math.PI * 2) * (i / steps);
+        const a2 = (Math.PI * 2) * ((i + 1) / steps);
+        dxf.drawLine(r * Math.cos(a1), r * Math.sin(a1), r * Math.cos(a2), r * Math.sin(a2));
+    }
+    dxf.drawLine(-r - 10, 0, r + 10, 0);
+    dxf.drawLine(0, -r - 10, 0, r + 10);
+    // Hatch quadrant lines to simulate fill (top right)
+    for (let x = 0; x <= r; x += 5) {
+        const yMax = Math.sqrt(r * r - x * x);
+        if (yMax > 0)
+            dxf.drawLine(x, 0, x, yMax);
+    }
+    // Hatch quadrant lines (bottom left)
+    for (let x = 0; x >= -r; x -= 5) {
+        const yMin = -Math.sqrt(r * r - x * x);
+        if (yMin < 0)
+            dxf.drawLine(x, 0, x, yMin);
+    }
+    return getDxfStringWithExtents(dxf);
+}
+function exportRevisionCloudDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('ANNOTATION', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
+    dxf.setActiveLayer('ANNOTATION');
+    const width = 1000;
+    const height = 600;
+    const arcRadius = 50;
+    // Just approximate a simple rectangular cloud with semi-circles
+    for (let x = 0; x < width; x += arcRadius * 2) {
+        dxf.drawLine(x, 0, x + arcRadius, -arcRadius);
+        dxf.drawLine(x + arcRadius, -arcRadius, x + arcRadius * 2, 0);
+        dxf.drawLine(x, height, x + arcRadius, height + arcRadius);
+        dxf.drawLine(x + arcRadius, height + arcRadius, x + arcRadius * 2, height);
+    }
+    for (let y = 0; y < height; y += arcRadius * 2) {
+        dxf.drawLine(0, y, -arcRadius, y + arcRadius);
+        dxf.drawLine(-arcRadius, y + arcRadius, 0, y + arcRadius * 2);
+        dxf.drawLine(width, y, width + arcRadius, y + arcRadius);
+        dxf.drawLine(width + arcRadius, y + arcRadius, width, y + arcRadius * 2);
+    }
+    return getDxfStringWithExtents(dxf);
+}
+function exportGridBubbleDXF() {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('ANNOTATION', dxf_writer_1.default.ACI.CYAN, 'CONTINUOUS');
+    dxf.setActiveLayer('ANNOTATION');
+    const r = 50;
+    const steps = 16;
+    for (let i = 0; i < steps; i++) {
+        const a1 = (Math.PI * 2) * (i / steps);
+        const a2 = (Math.PI * 2) * ((i + 1) / steps);
+        dxf.drawLine(r * Math.cos(a1), r * Math.sin(a1), r * Math.cos(a2), r * Math.sin(a2));
+    }
+    // Extension line
+    dxf.drawLine(0, -r, 0, -r - 500);
     return getDxfStringWithExtents(dxf);
 }
 // ==========================================

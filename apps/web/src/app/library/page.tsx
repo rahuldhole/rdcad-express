@@ -2,13 +2,24 @@
 
 import React from "react";
 import { Download, Search } from "lucide-react";
-import { exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF } from "@rdcad-express/dxf-exporter";
+import { 
+  exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF,
+  exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF,
+  exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF
+} from "@rdcad-express/dxf-exporter";
 import DXFPreview from "@/components/DXFPreview";
 
 const ASSETS = [
   { id: "door", name: "Standard Door (900mm)", category: "Architectural", generate: exportDoorDXF },
+  { id: "double-door", name: "Double Swing Door (1800mm)", category: "Architectural", generate: exportDoubleDoorDXF },
+  { id: "sliding-door", name: "Sliding Glass Door (2000mm)", category: "Architectural", generate: exportSlidingDoorDXF },
+  { id: "garage-door", name: "Garage Roller Door (2400mm)", category: "Architectural", generate: exportGarageDoorDXF },
   { id: "window", name: "Standard Window (1200mm)", category: "Architectural", generate: exportWindowDXF },
   { id: "north", name: "North Symbol", category: "Drafting", generate: exportNorthSymbolDXF },
+  { id: "section-marker", name: "Section Callout", category: "Drafting", generate: exportSectionMarkerDXF },
+  { id: "elevation-target", name: "Elevation Target", category: "Drafting", generate: exportElevationTargetDXF },
+  { id: "revision-cloud", name: "Revision Cloud", category: "Drafting", generate: exportRevisionCloudDXF },
+  { id: "grid-bubble", name: "Grid Line Bubble", category: "Drafting", generate: exportGridBubbleDXF },
 ];
 
 export default function AssetLibrary() {

@@ -89,10 +89,24 @@ if (!fs_1.default.existsSync(tmpDir)) {
         const doorDXF = (0, index_1.exportDoorDXF)();
         const windowDXF = (0, index_1.exportWindowDXF)();
         const northDXF = (0, index_1.exportNorthSymbolDXF)();
+        const doubleDoorDXF = (0, index_1.exportDoubleDoorDXF)();
+        const slidingDoorDXF = (0, index_1.exportSlidingDoorDXF)();
+        const garageDoorDXF = (0, index_1.exportGarageDoorDXF)();
+        const sectionMarkerDXF = (0, index_1.exportSectionMarkerDXF)();
+        const elevationTargetDXF = (0, index_1.exportElevationTargetDXF)();
+        const revisionCloudDXF = (0, index_1.exportRevisionCloudDXF)();
+        const gridBubbleDXF = (0, index_1.exportGridBubbleDXF)();
         const parser = new dxf_parser_1.default();
         (0, vitest_1.expect)(() => parser.parseSync(doorDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(windowDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(northDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(doubleDoorDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(slidingDoorDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(garageDoorDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(sectionMarkerDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(elevationTargetDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(revisionCloudDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(gridBubbleDXF)).not.toThrow();
     });
     (0, vitest_1.it)("should generate a valid DXF string for a title block template", () => {
         const dxfString = (0, index_1.exportTemplateToDXF)({
