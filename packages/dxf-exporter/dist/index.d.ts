@@ -29,4 +29,8 @@ export declare function exportTreeDXF(): string;
 export declare function exportShrubDXF(): string;
 export declare function exportParkingBaysDXF(): string;
 export declare function exportVehicleDXF(): string;
+export declare function exportLightFixtureDXF(): string;
+export declare function exportSocketSwitchDXF(): string;
+export declare function exportDistributionBoardDXF(): string;
+export declare function exportHVACVentDXF(): string;
 export declare function exportTemplateToDXF(data: TitleBlockRow): string;

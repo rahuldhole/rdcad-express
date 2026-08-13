@@ -988,6 +988,111 @@ export function exportVehicleDXF(): string {
 }
 
 // ==========================================
+// Milestone 7: Asset Library (Phase 5: Electrical & Mechanical)
+// ==========================================
+
+export function exportLightFixtureDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('ELECTRICAL', DXFWriter.ACI.YELLOW, 'CONTINUOUS');
+  dxf.setActiveLayer('ELECTRICAL');
+  
+  const width = 1200;
+  const height = 600;
+  
+  // Outer housing
+  dxf.drawLine(0, 0, width, 0);
+  dxf.drawLine(width, 0, width, height);
+  dxf.drawLine(width, height, 0, height);
+  dxf.drawLine(0, height, 0, 0);
+  
+  // Crossed diagonal lines
+  dxf.drawLine(0, 0, width, height);
+  dxf.drawLine(0, height, width, 0);
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportSocketSwitchDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('ELECTRICAL', DXFWriter.ACI.RED, 'CONTINUOUS');
+  dxf.setActiveLayer('ELECTRICAL');
+  
+  // A standard socket is often a semicircle attached to a wall with lines protruding
+  const cx = 0;
+  const cy = 0;
+  const r = 100;
+  
+  // Wall line
+  dxf.drawLine(-200, 0, 200, 0);
+  
+  // Semicircle
+  const steps = 16;
+  for (let i = 0; i < steps; i++) {
+    const a1 = Math.PI * (i / steps);
+    const a2 = Math.PI * ((i + 1) / steps);
+    dxf.drawLine(cx + r * Math.cos(a1), cy + r * Math.sin(a1), cx + r * Math.cos(a2), cy + r * Math.sin(a2));
+  }
+  
+  // Twin lines for double socket
+  dxf.drawLine(-50, r, -50, r + 150);
+  dxf.drawLine(50, r, 50, r + 150);
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportDistributionBoardDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('ELECTRICAL', DXFWriter.ACI.RED, 'CONTINUOUS');
+  dxf.setActiveLayer('ELECTRICAL');
+  
+  const width = 400;
+  const height = 800;
+  
+  // Main box
+  dxf.drawLine(0, 0, width, 0);
+  dxf.drawLine(width, 0, width, height);
+  dxf.drawLine(width, height, 0, height);
+  dxf.drawLine(0, height, 0, 0);
+  
+  // Diagonal for DB panel standard symbol
+  dxf.drawLine(0, 0, width, height);
+  
+  // Optional internal hatching or split
+  dxf.drawLine(0, height / 2, width, height / 2);
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportHVACVentDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('MECHANICAL', DXFWriter.ACI.MAGENTA, 'CONTINUOUS');
+  dxf.setActiveLayer('MECHANICAL');
+  
+  const size = 600;
+  
+  // Outer frame
+  dxf.drawLine(0, 0, size, 0);
+  dxf.drawLine(size, 0, size, size);
+  dxf.drawLine(size, size, 0, size);
+  dxf.drawLine(0, size, 0, 0);
+  
+  // Crossed diagonals
+  dxf.drawLine(0, 0, size, size);
+  dxf.drawLine(size, 0, 0, size);
+  
+  // Concentric squares for louvers
+  for (let offset = 50; offset < size / 2 - 50; offset += 50) {
+    const s = size - offset * 2;
+    dxf.drawLine(offset, offset, offset + s, offset);
+    dxf.drawLine(offset + s, offset, offset + s, offset + s);
+    dxf.drawLine(offset + s, offset + s, offset, offset + s);
+    dxf.drawLine(offset, offset + s, offset, offset);
+  }
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+// ==========================================
 // Milestone 8: Drawing Templates & Title Blocks
 // ==========================================
 

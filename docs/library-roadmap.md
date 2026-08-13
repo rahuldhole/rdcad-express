@@ -37,8 +37,8 @@ Instead of manually converting 500+ legacy binary `.dwg` files, we will algorith
 - [x] Parking Bays (Parametric array generator)
 - [x] Standard Vehicles (Simplified 2D bounding geometries)
 
-### Phase 5: Electrical & Mechanical Symbols
-- [ ] Light Fixtures (Ceiling, Wall, Spots)
-- [ ] Sockets & Switches
-- [ ] Distribution Boards (DB)
-- [ ] HVAC Vents & Returns
+### Phase 5: Electrical & Mechanical Symbols (Completed)
+- [x] Light Fixtures (Ceiling, Wall, Spots)
+- [x] Sockets & Switches
+- [x] Distribution Boards (DB)
+- [x] HVAC Vents & Returns

@@ -7,7 +7,8 @@ import {
   exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF,
   exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF,
   exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF,
-  exportTreeDXF, exportShrubDXF, exportParkingBaysDXF, exportVehicleDXF
+  exportTreeDXF, exportShrubDXF, exportParkingBaysDXF, exportVehicleDXF,
+  exportLightFixtureDXF, exportSocketSwitchDXF, exportDistributionBoardDXF, exportHVACVentDXF
 } from "@rdcad-express/dxf-exporter";
 import DXFPreview from "@/components/DXFPreview";
 
@@ -30,6 +31,10 @@ const ASSETS = [
   { id: "shrub", name: "Shrub / Hedge (Plan)", category: "Landscaping & Site", generate: exportShrubDXF },
   { id: "parking", name: "Parking Bays (x5)", category: "Landscaping & Site", generate: exportParkingBaysDXF },
   { id: "vehicle", name: "Standard Sedan", category: "Landscaping & Site", generate: exportVehicleDXF },
+  { id: "light-fixture", name: "Ceiling Troffer Light (1200x600)", category: "Electrical & Mechanical", generate: exportLightFixtureDXF },
+  { id: "socket-switch", name: "Double Wall Socket", category: "Electrical & Mechanical", generate: exportSocketSwitchDXF },
+  { id: "distribution-board", name: "Distribution Board (DB)", category: "Electrical & Mechanical", generate: exportDistributionBoardDXF },
+  { id: "hvac-vent", name: "HVAC Supply Diffuser", category: "Electrical & Mechanical", generate: exportHVACVentDXF },
 ];
 
 type AssetType = { id: string; name: string; category: string; generate: () => string };

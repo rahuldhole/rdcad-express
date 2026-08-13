@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF, exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF, exportTemplateToDXF, exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF, exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF, exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF, exportTreeDXF, exportShrubDXF, exportParkingBaysDXF, exportVehicleDXF } from "./index";
+import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF, exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF, exportTemplateToDXF, exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF, exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF, exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF, exportTreeDXF, exportShrubDXF, exportParkingBaysDXF, exportVehicleDXF, exportLightFixtureDXF, exportSocketSwitchDXF, exportDistributionBoardDXF, exportHVACVentDXF } from "./index";
 import DxfParser from "dxf-parser";
 import fs from "fs";
 import path from "path";
@@ -115,6 +115,11 @@ describe("dxf-exporter tests", () => {
     const shrubDXF = exportShrubDXF();
     const parkingDXF = exportParkingBaysDXF();
     const vehicleDXF = exportVehicleDXF();
+    
+    const lightDXF = exportLightFixtureDXF();
+    const socketDXF = exportSocketSwitchDXF();
+    const dbDXF = exportDistributionBoardDXF();
+    const hvacDXF = exportHVACVentDXF();
 
     const parser = new DxfParser();
     expect(() => parser.parseSync(doorDXF)).not.toThrow();
@@ -139,6 +144,11 @@ describe("dxf-exporter tests", () => {
     expect(() => parser.parseSync(shrubDXF)).not.toThrow();
     expect(() => parser.parseSync(parkingDXF)).not.toThrow();
     expect(() => parser.parseSync(vehicleDXF)).not.toThrow();
+    
+    expect(() => parser.parseSync(lightDXF)).not.toThrow();
+    expect(() => parser.parseSync(socketDXF)).not.toThrow();
+    expect(() => parser.parseSync(dbDXF)).not.toThrow();
+    expect(() => parser.parseSync(hvacDXF)).not.toThrow();
   });
 
   it("should generate a valid DXF string for a title block template", () => {

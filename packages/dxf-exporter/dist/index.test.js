@@ -104,6 +104,10 @@ if (!fs_1.default.existsSync(tmpDir)) {
         const shrubDXF = (0, index_1.exportShrubDXF)();
         const parkingDXF = (0, index_1.exportParkingBaysDXF)();
         const vehicleDXF = (0, index_1.exportVehicleDXF)();
+        const lightDXF = (0, index_1.exportLightFixtureDXF)();
+        const socketDXF = (0, index_1.exportSocketSwitchDXF)();
+        const dbDXF = (0, index_1.exportDistributionBoardDXF)();
+        const hvacDXF = (0, index_1.exportHVACVentDXF)();
         const parser = new dxf_parser_1.default();
         (0, vitest_1.expect)(() => parser.parseSync(doorDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(windowDXF)).not.toThrow();
@@ -123,6 +127,10 @@ if (!fs_1.default.existsSync(tmpDir)) {
         (0, vitest_1.expect)(() => parser.parseSync(shrubDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(parkingDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(vehicleDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(lightDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(socketDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(dbDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(hvacDXF)).not.toThrow();
     });
     (0, vitest_1.it)("should generate a valid DXF string for a title block template", () => {
         const dxfString = (0, index_1.exportTemplateToDXF)({
