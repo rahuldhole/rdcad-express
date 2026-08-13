@@ -47,4 +47,4 @@ This document outlines the milestones and progress for fully replacing the legac
 *Status: Completed*
 - [x] Implement standard Sheet borders (A1, A2, A3)
 - [x] Parametric input for project metadata (Project Name, Client, Date)
-- [x] Generator for exporting the Title Block as a DXF sheetandard structural notes
+- [x] Generator for exporting the Title Block as a DXF sheet
