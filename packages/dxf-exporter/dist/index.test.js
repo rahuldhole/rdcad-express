@@ -65,4 +65,24 @@ if (!fs_1.default.existsSync(tmpDir)) {
             parser.parseSync(dxfString);
         }).not.toThrow();
     });
+    (0, vitest_1.it)("should generate a valid DXF string for a stair section and parse without errors", () => {
+        const dxfString = (0, index_1.exportStairsSectionToDXF)({
+            stairId: "ST1",
+            tread: 250,
+            rise: 150,
+            numberOfSteps: 10,
+            waistSlabThickness: 150,
+            mainBarDia: 12,
+            mainBarSpacing: 150,
+            distBarDia: 8,
+            distBarSpacing: 200,
+        });
+        // Write to tmp dir for manual inspection
+        const filePath = path_1.default.join(tmpDir, "test-stairs-output.dxf");
+        fs_1.default.writeFileSync(filePath, dxfString);
+        const parser = new dxf_parser_1.default();
+        (0, vitest_1.expect)(() => {
+            parser.parseSync(dxfString);
+        }).not.toThrow();
+    });
 });

@@ -31,11 +31,11 @@ This document outlines the milestones and progress for fully replacing the legac
 - [x] Rectangular and Circular underground tank sections
 - [x] Overhead water tank section generators
 
-## 🟡 Milestone 6: Stairs Detailing Module
-*Status: Not Started*
-- [ ] Parametric staircase calculation engine (treads, risers, reinforcement)
-- [ ] Real-time 2D Canvas preview for staircase sections
-- [ ] Export DXF stair details
+## 🟢 Milestone 6: Stairs Detailing Module
+*Status: Completed*
+- [x] Parametric staircase calculation engine (treads, risers, reinforcement)
+- [x] Real-time 2D Canvas preview for staircase sections
+- [x] Export DXF stair details
 
 ## 🟡 Milestone 7: Architectural Asset Library (DXF Gallery)
 *Status: Not Started*

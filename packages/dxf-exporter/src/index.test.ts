@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { exportBeamSectionToDXF, exportSlabSectionToDXF } from "./index";
+import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF } from "./index";
 import DxfParser from "dxf-parser";
 import fs from "fs";
 import path from "path";
@@ -62,6 +62,28 @@ describe("dxf-exporter tests", () => {
 
     // Write to tmp dir for manual inspection
     const filePath = path.join(tmpDir, "test-slab-output.dxf");
+    fs.writeFileSync(filePath, dxfString);
+
+    const parser = new DxfParser();
+    expect(() => {
+      parser.parseSync(dxfString);
+    }).not.toThrow();
+  });
+  it("should generate a valid DXF string for a stair section and parse without errors", () => {
+    const dxfString = exportStairsSectionToDXF({
+      stairId: "ST1",
+      tread: 250,
+      rise: 150,
+      numberOfSteps: 10,
+      waistSlabThickness: 150,
+      mainBarDia: 12,
+      mainBarSpacing: 150,
+      distBarDia: 8,
+      distBarSpacing: 200,
+    });
+
+    // Write to tmp dir for manual inspection
+    const filePath = path.join(tmpDir, "test-stairs-output.dxf");
     fs.writeFileSync(filePath, dxfString);
 
     const parser = new DxfParser();
