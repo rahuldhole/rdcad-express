@@ -5,6 +5,19 @@ import { Download } from "lucide-react";
 import { exportBeamSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
+import ExampleSelector, { Example } from "@/components/ExampleSelector";
+import type { BeamScheduleRow } from "@rdcad-express/dwg-schemas";
+
+const beamExamples: Example<BeamScheduleRow>[] = [
+  {
+    name: "Standard Plinth Beam",
+    data: { elementId: "PB1", width: 230, depth: 300, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 }
+  },
+  {
+    name: "Heavy Transfer Beam",
+    data: { elementId: "TB1", width: 450, depth: 750, bottomBarDia: 25, bottomBarCount: 5, topExtraLeft: 4, topExtraRight: 4, stirrupDia: 10, stirrupSpacing: 100 }
+  }
+];
 
 export default function BeamDetailing() {
   const beamData = useAppStore(state => state.beamData);
@@ -33,6 +46,8 @@ export default function BeamDetailing() {
             <Download className="w-4 h-4" /> Export DXF
           </button>
         </header>
+
+        <ExampleSelector examples={beamExamples} onSelect={setBeamData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

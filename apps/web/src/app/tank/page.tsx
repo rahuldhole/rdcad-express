@@ -5,6 +5,19 @@ import { Download } from "lucide-react";
 import { exportTankSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
+import ExampleSelector, { Example } from "@/components/ExampleSelector";
+import type { TankScheduleRow } from "@rdcad-express/dwg-schemas";
+
+const tankExamples: Example<TankScheduleRow>[] = [
+  {
+    name: "Small Underground",
+    data: { tankId: "UGT1", type: "UNDERGROUND", capacity: 50000, width: 3000, length: 5000, height: 3500, wallThickness: 250, mainBarDia: 12, mainBarSpacing: 150 }
+  },
+  {
+    name: "Large Overhead",
+    data: { tankId: "OHT1", type: "OVERHEAD", capacity: 150000, width: 6000, length: 8000, height: 4000, wallThickness: 300, mainBarDia: 16, mainBarSpacing: 150 }
+  }
+];
 
 export default function TankDetailing() {
   const tankData = useAppStore(state => state.tankData);
@@ -33,6 +46,8 @@ export default function TankDetailing() {
             <Download className="w-4 h-4" /> Export DXF
           </button>
         </header>
+
+        <ExampleSelector examples={tankExamples} onSelect={setTankData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

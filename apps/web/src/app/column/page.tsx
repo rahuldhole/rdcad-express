@@ -5,6 +5,19 @@ import { Download } from "lucide-react";
 import { exportColumnSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
+import ExampleSelector, { Example } from "@/components/ExampleSelector";
+import type { ColumnScheduleRow } from "@rdcad-express/dwg-schemas";
+
+const columnExamples: Example<ColumnScheduleRow>[] = [
+  {
+    name: "Standard Square",
+    data: { columnId: "C1", level: "GF", concreteGrade: "M30", width: 400, depth: 400, mainBarCount: 8, mainBarDia: 20, tieDia: 8, tieSpacing: 150 }
+  },
+  {
+    name: "Heavy Rectangular",
+    data: { columnId: "C2", level: "Basement", concreteGrade: "M40", width: 400, depth: 900, mainBarCount: 14, mainBarDia: 25, tieDia: 10, tieSpacing: 100 }
+  }
+];
 
 export default function ColumnDetailing() {
   const colData = useAppStore(state => state.colData);
@@ -33,6 +46,8 @@ export default function ColumnDetailing() {
             <Download className="w-4 h-4" /> Export DXF
           </button>
         </header>
+
+        <ExampleSelector examples={columnExamples} onSelect={setColData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

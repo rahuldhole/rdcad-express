@@ -5,6 +5,19 @@ import { Download } from "lucide-react";
 import { exportFoundationSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
+import ExampleSelector, { Example } from "@/components/ExampleSelector";
+import type { FoundationScheduleRow } from "@rdcad-express/dwg-schemas";
+
+const foundationExamples: Example<FoundationScheduleRow>[] = [
+  {
+    name: "Small Isolated",
+    data: { footingId: "F1", lx: 1500, ly: 1500, depth: 350, meshBarDiaX: 10, meshBarSpacingX: 150, meshBarDiaY: 10, meshBarSpacingY: 150 }
+  },
+  {
+    name: "Large Mat Footing",
+    data: { footingId: "F2", lx: 3500, ly: 3500, depth: 600, meshBarDiaX: 16, meshBarSpacingX: 150, meshBarDiaY: 16, meshBarSpacingY: 150 }
+  }
+];
 
 export default function FoundationDetailing() {
   const fdnData = useAppStore(state => state.fdnData);
@@ -33,6 +46,8 @@ export default function FoundationDetailing() {
             <Download className="w-4 h-4" /> Export DXF
           </button>
         </header>
+
+        <ExampleSelector examples={foundationExamples} onSelect={setFdnData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

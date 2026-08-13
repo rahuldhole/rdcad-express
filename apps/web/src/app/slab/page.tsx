@@ -5,6 +5,19 @@ import { Download } from "lucide-react";
 import { exportSlabSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
+import ExampleSelector, { Example } from "@/components/ExampleSelector";
+import type { SlabScheduleRow } from "@rdcad-express/dwg-schemas";
+
+const slabExamples: Example<SlabScheduleRow>[] = [
+  {
+    name: "Standard One-Way",
+    data: { slabId: "S1", lx: 2500, ly: 5000, depth: 150, mainBarDia: 10, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 }
+  },
+  {
+    name: "Heavy Two-Way Square",
+    data: { slabId: "S2", lx: 4500, ly: 4500, depth: 175, mainBarDia: 12, mainBarSpacing: 125, distBarDia: 12, distBarSpacing: 125 }
+  }
+];
 
 export default function SlabDetailing() {
   const slabData = useAppStore(state => state.slabData);
@@ -33,6 +46,8 @@ export default function SlabDetailing() {
             <Download className="w-4 h-4" /> Export DXF
           </button>
         </header>
+
+        <ExampleSelector examples={slabExamples} onSelect={setSlabData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

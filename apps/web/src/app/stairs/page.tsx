@@ -5,6 +5,19 @@ import { Download } from "lucide-react";
 import { exportStairsSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
+import ExampleSelector, { Example } from "@/components/ExampleSelector";
+import type { StairsScheduleRow } from "@rdcad-express/dwg-schemas";
+
+const stairsExamples: Example<StairsScheduleRow>[] = [
+  {
+    name: "Standard Residential",
+    data: { stairId: "ST1", tread: 250, rise: 150, numberOfSteps: 10, waistSlabThickness: 150, mainBarDia: 12, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 }
+  },
+  {
+    name: "Commercial Wide",
+    data: { stairId: "ST2", tread: 300, rise: 150, numberOfSteps: 12, waistSlabThickness: 200, mainBarDia: 16, mainBarSpacing: 125, distBarDia: 10, distBarSpacing: 150 }
+  }
+];
 
 export default function StairsDetailing() {
   const stairsData = useAppStore(state => state.stairsData);
@@ -33,6 +46,8 @@ export default function StairsDetailing() {
             <Download className="w-4 h-4" /> Export DXF
           </button>
         </header>
+
+        <ExampleSelector examples={stairsExamples} onSelect={setStairsData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
