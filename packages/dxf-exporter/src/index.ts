@@ -125,13 +125,29 @@ export function exportSlabSectionToDXF(data: SlabScheduleRow): string {
   
   dxf.setActiveLayer('CONCRETE');
   dxf.drawLine(0, 0, data.lx, 0);
-  dxf.drawLine(data.lx, 0, data.lx, data.ly);
-  dxf.drawLine(data.lx, data.ly, 0, data.ly);
-  dxf.drawLine(0, data.ly, 0, 0);
+  dxf.drawLine(data.lx, 0, data.lx, data.depth);
+  dxf.drawLine(data.lx, data.depth, 0, data.depth);
+  dxf.drawLine(0, data.depth, 0, 0);
   
-  // Basic cross hatch or line indication for rebar
   dxf.setActiveLayer('REBAR');
-  dxf.drawLine(50, 50, data.lx - 50, 50); // main rebar indication
+  const cover = 25;
+  const lx = data.lx;
+  
+  // Main bar (continuous line at bottom)
+  dxf.drawLine(cover, cover, lx - cover, cover);
+  
+  // Distribution bars (dots resting on main bar)
+  const distBarRadius = (data.distBarDia || 8) / 2;
+  const mainBarDia = data.mainBarDia || 10;
+  const distBarY = cover + mainBarDia / 2 + distBarRadius;
+  
+  const numDistBars = Math.floor((lx - 2 * cover) / (data.distBarSpacing || 200)) + 1;
+  const actualSpacing = (lx - 2 * cover) / (numDistBars - 1 || 1);
+  
+  for (let i = 0; i < numDistBars; i++) {
+    dxf.drawCircle(cover + i * actualSpacing, distBarY, distBarRadius);
+  }
+  
   return getDxfStringWithExtents(dxf);
 }
 
@@ -147,30 +163,103 @@ export function exportFoundationSectionToDXF(data: FoundationScheduleRow): strin
   dxf.drawLine(0, data.depth, 0, 0);
   
   dxf.setActiveLayer('REBAR');
-  dxf.drawLine(50, 50, data.lx - 50, 50); 
+  const cover = 50;
+  const lx = data.lx;
+  
+  // Mesh X (continuous line at bottom)
+  dxf.drawLine(cover, cover, lx - cover, cover);
+  
+  // Mesh Y (dots resting on Mesh X)
+  const yBarRadius = (data.meshBarDiaY || 10) / 2;
+  const xBarDia = data.meshBarDiaX || 10;
+  const yBarY = cover + xBarDia / 2 + yBarRadius;
+  
+  const numYBars = Math.floor((lx - 2 * cover) / (data.meshBarSpacingY || 150)) + 1;
+  const actualSpacing = (lx - 2 * cover) / (numYBars - 1 || 1);
+  
+  for (let i = 0; i < numYBars; i++) {
+    dxf.drawCircle(cover + i * actualSpacing, yBarY, yBarRadius);
+  }
+  
   return getDxfStringWithExtents(dxf);
 }
 
 export function exportTankSectionToDXF(data: TankScheduleRow): string {
   const dxf = new DXFWriter();
   dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
+  dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
+  
   dxf.setActiveLayer('CONCRETE');
   
   const outerW = data.width + (2 * data.wallThickness);
-  const outerH = data.height + (2 * data.wallThickness);
+  const outerH = data.height + data.wallThickness; // height is internal height, base slab is wallThickness
+  const wt = data.wallThickness;
   
   // Outer wall
   dxf.drawLine(0, 0, outerW, 0);
   dxf.drawLine(outerW, 0, outerW, outerH);
-  dxf.drawLine(outerW, outerH, 0, outerH);
-  dxf.drawLine(0, outerH, 0, 0);
+  dxf.drawLine(outerW, outerH, outerW - wt, outerH); // right top
   
-  // Inner wall
-  const wt = data.wallThickness;
-  dxf.drawLine(wt, wt, outerW - wt, wt);
-  dxf.drawLine(outerW - wt, wt, outerW - wt, outerH - wt);
-  dxf.drawLine(outerW - wt, outerH - wt, wt, outerH - wt);
-  dxf.drawLine(wt, outerH - wt, wt, wt);
+  // Inner wall (right)
+  dxf.drawLine(outerW - wt, outerH, outerW - wt, wt);
+  
+  // Inner base
+  dxf.drawLine(outerW - wt, wt, wt, wt);
+  
+  // Inner wall (left)
+  dxf.drawLine(wt, wt, wt, outerH);
+  
+  // left top
+  dxf.drawLine(wt, outerH, 0, outerH);
+  dxf.drawLine(0, outerH, 0, 0); // left outer
+  
+  dxf.setActiveLayer('REBAR');
+  const cover = 40;
+  
+  // Continuous U-shape rebar at inner face
+  // Base slab bottom
+  dxf.drawLine(cover, cover, outerW - cover, cover);
+  // Right wall outer
+  dxf.drawLine(outerW - cover, cover, outerW - cover, outerH - cover);
+  // Right wall inner
+  dxf.drawLine(outerW - wt + cover, outerH - cover, outerW - wt + cover, wt + cover);
+  // Base slab top
+  dxf.drawLine(outerW - wt + cover, wt + cover, wt - cover, wt + cover);
+  // Left wall inner
+  dxf.drawLine(wt - cover, wt + cover, wt - cover, outerH - cover);
+  // Left wall outer
+  dxf.drawLine(cover, outerH - cover, cover, cover);
+  // Connect at tops (hooks)
+  dxf.drawLine(outerW - cover, outerH - cover, outerW - wt + cover, outerH - cover);
+  dxf.drawLine(cover, outerH - cover, wt - cover, outerH - cover);
+  
+  // Distribution bars (dots)
+  const barRadius = (data.mainBarDia || 12) / 2;
+  const spacing = data.mainBarSpacing || 150;
+  
+  // Base slab bottom and top distribution bars
+  const numBaseBars = Math.floor((outerW - 2 * cover) / spacing) + 1;
+  const actualBaseSpacing = (outerW - 2 * cover) / (numBaseBars - 1 || 1);
+  for (let i = 0; i < numBaseBars; i++) {
+    const x = cover + i * actualBaseSpacing;
+    dxf.drawCircle(x, cover + barRadius * 2, barRadius); // bottom
+    if (x > wt && x < outerW - wt) {
+      dxf.drawCircle(x, wt + cover - barRadius * 2, barRadius); // top inner
+    }
+  }
+  
+  // Wall distribution bars
+  const numWallBars = Math.floor((outerH - cover - wt) / spacing) + 1;
+  const actualWallSpacing = (outerH - cover - wt) / (numWallBars - 1 || 1);
+  for (let i = 0; i < numWallBars; i++) {
+    const y = wt + i * actualWallSpacing;
+    // left wall
+    dxf.drawCircle(cover + barRadius * 2, y, barRadius);
+    dxf.drawCircle(wt - cover - barRadius * 2, y, barRadius);
+    // right wall
+    dxf.drawCircle(outerW - cover - barRadius * 2, y, barRadius);
+    dxf.drawCircle(outerW - wt + cover + barRadius * 2, y, barRadius);
+  }
 
   return getDxfStringWithExtents(dxf);
 }
