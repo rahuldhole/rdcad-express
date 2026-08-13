@@ -11,10 +11,13 @@
   "dependencies": {
     "@rdcad-express/core-math": "workspace:*",
     "@rdcad-express/dwg-schemas": "workspace:*",
+    "@rdcad-express/dxf-exporter": "workspace:*",
+    "konva": "^9.3.18",
     "lucide-react": "^1.31.0",
     "next": "15.2.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-konva": "^19.0.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

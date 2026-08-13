@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@rdcad-express/core-math": ["../../packages/core-math/src"],
-      "@rdcad-express/dwg-schemas": ["../../packages/dwg-schemas/src"]
+      "@rdcad-express/dwg-schemas": ["../../packages/dwg-schemas/src"],
+      "@rdcad-express/dxf-exporter": ["../../packages/dxf-exporter/src"]
     }
   },
   "include": [
