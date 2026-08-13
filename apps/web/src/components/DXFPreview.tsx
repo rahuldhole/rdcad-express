@@ -9,13 +9,12 @@ interface DXFPreviewProps {
 
 export default function DXFPreview({ dxfString }: DXFPreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const viewerRef = useRef<any>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!canvasRef.current || typeof window === "undefined") return;
+    useEffect(() => {
+    if (!containerRef.current || typeof window === "undefined") return;
 
     let isMounted = true;
 
@@ -25,7 +24,7 @@ export default function DXFPreview({ dxfString }: DXFPreviewProps) {
         if (!viewerRef.current) {
           const { DxfViewer } = await import("dxf-viewer");
           // Initialize viewer with clear color matching slate-900
-          viewerRef.current = new DxfViewer(canvasRef.current as HTMLCanvasElement, {
+          viewerRef.current = new DxfViewer(containerRef.current as HTMLElement, {
             clearColor: new THREE.Color("#0f172a"),
             autoResize: true,
           });
@@ -65,11 +64,6 @@ export default function DXFPreview({ dxfString }: DXFPreviewProps) {
           Render Error: {error}
         </div>
       )}
-      <canvas 
-        ref={canvasRef} 
-        style={{ width: "100%", height: "100%", display: "block" }} 
-        onContextMenu={(e) => e.preventDefault()}
-      />
     </div>
   );
 }
