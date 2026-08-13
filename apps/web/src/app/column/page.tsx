@@ -45,11 +45,11 @@ export default function ColumnDetailing() {
               </div>
               <div>
                 <label className="block text-sm text-slate-400 mb-1">Width (mm)</label>
-                <input type="number" value={colData.width} onChange={e => setColData({...colData, width: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
+                <input type="number" value={colData.width ?? 400} onChange={e => setColData({...colData, width: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
               </div>
               <div>
                 <label className="block text-sm text-slate-400 mb-1">Depth (mm)</label>
-                <input type="number" value={colData.depth} onChange={e => setColData({...colData, depth: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
+                <input type="number" value={colData.depth ?? 400} onChange={e => setColData({...colData, depth: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
               </div>
               <div>
                 <label className="block text-sm text-slate-400 mb-1">Main Bar Count</label>
