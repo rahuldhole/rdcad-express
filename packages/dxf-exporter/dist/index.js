@@ -202,27 +202,41 @@ function exportTankSectionToDXF(data) {
     // Distribution bars (dots)
     const barRadius = (data.mainBarDia || 12) / 2;
     const spacing = data.mainBarSpacing || 150;
-    // Base slab bottom and top distribution bars
-    const numBaseBars = Math.floor((outerW - 2 * cover) / spacing) + 1;
-    const actualBaseSpacing = (outerW - 2 * cover) / (numBaseBars - 1 || 1);
-    for (let i = 0; i < numBaseBars; i++) {
-        const x = cover + i * actualBaseSpacing;
-        dxf.drawCircle(x, cover + barRadius * 2, barRadius); // bottom
-        if (x > wt && x < outerW - wt) {
-            dxf.drawCircle(x, wt - cover - barRadius * 2, barRadius); // top inner
+    // Base slab bottom distribution bars (full width)
+    const numBaseBottomBars = Math.floor((outerW - 2 * cover) / spacing) + 1;
+    const actualBaseBottomSpacing = (outerW - 2 * cover) / (numBaseBottomBars - 1 || 1);
+    for (let i = 0; i < numBaseBottomBars; i++) {
+        const x = cover + i * actualBaseBottomSpacing;
+        dxf.drawCircle(x, cover + barRadius * 2, barRadius);
+    }
+    // Base slab top inner distribution bars
+    const innerBaseW = outerW - 2 * wt;
+    if (innerBaseW > 2 * cover) {
+        const numBaseTopBars = Math.floor((innerBaseW - 2 * cover) / spacing) + 1;
+        const actualBaseTopSpacing = (innerBaseW - 2 * cover) / (numBaseTopBars - 1 || 1);
+        for (let i = 0; i < numBaseTopBars; i++) {
+            const x = wt + cover + i * actualBaseTopSpacing;
+            dxf.drawCircle(x, wt - cover - barRadius * 2, barRadius);
         }
     }
-    // Wall distribution bars
-    const numWallBars = Math.floor((outerH - cover - wt) / spacing) + 1;
-    const actualWallSpacing = (outerH - cover - wt) / (numWallBars - 1 || 1);
-    for (let i = 0; i < numWallBars; i++) {
-        const y = wt + i * actualWallSpacing;
-        // left wall
-        dxf.drawCircle(cover + barRadius * 2, y, barRadius);
-        dxf.drawCircle(wt - cover - barRadius * 2, y, barRadius);
-        // right wall
-        dxf.drawCircle(outerW - cover - barRadius * 2, y, barRadius);
-        dxf.drawCircle(outerW - wt + cover + barRadius * 2, y, barRadius);
+    // Outer wall distribution bars (full height from cover to outerH - cover)
+    const numWallOuterBars = Math.floor((outerH - 2 * cover) / spacing) + 1;
+    const actualWallOuterSpacing = (outerH - 2 * cover) / (numWallOuterBars - 1 || 1);
+    for (let i = 0; i < numWallOuterBars; i++) {
+        const y = cover + i * actualWallOuterSpacing;
+        dxf.drawCircle(cover + barRadius * 2, y, barRadius); // left outer
+        dxf.drawCircle(outerW - cover - barRadius * 2, y, barRadius); // right outer
+    }
+    // Inner wall distribution bars (from wt + cover to outerH - cover)
+    const innerWallH = outerH - wt;
+    if (innerWallH > 2 * cover) {
+        const numWallInnerBars = Math.floor((innerWallH - 2 * cover) / spacing) + 1;
+        const actualWallInnerSpacing = (innerWallH - 2 * cover) / (numWallInnerBars - 1 || 1);
+        for (let i = 0; i < numWallInnerBars; i++) {
+            const y = wt + cover + i * actualWallInnerSpacing;
+            dxf.drawCircle(wt - cover - barRadius * 2, y, barRadius); // left inner
+            dxf.drawCircle(outerW - wt + cover + barRadius * 2, y, barRadius); // right inner
+        }
     }
     return getDxfStringWithExtents(dxf);
 }
