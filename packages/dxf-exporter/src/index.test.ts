@@ -37,7 +37,7 @@ describe("dxf-exporter tests", () => {
 
     // Ensure parser runs completely without throwing (e.g. valid structure, valid tables)
     const parser = new DxfParser();
-    let parsedDxf = null;
+    let parsedDxf: any = null;
     expect(() => {
       parsedDxf = parser.parseSync(dxfString);
     }).not.toThrow();

@@ -48,13 +48,50 @@ function exportColumnSectionToDXF(data) {
     const dxf = new dxf_writer_1.default();
     dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
     dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
-    // Assume square for now if single dimension
-    const side = 400; // placeholder size based on mainBarCount logic
+    const w = data.width || 400;
+    const d = data.depth || 400;
     dxf.setActiveLayer('CONCRETE');
-    dxf.drawLine(0, 0, side, 0);
-    dxf.drawLine(side, 0, side, side);
-    dxf.drawLine(side, side, 0, side);
-    dxf.drawLine(0, side, 0, 0);
+    dxf.drawLine(0, 0, w, 0);
+    dxf.drawLine(w, 0, w, d);
+    dxf.drawLine(w, d, 0, d);
+    dxf.drawLine(0, d, 0, 0);
+    dxf.setActiveLayer('REBAR');
+    const cover = 40;
+    const tw = w - 2 * cover;
+    const td = d - 2 * cover;
+    // Draw tie
+    dxf.drawLine(cover, cover, cover + tw, cover);
+    dxf.drawLine(cover + tw, cover, cover + tw, cover + td);
+    dxf.drawLine(cover + tw, cover + td, cover, cover + td);
+    dxf.drawLine(cover, cover + td, cover, cover);
+    // Draw main bars
+    const barRadius = (data.mainBarDia || 16) / 2;
+    const count = data.mainBarCount || 4;
+    const totalPerimeter = 2 * tw + 2 * td;
+    const spacing = totalPerimeter / count;
+    let currentDist = 0;
+    for (let i = 0; i < count; i++) {
+        let x = cover;
+        let y = cover;
+        if (currentDist <= tw) {
+            x = cover + currentDist;
+            y = cover;
+        }
+        else if (currentDist <= tw + td) {
+            x = cover + tw;
+            y = cover + (currentDist - tw);
+        }
+        else if (currentDist <= 2 * tw + td) {
+            x = cover + tw - (currentDist - tw - td);
+            y = cover + td;
+        }
+        else {
+            x = cover;
+            y = cover + td - (currentDist - 2 * tw - td);
+        }
+        dxf.drawCircle(x, y, barRadius);
+        currentDist += spacing;
+    }
     return getDxfStringWithExtents(dxf);
 }
 function exportTextNodesToDXF(nodes) {

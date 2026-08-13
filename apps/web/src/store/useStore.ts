@@ -77,6 +77,8 @@ export const useAppStore = create<AppState>()(
         columnId: "C1",
         level: "GF",
         concreteGrade: "M30",
+        width: 400,
+        depth: 400,
         mainBarCount: 8,
         mainBarDia: 20,
         tieDia: 8,

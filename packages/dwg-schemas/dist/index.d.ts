@@ -22,6 +22,8 @@ export interface ColumnScheduleRow {
     columnId: string;
     level: string;
     concreteGrade: string;
+    width: number;
+    depth: number;
     mainBarCount: number;
     mainBarDia: number;
     tieDia: number;
