@@ -39,6 +39,18 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
           try {
             // Wait for load to finish
             await viewerRef.current.Load({ url });
+
+            // Force a resize in case the container was hidden or size was 0 during init
+            if (viewerRef.current.Resize) {
+              viewerRef.current.Resize();
+            }
+
+            // Automatically fit and render after loading
+            const bounds = viewerRef.current.GetBounds();
+            if (bounds) {
+              viewerRef.current.FitView(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, 1.2);
+              viewerRef.current.Render();
+            }
           } finally {
             URL.revokeObjectURL(url);
           }
