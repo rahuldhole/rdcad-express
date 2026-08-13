@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF, exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF, exportTemplateToDXF, exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF, exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF } from "./index";
+import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF, exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF, exportTemplateToDXF, exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF, exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF, exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF } from "./index";
 import DxfParser from "dxf-parser";
 import fs from "fs";
 import path from "path";
@@ -105,6 +105,11 @@ describe("dxf-exporter tests", () => {
     const elevationTargetDXF = exportElevationTargetDXF();
     const revisionCloudDXF = exportRevisionCloudDXF();
     const gridBubbleDXF = exportGridBubbleDXF();
+    
+    const deskDXF = exportDeskDXF();
+    const conferenceTableDXF = exportConferenceTableDXF();
+    const toiletDXF = exportToiletDXF();
+    const sinkDXF = exportSinkDXF();
 
     const parser = new DxfParser();
     expect(() => parser.parseSync(doorDXF)).not.toThrow();
@@ -119,6 +124,11 @@ describe("dxf-exporter tests", () => {
     expect(() => parser.parseSync(elevationTargetDXF)).not.toThrow();
     expect(() => parser.parseSync(revisionCloudDXF)).not.toThrow();
     expect(() => parser.parseSync(gridBubbleDXF)).not.toThrow();
+    
+    expect(() => parser.parseSync(deskDXF)).not.toThrow();
+    expect(() => parser.parseSync(conferenceTableDXF)).not.toThrow();
+    expect(() => parser.parseSync(toiletDXF)).not.toThrow();
+    expect(() => parser.parseSync(sinkDXF)).not.toThrow();
   });
 
   it("should generate a valid DXF string for a title block template", () => {

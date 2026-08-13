@@ -96,6 +96,10 @@ if (!fs_1.default.existsSync(tmpDir)) {
         const elevationTargetDXF = (0, index_1.exportElevationTargetDXF)();
         const revisionCloudDXF = (0, index_1.exportRevisionCloudDXF)();
         const gridBubbleDXF = (0, index_1.exportGridBubbleDXF)();
+        const deskDXF = (0, index_1.exportDeskDXF)();
+        const conferenceTableDXF = (0, index_1.exportConferenceTableDXF)();
+        const toiletDXF = (0, index_1.exportToiletDXF)();
+        const sinkDXF = (0, index_1.exportSinkDXF)();
         const parser = new dxf_parser_1.default();
         (0, vitest_1.expect)(() => parser.parseSync(doorDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(windowDXF)).not.toThrow();
@@ -107,6 +111,10 @@ if (!fs_1.default.existsSync(tmpDir)) {
         (0, vitest_1.expect)(() => parser.parseSync(elevationTargetDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(revisionCloudDXF)).not.toThrow();
         (0, vitest_1.expect)(() => parser.parseSync(gridBubbleDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(deskDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(conferenceTableDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(toiletDXF)).not.toThrow();
+        (0, vitest_1.expect)(() => parser.parseSync(sinkDXF)).not.toThrow();
     });
     (0, vitest_1.it)("should generate a valid DXF string for a title block template", () => {
         const dxfString = (0, index_1.exportTemplateToDXF)({

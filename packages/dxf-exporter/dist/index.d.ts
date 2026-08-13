@@ -21,4 +21,8 @@ export declare function exportSectionMarkerDXF(): string;
 export declare function exportElevationTargetDXF(): string;
 export declare function exportRevisionCloudDXF(): string;
 export declare function exportGridBubbleDXF(): string;
+export declare function exportDeskDXF(): string;
+export declare function exportConferenceTableDXF(): string;
+export declare function exportToiletDXF(): string;
+export declare function exportSinkDXF(): string;
 export declare function exportTemplateToDXF(data: TitleBlockRow): string;

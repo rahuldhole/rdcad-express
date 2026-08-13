@@ -656,6 +656,192 @@ export function exportGridBubbleDXF(): string {
 }
 
 // ==========================================
+// Milestone 7: Asset Library (Phase 3: Furniture & Plumbing)
+// ==========================================
+
+export function exportDeskDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('FURNITURE', DXFWriter.ACI.YELLOW, 'CONTINUOUS');
+  dxf.setActiveLayer('FURNITURE');
+  
+  const width = 1500;
+  const depth = 750;
+  
+  // Desk outline
+  dxf.drawLine(0, 0, width, 0);
+  dxf.drawLine(width, 0, width, depth);
+  dxf.drawLine(width, depth, 0, depth);
+  dxf.drawLine(0, depth, 0, 0);
+  
+  // Draw a simple chair tucked in
+  const chairW = 500;
+  const chairD = 500;
+  const chairX = (width - chairW) / 2;
+  const chairY = -200; // tucked under the desk
+  
+  dxf.drawLine(chairX, chairY, chairX + chairW, chairY);
+  dxf.drawLine(chairX + chairW, chairY, chairX + chairW, chairY + chairD);
+  dxf.drawLine(chairX + chairW, chairY + chairD, chairX, chairY + chairD);
+  dxf.drawLine(chairX, chairY + chairD, chairX, chairY);
+  
+  // Chair backrest
+  dxf.drawLine(chairX + 50, chairY + 50, chairX + chairW - 50, chairY + 50);
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportConferenceTableDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('FURNITURE', DXFWriter.ACI.YELLOW, 'CONTINUOUS');
+  dxf.setActiveLayer('FURNITURE');
+  
+  const width = 3000;
+  const depth = 1200;
+  
+  // Table outline
+  dxf.drawLine(0, 0, width, 0);
+  dxf.drawLine(width, 0, width, depth);
+  dxf.drawLine(width, depth, 0, depth);
+  dxf.drawLine(0, depth, 0, 0);
+  
+  // Draw chairs around table
+  const chairW = 500;
+  const chairD = 500;
+  
+  const drawChair = (x: number, y: number, rotation: number) => {
+    // simplified drawing for rotation: 0 (bottom), 1 (right), 2 (top), 3 (left)
+    if (rotation === 0) { // Bottom (facing up)
+      dxf.drawLine(x, y, x + chairW, y);
+      dxf.drawLine(x + chairW, y, x + chairW, y + chairD);
+      dxf.drawLine(x + chairW, y + chairD, x, y + chairD);
+      dxf.drawLine(x, y + chairD, x, y);
+      dxf.drawLine(x + 50, y - 50, x + chairW - 50, y - 50); // backrest
+    } else if (rotation === 2) { // Top (facing down)
+      dxf.drawLine(x, y, x + chairW, y);
+      dxf.drawLine(x + chairW, y, x + chairW, y - chairD);
+      dxf.drawLine(x + chairW, y - chairD, x, y - chairD);
+      dxf.drawLine(x, y - chairD, x, y);
+      dxf.drawLine(x + 50, y + 50, x + chairW - 50, y + 50); // backrest
+    } else if (rotation === 1) { // Right (facing left)
+      dxf.drawLine(x, y, x, y + chairW);
+      dxf.drawLine(x, y + chairW, x - chairD, y + chairW);
+      dxf.drawLine(x - chairD, y + chairW, x - chairD, y);
+      dxf.drawLine(x - chairD, y, x, y);
+      dxf.drawLine(x + 50, y + 50, x + 50, y + chairW - 50); // backrest
+    } else if (rotation === 3) { // Left (facing right)
+      dxf.drawLine(x, y, x, y + chairW);
+      dxf.drawLine(x, y + chairW, x + chairD, y + chairW);
+      dxf.drawLine(x + chairD, y + chairW, x + chairD, y);
+      dxf.drawLine(x + chairD, y, x, y);
+      dxf.drawLine(x - 50, y + 50, x - 50, y + chairW - 50); // backrest
+    }
+  };
+
+  // 3 chairs on bottom
+  drawChair(500, -200, 0);
+  drawChair(1250, -200, 0);
+  drawChair(2000, -200, 0);
+  
+  // 3 chairs on top
+  drawChair(500, depth + 200, 2);
+  drawChair(1250, depth + 200, 2);
+  drawChair(2000, depth + 200, 2);
+  
+  // 1 chair on left
+  drawChair(-200, 350, 3);
+  
+  // 1 chair on right
+  drawChair(width + 200, 350, 1);
+
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportToiletDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('PLUMBING', DXFWriter.ACI.CYAN, 'CONTINUOUS');
+  dxf.setActiveLayer('PLUMBING');
+  
+  // Cistern (Tank)
+  dxf.drawLine(0, 0, 400, 0);
+  dxf.drawLine(400, 0, 400, 200);
+  dxf.drawLine(400, 200, 0, 200);
+  dxf.drawLine(0, 200, 0, 0);
+  
+  // Bowl (Approximate with arcs or lines)
+  const cx = 200;
+  const cy = 200;
+  
+  // Base connection
+  dxf.drawLine(120, 200, 120, 300);
+  dxf.drawLine(280, 200, 280, 300);
+  
+  // Oval bowl approximation using polygon
+  const rX = 180;
+  const rY = 250;
+  const steps = 16;
+  const startY = 300 + rY; // center of oval
+  
+  for (let i = 0; i < steps; i++) {
+    const a1 = Math.PI * (i / steps);
+    const a2 = Math.PI * ((i + 1) / steps);
+    // Draw only bottom half of the oval (0 to PI) relative to (cx, startY)
+    const x1 = cx + rX * Math.cos(a1);
+    const y1 = startY + rY * Math.sin(a1);
+    const x2 = cx + rX * Math.cos(a2);
+    const y2 = startY + rY * Math.sin(a2);
+    dxf.drawLine(x1, y1, x2, y2);
+  }
+  
+  // connect oval to base
+  dxf.drawLine(cx + rX, startY, 280, 300);
+  dxf.drawLine(cx - rX, startY, 120, 300);
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportSinkDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('PLUMBING', DXFWriter.ACI.CYAN, 'CONTINUOUS');
+  dxf.setActiveLayer('PLUMBING');
+  
+  const width = 600;
+  const depth = 450;
+  
+  // Outer basin edge
+  dxf.drawLine(0, 0, width, 0);
+  dxf.drawLine(width, 0, width, depth);
+  dxf.drawLine(width, depth, 0, depth);
+  dxf.drawLine(0, depth, 0, 0);
+  
+  // Inner bowl (offset by 50mm)
+  const iw = width - 100;
+  const id = depth - 100;
+  dxf.drawLine(50, 50, 50 + iw, 50);
+  dxf.drawLine(50 + iw, 50, 50 + iw, 50 + id);
+  dxf.drawLine(50 + iw, 50 + id, 50, 50 + id);
+  dxf.drawLine(50, 50 + id, 50, 50);
+  
+  // Drain circle
+  const cx = width / 2;
+  const cy = depth / 2;
+  const r = 25;
+  const steps = 8;
+  for (let i = 0; i < steps; i++) {
+    const a1 = (Math.PI * 2) * (i / steps);
+    const a2 = (Math.PI * 2) * ((i + 1) / steps);
+    dxf.drawLine(cx + r * Math.cos(a1), cy + r * Math.sin(a1), cx + r * Math.cos(a2), cy + r * Math.sin(a2));
+  }
+  
+  // Faucet body
+  dxf.drawLine(cx - 30, depth - 20, cx + 30, depth - 20);
+  dxf.drawLine(cx + 30, depth - 20, cx + 30, depth);
+  dxf.drawLine(cx + 30, depth, cx - 30, depth);
+  dxf.drawLine(cx - 30, depth, cx - 30, depth - 20);
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+// ==========================================
 // Milestone 8: Drawing Templates & Title Blocks
 // ==========================================
 

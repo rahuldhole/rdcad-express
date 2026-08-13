@@ -5,7 +5,8 @@ import { Download, Search, X } from "lucide-react";
 import { 
   exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF,
   exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF,
-  exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF
+  exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF,
+  exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF
 } from "@rdcad-express/dxf-exporter";
 import DXFPreview from "@/components/DXFPreview";
 
@@ -20,6 +21,10 @@ const ASSETS = [
   { id: "elevation-target", name: "Elevation Target", category: "Drafting", generate: exportElevationTargetDXF },
   { id: "revision-cloud", name: "Revision Cloud", category: "Drafting", generate: exportRevisionCloudDXF },
   { id: "grid-bubble", name: "Grid Line Bubble", category: "Drafting", generate: exportGridBubbleDXF },
+  { id: "desk", name: "Standard Desk (1500x750)", category: "Furniture", generate: exportDeskDXF },
+  { id: "conference-table", name: "Conference Table (3000x1200)", category: "Furniture", generate: exportConferenceTableDXF },
+  { id: "toilet", name: "Water Closet (WC)", category: "Plumbing", generate: exportToiletDXF },
+  { id: "sink", name: "Wash Basin (600x450)", category: "Plumbing", generate: exportSinkDXF },
 ];
 
 type AssetType = { id: string; name: string; category: string; generate: () => string };

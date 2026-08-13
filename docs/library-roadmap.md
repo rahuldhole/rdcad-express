@@ -11,25 +11,25 @@ Instead of manually converting 500+ legacy binary `.dwg` files, we will algorith
 
 ## 📅 Roadmap: Programmatic Asset Categories
 
-### Phase 1: Architectural Openings (In Progress)
+### Phase 1: Architectural Openings (Completed)
 - [x] Standard Door (Single Swing)
 - [x] Standard Window (Fixed Glass)
-- [ ] Double Swing Doors
-- [ ] Sliding Glass Doors
-- [ ] Garage / Roller Doors
+- [x] Double Swing Doors
+- [x] Sliding Glass Doors
+- [x] Garage / Roller Doors
 
-### Phase 2: Structural & Drafting Annotations
+### Phase 2: Structural & Drafting Annotations (Completed)
 - [x] North Arrow Symbol
-- [ ] Section Markers & Callouts
-- [ ] Elevation Targets
-- [ ] Revision Clouds
-- [ ] Grid Line Bubbles (Dynamic text insertion)
+- [x] Section Markers & Callouts
+- [x] Elevation Targets
+- [x] Revision Clouds
+- [x] Grid Line Bubbles (Dynamic text insertion)
 
-### Phase 3: Furniture & Plumbing (Parametric)
-- [ ] Standard Desk (Parametric width/depth)
-- [ ] Conference Table (Parametric seating)
-- [ ] Toilet / Water Closet (Standard plan view)
-- [ ] Sinks & Basins (Single and double)
+### Phase 3: Furniture & Plumbing (Completed)
+- [x] Standard Desk (Parametric width/depth)
+- [x] Conference Table (Parametric seating)
+- [x] Toilet / Water Closet (Standard plan view)
+- [x] Sinks & Basins (Single and double)
 
 ### Phase 4: Landscaping & Site (Algorithmic)
 - [ ] Trees (Algorithmic fractal branching in plan view)
