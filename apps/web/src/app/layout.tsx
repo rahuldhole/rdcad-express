@@ -30,7 +30,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-8">
             <Link href="/" className="flex items-center gap-2">
               <img src="/logo.svg" alt="RDCAD Express Logo" className="w-8 h-8" />
-              <div className="font-bold text-xl text-blue-400">RDCAD Express</div>
+              <div className="font-bold text-xl text-blue-400 flex items-center gap-2">
+                RDCAD Express
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase tracking-wider">Beta</span>
+              </div>
             </Link>
             <nav className="flex gap-4 overflow-x-auto w-full pb-2 md:pb-0 md:w-auto justify-start md:justify-center hide-scrollbar">
               <Link href="/" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Home</Link>
@@ -44,12 +47,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/utilities" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Grid Utils</Link>
               <Link href="/library" className="text-sm font-medium hover:text-emerald-400 text-emerald-500/70 transition whitespace-nowrap">Library</Link>
               <Link href="/templates" className="text-sm font-medium hover:text-emerald-400 text-emerald-500/70 transition whitespace-nowrap">Templates</Link>
+              <a href="https://github.com/rahuldhole/rdcad-express/issues" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-red-400 text-red-500/70 transition whitespace-nowrap ml-2">Report Issue</a>
             </nav>
           </div>
         </header>
-        <main className="flex-1">
+        <main className="flex-1 pb-10">
           {children}
         </main>
+        <footer className="bg-slate-900 border-t border-slate-800 py-6 mt-auto">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 text-center text-sm text-slate-500">
+            Built with ❤️ by <a href="https://rahuldhole.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">rahuldhole.com</a>
+          </div>
+        </footer>
       </body>
     </html>
   );
