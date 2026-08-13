@@ -6,9 +6,10 @@ import { RefreshCw, ZoomIn, ZoomOut, Maximize } from "lucide-react";
 
 interface DXFPreviewProps {
   dxfString: string;
+  staticMode?: boolean;
 }
 
-export default function DXFPreview({ dxfString }: DXFPreviewProps) {
+export default function DXFPreview({ dxfString, staticMode = false }: DXFPreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const viewerRef = useRef<any>(null);
@@ -79,24 +80,29 @@ export default function DXFPreview({ dxfString }: DXFPreviewProps) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden" style={{ minHeight: "500px" }}>
-      <div className="flex items-center gap-2 p-2 border-b border-slate-800 bg-slate-950/80 z-10 relative shadow-sm">
-        <button onClick={handleFit} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Reset View">
-          <RefreshCw className="w-4 h-4" />
-        </button>
-        <button onClick={() => handleZoom(1.2)} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Zoom In">
-          <ZoomIn className="w-4 h-4" />
-        </button>
-        <button onClick={() => handleZoom(0.8)} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Zoom Out">
-          <ZoomOut className="w-4 h-4" />
-        </button>
-        <button onClick={handleFit} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors ml-auto" title="Fit to Screen">
-          <Maximize className="w-4 h-4" />
-        </button>
+    <div className="w-full h-full flex flex-col relative overflow-hidden" style={staticMode ? {} : { minHeight: "500px" }}>
+      {!staticMode && (
+        <div className="flex items-center gap-2 p-2 border-b border-slate-800 bg-slate-950/80 z-10 relative shadow-sm">
+          <button onClick={handleFit} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Reset View">
+            <RefreshCw className="w-4 h-4" />
+          </button>
+          <button onClick={() => handleZoom(1.2)} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Zoom In">
+            <ZoomIn className="w-4 h-4" />
+          </button>
+          <button onClick={() => handleZoom(0.8)} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Zoom Out">
+            <ZoomOut className="w-4 h-4" />
+          </button>
+          <button onClick={handleFit} className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors ml-auto" title="Fit to Screen">
+            <Maximize className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+      <div className="flex-1 relative w-full h-full">
+        {staticMode && <div className="absolute inset-0 z-20 cursor-pointer" />}
+        <div ref={containerRef} className="w-full h-full absolute inset-0" />
       </div>
-      <div ref={containerRef} className="flex-1 relative w-full" />
       {error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 text-red-500 z-10 font-medium p-4 text-center">
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 text-red-500 z-30 font-medium p-4 text-center">
           Render Error: {error}
         </div>
       )}
