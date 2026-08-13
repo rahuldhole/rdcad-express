@@ -6,7 +6,8 @@ import {
   exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF,
   exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF,
   exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF,
-  exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF
+  exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF,
+  exportTreeDXF, exportShrubDXF, exportParkingBaysDXF, exportVehicleDXF
 } from "@rdcad-express/dxf-exporter";
 import DXFPreview from "@/components/DXFPreview";
 
@@ -25,6 +26,10 @@ const ASSETS = [
   { id: "conference-table", name: "Conference Table (3000x1200)", category: "Furniture", generate: exportConferenceTableDXF },
   { id: "toilet", name: "Water Closet (WC)", category: "Plumbing", generate: exportToiletDXF },
   { id: "sink", name: "Wash Basin (600x450)", category: "Plumbing", generate: exportSinkDXF },
+  { id: "tree", name: "Algorithmic Tree (Plan)", category: "Landscaping & Site", generate: exportTreeDXF },
+  { id: "shrub", name: "Shrub / Hedge (Plan)", category: "Landscaping & Site", generate: exportShrubDXF },
+  { id: "parking", name: "Parking Bays (x5)", category: "Landscaping & Site", generate: exportParkingBaysDXF },
+  { id: "vehicle", name: "Standard Sedan", category: "Landscaping & Site", generate: exportVehicleDXF },
 ];
 
 type AssetType = { id: string; name: string; category: string; generate: () => string };

@@ -31,11 +31,11 @@ Instead of manually converting 500+ legacy binary `.dwg` files, we will algorith
 - [x] Toilet / Water Closet (Standard plan view)
 - [x] Sinks & Basins (Single and double)
 
-### Phase 4: Landscaping & Site (Algorithmic)
-- [ ] Trees (Algorithmic fractal branching in plan view)
-- [ ] Shrubs & Hedges
-- [ ] Parking Bays (Parametric array generator)
-- [ ] Standard Vehicles (Simplified 2D bounding geometries)
+### Phase 4: Landscaping & Site (Completed)
+- [x] Trees (Algorithmic fractal branching in plan view)
+- [x] Shrubs & Hedges
+- [x] Parking Bays (Parametric array generator)
+- [x] Standard Vehicles (Simplified 2D bounding geometries)
 
 ### Phase 5: Electrical & Mechanical Symbols
 - [ ] Light Fixtures (Ceiling, Wall, Spots)

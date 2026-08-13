@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF, exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF, exportTemplateToDXF, exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF, exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF, exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF } from "./index";
+import { exportBeamSectionToDXF, exportSlabSectionToDXF, exportStairsSectionToDXF, exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF, exportTemplateToDXF, exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF, exportSectionMarkerDXF, exportElevationTargetDXF, exportRevisionCloudDXF, exportGridBubbleDXF, exportDeskDXF, exportConferenceTableDXF, exportToiletDXF, exportSinkDXF, exportTreeDXF, exportShrubDXF, exportParkingBaysDXF, exportVehicleDXF } from "./index";
 import DxfParser from "dxf-parser";
 import fs from "fs";
 import path from "path";
@@ -110,6 +110,11 @@ describe("dxf-exporter tests", () => {
     const conferenceTableDXF = exportConferenceTableDXF();
     const toiletDXF = exportToiletDXF();
     const sinkDXF = exportSinkDXF();
+    
+    const treeDXF = exportTreeDXF();
+    const shrubDXF = exportShrubDXF();
+    const parkingDXF = exportParkingBaysDXF();
+    const vehicleDXF = exportVehicleDXF();
 
     const parser = new DxfParser();
     expect(() => parser.parseSync(doorDXF)).not.toThrow();
@@ -129,6 +134,11 @@ describe("dxf-exporter tests", () => {
     expect(() => parser.parseSync(conferenceTableDXF)).not.toThrow();
     expect(() => parser.parseSync(toiletDXF)).not.toThrow();
     expect(() => parser.parseSync(sinkDXF)).not.toThrow();
+    
+    expect(() => parser.parseSync(treeDXF)).not.toThrow();
+    expect(() => parser.parseSync(shrubDXF)).not.toThrow();
+    expect(() => parser.parseSync(parkingDXF)).not.toThrow();
+    expect(() => parser.parseSync(vehicleDXF)).not.toThrow();
   });
 
   it("should generate a valid DXF string for a title block template", () => {

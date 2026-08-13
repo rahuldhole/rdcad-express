@@ -842,6 +842,152 @@ export function exportSinkDXF(): string {
 }
 
 // ==========================================
+// Milestone 7: Asset Library (Phase 4: Landscaping & Site)
+// ==========================================
+
+export function exportTreeDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('LANDSCAPING', DXFWriter.ACI.GREEN, 'CONTINUOUS');
+  dxf.setActiveLayer('LANDSCAPING');
+  
+  const cx = 0;
+  const cy = 0;
+  const baseRadius = 2000;
+  
+  // Draw organic canopy (scalloped edge via sine wave perturbation)
+  const steps = 36;
+  const points = [];
+  for (let i = 0; i < steps; i++) {
+    const angle = (Math.PI * 2) * (i / steps);
+    // Add a perturbation based on the angle to make it look like leaves/scallops
+    const r = baseRadius + Math.sin(angle * 8) * 150 + Math.cos(angle * 5) * 100;
+    points.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) });
+  }
+  
+  // Close the loop
+  for (let i = 0; i < steps; i++) {
+    const p1 = points[i];
+    const p2 = points[(i + 1) % steps];
+    dxf.drawLine(p1.x, p1.y, p2.x, p2.y);
+  }
+  
+  // Draw recursive branches (simple fractal cross)
+  const drawBranch = (x: number, y: number, angle: number, length: number, depth: number) => {
+    if (depth === 0) return;
+    const nx = x + length * Math.cos(angle);
+    const ny = y + length * Math.sin(angle);
+    dxf.drawLine(x, y, nx, ny);
+    
+    // Branch out
+    drawBranch(nx, ny, angle - 0.5, length * 0.7, depth - 1);
+    drawBranch(nx, ny, angle + 0.5, length * 0.7, depth - 1);
+  };
+  
+  // Generate 4 main branches from center
+  for (let i = 0; i < 4; i++) {
+    drawBranch(cx, cy, (Math.PI / 2) * i, baseRadius * 0.4, 3);
+  }
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportShrubDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('LANDSCAPING', DXFWriter.ACI.GREEN, 'CONTINUOUS');
+  dxf.setActiveLayer('LANDSCAPING');
+  
+  const cx = 0;
+  const cy = 0;
+  const baseRadius = 500;
+  
+  // Draw organic canopy
+  const steps = 16;
+  const points = [];
+  for (let i = 0; i < steps; i++) {
+    const angle = (Math.PI * 2) * (i / steps);
+    const r = baseRadius + Math.sin(angle * 6) * 80;
+    points.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) });
+  }
+  
+  for (let i = 0; i < steps; i++) {
+    const p1 = points[i];
+    const p2 = points[(i + 1) % steps];
+    dxf.drawLine(p1.x, p1.y, p2.x, p2.y);
+  }
+  
+  // Inner detail
+  for (let i = 0; i < steps; i++) {
+    const angle = (Math.PI * 2) * (i / steps);
+    const r = baseRadius * 0.5 + Math.cos(angle * 4) * 40;
+    const px = cx + r * Math.cos(angle);
+    const py = cy + r * Math.sin(angle);
+    const pNext = { x: cx + (r * 0.8) * Math.cos(angle + 0.2), y: cy + (r * 0.8) * Math.sin(angle + 0.2) };
+    dxf.drawLine(px, py, pNext.x, pNext.y);
+  }
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportParkingBaysDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('SITE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
+  dxf.setActiveLayer('SITE');
+  
+  const bayWidth = 2500;
+  const bayDepth = 5000;
+  const numBays = 5;
+  
+  // Draw top and bottom boundary lines
+  dxf.drawLine(0, 0, bayWidth * numBays, 0);
+  dxf.drawLine(0, bayDepth, bayWidth * numBays, bayDepth);
+  
+  // Draw dividing lines
+  for (let i = 0; i <= numBays; i++) {
+    const x = i * bayWidth;
+    dxf.drawLine(x, 0, x, bayDepth);
+  }
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportVehicleDXF(): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('SITE', DXFWriter.ACI.CYAN, 'CONTINUOUS');
+  dxf.setActiveLayer('SITE');
+  
+  const width = 1800;
+  const length = 4500;
+  
+  // Main body bounding box
+  dxf.drawLine(0, 0, width, 0);
+  dxf.drawLine(width, 0, width, length);
+  dxf.drawLine(width, length, 0, length);
+  dxf.drawLine(0, length, 0, 0);
+  
+  // Windshield/Roof box
+  const roofInsetX = 150;
+  const hoodLength = 1000;
+  const trunkLength = 800;
+  const roofLength = length - hoodLength - trunkLength;
+  
+  dxf.drawLine(roofInsetX, trunkLength, width - roofInsetX, trunkLength);
+  dxf.drawLine(width - roofInsetX, trunkLength, width - roofInsetX, trunkLength + roofLength);
+  dxf.drawLine(width - roofInsetX, trunkLength + roofLength, roofInsetX, trunkLength + roofLength);
+  dxf.drawLine(roofInsetX, trunkLength + roofLength, roofInsetX, trunkLength);
+  
+  // Side mirrors
+  dxf.drawLine(0, trunkLength + roofLength, -100, trunkLength + roofLength);
+  dxf.drawLine(-100, trunkLength + roofLength, -100, trunkLength + roofLength + 100);
+  dxf.drawLine(-100, trunkLength + roofLength + 100, 0, trunkLength + roofLength + 150);
+  
+  dxf.drawLine(width, trunkLength + roofLength, width + 100, trunkLength + roofLength);
+  dxf.drawLine(width + 100, trunkLength + roofLength, width + 100, trunkLength + roofLength + 100);
+  dxf.drawLine(width + 100, trunkLength + roofLength + 100, width, trunkLength + roofLength + 150);
+  
+  return getDxfStringWithExtents(dxf);
+}
+
+// ==========================================
 // Milestone 8: Drawing Templates & Title Blocks
 // ==========================================
 

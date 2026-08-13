@@ -25,4 +25,8 @@ export declare function exportDeskDXF(): string;
 export declare function exportConferenceTableDXF(): string;
 export declare function exportToiletDXF(): string;
 export declare function exportSinkDXF(): string;
+export declare function exportTreeDXF(): string;
+export declare function exportShrubDXF(): string;
+export declare function exportParkingBaysDXF(): string;
+export declare function exportVehicleDXF(): string;
 export declare function exportTemplateToDXF(data: TitleBlockRow): string;
