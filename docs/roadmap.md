@@ -16,17 +16,17 @@ This document outlines the milestones and progress for fully replacing the legac
 - [x] Develop the DXF Vector Generator to export native `.dxf` CAD files
 - [x] Integrate DXF exporting with the UI
 
-## 🟡 Milestone 3: Sequential Renumbering & Grid Utilities
-*Status: In Progress*
-- [ ] Interactive canvas tool to place and auto-number elements (e.g. B1, B2)
-- [ ] Find & Replace prefix/suffix tools for drawing labels
+## 🟢 Milestone 3: Sequential Renumbering & Grid Utilities
+*Status: Completed*
+- [x] Interactive canvas tool to place and auto-number elements (e.g. B1, B2)
+- [x] Find & Replace prefix/suffix tools for drawing labels
 
-## ⚪ Milestone 4: Slab & Foundation Modules
-*Status: Planned*
+## 🟡 Milestone 4: Slab & Foundation Modules
+*Status: In Progress*
 - [ ] 1-Way and 2-Way slab rebar calculator and schedule generator
 - [ ] Isolated footing & pile cap parametric section generator
 
-## ⚪ Milestone 5: Specialized Structural Tanks (Water Tanks)
-*Status: Planned*
+## 🟡 Milestone 5: Specialized Structural Tanks (Water Tanks)
+*Status: In Progress*
 - [ ] Rectangular and Circular underground tank sections
 - [ ] Overhead water tank section generators

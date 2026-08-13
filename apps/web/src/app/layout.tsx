@@ -30,9 +30,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="font-bold text-xl text-blue-400">RDCAD Express</div>
             <nav className="flex gap-4">
               <Link href="/" className="text-sm font-medium hover:text-white text-slate-400 transition">BBS Generator</Link>
-              <Link href="/beam" className="text-sm font-medium hover:text-white text-slate-400 transition">Beam Detailing</Link>
-              <Link href="/column" className="text-sm font-medium hover:text-white text-slate-400 transition">Column Detailing</Link>
-              <Link href="/utilities" className="text-sm font-medium hover:text-white text-slate-400 transition">Grid Utilities</Link>
+              <Link href="/beam" className="text-sm font-medium hover:text-white text-slate-400 transition">Beam</Link>
+              <Link href="/column" className="text-sm font-medium hover:text-white text-slate-400 transition">Column</Link>
+              <Link href="/slab" className="text-sm font-medium hover:text-white text-slate-400 transition">Slab</Link>
+              <Link href="/foundation" className="text-sm font-medium hover:text-white text-slate-400 transition">Foundation</Link>
+              <Link href="/tank" className="text-sm font-medium hover:text-white text-slate-400 transition">Tank</Link>
+              <Link href="/utilities" className="text-sm font-medium hover:text-white text-slate-400 transition">Grid Utils</Link>
             </nav>
           </div>
         </header>

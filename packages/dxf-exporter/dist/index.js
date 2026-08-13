@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.exportBeamSectionToDXF = exportBeamSectionToDXF;
 exports.exportColumnSectionToDXF = exportColumnSectionToDXF;
 exports.exportTextNodesToDXF = exportTextNodesToDXF;
+exports.exportSlabSectionToDXF = exportSlabSectionToDXF;
+exports.exportFoundationSectionToDXF = exportFoundationSectionToDXF;
+exports.exportTankSectionToDXF = exportTankSectionToDXF;
 const dxf_writer_1 = __importDefault(require("dxf-writer"));
 function exportBeamSectionToDXF(data) {
     const dxf = new dxf_writer_1.default();
@@ -68,5 +71,51 @@ function exportTextNodesToDXF(nodes) {
             // fallback for different library signatures if needed
         }
     });
+    return dxf.toDxfString();
+}
+function exportSlabSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
+    dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
+    dxf.setActiveLayer('CONCRETE');
+    dxf.drawLine(0, 0, data.lx, 0);
+    dxf.drawLine(data.lx, 0, data.lx, data.ly);
+    dxf.drawLine(data.lx, data.ly, 0, data.ly);
+    dxf.drawLine(0, data.ly, 0, 0);
+    // Basic cross hatch or line indication for rebar
+    dxf.setActiveLayer('REBAR');
+    dxf.drawLine(50, 50, data.lx - 50, 50); // main rebar indication
+    return dxf.toDxfString();
+}
+function exportFoundationSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
+    dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
+    dxf.setActiveLayer('CONCRETE');
+    dxf.drawLine(0, 0, data.lx, 0);
+    dxf.drawLine(data.lx, 0, data.lx, data.depth);
+    dxf.drawLine(data.lx, data.depth, 0, data.depth);
+    dxf.drawLine(0, data.depth, 0, 0);
+    dxf.setActiveLayer('REBAR');
+    dxf.drawLine(50, 50, data.lx - 50, 50);
+    return dxf.toDxfString();
+}
+function exportTankSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
+    dxf.setActiveLayer('CONCRETE');
+    const outerW = data.width + (2 * data.wallThickness);
+    const outerH = data.height + (2 * data.wallThickness);
+    // Outer wall
+    dxf.drawLine(0, 0, outerW, 0);
+    dxf.drawLine(outerW, 0, outerW, outerH);
+    dxf.drawLine(outerW, outerH, 0, outerH);
+    dxf.drawLine(0, outerH, 0, 0);
+    // Inner wall
+    const wt = data.wallThickness;
+    dxf.drawLine(wt, wt, outerW - wt, wt);
+    dxf.drawLine(outerW - wt, wt, outerW - wt, outerH - wt);
+    dxf.drawLine(outerW - wt, outerH - wt, wt, outerH - wt);
+    dxf.drawLine(wt, outerH - wt, wt, wt);
     return dxf.toDxfString();
 }

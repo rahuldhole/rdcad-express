@@ -1,5 +1,5 @@
 import DXFWriter from 'dxf-writer';
-import type { BeamScheduleRow, ColumnScheduleRow } from '@rdcad-express/dwg-schemas';
+import type { BeamScheduleRow, ColumnScheduleRow, SlabScheduleRow, FoundationScheduleRow, TankScheduleRow } from '@rdcad-express/dwg-schemas';
 
 export function exportBeamSectionToDXF(data: BeamScheduleRow): string {
   const dxf = new DXFWriter();
@@ -77,5 +77,62 @@ export function exportTextNodesToDXF(nodes: { id: string, text: string, x: numbe
     }
   });
   
+  return dxf.toDxfString();
+}
+
+export function exportSlabSectionToDXF(data: SlabScheduleRow): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
+  dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
+  
+  dxf.setActiveLayer('CONCRETE');
+  dxf.drawLine(0, 0, data.lx, 0);
+  dxf.drawLine(data.lx, 0, data.lx, data.ly);
+  dxf.drawLine(data.lx, data.ly, 0, data.ly);
+  dxf.drawLine(0, data.ly, 0, 0);
+  
+  // Basic cross hatch or line indication for rebar
+  dxf.setActiveLayer('REBAR');
+  dxf.drawLine(50, 50, data.lx - 50, 50); // main rebar indication
+  return dxf.toDxfString();
+}
+
+export function exportFoundationSectionToDXF(data: FoundationScheduleRow): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
+  dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
+  
+  dxf.setActiveLayer('CONCRETE');
+  dxf.drawLine(0, 0, data.lx, 0);
+  dxf.drawLine(data.lx, 0, data.lx, data.depth);
+  dxf.drawLine(data.lx, data.depth, 0, data.depth);
+  dxf.drawLine(0, data.depth, 0, 0);
+  
+  dxf.setActiveLayer('REBAR');
+  dxf.drawLine(50, 50, data.lx - 50, 50); 
+  return dxf.toDxfString();
+}
+
+export function exportTankSectionToDXF(data: TankScheduleRow): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
+  dxf.setActiveLayer('CONCRETE');
+  
+  const outerW = data.width + (2 * data.wallThickness);
+  const outerH = data.height + (2 * data.wallThickness);
+  
+  // Outer wall
+  dxf.drawLine(0, 0, outerW, 0);
+  dxf.drawLine(outerW, 0, outerW, outerH);
+  dxf.drawLine(outerW, outerH, 0, outerH);
+  dxf.drawLine(0, outerH, 0, 0);
+  
+  // Inner wall
+  const wt = data.wallThickness;
+  dxf.drawLine(wt, wt, outerW - wt, wt);
+  dxf.drawLine(outerW - wt, wt, outerW - wt, outerH - wt);
+  dxf.drawLine(outerW - wt, outerH - wt, wt, outerH - wt);
+  dxf.drawLine(wt, outerH - wt, wt, wt);
+
   return dxf.toDxfString();
 }
