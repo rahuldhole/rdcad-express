@@ -22,9 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-950 text-slate-200">
+      <body className="min-h-full flex flex-col bg-slate-950 text-slate-200" suppressHydrationWarning>
         <header className="bg-slate-900 border-b border-slate-800 px-8 py-4">
           <div className="max-w-7xl mx-auto flex items-center gap-8">
             <div className="font-bold text-xl text-blue-400">RDCAD Express</div>
