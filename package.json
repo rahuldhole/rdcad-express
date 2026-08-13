@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "pnpm --parallel --filter \"*\" run dev",
-    "build": "pnpm --filter \"*\" run build"
+    "build": "pnpm --filter \"*\" run build",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10"
   }
 }
