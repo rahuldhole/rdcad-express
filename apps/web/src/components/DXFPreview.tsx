@@ -40,11 +40,6 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
             // Wait for load to finish
             await viewerRef.current.Load({ url });
 
-            // Force a resize in case the container was hidden or size was 0 during init
-            if (viewerRef.current.Resize) {
-              viewerRef.current.Resize();
-            }
-
             // Automatically fit and render after loading
             const bounds = viewerRef.current.GetBounds();
             if (bounds) {
@@ -62,12 +57,27 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
       }
     };
 
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (viewerRef.current && viewerRef.current.SetSize) {
+          viewerRef.current.SetSize(entry.contentRect.width, entry.contentRect.height);
+          viewerRef.current.Render();
+        }
+      }
+    });
+
+    resizeObserver.observe(containerRef.current);
     initViewer();
 
     return () => {
       isMounted = false;
-      // Ideally we would dispose the viewer if it supports it, 
-      // but dxf-viewer can just be overwritten or garbage collected if canvas is removed.
+      resizeObserver.disconnect();
+      if (viewerRef.current) {
+        if (viewerRef.current.Destroy) {
+          viewerRef.current.Destroy();
+        }
+        viewerRef.current = null;
+      }
     };
   }, [dxfString]);
 
