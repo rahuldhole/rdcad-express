@@ -9,14 +9,14 @@ import ExampleSelector, { Example } from "@/components/ExampleSelector";
 import type { BeamScheduleRow } from "@rdcad-express/dwg-schemas";
 
 const beamExamples: Example<BeamScheduleRow>[] = [
-  {
-    name: "Standard Plinth Beam",
-    data: { elementId: "PB1", width: 230, depth: 300, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 }
-  },
-  {
-    name: "Heavy Transfer Beam",
-    data: { elementId: "TB1", width: 450, depth: 750, bottomBarDia: 25, bottomBarCount: 5, topExtraLeft: 4, topExtraRight: 4, stirrupDia: 10, stirrupSpacing: 100 }
-  }
+  { name: "Standard Plinth Beam", data: { elementId: "PB1", width: 230, depth: 300, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 } },
+  { name: "Heavy Transfer Beam", data: { elementId: "TB1", width: 450, depth: 750, bottomBarDia: 25, bottomBarCount: 5, topExtraLeft: 4, topExtraRight: 4, stirrupDia: 10, stirrupSpacing: 100 } },
+  { name: "Wide Shallow Beam", data: { elementId: "WB1", width: 600, depth: 300, bottomBarDia: 16, bottomBarCount: 6, topExtraLeft: 3, topExtraRight: 3, stirrupDia: 8, stirrupSpacing: 125 } },
+  { name: "Lintel Beam (Small)", data: { elementId: "LB1", width: 230, depth: 200, bottomBarDia: 10, bottomBarCount: 2, topExtraLeft: 0, topExtraRight: 0, stirrupDia: 8, stirrupSpacing: 200 } },
+  { name: "Roof Beam (Light)", data: { elementId: "RB1", width: 230, depth: 400, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 } },
+  { name: "Primary Girder (Deep)", data: { elementId: "G1", width: 300, depth: 900, bottomBarDia: 20, bottomBarCount: 4, topExtraLeft: 3, topExtraRight: 3, stirrupDia: 10, stirrupSpacing: 125 } },
+  { name: "Secondary Beam (Narrow)", data: { elementId: "SB1", width: 200, depth: 450, bottomBarDia: 16, bottomBarCount: 2, topExtraLeft: 1, topExtraRight: 1, stirrupDia: 8, stirrupSpacing: 150 } },
+  { name: "Ground Beam", data: { elementId: "GB1", width: 300, depth: 450, bottomBarDia: 16, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 175 } }
 ];
 
 export default function BeamDetailing() {
@@ -42,12 +42,13 @@ export default function BeamDetailing() {
             <h1 className="text-3xl font-bold text-white">Beam Detailing</h1>
             <p className="text-slate-400 mt-2">Parametric beam sections with real-time 2D preview</p>
           </div>
-          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-            <Download className="w-4 h-4" /> Export DXF
-          </button>
+          <div className="flex items-center gap-4">
+            <ExampleSelector examples={beamExamples} onSelect={setBeamData} />
+            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+              <Download className="w-4 h-4" /> Export DXF
+            </button>
+          </div>
         </header>
-
-        <ExampleSelector examples={beamExamples} onSelect={setBeamData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

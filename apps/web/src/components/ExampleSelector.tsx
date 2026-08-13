@@ -13,22 +13,25 @@ interface ExampleSelectorProps<T> {
 
 export default function ExampleSelector<T>({ examples, onSelect }: ExampleSelectorProps<T>) {
   return (
-    <div className="bg-slate-900 rounded border border-slate-800 p-4 mb-6 flex items-center justify-between shadow-sm">
-      <div className="flex items-center gap-2 text-slate-300 font-medium">
-        <Sparkles className="w-5 h-5 text-emerald-500" />
-        <span>Predefined Examples</span>
-      </div>
-      <div className="flex gap-2 flex-wrap justify-end">
+    <div className="flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-emerald-500" />
+      <select
+        className="bg-slate-950 border border-slate-700 text-slate-300 rounded px-2 py-1 text-sm focus:border-emerald-500 outline-none w-40"
+        onChange={(e) => {
+          if (e.target.value === "") return;
+          const idx = parseInt(e.target.value, 10);
+          onSelect(examples[idx].data);
+          e.target.value = ""; // reset back
+        }}
+        defaultValue=""
+      >
+        <option value="" disabled>Examples...</option>
         {examples.map((example, idx) => (
-          <button
-            key={idx}
-            onClick={() => onSelect(example.data)}
-            className="px-3 py-1.5 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded border border-slate-700 transition-colors"
-          >
+          <option key={idx} value={idx}>
             {example.name}
-          </button>
+          </option>
         ))}
-      </div>
+      </select>
     </div>
   );
 }

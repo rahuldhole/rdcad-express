@@ -9,14 +9,14 @@ import ExampleSelector, { Example } from "@/components/ExampleSelector";
 import type { FoundationScheduleRow } from "@rdcad-express/dwg-schemas";
 
 const foundationExamples: Example<FoundationScheduleRow>[] = [
-  {
-    name: "Small Isolated",
-    data: { footingId: "F1", lx: 1500, ly: 1500, depth: 350, meshBarDiaX: 10, meshBarSpacingX: 150, meshBarDiaY: 10, meshBarSpacingY: 150 }
-  },
-  {
-    name: "Large Mat Footing",
-    data: { footingId: "F2", lx: 3500, ly: 3500, depth: 600, meshBarDiaX: 16, meshBarSpacingX: 150, meshBarDiaY: 16, meshBarSpacingY: 150 }
-  }
+  { name: "Small Isolated", data: { footingId: "F1", lx: 1500, ly: 1500, depth: 350, meshBarDiaX: 10, meshBarSpacingX: 150, meshBarDiaY: 10, meshBarSpacingY: 150 } },
+  { name: "Large Mat Footing", data: { footingId: "F2", lx: 3500, ly: 3500, depth: 600, meshBarDiaX: 16, meshBarSpacingX: 150, meshBarDiaY: 16, meshBarSpacingY: 150 } },
+  { name: "Rectangular Footing", data: { footingId: "F3", lx: 2500, ly: 1800, depth: 450, meshBarDiaX: 12, meshBarSpacingX: 125, meshBarDiaY: 10, meshBarSpacingY: 150 } },
+  { name: "Strip Footing (Sim)", data: { footingId: "SF1", lx: 1000, ly: 5000, depth: 300, meshBarDiaX: 12, meshBarSpacingX: 150, meshBarDiaY: 10, meshBarSpacingY: 200 } },
+  { name: "Combined Footing (Sim)", data: { footingId: "CF1", lx: 2000, ly: 4500, depth: 550, meshBarDiaX: 16, meshBarSpacingX: 125, meshBarDiaY: 12, meshBarSpacingY: 150 } },
+  { name: "Heavy Machine Fdn", data: { footingId: "MF1", lx: 4000, ly: 4000, depth: 800, meshBarDiaX: 20, meshBarSpacingX: 100, meshBarDiaY: 20, meshBarSpacingY: 100 } },
+  { name: "Lift Pit Footing", data: { footingId: "LPF1", lx: 2500, ly: 2500, depth: 750, meshBarDiaX: 16, meshBarSpacingX: 150, meshBarDiaY: 16, meshBarSpacingY: 150 } },
+  { name: "Boundary Wall Fdn", data: { footingId: "BWF1", lx: 800, ly: 800, depth: 200, meshBarDiaX: 8, meshBarSpacingX: 200, meshBarDiaY: 8, meshBarSpacingY: 200 } }
 ];
 
 export default function FoundationDetailing() {
@@ -40,14 +40,15 @@ export default function FoundationDetailing() {
         <header className="flex justify-between items-center pb-6 border-b border-slate-800">
           <div>
             <h1 className="text-3xl font-bold text-white">Foundation Detailing</h1>
-            <p className="text-slate-400 mt-2">Isolated footing section generator</p>
+            <p className="text-slate-400 mt-2">Parametric footing plan and section with DXF export</p>
           </div>
-          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-            <Download className="w-4 h-4" /> Export DXF
-          </button>
+          <div className="flex items-center gap-4">
+            <ExampleSelector examples={foundationExamples} onSelect={setFdnData} />
+            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+              <Download className="w-4 h-4" /> Export DXF
+            </button>
+          </div>
         </header>
-
-        <ExampleSelector examples={foundationExamples} onSelect={setFdnData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

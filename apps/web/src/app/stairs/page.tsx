@@ -9,14 +9,14 @@ import ExampleSelector, { Example } from "@/components/ExampleSelector";
 import type { StairsScheduleRow } from "@rdcad-express/dwg-schemas";
 
 const stairsExamples: Example<StairsScheduleRow>[] = [
-  {
-    name: "Standard Residential",
-    data: { stairId: "ST1", tread: 250, rise: 150, numberOfSteps: 10, waistSlabThickness: 150, mainBarDia: 12, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 }
-  },
-  {
-    name: "Commercial Wide",
-    data: { stairId: "ST2", tread: 300, rise: 150, numberOfSteps: 12, waistSlabThickness: 200, mainBarDia: 16, mainBarSpacing: 125, distBarDia: 10, distBarSpacing: 150 }
-  }
+  { name: "Standard Residential", data: { stairId: "ST1", tread: 250, rise: 150, numberOfSteps: 10, waistSlabThickness: 150, mainBarDia: 12, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 } },
+  { name: "Commercial Wide", data: { stairId: "ST2", tread: 300, rise: 150, numberOfSteps: 12, waistSlabThickness: 200, mainBarDia: 16, mainBarSpacing: 125, distBarDia: 10, distBarSpacing: 150 } },
+  { name: "Compact Service Stairs", data: { stairId: "ST3", tread: 220, rise: 175, numberOfSteps: 8, waistSlabThickness: 125, mainBarDia: 10, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 } },
+  { name: "Grand Entrance Stairs", data: { stairId: "ST4", tread: 350, rise: 125, numberOfSteps: 15, waistSlabThickness: 250, mainBarDia: 20, mainBarSpacing: 100, distBarDia: 12, distBarSpacing: 150 } },
+  { name: "Fire Escape Stairs", data: { stairId: "ST5", tread: 250, rise: 200, numberOfSteps: 14, waistSlabThickness: 150, mainBarDia: 12, mainBarSpacing: 125, distBarDia: 8, distBarSpacing: 175 } },
+  { name: "Basement Access", data: { stairId: "ST6", tread: 250, rise: 160, numberOfSteps: 9, waistSlabThickness: 150, mainBarDia: 12, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 } },
+  { name: "Public Building Stairs", data: { stairId: "ST7", tread: 300, rise: 140, numberOfSteps: 20, waistSlabThickness: 200, mainBarDia: 16, mainBarSpacing: 100, distBarDia: 12, distBarSpacing: 150 } },
+  { name: "Dog-legged (Standard)", data: { stairId: "ST8", tread: 260, rise: 150, numberOfSteps: 11, waistSlabThickness: 150, mainBarDia: 12, mainBarSpacing: 125, distBarDia: 10, distBarSpacing: 150 } }
 ];
 
 export default function StairsDetailing() {
@@ -42,12 +42,13 @@ export default function StairsDetailing() {
             <h1 className="text-3xl font-bold text-white">Stairs Detailing</h1>
             <p className="text-slate-400 mt-2">Parametric staircase calculation and preview</p>
           </div>
-          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-            <Download className="w-4 h-4" /> Export DXF
-          </button>
+          <div className="flex items-center gap-4">
+            <ExampleSelector examples={stairsExamples} onSelect={setStairsData} />
+            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+              <Download className="w-4 h-4" /> Export DXF
+            </button>
+          </div>
         </header>
-
-        <ExampleSelector examples={stairsExamples} onSelect={setStairsData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

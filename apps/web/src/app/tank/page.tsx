@@ -9,14 +9,14 @@ import ExampleSelector, { Example } from "@/components/ExampleSelector";
 import type { TankScheduleRow } from "@rdcad-express/dwg-schemas";
 
 const tankExamples: Example<TankScheduleRow>[] = [
-  {
-    name: "Small Underground",
-    data: { tankId: "UGT1", type: "UNDERGROUND", capacity: 50000, width: 3000, length: 5000, height: 3500, wallThickness: 250, mainBarDia: 12, mainBarSpacing: 150 }
-  },
-  {
-    name: "Large Overhead",
-    data: { tankId: "OHT1", type: "OVERHEAD", capacity: 150000, width: 6000, length: 8000, height: 4000, wallThickness: 300, mainBarDia: 16, mainBarSpacing: 150 }
-  }
+  { name: "Small Underground", data: { tankId: "UGT1", type: "UNDERGROUND", capacity: 50000, width: 3000, length: 5000, height: 3500, wallThickness: 250, mainBarDia: 12, mainBarSpacing: 150 } },
+  { name: "Large Overhead", data: { tankId: "OHT1", type: "OVERHEAD", capacity: 150000, width: 6000, length: 8000, height: 4000, wallThickness: 300, mainBarDia: 16, mainBarSpacing: 150 } },
+  { name: "Residential Roof Tank", data: { tankId: "RT1", type: "OVERHEAD", capacity: 10000, width: 2000, length: 2500, height: 2000, wallThickness: 150, mainBarDia: 10, mainBarSpacing: 200 } },
+  { name: "Fire Water Tank", data: { tankId: "FWT1", type: "UNDERGROUND", capacity: 250000, width: 8000, length: 10000, height: 3500, wallThickness: 350, mainBarDia: 16, mainBarSpacing: 125 } },
+  { name: "Sump Pit (Tiny)", data: { tankId: "SP1", type: "UNDERGROUND", capacity: 2000, width: 1000, length: 1000, height: 2000, wallThickness: 150, mainBarDia: 10, mainBarSpacing: 200 } },
+  { name: "Rainwater Harvesting", data: { tankId: "RWH1", type: "UNDERGROUND", capacity: 75000, width: 4000, length: 6000, height: 3200, wallThickness: 200, mainBarDia: 12, mainBarSpacing: 175 } },
+  { name: "Industrial Storage", data: { tankId: "IND1", type: "OVERHEAD", capacity: 500000, width: 10000, length: 12000, height: 4500, wallThickness: 400, mainBarDia: 20, mainBarSpacing: 100 } },
+  { name: "Narrow Trench Tank", data: { tankId: "NT1", type: "UNDERGROUND", capacity: 30000, width: 1500, length: 10000, height: 2000, wallThickness: 200, mainBarDia: 12, mainBarSpacing: 150 } }
 ];
 
 export default function TankDetailing() {
@@ -42,12 +42,13 @@ export default function TankDetailing() {
             <h1 className="text-3xl font-bold text-white">Tank Detailing</h1>
             <p className="text-slate-400 mt-2">Underground and Overhead water tanks</p>
           </div>
-          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-            <Download className="w-4 h-4" /> Export DXF
-          </button>
+          <div className="flex items-center gap-4">
+            <ExampleSelector examples={tankExamples} onSelect={setTankData} />
+            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+              <Download className="w-4 h-4" /> Export DXF
+            </button>
+          </div>
         </header>
-
-        <ExampleSelector examples={tankExamples} onSelect={setTankData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

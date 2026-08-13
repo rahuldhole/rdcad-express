@@ -9,14 +9,14 @@ import ExampleSelector, { Example } from "@/components/ExampleSelector";
 import type { SlabScheduleRow } from "@rdcad-express/dwg-schemas";
 
 const slabExamples: Example<SlabScheduleRow>[] = [
-  {
-    name: "Standard One-Way",
-    data: { slabId: "S1", lx: 2500, ly: 5000, depth: 150, mainBarDia: 10, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 }
-  },
-  {
-    name: "Heavy Two-Way Square",
-    data: { slabId: "S2", lx: 4500, ly: 4500, depth: 175, mainBarDia: 12, mainBarSpacing: 125, distBarDia: 12, distBarSpacing: 125 }
-  }
+  { name: "Standard One-Way", data: { slabId: "S1", lx: 2500, ly: 5000, depth: 150, mainBarDia: 10, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 } },
+  { name: "Heavy Two-Way Square", data: { slabId: "S2", lx: 4500, ly: 4500, depth: 175, mainBarDia: 12, mainBarSpacing: 125, distBarDia: 12, distBarSpacing: 125 } },
+  { name: "Large Rectangular", data: { slabId: "S3", lx: 4000, ly: 6000, depth: 200, mainBarDia: 12, mainBarSpacing: 150, distBarDia: 10, distBarSpacing: 150 } },
+  { name: "Balcony Cantilever (Sim)", data: { slabId: "CS1", lx: 1500, ly: 4000, depth: 150, mainBarDia: 12, mainBarSpacing: 125, distBarDia: 8, distBarSpacing: 200 } },
+  { name: "Roof Slab (Light)", data: { slabId: "RS1", lx: 3000, ly: 4000, depth: 125, mainBarDia: 8, mainBarSpacing: 175, distBarDia: 8, distBarSpacing: 200 } },
+  { name: "Heavy Machine Floor", data: { slabId: "MFS1", lx: 5000, ly: 5000, depth: 250, mainBarDia: 16, mainBarSpacing: 125, distBarDia: 16, distBarSpacing: 125 } },
+  { name: "Staircase Landing", data: { slabId: "SL1", lx: 1200, ly: 2500, depth: 150, mainBarDia: 10, mainBarSpacing: 150, distBarDia: 8, distBarSpacing: 200 } },
+  { name: "Sunken Slab (Restroom)", data: { slabId: "SS1", lx: 2000, ly: 2500, depth: 200, mainBarDia: 10, mainBarSpacing: 150, distBarDia: 10, distBarSpacing: 150 } }
 ];
 
 export default function SlabDetailing() {
@@ -42,12 +42,13 @@ export default function SlabDetailing() {
             <h1 className="text-3xl font-bold text-white">Slab Detailing</h1>
             <p className="text-slate-400 mt-2">Parametric 1-way and 2-way slab preview</p>
           </div>
-          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-            <Download className="w-4 h-4" /> Export DXF
-          </button>
+          <div className="flex items-center gap-4">
+            <ExampleSelector examples={slabExamples} onSelect={setSlabData} />
+            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+              <Download className="w-4 h-4" /> Export DXF
+            </button>
+          </div>
         </header>
-
-        <ExampleSelector examples={slabExamples} onSelect={setSlabData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">

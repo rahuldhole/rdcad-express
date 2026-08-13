@@ -9,14 +9,14 @@ import ExampleSelector, { Example } from "@/components/ExampleSelector";
 import type { ColumnScheduleRow } from "@rdcad-express/dwg-schemas";
 
 const columnExamples: Example<ColumnScheduleRow>[] = [
-  {
-    name: "Standard Square",
-    data: { columnId: "C1", level: "GF", concreteGrade: "M30", width: 400, depth: 400, mainBarCount: 8, mainBarDia: 20, tieDia: 8, tieSpacing: 150 }
-  },
-  {
-    name: "Heavy Rectangular",
-    data: { columnId: "C2", level: "Basement", concreteGrade: "M40", width: 400, depth: 900, mainBarCount: 14, mainBarDia: 25, tieDia: 10, tieSpacing: 100 }
-  }
+  { name: "Standard Square", data: { columnId: "C1", level: "GF", concreteGrade: "M30", width: 400, depth: 400, mainBarCount: 8, mainBarDia: 20, tieDia: 8, tieSpacing: 150 } },
+  { name: "Heavy Rectangular", data: { columnId: "C2", level: "Basement", concreteGrade: "M40", width: 400, depth: 900, mainBarCount: 14, mainBarDia: 25, tieDia: 10, tieSpacing: 100 } },
+  { name: "Circular (Simulated)", data: { columnId: "C3", level: "First", concreteGrade: "M30", width: 600, depth: 600, mainBarCount: 12, mainBarDia: 16, tieDia: 8, tieSpacing: 150 } },
+  { name: "Slender Column", data: { columnId: "C4", level: "Top", concreteGrade: "M25", width: 230, depth: 450, mainBarCount: 6, mainBarDia: 16, tieDia: 8, tieSpacing: 200 } },
+  { name: "Massive Pedestal", data: { columnId: "P1", level: "Foundation", concreteGrade: "M35", width: 1000, depth: 1000, mainBarCount: 20, mainBarDia: 32, tieDia: 12, tieSpacing: 150 } },
+  { name: "L-Shaped Corner (Sim)", data: { columnId: "C5", level: "GF", concreteGrade: "M30", width: 600, depth: 600, mainBarCount: 16, mainBarDia: 20, tieDia: 10, tieSpacing: 150 } },
+  { name: "Edge Column", data: { columnId: "C6", level: "GF", concreteGrade: "M30", width: 300, depth: 600, mainBarCount: 10, mainBarDia: 20, tieDia: 8, tieSpacing: 150 } },
+  { name: "Boundary Wall Pillar", data: { columnId: "BP1", level: "GL", concreteGrade: "M20", width: 230, depth: 230, mainBarCount: 4, mainBarDia: 12, tieDia: 8, tieSpacing: 200 } }
 ];
 
 export default function ColumnDetailing() {
@@ -42,12 +42,13 @@ export default function ColumnDetailing() {
             <h1 className="text-3xl font-bold text-white">Column Detailing</h1>
             <p className="text-slate-400 mt-2">Parametric column sections with real-time 2D preview</p>
           </div>
-          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-            <Download className="w-4 h-4" /> Export DXF
-          </button>
+          <div className="flex items-center gap-4">
+            <ExampleSelector examples={columnExamples} onSelect={setColData} />
+            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+              <Download className="w-4 h-4" /> Export DXF
+            </button>
+          </div>
         </header>
-
-        <ExampleSelector examples={columnExamples} onSelect={setColData} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
