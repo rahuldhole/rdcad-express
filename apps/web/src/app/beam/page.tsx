@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Download, RefreshCw, ZoomIn, ZoomOut, Maximize } from "lucide-react";
+import { Download } from "lucide-react";
 import { exportBeamSectionToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
@@ -63,24 +63,8 @@ export default function BeamDetailing() {
             </div>
           </div>
 
-          <div className="bg-slate-900 rounded border border-slate-800 flex flex-col relative overflow-hidden" style={{ minHeight: "500px" }}>
-            <div className="flex items-center gap-2 p-2 border-b border-slate-800 bg-slate-950/80 z-10 relative shadow-sm">
-              <button className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Reset View">
-                <RefreshCw className="w-4 h-4" />
-              </button>
-              <button className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Zoom In">
-                <ZoomIn className="w-4 h-4" />
-              </button>
-              <button className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors" title="Zoom Out">
-                <ZoomOut className="w-4 h-4" />
-              </button>
-              <button className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors ml-auto" title="Fit to Screen">
-                <Maximize className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex-1 relative flex items-center justify-center min-h-0">
-              {dxfString && <DXFPreview dxfString={dxfString} />}
-            </div>
+          <div className="bg-slate-900 rounded border border-slate-800 flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>
+            {dxfString && <DXFPreview dxfString={dxfString} />}
           </div>
         </div>
       </div>
