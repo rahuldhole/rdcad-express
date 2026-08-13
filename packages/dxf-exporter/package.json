@@ -5,10 +5,13 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "test": "vitest run",
     "dev": "tsc -w"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "dxf-parser": "^1.1.2",
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "@rdcad-express/dwg-schemas": "workspace:*",

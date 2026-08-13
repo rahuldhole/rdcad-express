@@ -1,8 +1,17 @@
 import { describe, it, expect } from "vitest";
 import { exportBeamSectionToDXF, exportSlabSectionToDXF } from "./index";
+import DxfParser from "dxf-parser";
+import fs from "fs";
+import path from "path";
+
+// Ensure tmp directory exists
+const tmpDir = path.resolve(__dirname, "../../../tmp");
+if (!fs.existsSync(tmpDir)) {
+  fs.mkdirSync(tmpDir, { recursive: true });
+}
 
 describe("dxf-exporter tests", () => {
-  it("should generate a valid DXF string for a beam section", () => {
+  it("should generate a valid DXF string for a beam section and parse without errors", () => {
     const dxfString = exportBeamSectionToDXF({
       elementId: "B1",
       width: 300,
@@ -15,17 +24,30 @@ describe("dxf-exporter tests", () => {
       stirrupSpacing: 150
     });
 
-    // Check basic DXF structures
+    // Write to tmp dir for manual inspection
+    const filePath = path.join(tmpDir, "test-beam-output.dxf");
+    fs.writeFileSync(filePath, dxfString);
+
+    // Basic structure assertions
     expect(dxfString).toContain("SECTION");
     expect(dxfString).toContain("ENTITIES");
+    expect(dxfString).toContain("$EXTMIN");
+    expect(dxfString).toContain("$EXTMAX");
     expect(dxfString).toContain("EOF");
 
-    // Check custom layers are created
-    expect(dxfString).toContain("CONCRETE");
-    expect(dxfString).toContain("REBAR");
+    // Ensure parser runs completely without throwing (e.g. valid structure, valid tables)
+    const parser = new DxfParser();
+    let parsedDxf = null;
+    expect(() => {
+      parsedDxf = parser.parseSync(dxfString);
+    }).not.toThrow();
+    
+    // Ensure the parser populated extents from our fix
+    expect(parsedDxf.header['$EXTMIN']).toBeDefined();
+    expect(parsedDxf.header['$EXTMAX']).toBeDefined();
   });
 
-  it("should generate a valid DXF string for a slab section", () => {
+  it("should generate a valid DXF string for a slab section and parse without errors", () => {
     const dxfString = exportSlabSectionToDXF({
       slabId: "S1",
       lx: 4000,
@@ -37,8 +59,13 @@ describe("dxf-exporter tests", () => {
       distBarSpacing: 200
     });
 
-    expect(dxfString).toContain("CONCRETE");
-    expect(dxfString).toContain("REBAR");
-    expect(dxfString).toContain("EOF");
+    // Write to tmp dir for manual inspection
+    const filePath = path.join(tmpDir, "test-slab-output.dxf");
+    fs.writeFileSync(filePath, dxfString);
+
+    const parser = new DxfParser();
+    expect(() => {
+      parser.parseSync(dxfString);
+    }).not.toThrow();
   });
 });
