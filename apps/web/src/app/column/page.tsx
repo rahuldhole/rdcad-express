@@ -4,17 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Download } from "lucide-react";
 import { exportColumnSectionToDXF } from "@rdcad-express/dxf-exporter";
 import type { ColumnScheduleRow } from "@rdcad-express/dwg-schemas";
+import { useAppStore } from "@/store/useStore";
 
 export default function ColumnDetailing() {
-  const [colData, setColData] = useState<ColumnScheduleRow>({
-    columnId: "C1",
-    level: "GF",
-    concreteGrade: "M30",
-    mainBarCount: 8,
-    mainBarDia: 20,
-    tieDia: 8,
-    tieSpacing: 150,
-  });
+  const colData = useAppStore(state => state.colData);
+  const setColData = useAppStore(state => state.setColData);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [KonvaComps, setKonvaComps] = useState<any>(null);

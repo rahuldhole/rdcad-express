@@ -4,19 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Download } from "lucide-react";
 import { exportTankSectionToDXF } from "@rdcad-express/dxf-exporter";
 import type { TankScheduleRow } from "@rdcad-express/dwg-schemas";
+import { useAppStore } from "@/store/useStore";
 
 export default function TankDetailing() {
-  const [tankData, setTankData] = useState<TankScheduleRow>({
-    tankId: "T1",
-    type: "UNDERGROUND",
-    capacity: 50000,
-    width: 3000,
-    length: 5000,
-    height: 3500,
-    wallThickness: 250,
-    mainBarDia: 12,
-    mainBarSpacing: 150,
-  });
+  const tankData = useAppStore(state => state.tankData);
+  const setTankData = useAppStore(state => state.setTankData);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [KonvaComps, setKonvaComps] = useState<any>(null);

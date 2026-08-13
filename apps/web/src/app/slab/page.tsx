@@ -4,18 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Download } from "lucide-react";
 import { exportSlabSectionToDXF } from "@rdcad-express/dxf-exporter";
 import type { SlabScheduleRow } from "@rdcad-express/dwg-schemas";
+import { useAppStore } from "@/store/useStore";
 
 export default function SlabDetailing() {
-  const [slabData, setSlabData] = useState<SlabScheduleRow>({
-    slabId: "S1",
-    lx: 4000,
-    ly: 5000,
-    depth: 150,
-    mainBarDia: 10,
-    mainBarSpacing: 150,
-    distBarDia: 8,
-    distBarSpacing: 200,
-  });
+  const slabData = useAppStore(state => state.slabData);
+  const setSlabData = useAppStore(state => state.setSlabData);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [KonvaComps, setKonvaComps] = useState<any>(null);

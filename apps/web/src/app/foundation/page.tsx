@@ -4,18 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Download } from "lucide-react";
 import { exportFoundationSectionToDXF } from "@rdcad-express/dxf-exporter";
 import type { FoundationScheduleRow } from "@rdcad-express/dwg-schemas";
+import { useAppStore } from "@/store/useStore";
 
 export default function FoundationDetailing() {
-  const [fdnData, setFdnData] = useState<FoundationScheduleRow>({
-    footingId: "F1",
-    lx: 2000,
-    ly: 2000,
-    depth: 450,
-    meshBarDiaX: 12,
-    meshBarSpacingX: 150,
-    meshBarDiaY: 12,
-    meshBarSpacingY: 150,
-  });
+  const fdnData = useAppStore(state => state.fdnData);
+  const setFdnData = useAppStore(state => state.setFdnData);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [KonvaComps, setKonvaComps] = useState<any>(null);

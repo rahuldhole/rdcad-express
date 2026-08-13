@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Download, Search } from "lucide-react";
 import { exportTextNodesToDXF } from "@rdcad-express/dxf-exporter";
+import { useAppStore } from "@/store/useStore";
 
 type TextNode = {
   id: string;
@@ -12,11 +13,16 @@ type TextNode = {
 };
 
 export default function GridUtilities() {
-  const [nodes, setNodes] = useState<TextNode[]>([]);
-  const [prefix, setPrefix] = useState("B");
-  const [startNum, setStartNum] = useState(1);
-  const [findText, setFindText] = useState("");
-  const [replaceText, setReplaceText] = useState("");
+  const nodes = useAppStore(state => state.nodes);
+  const setNodes = useAppStore(state => state.setNodes);
+  const prefix = useAppStore(state => state.prefix);
+  const setPrefix = useAppStore(state => state.setPrefix);
+  const startNum = useAppStore(state => state.startNum);
+  const setStartNum = useAppStore(state => state.setStartNum);
+  const findText = useAppStore(state => state.findText);
+  const setFindText = useAppStore(state => state.setFindText);
+  const replaceText = useAppStore(state => state.replaceText);
+  const setReplaceText = useAppStore(state => state.setReplaceText);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [KonvaComps, setKonvaComps] = useState<any>(null);
