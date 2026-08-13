@@ -5,7 +5,8 @@ import type {
   TankScheduleRow, 
   ColumnScheduleRow, 
   SlabScheduleRow, 
-  FoundationScheduleRow 
+  FoundationScheduleRow,
+  StairsScheduleRow
 } from '@rdcad-express/dwg-schemas';
 
 type TextNode = {
@@ -30,6 +31,9 @@ interface AppState {
   
   fdnData: FoundationScheduleRow;
   setFdnData: (data: FoundationScheduleRow) => void;
+  
+  stairsData: StairsScheduleRow;
+  setStairsData: (data: StairsScheduleRow) => void;
   
   // Utility states
   nodes: TextNode[];
@@ -109,6 +113,19 @@ export const useAppStore = create<AppState>()(
         meshBarSpacingY: 150,
       },
       setFdnData: (data) => set({ fdnData: data }),
+      
+      stairsData: {
+        stairId: "ST1",
+        tread: 250,
+        rise: 150,
+        numberOfSteps: 10,
+        waistSlabThickness: 150,
+        mainBarDia: 12,
+        mainBarSpacing: 150,
+        distBarDia: 8,
+        distBarSpacing: 200,
+      },
+      setStairsData: (data) => set({ stairsData: data }),
       
       nodes: [],
       setNodes: (nodes) => set({ nodes }),

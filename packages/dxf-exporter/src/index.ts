@@ -1,5 +1,5 @@
 import DXFWriter from 'dxf-writer';
-import type { BeamScheduleRow, ColumnScheduleRow, SlabScheduleRow, FoundationScheduleRow, TankScheduleRow } from '@rdcad-express/dwg-schemas';
+import type { BeamScheduleRow, ColumnScheduleRow, SlabScheduleRow, FoundationScheduleRow, TankScheduleRow, StairsScheduleRow } from '@rdcad-express/dwg-schemas';
 
 export function exportBeamSectionToDXF(data: BeamScheduleRow): string {
   const dxf = new DXFWriter();
@@ -277,6 +277,64 @@ export function exportTankSectionToDXF(data: TankScheduleRow): string {
     }
   }
 
+  return getDxfStringWithExtents(dxf);
+}
+
+export function exportStairsSectionToDXF(data: StairsScheduleRow): string {
+  const dxf = new DXFWriter();
+  dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
+  dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
+  
+  dxf.setActiveLayer('CONCRETE');
+  const tread = data.tread || 250;
+  const rise = data.rise || 150;
+  const steps = data.numberOfSteps || 10;
+  const waist = data.waistSlabThickness || 150;
+  
+  // Draw the zig-zag steps
+  let currentX = 0;
+  let currentY = 0;
+  
+  for (let i = 0; i < steps; i++) {
+    // Riser (vertical up)
+    dxf.drawLine(currentX, currentY, currentX, currentY + rise);
+    currentY += rise;
+    
+    // Tread (horizontal right)
+    dxf.drawLine(currentX, currentY, currentX + tread, currentY);
+    currentX += tread;
+  }
+  
+  // Draw the waist slab
+  // Calculate the angle of the stairs
+  const angle = Math.atan2(rise, tread);
+  // Vertical offset to draw waist slab parallel to the nosing line
+  const waistOffset = waist / Math.cos(angle);
+  
+  // Bottom line of waist slab
+  const bottomStartX = 0;
+  const bottomStartY = -waistOffset;
+  const bottomEndX = currentX;
+  const bottomEndY = currentY - rise - waistOffset;
+  
+  dxf.drawLine(bottomStartX, bottomStartY, bottomEndX, bottomEndY);
+  dxf.drawLine(0, 0, bottomStartX, bottomStartY); // Connect start
+  dxf.drawLine(currentX, currentY, bottomEndX, bottomEndY + rise); // Connect end (approx)
+  
+  // Rebar implementation (simplified main and distribution bars)
+  dxf.setActiveLayer('REBAR');
+  const cover = 25;
+  const mainBarDia = data.mainBarDia || 12;
+  const distBarDia = data.distBarDia || 8;
+  
+  // Main bar parallel to waist
+  const rebarOffset = (waist - cover * 2) / Math.cos(angle);
+  const rx1 = 0 + cover;
+  const ry1 = bottomStartY + cover;
+  const rx2 = bottomEndX - cover;
+  const ry2 = bottomEndY + cover;
+  dxf.drawLine(rx1, ry1, rx2, ry2);
+  
   return getDxfStringWithExtents(dxf);
 }
 

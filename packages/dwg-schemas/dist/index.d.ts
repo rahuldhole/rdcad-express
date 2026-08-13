@@ -60,3 +60,14 @@ export interface TankScheduleRow {
     mainBarDia: number;
     mainBarSpacing: number;
 }
+export interface StairsScheduleRow {
+    stairId: string;
+    tread: number;
+    rise: number;
+    numberOfSteps: number;
+    waistSlabThickness: number;
+    mainBarDia: number;
+    mainBarSpacing: number;
+    distBarDia: number;
+    distBarSpacing: number;
+}

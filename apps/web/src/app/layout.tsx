@@ -40,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/slab" className="text-sm font-medium hover:text-white text-slate-400 transition">Slab</Link>
               <Link href="/foundation" className="text-sm font-medium hover:text-white text-slate-400 transition">Foundation</Link>
               <Link href="/tank" className="text-sm font-medium hover:text-white text-slate-400 transition">Tank</Link>
+              <Link href="/stairs" className="text-sm font-medium hover:text-white text-slate-400 transition">Stairs</Link>
               <Link href="/utilities" className="text-sm font-medium hover:text-white text-slate-400 transition">Grid Utils</Link>
             </nav>
           </div>

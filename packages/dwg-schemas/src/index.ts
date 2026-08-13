@@ -65,3 +65,15 @@ export interface TankScheduleRow {
   mainBarDia: number;
   mainBarSpacing: number;
 }
+
+export interface StairsScheduleRow {
+  stairId: string;
+  tread: number;           // Tread length in mm
+  rise: number;            // Riser height in mm
+  numberOfSteps: number;   // Total number of steps
+  waistSlabThickness: number; // Thickness of the waist slab in mm
+  mainBarDia: number;      // Main longitudinal reinforcement diameter
+  mainBarSpacing: number;  // Spacing of main bars
+  distBarDia: number;      // Distribution bar diameter
+  distBarSpacing: number;  // Spacing of distribution bars
+}
