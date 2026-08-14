@@ -211,8 +211,104 @@ export default function MarketingPage() {
         </div>
       </section>
 
+      {/* Project Feature Section */}
+      <section className="py-24 px-8 border-t border-slate-900/50 bg-slate-900/20 relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-1 w-full bg-slate-950 rounded-2xl border border-slate-800 p-6 shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-blue-500 via-indigo-500 to-purple-500"></div>
+            <div className="flex items-center gap-2 mb-6 border-b border-slate-800/50 pb-4">
+              <div className="w-8 h-8 rounded bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">P</div>
+              <span className="text-slate-300 font-medium text-sm">Project Active Summary</span>
+            </div>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between p-3 rounded-lg bg-slate-900/50 border border-slate-800/50">
+                <span className="text-sm text-slate-400">Beam Detail B1</span>
+                <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded">Ready</span>
+              </div>
+              <div className="flex items-center justify-between p-3 rounded-lg bg-slate-900/50 border border-slate-800/50">
+                <span className="text-sm text-slate-400">Column Schedule C1-C4</span>
+                <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded">Ready</span>
+              </div>
+              <div className="mt-2 flex gap-3">
+                <div className="flex-1 h-10 bg-blue-600/20 border border-blue-500/30 rounded flex items-center justify-center text-blue-400 text-xs font-bold transition hover:bg-blue-600/30 cursor-pointer">GENERATE REPORT</div>
+                <div className="flex-1 h-10 bg-emerald-600/20 border border-emerald-500/30 rounded flex items-center justify-center text-emerald-400 text-xs font-bold transition hover:bg-emerald-600/30 cursor-pointer">EXPORT ALL DXF</div>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold tracking-wide uppercase">
+              Project Management
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold">Unified Project Reports</h2>
+            <p className="text-lg text-slate-400 leading-relaxed">
+              Consolidate your structural designs into a single, cohesive project. RDCAD Express allows you to queue multiple elements—beams, columns, slabs—and generate a comprehensive engineering report.
+            </p>
+            <ul className="space-y-4 text-slate-300">
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">✓</div>
+                Batch export multiple DXF files simultaneously
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">✓</div>
+                Generate unified PDF calculation reports
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">✓</div>
+                Track your active designs in one centralized view
+              </li>
+            </ul>
+            <div className="pt-4">
+              <Link href="/project" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition shadow-lg shadow-blue-500/20">
+                View Project Dashboard
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reporting Issues Section */}
+      <section className="py-24 px-8 border-t border-slate-900/50 bg-slate-950 relative z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-900 border border-slate-800 mb-4 shadow-xl">
+            <GitBranch className="w-8 h-8 text-slate-300" />
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold">Found a Bug? Have an Idea?</h2>
+          <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
+            RDCAD Express is open-source, and we rely on community feedback to improve. If you encounter a bug or have a feature request, you can easily report it on our GitHub repository.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-6 text-left mt-12">
+            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl relative overflow-hidden group hover:border-slate-700 transition-colors">
+              <div className="text-4xl font-black text-slate-800/50 absolute -right-2 -bottom-4 group-hover:text-slate-700 transition-colors">1</div>
+              <h3 className="text-xl font-bold mb-3 relative z-10 text-white">Create an Account</h3>
+              <p className="text-slate-400 text-sm relative z-10">If you don&apos;t have one, sign up for a free account at GitHub.com.</p>
+            </div>
+            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl relative overflow-hidden group hover:border-slate-700 transition-colors">
+              <div className="text-4xl font-black text-slate-800/50 absolute -right-2 -bottom-4 group-hover:text-slate-700 transition-colors">2</div>
+              <h3 className="text-xl font-bold mb-3 relative z-10 text-white">Go to Issues</h3>
+              <p className="text-slate-400 text-sm relative z-10">Navigate to the &quot;Issues&quot; tab on our GitHub repository and click &quot;New Issue&quot;.</p>
+            </div>
+            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl relative overflow-hidden group hover:border-slate-700 transition-colors">
+              <div className="text-4xl font-black text-slate-800/50 absolute -right-2 -bottom-4 group-hover:text-slate-700 transition-colors">3</div>
+              <h3 className="text-xl font-bold mb-3 relative z-10 text-white">Provide Details</h3>
+              <p className="text-slate-400 text-sm relative z-10">Describe the problem clearly. Include screenshots or error messages if possible.</p>
+            </div>
+          </div>
+          
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="https://github.com/rahuldhole/rdcad-express/issues/new" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-100 hover:bg-white text-slate-900 rounded-full font-bold transition-all shadow-lg hover:scale-105">
+              Report an Issue Now
+            </a>
+            <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-slate-700 hover:border-slate-600 text-slate-300 rounded-full font-bold transition-all hover:bg-slate-800">
+              Explore Repository
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="py-12 px-8 border-t border-slate-900 text-center text-slate-500 text-sm">
+      <footer className="py-12 px-8 border-t border-slate-900 text-center text-slate-500 text-sm bg-slate-950">
         <p>© {new Date().getFullYear()} RDCAD Express. Open Source under MIT License.</p>
       </footer>
     </div>
