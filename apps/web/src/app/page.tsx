@@ -45,7 +45,7 @@ export default function MarketingPage() {
             <p className="text-slate-400">Everything you need to detail structures efficiently.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <FeatureCard 
               icon={<Code className="w-8 h-8 text-blue-400" />}
               title="BBS Generator"
@@ -81,6 +81,30 @@ export default function MarketingPage() {
               title="Tank Detailing"
               description="Water tank structural components and drawings."
               link="/tank"
+            />
+            <FeatureCard 
+              icon={<Layers className="w-8 h-8 text-orange-400" />}
+              title="Stairs Detailing"
+              description="Parametric dog-legged stair reinforcements and profiles."
+              link="/stairs"
+            />
+            <FeatureCard 
+              icon={<Code className="w-8 h-8 text-indigo-400" />}
+              title="Grid Utils"
+              description="Drafting utilities for grids, elevations, and revisions."
+              link="/utilities"
+            />
+            <FeatureCard 
+              icon={<Compass className="w-8 h-8 text-pink-400" />}
+              title="Asset Library"
+              description="Pre-built CAD blocks for architecture and plumbing."
+              link="/library"
+            />
+            <FeatureCard 
+              icon={<Cpu className="w-8 h-8 text-teal-400" />}
+              title="Templates"
+              description="Standardized title blocks and project templates."
+              link="/templates"
             />
           </div>
         </div>
