@@ -25,13 +25,22 @@ const index_1 = require("./index");
             (0, vitest_1.expect)((0, index_1.calculateStirrupCount)(3000, 150)).toBe(21); // (3000/150) + 1
             (0, vitest_1.expect)((0, index_1.calculateStirrupCount)(4000, 200)).toBe(21);
         });
+        (0, vitest_1.it)("should handle non-divisible spans correctly", () => {
+            // 3050 / 150 = 20.33 => 20 + 1 = 21
+            (0, vitest_1.expect)((0, index_1.calculateStirrupCount)(3050, 150)).toBe(21);
+        });
+        (0, vitest_1.it)("should handle zero or tiny span", () => {
+            (0, vitest_1.expect)((0, index_1.calculateStirrupCount)(0, 150)).toBe(1);
+        });
     });
     (0, vitest_1.describe)("BendRules", () => {
         (0, vitest_1.it)("should return correct 90 deg deduction", () => {
             (0, vitest_1.expect)(index_1.BendRules.deduction90(16)).toBe(32);
+            (0, vitest_1.expect)(index_1.BendRules.deduction90(10)).toBe(20);
         });
         (0, vitest_1.it)("should return correct 135 deg allowance", () => {
             (0, vitest_1.expect)(index_1.BendRules.allowance135(8)).toBe(80);
+            (0, vitest_1.expect)(index_1.BendRules.allowance135(12)).toBe(120);
         });
     });
 });

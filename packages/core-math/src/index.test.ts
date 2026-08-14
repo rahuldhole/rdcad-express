@@ -27,15 +27,26 @@ describe("core-math tests", () => {
       expect(calculateStirrupCount(3000, 150)).toBe(21); // (3000/150) + 1
       expect(calculateStirrupCount(4000, 200)).toBe(21);
     });
+    
+    it("should handle non-divisible spans correctly", () => {
+      // 3050 / 150 = 20.33 => 20 + 1 = 21
+      expect(calculateStirrupCount(3050, 150)).toBe(21);
+    });
+    
+    it("should handle zero or tiny span", () => {
+      expect(calculateStirrupCount(0, 150)).toBe(1);
+    });
   });
 
   describe("BendRules", () => {
     it("should return correct 90 deg deduction", () => {
       expect(BendRules.deduction90(16)).toBe(32);
+      expect(BendRules.deduction90(10)).toBe(20);
     });
 
     it("should return correct 135 deg allowance", () => {
       expect(BendRules.allowance135(8)).toBe(80);
+      expect(BendRules.allowance135(12)).toBe(120);
     });
   });
 });

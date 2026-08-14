@@ -94,6 +94,50 @@ export default function MarketingPage() {
         </div>
       </section>
 
+      {/* Reliability Section */}
+      <section className="py-24 px-8 border-t border-slate-900/50 bg-slate-950 relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
+          <div className="flex-1 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm font-semibold tracking-wide uppercase">
+              Quality Assured
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold">Tested & Reliable Core</h2>
+            <p className="text-lg text-slate-400 leading-relaxed">
+              We know that structural detailing requires absolute precision. That's why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <span className="text-white font-medium">Vitest</span> test suite.
+            </p>
+            <ul className="space-y-4 text-slate-300">
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">✓</div>
+                Rigorous testing for accurate BBS calculations
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">✓</div>
+                Automated validation of generated DXF structural integrity
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">✓</div>
+                Deterministic outputs across different environments
+              </li>
+            </ul>
+          </div>
+          <div className="flex-1 w-full bg-slate-900 rounded-2xl border border-slate-800 p-6 shadow-2xl relative overflow-hidden group">
+            <div className="flex items-center gap-2 mb-4 text-slate-500 text-sm font-mono border-b border-slate-800/50 pb-4">
+              <div className="w-3 h-3 rounded-full bg-slate-700"></div>
+              <div className="w-3 h-3 rounded-full bg-slate-700"></div>
+              <div className="w-3 h-3 rounded-full bg-slate-700"></div>
+              <span className="ml-2">vitest run</span>
+            </div>
+            <div className="font-mono text-sm space-y-2">
+              <div className="text-emerald-400">✓ packages/core-math/src/index.test.ts (8 tests)</div>
+              <div className="text-emerald-400">✓ packages/dxf-exporter/src/index.test.ts (5 tests)</div>
+              <div className="text-slate-500 mt-4">Test Files  2 passed (2)</div>
+              <div className="text-slate-500">Tests  13 passed (13)</div>
+              <div className="text-slate-500">Duration  843ms</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-24 px-8 border-t border-slate-900/50 bg-slate-950/50 relative z-10">
         <div className="max-w-7xl mx-auto">

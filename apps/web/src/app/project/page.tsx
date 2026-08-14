@@ -106,7 +106,7 @@ export default function ProjectDashboard() {
 
         {/* Quick-add bar — always visible */}
         <div className="bg-slate-900 rounded-xl border border-slate-800 p-5">
-          <h3 className="text-sm font-medium text-slate-400 mb-3">Quick Add — configure an element & click "Add to Project"</h3>
+          <h3 className="text-sm font-medium text-slate-400 mb-3">Quick Add — configure an element & click "Save"</h3>
           <div className="flex flex-wrap gap-2">
             {elementPages.map(page => (
               <Link
@@ -126,10 +126,11 @@ export default function ProjectDashboard() {
             <div className="w-20 h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center text-slate-600 mb-2">
               <FolderArchive className="w-10 h-10" />
             </div>
-            <h2 className="text-xl font-semibold text-white">No elements yet</h2>
-            <p className="text-slate-400 max-w-md mx-auto leading-relaxed">
-              Use the buttons above to navigate to a detailing page. Configure your element's properties, then click <strong>"Add to Project"</strong> to collect it here. Once you've gathered all elements, export them as a single ZIP file.
-            </p>
+            <div className="max-w-md mx-auto p-8 text-center text-slate-500">
+              <FolderPlus className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <p>Your project is empty.</p>
+              <p className="mt-2 text-sm">Use the buttons above to navigate to a detailing page. Configure your element's properties, then click <strong>"Save"</strong> to collect it here. Once you've gathered all elements, export them as a single ZIP file.</p>
+            </div>
           </div>
         ) : (
           <div className="space-y-3">
