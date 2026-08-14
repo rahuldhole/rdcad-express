@@ -1,27 +1,35 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export function ProtectedEmail() {
-  const [email, setEmail] = useState("hello [at] rahuldhole [dot] com");
-  const [href, setHref] = useState("#");
+  const [showEmail, setShowEmail] = useState(false);
 
-  useEffect(() => {
-    // Decode the email on the client side only to hide from bots
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowEmail(true);
+  };
+
+  if (showEmail) {
     const user = "hello";
     const domain = "rahuldhole.com";
     const address = `${user}@${domain}`;
-    
-    setEmail(address);
-    setHref(`mailto:${address}`);
-  }, []);
+    return (
+      <a 
+        href={`mailto:${address}`} 
+        className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+      >
+        {address}
+      </a>
+    );
+  }
 
   return (
-    <a 
-      href={href} 
-      className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+    <button 
+      onClick={handleClick}
+      className="text-blue-400 hover:text-blue-300 font-medium transition-colors underline decoration-dashed underline-offset-4 bg-blue-500/10 px-2 py-0.5 rounded"
     >
-      {email}
-    </a>
+      Click to reveal email
+    </button>
   );
 }
