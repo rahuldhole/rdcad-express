@@ -12,9 +12,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "RDCAD Express - Structural Detailing";
+const description = "Advanced parametric detailing and Bar Bending Schedule tools for structural engineers.";
+const icon = "🛠️";
+const ogImageUrl = `https://og-image.org/api/og?template=gradient&title=${encodeURIComponent(title)}&icon=${encodeURIComponent(icon)}&description=${encodeURIComponent(description)}&bg=1e3a5f&text=ffffff`;
+
 export const metadata: Metadata = {
-  title: "RDCAD Express - Structural Detailing",
-  description: "Advanced parametric detailing and Bar Bending Schedule tools for structural engineers.",
+  title,
+  description,
+  openGraph: {
+    type: "website",
+    title,
+    description,
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [ogImageUrl],
+  },
 };
 
 import Navbar from "@/components/Navbar";
