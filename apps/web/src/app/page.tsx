@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, GitBranch, Code, Layers, Cpu, Compass } from "lucide-react";
+import { ProtectedEmail } from "@/components/ProtectedEmail";
 
 export default function MarketingPage() {
   return (
@@ -303,6 +304,10 @@ export default function MarketingPage() {
             <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-slate-700 hover:border-slate-600 text-slate-300 rounded-full font-bold transition-all hover:bg-slate-800">
               Explore Repository
             </a>
+          </div>
+          
+          <div className="pt-6 text-slate-400 text-sm">
+            Need direct support? Email me at <ProtectedEmail />
           </div>
         </div>
       </section>
