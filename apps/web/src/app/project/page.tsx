@@ -1,15 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useAppStore } from "@/store/useStore";
-import { Download, Trash2, FolderArchive, Plus } from "lucide-react";
+import { Download, Trash2, FolderArchive, Plus, Pencil, Check, X, FileText } from "lucide-react";
 import Link from "next/link";
 import JSZip from "jszip";
+
+const elementPages = [
+  { href: "/beam", label: "Beam", color: "text-emerald-400", bg: "bg-emerald-500/10 border-emerald-500/20" },
+  { href: "/column", label: "Column", color: "text-purple-400", bg: "bg-purple-500/10 border-purple-500/20" },
+  { href: "/slab", label: "Slab", color: "text-rose-400", bg: "bg-rose-500/10 border-rose-500/20" },
+  { href: "/foundation", label: "Foundation", color: "text-amber-400", bg: "bg-amber-500/10 border-amber-500/20" },
+  { href: "/tank", label: "Tank", color: "text-cyan-400", bg: "bg-cyan-500/10 border-cyan-500/20" },
+  { href: "/stairs", label: "Stairs", color: "text-orange-400", bg: "bg-orange-500/10 border-orange-500/20" },
+];
 
 export default function ProjectDashboard() {
   const projectItems = useAppStore(state => state.projectItems);
   const removeFromProject = useAppStore(state => state.removeFromProject);
   const clearProject = useAppStore(state => state.clearProject);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editName, setEditName] = useState("");
 
   const handleExportZip = async () => {
     if (projectItems.length === 0) return;
@@ -29,80 +40,161 @@ export default function ProjectDashboard() {
     URL.revokeObjectURL(url);
   };
 
+  const handleExportSingle = (item: { name: string; dxfString: string }) => {
+    const blob = new Blob([item.dxfString], { type: "application/dxf" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${item.name}.dxf`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const startRename = (id: string, currentName: string) => {
+    setEditingId(id);
+    setEditName(currentName);
+  };
+
+  const confirmRename = (id: string) => {
+    if (editName.trim()) {
+      const item = projectItems.find(i => i.id === id);
+      if (item) {
+        useAppStore.getState().removeFromProject(id);
+        useAppStore.getState().addToProject({
+          ...item,
+          id: crypto.randomUUID(),
+          name: editName.trim(),
+        });
+      }
+    }
+    setEditingId(null);
+    setEditName("");
+  };
+
+  const totalSize = projectItems.reduce((acc, item) => acc + item.dxfString.length, 0);
+
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="max-w-7xl mx-auto space-y-8">
+        {/* Header */}
         <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
           <div>
             <h1 className="text-3xl font-bold text-white">Project Dashboard</h1>
-            <p className="text-slate-400 mt-2">Manage and batch export your configured structural elements.</p>
+            <p className="text-slate-400 mt-2">
+              {projectItems.length === 0 
+                ? "Configure structural elements, then add them here for batch export." 
+                : `${projectItems.length} element${projectItems.length > 1 ? 's' : ''} · ${(totalSize / 1024).toFixed(1)} KB total`}
+            </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
-            <button 
-              onClick={handleExportZip} 
-              disabled={projectItems.length === 0}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded font-medium transition whitespace-nowrap ${projectItems.length > 0 ? "bg-emerald-600 hover:bg-emerald-500 shadow-lg shadow-emerald-500/20" : "bg-slate-800 text-slate-500 cursor-not-allowed"}`}
-            >
-              <FolderArchive className="w-4 h-4" /> Export All to ZIP
-            </button>
-            <button 
-              onClick={clearProject}
-              disabled={projectItems.length === 0}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded font-medium transition whitespace-nowrap ${projectItems.length > 0 ? "bg-red-600 hover:bg-red-500 shadow-lg shadow-red-500/20 text-white" : "bg-slate-800 text-slate-500 cursor-not-allowed"}`}
-            >
-              <Trash2 className="w-4 h-4" /> Clear Project
-            </button>
-          </div>
+          {projectItems.length > 0 && (
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+              <button 
+                onClick={handleExportZip} 
+                className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium transition whitespace-nowrap bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20"
+              >
+                <FolderArchive className="w-4 h-4" /> Export All (.zip)
+              </button>
+              <button 
+                onClick={() => { if (confirm("Remove all items from this project?")) clearProject(); }}
+                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium transition whitespace-nowrap bg-slate-800 hover:bg-red-900/50 text-slate-400 hover:text-red-400 border border-slate-700 hover:border-red-900/50"
+              >
+                <Trash2 className="w-4 h-4" /> Clear All
+              </button>
+            </div>
+          )}
         </header>
 
+        {/* Quick-add bar — always visible */}
+        <div className="bg-slate-900 rounded-xl border border-slate-800 p-5">
+          <h3 className="text-sm font-medium text-slate-400 mb-3">Quick Add — configure an element & click "Add to Project"</h3>
+          <div className="flex flex-wrap gap-2">
+            {elementPages.map(page => (
+              <Link
+                key={page.href}
+                href={page.href}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border text-sm font-medium transition hover:scale-[1.03] ${page.bg} ${page.color}`}
+              >
+                <Plus className="w-3.5 h-3.5" /> {page.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Items list */}
         {projectItems.length === 0 ? (
-          <div className="bg-slate-900 rounded border border-slate-800 p-12 text-center flex flex-col items-center justify-center space-y-4">
-            <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-slate-600 mb-4">
-              <FolderArchive className="w-8 h-8" />
+          <div className="bg-slate-900/50 rounded-xl border border-dashed border-slate-700 p-16 text-center flex flex-col items-center justify-center space-y-4">
+            <div className="w-20 h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center text-slate-600 mb-2">
+              <FolderArchive className="w-10 h-10" />
             </div>
-            <h2 className="text-xl font-semibold text-white">Your project is empty</h2>
-            <p className="text-slate-400 max-w-md mx-auto">
-              Go to any detailing page (Beam, Column, Slab, etc.) and click "Add to Project" to build up your master file.
+            <h2 className="text-xl font-semibold text-white">No elements yet</h2>
+            <p className="text-slate-400 max-w-md mx-auto leading-relaxed">
+              Use the buttons above to navigate to a detailing page. Configure your element's properties, then click <strong>"Add to Project"</strong> to collect it here. Once you've gathered all elements, export them as a single ZIP file.
             </p>
-            <div className="flex gap-4 mt-6">
-              <Link href="/column" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded transition text-sm">
-                <Plus className="w-4 h-4" /> Add Column
-              </Link>
-              <Link href="/beam" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded transition text-sm">
-                <Plus className="w-4 h-4" /> Add Beam
-              </Link>
-            </div>
           </div>
         ) : (
-          <div className="bg-slate-900 rounded border border-slate-800 overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-slate-950 text-slate-400 border-b border-slate-800">
-                <tr>
-                  <th className="px-6 py-4 font-medium">Element Name</th>
-                  <th className="px-6 py-4 font-medium">Type</th>
-                  <th className="px-6 py-4 font-medium">Size (Bytes)</th>
-                  <th className="px-6 py-4 font-medium text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800/50">
-                {projectItems.map((item) => (
-                  <tr key={item.id} className="hover:bg-slate-800/50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-blue-400">{item.name}.dxf</td>
-                    <td className="px-6 py-4 text-slate-400 capitalize">{item.type}</td>
-                    <td className="px-6 py-4 text-slate-400">{item.dxfString.length.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right">
-                      <button 
-                        onClick={() => removeFromProject(item.id)}
-                        className="text-red-400 hover:text-red-300 transition p-2"
-                        title="Remove from project"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="space-y-3">
+            {projectItems.map((item, index) => (
+              <div key={item.id} className="bg-slate-900 rounded-xl border border-slate-800 p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 hover:border-slate-700 transition group">
+                {/* Index & Icon */}
+                <div className="flex items-center gap-3 shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-sm font-mono text-slate-500">
+                    {index + 1}
+                  </div>
+                  <FileText className="w-5 h-5 text-blue-400" />
+                </div>
+
+                {/* Name & Type */}
+                <div className="flex-1 min-w-0">
+                  {editingId === item.id ? (
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={editName}
+                        onChange={e => setEditName(e.target.value)}
+                        className="flex-1 bg-slate-950 border border-blue-500 rounded px-3 py-1.5 text-sm text-white font-mono focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        autoFocus
+                        onKeyDown={e => {
+                          if (e.key === "Enter") confirmRename(item.id);
+                          if (e.key === "Escape") setEditingId(null);
+                        }}
+                      />
+                      <button onClick={() => confirmRename(item.id)} className="text-emerald-400 hover:text-emerald-300 p-1"><Check className="w-4 h-4" /></button>
+                      <button onClick={() => setEditingId(null)} className="text-slate-400 hover:text-white p-1"><X className="w-4 h-4" /></button>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="text-white font-medium font-mono text-sm truncate">{item.name}<span className="text-slate-500">.dxf</span></p>
+                      <p className="text-xs text-slate-500 mt-0.5 capitalize">{item.type} · {(item.dxfString.length / 1024).toFixed(1)} KB</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center gap-1 shrink-0 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button 
+                    onClick={() => startRename(item.id, item.name)}
+                    className="p-2 text-slate-400 hover:text-blue-400 hover:bg-slate-800 rounded-lg transition"
+                    title="Rename"
+                  >
+                    <Pencil className="w-4 h-4" />
+                  </button>
+                  <button 
+                    onClick={() => handleExportSingle(item)}
+                    className="p-2 text-slate-400 hover:text-emerald-400 hover:bg-slate-800 rounded-lg transition"
+                    title="Download this file"
+                  >
+                    <Download className="w-4 h-4" />
+                  </button>
+                  <button 
+                    onClick={() => removeFromProject(item.id)}
+                    className="p-2 text-slate-400 hover:text-red-400 hover:bg-slate-800 rounded-lg transition"
+                    title="Remove from project"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
