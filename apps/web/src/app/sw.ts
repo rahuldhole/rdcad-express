@@ -11,11 +11,32 @@ declare global {
 
 declare const self: ServiceWorkerGlobalScope;
 
+const HTML_ROUTES = [
+  "/",
+  "/bbs",
+  "/beam",
+  "/column",
+  "/download",
+  "/foundation",
+  "/library",
+  "/project",
+  "/slab",
+  "/stairs",
+  "/tank",
+  "/templates",
+  "/utilities"
+];
+
+const additionalEntries = HTML_ROUTES.map(url => ({
+  url,
+  revision: "v1"
+}));
+
 const serwist = new Serwist({
-  precacheEntries: self.__SW_MANIFEST,
+  precacheEntries: [...(self.__SW_MANIFEST || []), ...additionalEntries],
   skipWaiting: true,
   clientsClaim: true,
-  navigationPreload: true,
+  navigationPreload: false, // Disabled to prevent ERR_FAILED on hard reloads while offline
   runtimeCaching: defaultCache,
 });
 
