@@ -20,6 +20,7 @@ const ogImageUrl = `https://og-image.org/api/og?template=gradient&title=${encode
 export const metadata: Metadata = {
   title,
   description,
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     title,
