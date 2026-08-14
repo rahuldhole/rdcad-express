@@ -26,7 +26,7 @@ const HTML_ROUTES = [
   "/bbs",
   "/beam",
   "/column",
-  "/download",
+  "/setup",
   "/foundation",
   "/library",
   "/project",
