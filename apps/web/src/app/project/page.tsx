@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useAppStore } from "@/store/useStore";
-import { Download, Trash2, FolderArchive, Plus, Pencil, Check, X, FileText, FolderPlus } from "lucide-react";
+import { Download, Trash2, FolderArchive, Plus, Pencil, Check, X, FileText, FolderOpen } from "lucide-react";
 import Link from "next/link";
 import JSZip from "jszip";
 
@@ -128,7 +128,7 @@ export default function ProjectDashboard() {
               <FolderArchive className="w-10 h-10" />
             </div>
             <div className="max-w-md mx-auto p-8 text-center text-slate-500">
-              <FolderPlus className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <FolderOpen className="w-12 h-12 mx-auto mb-4 opacity-50" />
               <p>Your project is empty.</p>
               <p className="mt-2 text-sm">Use the buttons above to navigate to a detailing page. Configure your element&apos;s properties, then click <strong>&quot;Save&quot;</strong> to collect it here. Once you&apos;ve gathered all elements, export them as a single ZIP file.</p>
             </div>
