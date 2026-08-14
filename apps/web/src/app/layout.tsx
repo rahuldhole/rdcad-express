@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import Navbar from "@/components/Navbar";
+import ProjectModal from "@/components/ProjectModal";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col bg-slate-950 text-slate-200" suppressHydrationWarning>
         <Navbar />
+        <ProjectModal />
         <main className="flex-1 pb-10">
           {children}
         </main>

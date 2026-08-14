@@ -46,14 +46,11 @@ export default function TankDetailing() {
             <ExampleSelector examples={tankExamples} onSelect={setTankData} />
             <button 
               onClick={() => {
-                const id = Math.random().toString(36).substring(7);
-                useAppStore.getState().addToProject({ 
-                  id, 
-                  name: `Tank_${tankData.tankId}_${tankData.type}`, 
+                useAppStore.getState().setProjectModalData({ 
+                  defaultName: `Tank_${tankData.tankId}_${tankData.type}`, 
                   type: 'tank', 
                   dxfString 
                 });
-                alert(`Added Tank ${tankData.tankId} to Project!`);
               }}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition whitespace-nowrap"
             >

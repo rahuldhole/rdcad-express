@@ -55,6 +55,9 @@ interface AppState {
   addToProject: (item: { id: string; name: string; type: string; dxfString: string }) => void;
   removeFromProject: (id: string) => void;
   clearProject: () => void;
+  
+  projectModalData: { type: string; defaultName: string; dxfString: string } | null;
+  setProjectModalData: (data: { type: string; defaultName: string; dxfString: string } | null) => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -161,6 +164,9 @@ export const useAppStore = create<AppState>()(
       addToProject: (item) => set((state) => ({ projectItems: [...state.projectItems, item] })),
       removeFromProject: (id) => set((state) => ({ projectItems: state.projectItems.filter((i) => i.id !== id) })),
       clearProject: () => set({ projectItems: [] }),
+      
+      projectModalData: null,
+      setProjectModalData: (data) => set({ projectModalData: data }),
     }),
     {
       name: 'rdcad-storage',

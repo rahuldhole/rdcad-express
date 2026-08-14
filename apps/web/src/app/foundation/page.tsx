@@ -46,14 +46,11 @@ export default function FoundationDetailing() {
             <ExampleSelector examples={foundationExamples} onSelect={setFdnData} />
             <button 
               onClick={() => {
-                const id = Math.random().toString(36).substring(7);
-                useAppStore.getState().addToProject({ 
-                  id, 
-                  name: `Foundation_${fdnData.footingId}`, 
+                useAppStore.getState().setProjectModalData({ 
+                  defaultName: `Foundation_${fdnData.footingId}`, 
                   type: 'foundation', 
                   dxfString 
                 });
-                alert(`Added Foundation ${fdnData.footingId} to Project!`);
               }}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition whitespace-nowrap"
             >

@@ -46,14 +46,11 @@ export default function ColumnDetailing() {
             <ExampleSelector examples={columnExamples} onSelect={setColData} />
             <button 
               onClick={() => {
-                const id = Math.random().toString(36).substring(7);
-                useAppStore.getState().addToProject({ 
-                  id, 
-                  name: `Column_${colData.columnId}_${colData.width}x${colData.depth}`, 
+                useAppStore.getState().setProjectModalData({ 
+                  defaultName: `Column_${colData.columnId}_${colData.width}x${colData.depth}`, 
                   type: 'column', 
                   dxfString 
                 });
-                alert(`Added Column ${colData.columnId} to Project!`);
               }}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition whitespace-nowrap"
             >

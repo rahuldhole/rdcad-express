@@ -2,19 +2,19 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, FolderArchive } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useAppStore } from "@/store/useStore";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const projectItems = useAppStore(state => state.projectItems);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
   const navLinks = [
-    { href: "/", label: "Home", isSpecial: false },
-    { href: "/project", label: "Project", isSpecial: true },
     { href: "/bbs", label: "BBS Generator", isSpecial: false },
     { href: "/beam", label: "Beam", isSpecial: false },
     { href: "/column", label: "Column", isSpecial: false },
@@ -23,6 +23,7 @@ export default function Navbar() {
     { href: "/tank", label: "Tank", isSpecial: false },
     { href: "/stairs", label: "Stairs", isSpecial: false },
     { href: "/utilities", label: "Grid Utils", isSpecial: false },
+    { href: "/project", label: "Project", isSpecial: true },
     { href: "/library", label: "Library", isSpecial: false, isBeta: true },
     { href: "/templates", label: "Templates", isSpecial: false, isBeta: true },
   ];
@@ -44,7 +45,7 @@ export default function Navbar() {
             <Link 
               key={link.href} 
               href={link.href} 
-              className={`text-sm font-medium transition whitespace-nowrap ${
+              className={`flex items-center gap-1.5 text-sm font-medium transition whitespace-nowrap ${
                 pathname === link.href ? "text-white" : 
                 link.isSpecial ? "text-blue-400 hover:text-blue-300" : 
                 link.isBeta ? "text-emerald-500/70 hover:text-emerald-400" : 
@@ -52,6 +53,11 @@ export default function Navbar() {
               }`}
             >
               {link.label}
+              {link.href === "/project" && projectItems.length > 0 && (
+                <span className="flex items-center justify-center w-5 h-5 text-[10px] bg-blue-600 text-white rounded-full">
+                  {projectItems.length}
+                </span>
+              )}
             </Link>
           ))}
           <div className="h-6 w-px bg-slate-800 mx-1"></div>
@@ -83,14 +89,19 @@ export default function Navbar() {
                 key={link.href} 
                 href={link.href} 
                 onClick={closeMenu}
-                className={`text-base font-medium px-4 py-3 rounded-lg transition ${
+                className={`flex items-center justify-between px-4 py-3 rounded-lg transition ${
                   pathname === link.href ? "bg-slate-800 text-white" : 
                   link.isSpecial ? "text-blue-400 hover:bg-slate-800/50" : 
                   link.isBeta ? "text-emerald-500 hover:bg-slate-800/50" : 
                   "text-slate-400 hover:bg-slate-800 hover:text-white"
                 }`}
               >
-                {link.label}
+                <span className="text-base font-medium">{link.label}</span>
+                {link.href === "/project" && projectItems.length > 0 && (
+                  <span className="flex items-center justify-center w-6 h-6 text-xs bg-blue-600 text-white rounded-full">
+                    {projectItems.length}
+                  </span>
+                )}
               </Link>
             ))}
             <div className="h-px bg-slate-800 my-2"></div>

@@ -46,14 +46,11 @@ export default function BeamDetailing() {
             <ExampleSelector examples={beamExamples} onSelect={setBeamData} />
             <button 
               onClick={() => {
-                const id = Math.random().toString(36).substring(7);
-                useAppStore.getState().addToProject({ 
-                  id, 
-                  name: `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}`, 
+                useAppStore.getState().setProjectModalData({ 
+                  defaultName: `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}`, 
                   type: 'beam', 
                   dxfString 
                 });
-                alert(`Added Beam ${beamData.elementId} to Project!`);
               }}
               className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition"
             >

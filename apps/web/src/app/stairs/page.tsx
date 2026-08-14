@@ -46,14 +46,11 @@ export default function StairsDetailing() {
             <ExampleSelector examples={stairsExamples} onSelect={setStairsData} />
             <button 
               onClick={() => {
-                const id = Math.random().toString(36).substring(7);
-                useAppStore.getState().addToProject({ 
-                  id, 
-                  name: `Stairs_${stairsData.stairId}_${stairsData.tread}x${stairsData.rise}`, 
+                useAppStore.getState().setProjectModalData({ 
+                  defaultName: `Stairs_${stairsData.stairId}_${stairsData.tread}x${stairsData.rise}`, 
                   type: 'stairs', 
                   dxfString 
                 });
-                alert(`Added Stairs ${stairsData.stairId} to Project!`);
               }}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition whitespace-nowrap"
             >
