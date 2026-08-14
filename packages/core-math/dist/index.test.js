@@ -35,12 +35,12 @@ const index_1 = require("./index");
     });
     (0, vitest_1.describe)("BendRules", () => {
         (0, vitest_1.it)("should calculate correct deduction for 90 degree bend based on IS", () => {
-            (0, vitest_1.expect)(index_1.BendRules[index_1.RegionalStandard.IS].deduction90(16)).toBe(32);
-            (0, vitest_1.expect)(index_1.BendRules[index_1.RegionalStandard.IS].deduction90(10)).toBe(20);
+            (0, vitest_1.expect)(index_1.BendRules['IS'].deduction90(16)).toBe(32);
+            (0, vitest_1.expect)(index_1.BendRules['IS'].deduction90(10)).toBe(20);
         });
         (0, vitest_1.it)("should calculate correct allowance for 135 degree stirrup hook based on IS", () => {
-            (0, vitest_1.expect)(index_1.BendRules[index_1.RegionalStandard.IS].allowance135(8)).toBe(80);
-            (0, vitest_1.expect)(index_1.BendRules[index_1.RegionalStandard.IS].allowance135(12)).toBe(120);
+            (0, vitest_1.expect)(index_1.BendRules['IS'].allowance135(8)).toBe(80);
+            (0, vitest_1.expect)(index_1.BendRules['IS'].allowance135(12)).toBe(120);
         });
     });
 });

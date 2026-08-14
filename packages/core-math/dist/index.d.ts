@@ -15,11 +15,12 @@ export declare function getUnitWeight(diameter: number): number;
  * @returns Total weight in kg
  */
 export declare function calculateTotalWeight(diameter: number, length: number, quantity: number): number;
-export declare enum RegionalStandard {
-    IS = "IS",// Indian Standard
-    BS = "BS",// British Standard
-    ACI = "ACI"
-}
+export type RegionalStandard = 'IS' | 'BS' | 'ACI';
+export declare const RegionalStandards: {
+    IS: RegionalStandard;
+    BS: RegionalStandard;
+    ACI: RegionalStandard;
+};
 export interface IBendRules {
     deduction90: (diameter: number) => number;
     allowance135: (diameter: number) => number;
