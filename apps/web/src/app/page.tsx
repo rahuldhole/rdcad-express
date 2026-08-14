@@ -13,12 +13,9 @@ export default function MarketingPage() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-sm font-medium text-blue-400 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            RDCAD Express Open Source
-          </div>
-          <PwaInstallButton />
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-sm font-medium text-blue-400 mb-8 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+          RDCAD Express Open Source
         </div>
         
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-br from-white to-slate-400 bg-clip-text text-transparent">
@@ -30,14 +27,15 @@ export default function MarketingPage() {
           An advanced suite of open-source engineering tools for generating accurate Bar Bending Schedules, DXF exports, and detailed structural designs instantly.
         </p>
         
-        <div className="flex flex-col sm:flex-row items-center gap-4">
-          <Link href="/bbs" className="group flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)]">
-            Launch App
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap w-full max-w-4xl mx-auto">
+          <Link href="/setup" className="group flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] flex-1 sm:flex-none">
+            Setup Guide
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
-          <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold transition-all border border-slate-800 hover:border-slate-700">
+          <PwaInstallButton />
+          <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold transition-all border border-slate-800 hover:border-slate-700 flex-1 sm:flex-none">
             <GitBranch className="w-5 h-5" />
-            View on GitHub
+            GitHub
           </a>
         </div>
         <div className="mt-8">
@@ -73,7 +71,7 @@ export default function MarketingPage() {
               </li>
             </ul>
             <div className="pt-4">
-              <Link href="/download" className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-medium transition shadow-lg shadow-indigo-500/20">
+              <Link href="/setup" className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-medium transition shadow-lg shadow-indigo-500/20">
                 Learn How to Install
                 <ArrowRight className="w-4 h-4" />
               </Link>

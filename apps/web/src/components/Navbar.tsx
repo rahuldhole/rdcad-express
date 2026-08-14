@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Setup } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useAppStore } from "@/store/useStore";
 
@@ -69,11 +69,11 @@ export default function Navbar() {
               )}
             </Link>
             <Link 
-              href="/download" 
+              href="/setup" 
               className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded transition shadow-lg shadow-indigo-500/20"
-              title="Download AutoCAD LISP Script"
+              title="Setup AutoCAD LISP Script"
             >
-              <Download className="w-3.5 h-3.5" /> Download
+              <Setup className="w-3.5 h-3.5" /> Setup
             </Link>
           </div>
 
@@ -122,10 +122,10 @@ export default function Navbar() {
                 )}
               </Link>
               <Link 
-                href="/download" 
+                href="/setup" 
                 className="flex items-center gap-2 text-base font-medium px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition"
               >
-                <Download className="w-4 h-4" /> AutoCAD Integration
+                <Setup className="w-4 h-4" /> AutoCAD Integration
               </Link>
             </div>
 

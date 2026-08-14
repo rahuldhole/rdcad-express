@@ -35,17 +35,17 @@ export function PwaInstallButton() {
 
   if (isInstalled) {
     return (
-      <div className="flex items-center gap-2 px-4 py-2 bg-emerald-900/30 text-emerald-400 rounded-full text-sm font-medium border border-emerald-800/50 backdrop-blur-sm">
-        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-        Installed App
+      <div className="flex items-center gap-2 px-6 py-3 bg-emerald-500/10 text-emerald-400 rounded-full font-semibold border border-emerald-500/20 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]">
+        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+        Installed Desktop App
       </div>
     );
   }
 
   if (!deferredPrompt) {
     return (
-      <div className="flex items-center gap-2 px-4 py-2 bg-slate-900/80 border border-slate-800 text-sm font-medium text-slate-400 rounded-full backdrop-blur-sm">
-        <span className="w-2 h-2 rounded-full bg-slate-500" />
+      <div className="flex items-center gap-2 px-6 py-3 bg-slate-800 text-slate-300 rounded-full font-semibold border border-slate-700 shadow-md">
+        <span className="w-2.5 h-2.5 rounded-full bg-slate-500" />
         Offline Ready PWA
       </div>
     );
@@ -54,10 +54,10 @@ export function PwaInstallButton() {
   return (
     <button
       onClick={handleInstallClick}
-      className="flex items-center gap-2 px-4 py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-full text-sm font-medium border border-blue-500/30 hover:border-blue-500/50 transition-all backdrop-blur-sm cursor-pointer shadow-[0_0_15px_-3px_rgba(59,130,246,0.3)]"
+      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-full font-bold border border-blue-400/30 hover:border-blue-400/50 transition-all shadow-[0_0_20px_-5px_rgba(59,130,246,0.5)] hover:scale-105 cursor-pointer"
     >
-      <Download className="w-4 h-4" />
-      Install App (Offline Ready)
+      <Download className="w-5 h-5" />
+      Install Desktop App
     </button>
   );
 }
