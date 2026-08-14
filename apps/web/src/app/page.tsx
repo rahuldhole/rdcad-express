@@ -311,11 +311,6 @@ export default function MarketingPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-8 border-t border-slate-900 text-center text-slate-500 text-sm bg-slate-950">
-        <p>© {new Date().getFullYear()} RDCAD Express. Open Source under MIT License.</p>
-      </footer>
     </div>
   );
 }

@@ -58,8 +58,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <footer className="bg-slate-900 border-t border-slate-800 py-6 mt-auto">
           <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-            <div>
-              Built with ❤️ by <a href="https://rahuldhole.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">rahuldhole.com</a>
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
+              <div>
+                Built with ❤️ by <a href="https://rahuldhole.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">rahuldhole.com</a>
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-slate-700"></div>
+              <div>
+                © {new Date().getFullYear()} RDCAD Express. Open Source under MIT License.
+              </div>
             </div>
             <a 
               href="https://github.com/rahuldhole/rdcad-express/issues" 
