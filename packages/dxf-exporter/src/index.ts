@@ -1155,5 +1155,9 @@ function getDxfStringWithExtents(dxf: any): string {
   let str = dxf.toDxfString();
   const extents = `9\n$EXTMIN\n10\n-10000.0\n20\n-10000.0\n30\n0.0\n9\n$EXTMAX\n10\n10000.0\n20\n10000.0\n30\n0.0\n`;
   str = str.replace('0\nENDSEC\n0\nSECTION\n2\nCLASSES', extents + '0\nENDSEC\n0\nSECTION\n2\nCLASSES');
+  
+  // Ensure DXF standard text style uses a standard system font fallback instead of the default 'txt' or 'txt.shx'
+  str = str.replace(/\n3\ntxt\n/g, '\n3\nARIAL.TTF\n');
+  
   return str;
 }

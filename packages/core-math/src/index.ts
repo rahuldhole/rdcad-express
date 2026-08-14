@@ -22,16 +22,43 @@ export function calculateTotalWeight(diameter: number, length: number, quantity:
   return unitWeight * length * quantity;
 }
 
+export enum RegionalStandard {
+  IS = 'IS',   // Indian Standard
+  BS = 'BS',   // British Standard
+  ACI = 'ACI'  // American Concrete Institute
+}
+
+export interface IBendRules {
+  deduction90: (diameter: number) => number;
+  allowance135: (diameter: number) => number;
+}
+
 /**
  * Hook and bend allowance rules.
  */
-export const BendRules = {
-  /** 90 degree bend deduction (2 * D) */
-  deduction90: (diameter: number) => 2 * diameter,
-  
-  /** 135 degree stirrup hook allowance (10 * D) */
-  allowance135: (diameter: number) => 10 * diameter,
+export const BendRules: Record<RegionalStandard, IBendRules> = {
+  [RegionalStandard.IS]: {
+    /** IS: 90 degree bend deduction (2 * D) */
+    deduction90: (diameter: number) => 2 * diameter,
+    /** IS: 135 degree stirrup hook allowance (10 * D) */
+    allowance135: (diameter: number) => 10 * diameter,
+  },
+  [RegionalStandard.BS]: {
+    /** BS: 90 degree bend deduction (typically 2 * D depending on radius, using 2D for simplicity) */
+    deduction90: (diameter: number) => 2 * diameter,
+    /** BS: 135 degree stirrup hook allowance (typically 12 * D or based on min radius) */
+    allowance135: (diameter: number) => 12 * diameter,
+  },
+  [RegionalStandard.ACI]: {
+    /** ACI: 90 degree bend deduction (approx 2 * D) */
+    deduction90: (diameter: number) => 2 * diameter,
+    /** ACI: 135 degree stirrup hook allowance (6 * D or 3 inches max, simplified to 6 * D) */
+    allowance135: (diameter: number) => 6 * diameter, // Can be configured further
+  }
 };
+
+/** Default active bend rules (Fallback to IS for backward compatibility) */
+export const DefaultBendRules = BendRules[RegionalStandard.IS];
 
 /**
  * Stirrup count calculator

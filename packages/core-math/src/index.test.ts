@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getUnitWeight, calculateTotalWeight, calculateStirrupCount, BendRules } from "./index";
+import { getUnitWeight, calculateTotalWeight, calculateStirrupCount, BendRules, RegionalStandard } from "./index";
 
 describe("core-math tests", () => {
   describe("getUnitWeight", () => {
@@ -39,14 +39,14 @@ describe("core-math tests", () => {
   });
 
   describe("BendRules", () => {
-    it("should return correct 90 deg deduction", () => {
-      expect(BendRules.deduction90(16)).toBe(32);
-      expect(BendRules.deduction90(10)).toBe(20);
+    it("should calculate correct deduction for 90 degree bend based on IS", () => {
+      expect(BendRules[RegionalStandard.IS].deduction90(16)).toBe(32);
+      expect(BendRules[RegionalStandard.IS].deduction90(10)).toBe(20);
     });
 
-    it("should return correct 135 deg allowance", () => {
-      expect(BendRules.allowance135(8)).toBe(80);
-      expect(BendRules.allowance135(12)).toBe(120);
+    it("should calculate correct allowance for 135 degree stirrup hook based on IS", () => {
+      expect(BendRules[RegionalStandard.IS].allowance135(8)).toBe(80);
+      expect(BendRules[RegionalStandard.IS].allowance135(12)).toBe(120);
     });
   });
 });

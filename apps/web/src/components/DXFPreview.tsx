@@ -46,6 +46,8 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
           viewerRef.current = new DxfViewer(containerRef.current as HTMLElement, {
             clearColor: new THREE.Color("#0f172a"),
             autoResize: true,
+            // @ts-expect-error fontUrls is not in the type definition but works at runtime
+            fontUrls: ['https://raw.githubusercontent.com/bjnortier/dxf/master/fonts/Roboto-Light.ttf'],
           });
         }
 

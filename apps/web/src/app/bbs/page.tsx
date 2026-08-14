@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Plus, Trash2, Download, Table2 } from "lucide-react";
+import { Plus, Trash2, Download, Table2, FileSpreadsheet } from "lucide-react";
 import { calculateTotalWeight } from "@rdcad-express/core-math";
 import type { RebarElement } from "@rdcad-express/dwg-schemas";
+import * as XLSX from "xlsx";
 
 export default function BBSGenerator() {
   const [rows, setRows] = useState<RebarElement[]>([
@@ -74,6 +75,34 @@ export default function BBSGenerator() {
     URL.revokeObjectURL(url);
   };
 
+  const handleExportExcel = () => {
+    const data = rows.map(row => {
+      const weight = calculateTotalWeight(row.diameter, row.cuttingLength, row.numberOfMembers * row.barsPerMember);
+      return {
+        "Mark": row.elementMark,
+        "Shape Code": row.shapeCode,
+        "Diameter (mm)": row.diameter,
+        "Members": row.numberOfMembers,
+        "Bars/Member": row.barsPerMember,
+        "Cutting Length (m)": row.cuttingLength,
+        "Weight (kg)": parseFloat(weight.toFixed(2))
+      };
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "BBS");
+    
+    // Auto-size columns
+    const colWidths = [
+      { wch: 10 }, { wch: 12 }, { wch: 15 }, 
+      { wch: 10 }, { wch: 15 }, { wch: 20 }, { wch: 15 }
+    ];
+    worksheet["!cols"] = colWidths;
+
+    XLSX.writeFile(workbook, "bbs_export.xlsx");
+  };
+
   const totalTonnage = useMemo(() => {
     return rows.reduce((sum, row) => {
       const weight = calculateTotalWeight(row.diameter, row.cuttingLength, row.numberOfMembers * row.barsPerMember);
@@ -99,6 +128,12 @@ export default function BBSGenerator() {
               className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 transition rounded-lg border border-slate-700"
             >
               <Download className="w-4 h-4" /> Export CSV
+            </button>
+            <button 
+              onClick={handleExportExcel}
+              className="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-600 transition rounded-lg border border-green-600 text-white shadow-lg shadow-green-900/20"
+            >
+              <FileSpreadsheet className="w-4 h-4" /> Export Excel
             </button>
             <button 
               onClick={handleAddRow}

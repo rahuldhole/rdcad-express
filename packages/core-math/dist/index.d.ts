@@ -15,15 +15,21 @@ export declare function getUnitWeight(diameter: number): number;
  * @returns Total weight in kg
  */
 export declare function calculateTotalWeight(diameter: number, length: number, quantity: number): number;
+export declare enum RegionalStandard {
+    IS = "IS",// Indian Standard
+    BS = "BS",// British Standard
+    ACI = "ACI"
+}
+export interface IBendRules {
+    deduction90: (diameter: number) => number;
+    allowance135: (diameter: number) => number;
+}
 /**
  * Hook and bend allowance rules.
  */
-export declare const BendRules: {
-    /** 90 degree bend deduction (2 * D) */
-    deduction90: (diameter: number) => number;
-    /** 135 degree stirrup hook allowance (10 * D) */
-    allowance135: (diameter: number) => number;
-};
+export declare const BendRules: Record<RegionalStandard, IBendRules>;
+/** Default active bend rules (Fallback to IS for backward compatibility) */
+export declare const DefaultBendRules: IBendRules;
 /**
  * Stirrup count calculator
  *
