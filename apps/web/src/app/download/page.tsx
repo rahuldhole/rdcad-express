@@ -24,7 +24,7 @@ export default function DownloadPage() {
         <div className="bg-slate-900 rounded-xl border border-slate-800 p-8 space-y-6">
           <h2 className="text-2xl font-semibold text-white">How it works</h2>
           <p className="text-slate-400 text-lg leading-relaxed">
-            Downloading DXF files is only half the battle. To truly speed up your workflow, we've created a tiny (1KB) AutoLISP companion script. When executed, this script instantly locates the most recent DXF file in your Downloads folder and attaches it to your cursor for immediate insertion into your drawing.
+            Downloading DXF files is only half the battle. To truly speed up your workflow, we&apos;ve created a tiny (1KB) AutoLISP companion script. When executed, this script instantly locates the most recent DXF file in your Downloads folder and attaches it to your cursor for immediate insertion into your drawing.
           </p>
           
           <div className="bg-blue-900/20 border border-blue-500/20 p-4 rounded-lg">
@@ -58,7 +58,7 @@ export default function DownloadPage() {
               <Terminal className="w-4 h-4" /> Pro Tip: Persistent Loading
             </div>
             <p className="text-sm text-slate-400">
-              To avoid dragging and dropping the file every time you open AutoCAD, you can add it to your <strong>Startup Suite</strong>. Type <code className="px-1.5 py-0.5 bg-slate-800 rounded text-slate-300">APPLOAD</code> in AutoCAD, click the "Contents..." button under the Startup Suite section, and add the <code className="px-1.5 py-0.5 bg-slate-800 rounded text-indigo-300">rdcad-import.lsp</code> file there.
+              To avoid dragging and dropping the file every time you open AutoCAD, you can add it to your <strong>Startup Suite</strong>. Type <code className="px-1.5 py-0.5 bg-slate-800 rounded text-slate-300">APPLOAD</code> in AutoCAD, click the &quot;Contents...&quot; button under the Startup Suite section, and add the <code className="px-1.5 py-0.5 bg-slate-800 rounded text-indigo-300">rdcad-import.lsp</code> file there.
             </p>
           </div>
         </div>

@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Download, FolderArchive } from "lucide-react";
+import Image from "next/image";
+import { Menu, X, Download } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useAppStore } from "@/store/useStore";
 
@@ -32,7 +33,7 @@ export default function Navbar() {
     <header className="bg-slate-900 border-b border-slate-800 px-4 md:px-8 py-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-          <img src="/logo.svg" alt="RDCAD Express Logo" className="w-8 h-8" />
+          <Image src="/logo.svg" alt="RDCAD Express Logo" width={32} height={32} className="w-8 h-8" />
           <div className="font-bold text-xl text-blue-400 flex items-center gap-2">
             RDCAD Express
             <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase tracking-wider">Beta</span>

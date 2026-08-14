@@ -18,7 +18,8 @@ export default function ProjectModal() {
       // Intentionally not overriding name with projectModalData.defaultName to allow persistence across re-opens if needed, or initialized differently.
       // But if we want to reset it on open, we should do it in the store actions or handle it via a key on the component.
       // We will leave this for now to fix the lint error and manage state safely.
-      setShowSuccess(false);
+      const timer = setTimeout(() => setShowSuccess(false), 0);
+      return () => clearTimeout(timer);
     }
   }, [projectModalData]);
 

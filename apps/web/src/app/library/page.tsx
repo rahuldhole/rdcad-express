@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Download, Search, X } from "lucide-react";
+import { Download, Search } from "lucide-react";
 import { 
   exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF,
   exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF,
