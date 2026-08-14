@@ -24,7 +24,6 @@ export default function Navbar() {
     { href: "/tank", label: "Tank", isSpecial: false },
     { href: "/stairs", label: "Stairs", isSpecial: false },
     { href: "/utilities", label: "Grid Utils", isSpecial: false },
-    { href: "/project", label: "Project", isSpecial: true },
     { href: "/library", label: "Library", isSpecial: false, isBeta: true },
     { href: "/templates", label: "Templates", isSpecial: false, isBeta: true },
   ];
@@ -54,21 +53,29 @@ export default function Navbar() {
               }`}
             >
               {link.label}
-              {link.href === "/project" && projectItems.length > 0 && (
+            </Link>
+          ))}
+          <div className="h-6 w-px bg-slate-800 mx-1"></div>
+          <div className="flex items-center gap-3">
+            <Link 
+              href="/project" 
+              className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded transition border border-slate-700"
+            >
+              Project
+              {projectItems.length > 0 && (
                 <span className="flex items-center justify-center w-5 h-5 text-[10px] bg-blue-600 text-white rounded-full">
                   {projectItems.length}
                 </span>
               )}
             </Link>
-          ))}
-          <div className="h-6 w-px bg-slate-800 mx-1"></div>
-          <Link 
-            href="/download" 
-            className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded transition shadow-lg shadow-indigo-500/20"
-            title="Download AutoCAD LISP Script"
-          >
-            <Download className="w-3.5 h-3.5" /> Download
-          </Link>
+            <Link 
+              href="/download" 
+              className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded transition shadow-lg shadow-indigo-500/20"
+              title="Download AutoCAD LISP Script"
+            >
+              <Download className="w-3.5 h-3.5" /> Download
+            </Link>
+          </div>
 
         </nav>
 
@@ -98,20 +105,29 @@ export default function Navbar() {
                 }`}
               >
                 <span className="text-base font-medium">{link.label}</span>
-                {link.href === "/project" && projectItems.length > 0 && (
+              </Link>
+            ))}
+            <div className="h-px bg-slate-800 my-2"></div>
+            <div className="flex flex-col gap-2">
+              <Link 
+                href="/project" 
+                onClick={closeMenu}
+                className="flex items-center justify-between px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg transition"
+              >
+                <span className="text-base font-medium">Project</span>
+                {projectItems.length > 0 && (
                   <span className="flex items-center justify-center w-6 h-6 text-xs bg-blue-600 text-white rounded-full">
                     {projectItems.length}
                   </span>
                 )}
               </Link>
-            ))}
-            <div className="h-px bg-slate-800 my-2"></div>
-            <Link 
-              href="/download" 
-              className="flex items-center gap-2 text-base font-medium px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition"
-            >
-              <Download className="w-4 h-4" /> AutoCAD Integration
-            </Link>
+              <Link 
+                href="/download" 
+                className="flex items-center gap-2 text-base font-medium px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition"
+              >
+                <Download className="w-4 h-4" /> AutoCAD Integration
+              </Link>
+            </div>
 
           </div>
         </div>
