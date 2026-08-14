@@ -17,7 +17,8 @@ export const metadata: Metadata = {
   description: "Advanced parametric detailing and Bar Bending Schedule tools for structural engineers.",
 };
 
-import Link from "next/link";
+import Navbar from "@/components/Navbar";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -26,38 +27,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-slate-950 text-slate-200" suppressHydrationWarning>
-        <header className="bg-slate-900 border-b border-slate-800 px-4 md:px-8 py-4">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <Link href="/" className="flex items-center gap-2">
-              <img src="/logo.svg" alt="RDCAD Express Logo" className="w-8 h-8" />
-              <div className="font-bold text-xl text-blue-400 flex items-center gap-2">
-                RDCAD Express
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase tracking-wider">Beta</span>
-              </div>
-            </Link>
-            <nav className="flex gap-4 overflow-x-auto w-full pb-2 md:pb-0 md:w-auto justify-start md:justify-center hide-scrollbar">
-              <Link href="/" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Home</Link>
-              <Link href="/project" className="text-sm font-medium hover:text-white text-blue-400 transition whitespace-nowrap">Project</Link>
-              <Link href="/bbs" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">BBS Generator</Link>
-              <Link href="/beam" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Beam</Link>
-              <Link href="/column" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Column</Link>
-              <Link href="/slab" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Slab</Link>
-              <Link href="/foundation" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Foundation</Link>
-              <Link href="/tank" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Tank</Link>
-              <Link href="/stairs" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Stairs</Link>
-              <Link href="/utilities" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Grid Utils</Link>
-              <Link href="/library" className="text-sm font-medium hover:text-emerald-400 text-emerald-500/70 transition whitespace-nowrap">Library</Link>
-              <Link href="/templates" className="text-sm font-medium hover:text-emerald-400 text-emerald-500/70 transition whitespace-nowrap">Templates</Link>
-              <a href="https://github.com/rahuldhole/rdcad-express/issues" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-red-400 text-red-500/70 transition whitespace-nowrap ml-2">Report Issue</a>
-            </nav>
-          </div>
-        </header>
+        <Navbar />
         <main className="flex-1 pb-10">
           {children}
         </main>
         <footer className="bg-slate-900 border-t border-slate-800 py-6 mt-auto">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 text-center text-sm text-slate-500">
-            Built with ❤️ by <a href="https://rahuldhole.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">rahuldhole.com</a>
+          <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+            <div>
+              Built with ❤️ by <a href="https://rahuldhole.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">rahuldhole.com</a>
+            </div>
+            <a 
+              href="https://github.com/rahuldhole/rdcad-express/issues" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 hover:text-slate-300 transition text-slate-500 hover:text-white"
+              title="Report Issue"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.18-.3 6.5-1.5 6.5-7.1a5.1 5.1 0 0 0-1.4-3.6 4.8 4.8 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a11.5 11.5 0 0 0-6 0C7.1 1.7 6 2 6 2a4.8 4.8 0 0 0-.1 3.5 5.1 5.1 0 0 0-1.4 3.6c0 5.6 3.3 6.8 6.5 7.1a4.8 4.8 0 0 0-1 2.93V22"></path>
+                <path d="M9 18c-4.5 1.5-5-2.5-7-3"></path>
+              </svg>
+              <span>Report Issue</span>
+            </a>
           </div>
         </footer>
       </body>
