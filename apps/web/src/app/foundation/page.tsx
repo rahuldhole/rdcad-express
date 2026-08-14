@@ -29,7 +29,7 @@ export default function FoundationDetailing() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${fdnData.footingId}-foundation.dxf`;
+    a.download = `Foundation_${fdnData.footingId}_${fdnData.lx}x${fdnData.ly}.dxf`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -42,9 +42,24 @@ export default function FoundationDetailing() {
             <h1 className="text-3xl font-bold text-white">Foundation Detailing</h1>
             <p className="text-slate-400 mt-2">Parametric footing plan and section with DXF export</p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
             <ExampleSelector examples={foundationExamples} onSelect={setFdnData} />
-            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+            <button 
+              onClick={() => {
+                const id = Math.random().toString(36).substring(7);
+                useAppStore.getState().addToProject({ 
+                  id, 
+                  name: `Foundation_${fdnData.footingId}`, 
+                  type: 'foundation', 
+                  dxfString 
+                });
+                alert(`Added Foundation ${fdnData.footingId} to Project!`);
+              }}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition whitespace-nowrap"
+            >
+              Add to Project
+            </button>
+            <button onClick={handleExport} className="flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20 whitespace-nowrap">
               <Download className="w-4 h-4" /> Export DXF
             </button>
           </div>

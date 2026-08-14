@@ -50,6 +50,11 @@ interface AppState {
   setFindText: (text: string) => void;
   replaceText: string;
   setReplaceText: (text: string) => void;
+  // Project state
+  projectItems: { id: string; name: string; type: string; dxfString: string }[];
+  addToProject: (item: { id: string; name: string; type: string; dxfString: string }) => void;
+  removeFromProject: (id: string) => void;
+  clearProject: () => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -151,6 +156,11 @@ export const useAppStore = create<AppState>()(
       setFindText: (text) => set({ findText: text }),
       replaceText: "",
       setReplaceText: (text) => set({ replaceText: text }),
+
+      projectItems: [],
+      addToProject: (item) => set((state) => ({ projectItems: [...state.projectItems, item] })),
+      removeFromProject: (id) => set((state) => ({ projectItems: state.projectItems.filter((i) => i.id !== id) })),
+      clearProject: () => set({ projectItems: [] }),
     }),
     {
       name: 'rdcad-storage',

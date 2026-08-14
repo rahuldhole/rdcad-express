@@ -13,6 +13,7 @@
     "@rdcad-express/dwg-schemas": "workspace:*",
     "@rdcad-express/dxf-exporter": "workspace:*",
     "dxf-viewer": "^1.0.48",
+    "jszip": "^3.10.1",
     "konva": "^10.3.0",
     "lucide-react": "^1.31.0",
     "next": "15.2.1",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jszip": "^3.4.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

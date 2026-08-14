@@ -130,6 +130,19 @@ export default function GridUtilities() {
               </button>
             </div>
             
+            <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
+              <h3 className="text-xl font-bold border-b border-slate-800 pb-2">AutoCAD Integration</h3>
+              <p className="text-sm text-slate-400">Download our companion script to automatically import your latest DXF downloads directly into AutoCAD.</p>
+              <a 
+                href="/rdcad-import.lsp" 
+                download="rdcad-import.lsp"
+                className="w-full flex justify-center items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium transition shadow-lg shadow-indigo-500/20"
+              >
+                <Download className="w-4 h-4" /> Download .LSP Script
+              </a>
+              <p className="text-xs text-slate-500 mt-2 text-center">Drag into AutoCAD & type RDCAD_IMPORT</p>
+            </div>
+            
             <button onClick={() => setNodes([])} className="w-full px-4 py-2 bg-red-900/50 hover:bg-red-900/80 text-red-400 rounded transition border border-red-900/50">
               Clear Canvas
             </button>

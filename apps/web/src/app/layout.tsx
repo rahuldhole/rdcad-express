@@ -37,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav className="flex gap-4 overflow-x-auto w-full pb-2 md:pb-0 md:w-auto justify-start md:justify-center hide-scrollbar">
               <Link href="/" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Home</Link>
+              <Link href="/project" className="text-sm font-medium hover:text-white text-blue-400 transition whitespace-nowrap">Project</Link>
               <Link href="/bbs" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">BBS Generator</Link>
               <Link href="/beam" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Beam</Link>
               <Link href="/column" className="text-sm font-medium hover:text-white text-slate-400 transition whitespace-nowrap">Column</Link>

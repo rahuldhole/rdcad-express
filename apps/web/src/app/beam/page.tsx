@@ -29,7 +29,7 @@ export default function BeamDetailing() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${beamData.elementId}-section.dxf`;
+    a.download = `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}.dxf`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -44,6 +44,21 @@ export default function BeamDetailing() {
           </div>
           <div className="flex items-center gap-4">
             <ExampleSelector examples={beamExamples} onSelect={setBeamData} />
+            <button 
+              onClick={() => {
+                const id = Math.random().toString(36).substring(7);
+                useAppStore.getState().addToProject({ 
+                  id, 
+                  name: `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}`, 
+                  type: 'beam', 
+                  dxfString 
+                });
+                alert(`Added Beam ${beamData.elementId} to Project!`);
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition"
+            >
+              Add to Project
+            </button>
             <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
               <Download className="w-4 h-4" /> Export DXF
             </button>
