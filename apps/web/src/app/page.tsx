@@ -103,7 +103,7 @@ export default function MarketingPage() {
             </div>
             <h2 className="text-3xl md:text-5xl font-bold">Tested & Reliable Core</h2>
             <p className="text-lg text-slate-400 leading-relaxed">
-              We know that structural detailing requires absolute precision. That's why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <span className="text-white font-medium">Vitest</span> test suite.
+              We know that structural detailing requires absolute precision. That&apos;s why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <span className="text-white font-medium">Vitest</span> test suite.
             </p>
             <ul className="space-y-4 text-slate-300">
               <li className="flex items-center gap-3">

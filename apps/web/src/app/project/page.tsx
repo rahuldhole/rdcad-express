@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useAppStore } from "@/store/useStore";
-import { Download, Trash2, FolderArchive, Plus, Pencil, Check, X, FileText } from "lucide-react";
+import { Download, Trash2, FolderArchive, Plus, Pencil, Check, X, FileText, FolderPlus } from "lucide-react";
 import Link from "next/link";
 import JSZip from "jszip";
 
@@ -106,15 +106,16 @@ export default function ProjectDashboard() {
 
         {/* Quick-add bar — always visible */}
         <div className="bg-slate-900 rounded-xl border border-slate-800 p-5">
-          <h3 className="text-sm font-medium text-slate-400 mb-3">Quick Add — configure an element & click "Save"</h3>
+          <h3 className="text-sm font-medium text-slate-400 mb-3">Quick Add — configure an element & click &quot;Save&quot;</h3>
           <div className="flex flex-wrap gap-2">
             {elementPages.map(page => (
               <Link
                 key={page.href}
                 href={page.href}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border text-sm font-medium transition hover:scale-[1.03] ${page.bg} ${page.color}`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border ${page.bg} hover:bg-slate-800 transition-colors`}
               >
-                <Plus className="w-3.5 h-3.5" /> {page.label}
+                <Plus className={`w-3.5 h-3.5 ${page.color}`} />
+                <span className="text-sm text-slate-300 font-medium">{page.label}</span>
               </Link>
             ))}
           </div>
@@ -122,14 +123,14 @@ export default function ProjectDashboard() {
 
         {/* Items list */}
         {projectItems.length === 0 ? (
-          <div className="bg-slate-900/50 rounded-xl border border-dashed border-slate-700 p-16 text-center flex flex-col items-center justify-center space-y-4">
+          <div className="flex flex-col items-center justify-center py-20 bg-slate-900/50 rounded-2xl border border-slate-800/50 border-dashed">
             <div className="w-20 h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center text-slate-600 mb-2">
               <FolderArchive className="w-10 h-10" />
             </div>
             <div className="max-w-md mx-auto p-8 text-center text-slate-500">
               <FolderPlus className="w-12 h-12 mx-auto mb-4 opacity-50" />
               <p>Your project is empty.</p>
-              <p className="mt-2 text-sm">Use the buttons above to navigate to a detailing page. Configure your element's properties, then click <strong>"Save"</strong> to collect it here. Once you've gathered all elements, export them as a single ZIP file.</p>
+              <p className="mt-2 text-sm">Use the buttons above to navigate to a detailing page. Configure your element&apos;s properties, then click <strong>&quot;Save&quot;</strong> to collect it here. Once you&apos;ve gathered all elements, export them as a single ZIP file.</p>
             </div>
           </div>
         ) : (
