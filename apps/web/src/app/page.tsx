@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight, GitBranch, Code, Layers, Cpu, Compass } from "lucide-react";
 import { ProtectedEmail } from "@/components/ProtectedEmail";
+import { PwaInstallButton } from "@/components/PwaInstallButton";
 
 export default function MarketingPage() {
   return (
@@ -12,9 +13,12 @@ export default function MarketingPage() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-sm font-medium text-blue-400 mb-8 backdrop-blur-sm">
-          <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-          RDCAD Express Open Source
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 text-sm font-medium text-blue-400 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            RDCAD Express Open Source
+          </div>
+          <PwaInstallButton />
         </div>
         
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-br from-white to-slate-400 bg-clip-text text-transparent">
