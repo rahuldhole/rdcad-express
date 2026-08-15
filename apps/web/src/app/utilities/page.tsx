@@ -6,161 +6,161 @@ import { exportTextNodesToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 
 type TextNode = {
-  id: string;
-  text: string;
-  x: number;
-  y: number;
+ id: string;
+ text: string;
+ x: number;
+ y: number;
 };
 
 export default function GridUtilities() {
-  const nodes = useAppStore(state => state.nodes);
-  const setNodes = useAppStore(state => state.setNodes);
-  const prefix = useAppStore(state => state.prefix);
-  const setPrefix = useAppStore(state => state.setPrefix);
-  const startNum = useAppStore(state => state.startNum);
-  const setStartNum = useAppStore(state => state.setStartNum);
-  const findText = useAppStore(state => state.findText);
-  const setFindText = useAppStore(state => state.setFindText);
-  const replaceText = useAppStore(state => state.replaceText);
-  const setReplaceText = useAppStore(state => state.setReplaceText);
+ const nodes = useAppStore(state => state.nodes);
+ const setNodes = useAppStore(state => state.setNodes);
+ const prefix = useAppStore(state => state.prefix);
+ const setPrefix = useAppStore(state => state.setPrefix);
+ const startNum = useAppStore(state => state.startNum);
+ const setStartNum = useAppStore(state => state.setStartNum);
+ const findText = useAppStore(state => state.findText);
+ const setFindText = useAppStore(state => state.setFindText);
+ const replaceText = useAppStore(state => state.replaceText);
+ const setReplaceText = useAppStore(state => state.setReplaceText);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [KonvaComps, setKonvaComps] = useState<any>(null);
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ const [KonvaComps, setKonvaComps] = useState<any>(null);
 
-  useEffect(() => {
-    import("react-konva").then(mod => {
-      setKonvaComps(mod);
-    });
-  }, []);
+ useEffect(() => {
+ import("react-konva").then(mod => {
+ setKonvaComps(mod);
+ });
+ }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleCanvasClick = (e: any) => {
-    // only add if we clicked on the stage, not on an existing label
-    if (e.target === e.target.getStage()) {
-      const stage = e.target.getStage();
-      const pointerPosition = stage.getPointerPosition();
-      
-      const newNode: TextNode = {
-        id: `node-${Date.now()}`,
-        text: `${prefix}${startNum}`,
-        x: pointerPosition.x,
-        y: pointerPosition.y,
-      };
-      
-      setNodes([...nodes, newNode]);
-      setStartNum(startNum + 1); // auto increment
-    }
-  };
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ const handleCanvasClick = (e: any) => {
+ // only add if we clicked on the stage, not on an existing label
+ if (e.target === e.target.getStage()) {
+ const stage = e.target.getStage();
+ const pointerPosition = stage.getPointerPosition();
+ 
+ const newNode: TextNode = {
+ id: `node-${Date.now()}`,
+ text: `${prefix}${startNum}`,
+ x: pointerPosition.x,
+ y: pointerPosition.y,
+ };
+ 
+ setNodes([...nodes, newNode]);
+ setStartNum(startNum + 1); // auto increment
+ }
+ };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleDragEnd = (e: any, id: string) => {
-    const updatedNodes = nodes.map(node => {
-      if (node.id === id) {
-        return { ...node, x: e.target.x(), y: e.target.y() };
-      }
-      return node;
-    });
-    setNodes(updatedNodes);
-  };
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ const handleDragEnd = (e: any, id: string) => {
+ const updatedNodes = nodes.map(node => {
+ if (node.id === id) {
+ return { ...node, x: e.target.x(), y: e.target.y() };
+ }
+ return node;
+ });
+ setNodes(updatedNodes);
+ };
 
-  const handleReplace = () => {
-    if (!findText) return;
-    const updatedNodes = nodes.map(node => ({
-      ...node,
-      text: node.text.replace(new RegExp(findText, 'g'), replaceText)
-    }));
-    setNodes(updatedNodes);
-  };
+ const handleReplace = () => {
+ if (!findText) return;
+ const updatedNodes = nodes.map(node => ({
+ ...node,
+ text: node.text.replace(new RegExp(findText, 'g'), replaceText)
+ }));
+ setNodes(updatedNodes);
+ };
 
-  const handleExport = () => {
-    const dxfString = exportTextNodesToDXF(nodes);
-    const blob = new Blob([dxfString], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `grid-labels.dxf`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+ const handleExport = () => {
+ const dxfString = exportTextNodesToDXF(nodes);
+ const blob = new Blob([dxfString], { type: "text/plain" });
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement("a");
+ a.href = url;
+ a.download = `grid-labels.dxf`;
+ a.click();
+ URL.revokeObjectURL(url);
+ };
 
-  const Stage = KonvaComps?.Stage;
-  const Layer = KonvaComps?.Layer;
-  const Text = KonvaComps?.Text;
+ const Stage = KonvaComps?.Stage;
+ const Layer = KonvaComps?.Layer;
+ const Text = KonvaComps?.Text;
 
-  return (
-    <div className="p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
-          <div>
-            <h1 className="text-3xl font-bold text-white">Grid & Label Utilities</h1>
-            <p className="text-slate-400 mt-2">Place auto-incrementing text labels and bulk replace</p>
-          </div>
-          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-            <Download className="w-4 h-4" /> Export Labels to DXF
-          </button>
-        </header>
+ return (
+ <div className="p-8">
+ <div className="max-w-7xl mx-auto space-y-8">
+ <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-border">
+ <div>
+ <h1 className="text-3xl font-bold text-foreground">Grid & Label Utilities</h1>
+ <p className="text-muted-foreground mt-2">Place auto-incrementing text labels and bulk replace</p>
+ </div>
+ <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+ <Download className="w-4 h-4" /> Export Labels to DXF
+ </button>
+ </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="md:col-span-1 space-y-6">
-            <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
-              <h3 className="text-xl font-bold border-b border-slate-800 pb-2">Auto-Numbering</h3>
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Prefix</label>
-                <input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Next Number</label>
-                <input type="number" value={startNum} onChange={e => setStartNum(Number(e.target.value))} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <p className="text-xs text-slate-500">Click on the canvas to place &apos;{prefix}{startNum}&apos;</p>
-            </div>
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+ <div className="md:col-span-1 space-y-6">
+ <div className="bg-card rounded border border-border p-6 space-y-4">
+ <h3 className="text-xl font-bold border-b border-border pb-2">Auto-Numbering</h3>
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Prefix</label>
+ <input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Next Number</label>
+ <input type="number" value={startNum} onChange={e => setStartNum(Number(e.target.value))} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <p className="text-xs text-muted-foreground">Click on the canvas to place &apos;{prefix}{startNum}&apos;</p>
+ </div>
 
-            <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
-              <h3 className="text-xl font-bold border-b border-slate-800 pb-2">Find & Replace</h3>
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Find Prefix/String</label>
-                <input type="text" value={findText} onChange={e => setFindText(e.target.value)} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Replace With</label>
-                <input type="text" value={replaceText} onChange={e => setReplaceText(e.target.value)} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <button onClick={handleReplace} className="w-full flex justify-center items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded font-medium transition">
-                <Search className="w-4 h-4" /> Replace All
-              </button>
-            </div>
-            
+ <div className="bg-card rounded border border-border p-6 space-y-4">
+ <h3 className="text-xl font-bold border-b border-border pb-2">Find & Replace</h3>
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Find Prefix/String</label>
+ <input type="text" value={findText} onChange={e => setFindText(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Replace With</label>
+ <input type="text" value={replaceText} onChange={e => setReplaceText(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <button onClick={handleReplace} className="w-full flex justify-center items-center gap-2 px-4 py-2 bg-primary hover:bg-primary rounded font-medium transition">
+ <Search className="w-4 h-4" /> Replace All
+ </button>
+ </div>
+ 
 
-            
-            <button onClick={() => setNodes([])} className="w-full px-4 py-2 bg-red-900/50 hover:bg-red-900/80 text-red-400 rounded transition border border-red-900/50">
-              Clear Canvas
-            </button>
-          </div>
+ 
+ <button onClick={() => setNodes([])} className="w-full px-4 py-2 bg-red-900/50 hover:bg-red-900/80 text-red-400 rounded transition border border-red-900/50">
+ Clear Canvas
+ </button>
+ </div>
 
-          <div className="md:col-span-2 bg-slate-900 rounded border border-slate-800 flex items-center justify-center relative overflow-hidden" style={{ minHeight: "600px", cursor: "crosshair" }}>
-            <div className="absolute top-4 left-4 text-xs font-mono text-slate-500 bg-slate-950 px-2 py-1 rounded z-10 pointer-events-none">Interactive Schematic (Click to place)</div>
-            {Stage && (
-              <Stage width={800} height={600} onClick={handleCanvasClick}>
-                <Layer>
-                  {nodes.map(node => (
-                    <Text
-                      key={node.id}
-                      text={node.text}
-                      x={node.x}
-                      y={node.y}
-                      fontSize={24}
-                      fill="#e2e8f0"
-                      draggable
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      onDragEnd={(e: any) => handleDragEnd(e, node.id)}
-                    />
-                  ))}
-                </Layer>
-              </Stage>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+ <div className="md:col-span-2 bg-card rounded border border-border flex items-center justify-center relative overflow-hidden" style={{ minHeight: "600px", cursor: "crosshair" }}>
+ <div className="absolute top-4 left-4 text-xs font-mono text-muted-foreground bg-background px-2 py-1 rounded z-10 pointer-events-none">Interactive Schematic (Click to place)</div>
+ {Stage && (
+ <Stage width={800} height={600} onClick={handleCanvasClick}>
+ <Layer>
+ {nodes.map(node => (
+ <Text
+ key={node.id}
+ text={node.text}
+ x={node.x}
+ y={node.y}
+ fontSize={24}
+ fill="#e2e8f0"
+ draggable
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ onDragEnd={(e: any) => handleDragEnd(e, node.id)}
+ />
+ ))}
+ </Layer>
+ </Stage>
+ )}
+ </div>
+ </div>
+ </div>
+ </div>
+ );
 }

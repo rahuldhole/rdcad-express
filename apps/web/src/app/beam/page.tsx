@@ -9,93 +9,93 @@ import ExampleSelector, { Example } from "@/components/ExampleSelector";
 import type { BeamScheduleRow } from "@rdcad-express/dwg-schemas";
 
 const beamExamples: Example<BeamScheduleRow>[] = [
-  { name: "Standard Plinth Beam", data: { elementId: "PB1", width: 230, depth: 300, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 } },
-  { name: "Heavy Transfer Beam", data: { elementId: "TB1", width: 450, depth: 750, bottomBarDia: 25, bottomBarCount: 5, topExtraLeft: 4, topExtraRight: 4, stirrupDia: 10, stirrupSpacing: 100 } },
-  { name: "Wide Shallow Beam", data: { elementId: "WB1", width: 600, depth: 300, bottomBarDia: 16, bottomBarCount: 6, topExtraLeft: 3, topExtraRight: 3, stirrupDia: 8, stirrupSpacing: 125 } },
-  { name: "Lintel Beam (Small)", data: { elementId: "LB1", width: 230, depth: 200, bottomBarDia: 10, bottomBarCount: 2, topExtraLeft: 0, topExtraRight: 0, stirrupDia: 8, stirrupSpacing: 200 } },
-  { name: "Roof Beam (Light)", data: { elementId: "RB1", width: 230, depth: 400, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 } },
-  { name: "Primary Girder (Deep)", data: { elementId: "G1", width: 300, depth: 900, bottomBarDia: 20, bottomBarCount: 4, topExtraLeft: 3, topExtraRight: 3, stirrupDia: 10, stirrupSpacing: 125 } },
-  { name: "Secondary Beam (Narrow)", data: { elementId: "SB1", width: 200, depth: 450, bottomBarDia: 16, bottomBarCount: 2, topExtraLeft: 1, topExtraRight: 1, stirrupDia: 8, stirrupSpacing: 150 } },
-  { name: "Ground Beam", data: { elementId: "GB1", width: 300, depth: 450, bottomBarDia: 16, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 175 } }
+ { name: "Standard Plinth Beam", data: { elementId: "PB1", width: 230, depth: 300, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 } },
+ { name: "Heavy Transfer Beam", data: { elementId: "TB1", width: 450, depth: 750, bottomBarDia: 25, bottomBarCount: 5, topExtraLeft: 4, topExtraRight: 4, stirrupDia: 10, stirrupSpacing: 100 } },
+ { name: "Wide Shallow Beam", data: { elementId: "WB1", width: 600, depth: 300, bottomBarDia: 16, bottomBarCount: 6, topExtraLeft: 3, topExtraRight: 3, stirrupDia: 8, stirrupSpacing: 125 } },
+ { name: "Lintel Beam (Small)", data: { elementId: "LB1", width: 230, depth: 200, bottomBarDia: 10, bottomBarCount: 2, topExtraLeft: 0, topExtraRight: 0, stirrupDia: 8, stirrupSpacing: 200 } },
+ { name: "Roof Beam (Light)", data: { elementId: "RB1", width: 230, depth: 400, bottomBarDia: 12, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 150 } },
+ { name: "Primary Girder (Deep)", data: { elementId: "G1", width: 300, depth: 900, bottomBarDia: 20, bottomBarCount: 4, topExtraLeft: 3, topExtraRight: 3, stirrupDia: 10, stirrupSpacing: 125 } },
+ { name: "Secondary Beam (Narrow)", data: { elementId: "SB1", width: 200, depth: 450, bottomBarDia: 16, bottomBarCount: 2, topExtraLeft: 1, topExtraRight: 1, stirrupDia: 8, stirrupSpacing: 150 } },
+ { name: "Ground Beam", data: { elementId: "GB1", width: 300, depth: 450, bottomBarDia: 16, bottomBarCount: 3, topExtraLeft: 2, topExtraRight: 2, stirrupDia: 8, stirrupSpacing: 175 } }
 ];
 
 export default function BeamDetailing() {
-  const beamData = useAppStore(state => state.beamData);
-  const setBeamData = useAppStore(state => state.setBeamData);
-  const dxfString = React.useMemo(() => exportBeamSectionToDXF(beamData), [beamData]);
+ const beamData = useAppStore(state => state.beamData);
+ const setBeamData = useAppStore(state => state.setBeamData);
+ const dxfString = React.useMemo(() => exportBeamSectionToDXF(beamData), [beamData]);
 
-  const handleExport = () => {
-    const blob = new Blob([dxfString], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}.dxf`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+ const handleExport = () => {
+ const blob = new Blob([dxfString], { type: "text/plain" });
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement("a");
+ a.href = url;
+ a.download = `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}.dxf`;
+ a.click();
+ URL.revokeObjectURL(url);
+ };
 
-  return (
-    <div className="p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
-          <div>
-            <h1 className="text-3xl font-bold text-white">Beam Detailing</h1>
-            <p className="text-slate-400 mt-2">Parametric beam sections with real-time 2D preview</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <ExampleSelector examples={beamExamples} onSelect={setBeamData} />
-            <button 
-              onClick={() => {
-                useAppStore.getState().setProjectModalData({ 
-                  defaultName: `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}`, 
-                  type: 'beam', 
-                  dxfString 
-                });
-              }}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium transition"
-            >
-              Save
-            </button>
-            <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
-              <Download className="w-4 h-4" /> Export DXF
-            </button>
-          </div>
-        </header>
+ return (
+ <div className="p-8">
+ <div className="max-w-7xl mx-auto space-y-8">
+ <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-border">
+ <div>
+ <h1 className="text-3xl font-bold text-foreground">Beam Detailing</h1>
+ <p className="text-muted-foreground mt-2">Parametric beam sections with real-time 2D preview</p>
+ </div>
+ <div className="flex items-center gap-4">
+ <ExampleSelector examples={beamExamples} onSelect={setBeamData} />
+ <button 
+ onClick={() => {
+ useAppStore.getState().setProjectModalData({ 
+ defaultName: `Beam_${beamData.elementId}_${beamData.width}x${beamData.depth}`, 
+ type: 'beam', 
+ dxfString 
+ });
+ }}
+ className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-muted text-foreground rounded font-medium transition"
+ >
+ Save
+ </button>
+ <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+ <Download className="w-4 h-4" /> Export DXF
+ </button>
+ </div>
+ </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-slate-900 rounded border border-slate-800 p-6 space-y-4">
-            <h3 className="text-xl font-bold border-b border-slate-800 pb-2">Properties</h3>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Mark</label>
-                <input type="text" value={beamData.elementId} onChange={e => setBeamData({...beamData, elementId: e.target.value})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <div />
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Width (mm)</label>
-                <input type="number" value={beamData.width} onChange={e => setBeamData({...beamData, width: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Depth (mm)</label>
-                <input type="number" value={beamData.depth} onChange={e => setBeamData({...beamData, depth: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Bottom Bars Count</label>
-                <input type="number" value={beamData.bottomBarCount} onChange={e => setBeamData({...beamData, bottomBarCount: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm text-slate-400 mb-1">Bottom Bar Dia (mm)</label>
-                <input type="number" value={beamData.bottomBarDia} onChange={e => setBeamData({...beamData, bottomBarDia: Number(e.target.value)})} className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-sm focus:border-blue-500" />
-              </div>
-            </div>
-          </div>
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+ <div className="bg-card rounded border border-border p-6 space-y-4">
+ <h3 className="text-xl font-bold border-b border-border pb-2">Properties</h3>
+ 
+ <div className="grid grid-cols-2 gap-4">
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Mark</label>
+ <input type="text" value={beamData.elementId} onChange={e => setBeamData({...beamData, elementId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <div />
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Width (mm)</label>
+ <input type="number" value={beamData.width} onChange={e => setBeamData({...beamData, width: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Depth (mm)</label>
+ <input type="number" value={beamData.depth} onChange={e => setBeamData({...beamData, depth: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Bottom Bars Count</label>
+ <input type="number" value={beamData.bottomBarCount} onChange={e => setBeamData({...beamData, bottomBarCount: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ <div>
+ <label className="block text-sm text-muted-foreground mb-1">Bottom Bar Dia (mm)</label>
+ <input type="number" value={beamData.bottomBarDia} onChange={e => setBeamData({...beamData, bottomBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ </div>
+ </div>
+ </div>
 
-          <div className="bg-slate-900 rounded border border-slate-800 flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>
-            {dxfString && <DXFPreview dxfString={dxfString} />}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+ <div className="bg-card rounded border border-border flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>
+ {dxfString && <DXFPreview dxfString={dxfString} />}
+ </div>
+ </div>
+ </div>
+ </div>
+ );
 }
