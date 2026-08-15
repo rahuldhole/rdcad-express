@@ -11,6 +11,10 @@ import {
   exportLightFixtureDXF, exportSocketSwitchDXF, exportDistributionBoardDXF, exportHVACVentDXF
 } from "@rdcad-express/dxf-exporter";
 import DXFPreview from "@/components/DXFPreview";
+import { 
+  Box, Typography, TextField, Button, Grid, Card, CardContent, CardActions, 
+  IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Chip, InputAdornment 
+} from "@mui/material";
 
 const ASSETS = [
   { id: "door", name: "Standard Door (900mm)", category: "Architectural", generate: exportDoorDXF },
@@ -66,109 +70,134 @@ export default function AssetLibrary() {
   };
 
   return (
-    <div className="p-4 md:p-8 pt-4">
-      <div className="max-w-7xl mx-auto space-y-4">
-        <header className="flex flex-col md:flex-row md:justify-between md:items-end pb-6 border-b border-border gap-4">
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">Architectural Asset Library</h1>
-            <p className="text-muted-foreground mt-1 text-sm">Browse and download standard DXF blocks for your drawings.</p>
-          </div>
-          <div className="relative w-full md:w-64">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <input 
-              type="text" 
-              placeholder="Search assets..." 
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-card border border-border rounded-md pl-10 pr-4 py-2 text-sm text-foreground focus:border-blue-700 dark:border-blue-500 outline-none"
-            />
-          </div>
-        </header>
+    <Box sx={{ p: { xs: 2, md: 4 }, pt: { xs: 2, md: 2 } }}>
+      <Box sx={{ maxWidth: '1200px', mx: 'auto', display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'flex-end' }, gap: 2, pb: 3, borderBottom: 1, borderColor: 'divider' }}>
+          <Box>
+            <Typography variant="h4" fontWeight="bold">Architectural Asset Library</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Browse and download standard DXF blocks for your drawings.</Typography>
+          </Box>
+          <TextField 
+            placeholder="Search assets..." 
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            size="small"
+            sx={{ width: { xs: '100%', md: 300 } }}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search size={18} />
+                  </InputAdornment>
+                ),
+              }
+            }}
+          />
+        </Box>
 
-        <div className="space-y-12">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {Object.entries(groupedAssets).map(([category, assets]) => (
-            <div key={category}>
-              <h2 className="text-xl font-semibold text-foreground mb-6 border-b border-border pb-2">{category}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Box key={category}>
+              <Typography variant="h6" fontWeight="bold" sx={{ mb: 3, pb: 1, borderBottom: 1, borderColor: 'divider' }}>
+                {category}
+              </Typography>
+              <Grid container spacing={3}>
                 {assets.map(asset => {
                   const dxfString = asset.generate();
                   return (
-                    <div 
-                      key={asset.id} 
-                      className="bg-card rounded-lg border border-border overflow-hidden flex flex-col group hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-900/20 transition-all"
-                    >
-                      <div className="h-48 bg-background p-0 relative flex items-center justify-center pointer-events-none">
-                        <DXFPreview dxfString={dxfString} staticMode={true} />
-                      </div>
-                      <div className="p-4 border-t border-border bg-card flex justify-between items-center">
-                        <h3 className="font-medium text-foreground group-hover:text-primary transition-colors truncate pr-2">{asset.name}</h3>
-                        <div className="flex gap-2 flex-shrink-0">
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setPreviewAsset(asset);
-                            }}
-                            className="p-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md transition-colors"
-                            title="Preview Fullscreen"
-                          >
-                            <Maximize className="w-4 h-4" />
-                          </button>
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleExport(asset);
-                            }}
-                            className="p-2 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground rounded-md transition-colors"
-                            title="Download DXF"
-                          >
-                            <Download className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    <Grid size={{ xs: 12, sm: 6, md: 4 }} key={asset.id}>
+                      <Card 
+                        variant="outlined" 
+                        sx={{ 
+                          height: '100%', 
+                          display: 'flex', 
+                          flexDirection: 'column',
+                          transition: 'all 0.3s',
+                          '&:hover': {
+                            borderColor: 'primary.main',
+                            boxShadow: 4,
+                          }
+                        }}
+                      >
+                        <Box sx={{ height: 200, bgcolor: 'background.default', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                          <DXFPreview dxfString={dxfString} staticMode={true} />
+                        </Box>
+                        <Divider />
+                        <CardActions sx={{ p: 2, justifyContent: 'space-between', bgcolor: 'background.paper' }}>
+                          <Typography variant="body2" fontWeight="medium" noWrap sx={{ pr: 2 }}>
+                            {asset.name}
+                          </Typography>
+                          <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
+                            <IconButton 
+                              onClick={() => setPreviewAsset(asset)}
+                              size="small"
+                              sx={{ bgcolor: 'secondary.light', color: 'secondary.contrastText', '&:hover': { bgcolor: 'secondary.main' } }}
+                              title="Preview Fullscreen"
+                            >
+                              <Maximize size={16} />
+                            </IconButton>
+                            <IconButton 
+                              onClick={() => handleExport(asset)}
+                              size="small"
+                              color="primary"
+                              sx={{ bgcolor: 'primary.light', color: 'primary.main', '&:hover': { bgcolor: 'primary.main', color: 'primary.contrastText' } }}
+                              title="Download DXF"
+                            >
+                              <Download size={16} />
+                            </IconButton>
+                          </Box>
+                        </CardActions>
+                      </Card>
+                    </Grid>
                   );
                 })}
-              </div>
-            </div>
+              </Grid>
+            </Box>
           ))}
-        </div>
+        </Box>
         
         {filteredAssets.length === 0 && (
-          <div className="text-center py-20 text-muted-foreground">
-            No assets found matching &quot;{search}&quot;.
-          </div>
+          <Box sx={{ textAlign: 'center', py: 10 }}>
+            <Typography variant="body1" color="text.secondary">
+              No assets found matching "{search}".
+            </Typography>
+          </Box>
         )}
-      </div>
+      </Box>
 
-      {previewAsset && (
-        <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex flex-col">
-          <div className="flex justify-between items-center p-4 border-b border-border bg-card">
-            <div className="flex items-center gap-4">
-              <h2 className="text-xl font-bold">{previewAsset.name}</h2>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-md">{previewAsset.category}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <button 
+      <Dialog 
+        open={!!previewAsset} 
+        onClose={() => setPreviewAsset(null)}
+        fullWidth
+        maxWidth="lg"
+        PaperProps={{ sx: { height: '80vh' } }}
+      >
+        {previewAsset && (
+          <>
+            <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: 1, borderColor: 'divider', pb: 2 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Typography variant="h6" fontWeight="bold">{previewAsset.name}</Typography>
+                <Chip label={previewAsset.category} size="small" color="secondary" variant="outlined" />
+              </Box>
+              <IconButton onClick={() => setPreviewAsset(null)} size="small">
+                <X size={20} />
+              </IconButton>
+            </DialogTitle>
+            <DialogContent sx={{ p: 0, bgcolor: 'background.default', position: 'relative' }}>
+              <DXFPreview dxfString={previewAsset.generate()} staticMode={false} />
+            </DialogContent>
+            <DialogActions sx={{ borderTop: 1, borderColor: 'divider', p: 2 }}>
+              <Button 
+                variant="contained" 
+                startIcon={<Download size={18} />} 
                 onClick={() => handleExport(previewAsset)}
-                className="flex items-center gap-2 px-3 py-1.5 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm"
               >
-                <Download className="w-4 h-4" /> Download
-              </button>
-              <button 
-                onClick={() => setPreviewAsset(null)} 
-                className="p-1.5 hover:bg-muted text-muted-foreground hover:text-foreground rounded-md transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-          <div className="flex-1 w-full h-full p-4 md:p-8">
-             <div className="w-full h-full border border-border rounded-lg overflow-hidden bg-background shadow-2xl relative">
-                <DXFPreview dxfString={previewAsset.generate()} staticMode={false} />
-             </div>
-          </div>
-        </div>
-      )}
-    </div>
+                Download DXF
+              </Button>
+            </DialogActions>
+          </>
+        )}
+      </Dialog>
+    </Box>
   );
 }

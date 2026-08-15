@@ -1,377 +1,330 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, GitBranch, Code, Layers, Cpu, Compass, Copy } from "lucide-react";
 import { ProtectedEmail } from "@/components/ProtectedEmail";
 import { PwaInstallButton } from "@/components/PwaInstallButton";
+import { Box, Typography, Button, Container, Grid, Card, CardContent, Chip, Stack } from "@mui/material";
 
 export default function MarketingPage() {
- return (
- <div className="min-h-screen bg-background text-foreground overflow-hidden relative transition-colors">
- {/* Background decorations */}
- <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-900/20 blur-[120px] pointer-events-none" />
- <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-900/20 blur-[120px] pointer-events-none" />
+  return (
+    <Box sx={{ minHeight: '100vh', overflow: 'hidden', position: 'relative' }}>
+      {/* Background decorations */}
+      <Box sx={{ position: 'absolute', top: '-20%', left: '-10%', width: '50%', height: '50%', borderRadius: '50%', bgcolor: 'primary.dark', opacity: 0.1, filter: 'blur(120px)', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '50%', height: '50%', borderRadius: '50%', bgcolor: 'success.dark', opacity: 0.1, filter: 'blur(120px)', pointerEvents: 'none' }} />
 
- {/* Hero Section */}
- <section className="relative pt-32 pb-20 px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
- <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/80 /80 border border-slate-400 dark:border-slate-200 text-sm font-medium text-primary dark:text-primary mb-8 backdrop-blur-sm transition-colors">
- <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
- RDCAD Express Open Source
- </div>
- 
- <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 bg-clip-text text-transparent transition-colors">
- Parametric Structural <br className="hidden md:block" />
- <span className="bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-400 bg-clip-text text-transparent">Detailing Reimagined</span>
- </h1>
- 
- <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-12 transition-colors">
- An advanced suite of open-source engineering tools for generating accurate Bar Bending Schedules, DXF exports, and detailed structural designs instantly.
- </p>
- 
- <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full max-w-3xl mx-auto">
- <Link href="/guide" className="group flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] w-full sm:w-auto">
- Startup Guide
- <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
- </Link>
- <div className="w-full sm:w-auto">
- <PwaInstallButton />
- </div>
- <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-8 py-4 bg-background hover:bg-background dark:hover:bg-muted text-foreground rounded-full font-semibold transition-all border border-border hover:border-border dark:hover:border-border w-full sm:w-auto">
- <GitBranch className="w-5 h-5" />
- GitHub
- </a>
- </div>
- <div className="mt-8">
- <a href="https://github.com/rahuldhole/rdcad-express/issues" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground dark:hover:text-foreground transition flex items-center gap-2">
- Found a bug or have a suggestion? <span className="text-red-700 dark:text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-400 dark:hover:text-red-300 underline decoration-red-400/30 underline-offset-4">Report an Issue</span>
- </a>
- </div>
- </section>
+      {/* Hero Section */}
+      <Container maxWidth="lg" sx={{ pt: 16, pb: 10, textAlign: 'center', position: 'relative', zIndex: 1 }}>
+        <Chip 
+          label="RDCAD Express Open Source" 
+          variant="outlined" 
+          color="primary" 
+          sx={{ mb: 4, fontWeight: 'bold' }} 
+        />
+        
+        <Typography variant="h2" component="h1" fontWeight="900" gutterBottom sx={{ background: 'linear-gradient(45deg, #1e3a5f, #f50057)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          Parametric Structural <br /> Detailing Reimagined
+        </Typography>
+        
+        <Typography variant="h6" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 6 }}>
+          An advanced suite of open-source engineering tools for generating accurate Bar Bending Schedules, DXF exports, and detailed structural designs instantly.
+        </Typography>
+        
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', gap: 2, mb: 4 }}>
+          <Button 
+            component={Link} 
+            href="/guide" 
+            variant="contained" 
+            color="primary" 
+            size="large"
+            endIcon={<ArrowRight size={20} />}
+            sx={{ borderRadius: 8, px: 4, py: 1.5, fontWeight: 'bold' }}
+          >
+            Startup Guide
+          </Button>
+          <PwaInstallButton />
+          <Button 
+            component="a" 
+            href="https://github.com/rahuldhole/rdcad-express" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            variant="outlined" 
+            color="inherit" 
+            size="large"
+            startIcon={<GitBranch size={20} />}
+            sx={{ borderRadius: 8, px: 4, py: 1.5, fontWeight: 'bold' }}
+          >
+            GitHub
+          </Button>
+        </Box>
 
- {/* CAD Integration Section */}
- <section className="py-24 px-8 border-t border-slate-900/50 bg-card/20 relative z-10">
- <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
- <div className="flex-1 space-y-6">
- <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-semibold tracking-wide uppercase">
- Workflow Upgrade
- </div>
- <h2 className="text-3xl md:text-5xl font-bold">Seamless AutoCAD Integration</h2>
- <p className="text-lg text-muted-foreground leading-relaxed">
- Downloading DXF files is just the beginning. We provide a lightweight AutoLISP companion script that bridges the gap between RDCAD Express and your local AutoCAD environment.
- </p>
- <ul className="space-y-4 text-foreground">
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</div>
- Instantly imports your most recent download
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</div>
- Attaches block to cursor for immediate placement
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</div>
- No file-browser navigation required
- </li>
- </ul>
- <div className="pt-4">
- <Link href="/setup" className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-indigo-500 text-primary-foreground rounded-lg font-medium transition shadow-lg shadow-indigo-500/20">
- Learn How to Install
- <ArrowRight className="w-4 h-4" />
- </Link>
- </div>
- </div>
- <div className="flex-1 w-full bg-background rounded-2xl border border-border p-6 shadow-2xl relative overflow-hidden group">
- <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-blue-500 to-emerald-500"></div>
- <div className="flex items-center gap-2 mb-4 text-muted-foreground text-sm font-mono border-b border-border pb-4">
- <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
- <div className="w-3 h-3 rounded-full bg-amber-500/50"></div>
- <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
- <span className="ml-2">AutoCAD Command Line</span>
- </div>
- <div className="font-mono text-sm space-y-2">
- <div className="text-muted-foreground">Command: <span className="text-emerald-600 dark:text-emerald-400">RDCAD_IMPORT</span></div>
- <div className="text-muted-foreground">Importing: C:\Users\Engineer\Downloads\Beam_B1_300x450.dxf</div>
- <div className="text-muted-foreground">Specify insertion point or [Basepoint/Scale/X/Y/Z/Rotate]:</div>
- <div className="text-primary flex items-center gap-2 mt-4 animate-pulse">
- <span>_</span>
- </div>
- </div>
- </div>
- </div>
- </section>
+        <Typography variant="body2" color="text.secondary">
+          Found a bug or have a suggestion? <Link href="https://github.com/rahuldhole/rdcad-express/issues" style={{ color: '#f50057', textDecoration: 'underline' }}>Report an Issue</Link>
+        </Typography>
+      </Container>
 
- {/* Copy CAD Command Section */}
- <section className="py-24 px-8 border-t border-slate-900/50 bg-background relative z-10">
- <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
- <div className="flex-1 space-y-6">
- <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-semibold tracking-wide uppercase">
- Instant Drafting
- </div>
- <h2 className="text-3xl md:text-5xl font-bold">Copy CAD Command</h2>
- <p className="text-lg text-muted-foreground leading-relaxed">
- Say goodbye to downloading and importing files. Use the <span className="font-semibold text-foreground">Copy CAD Command</span> feature to instantly grab the LISP script of your structural element, and paste it directly into AutoCAD.
- </p>
- <ul className="space-y-4 text-foreground">
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">✓</div>
- Generates drawing instantly at your cursor
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">✓</div>
- Completely eliminates file clutter
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">✓</div>
- Faster than standard DXF exports
- </li>
- </ul>
- <div className="pt-4">
- <Link href="/guide" className="inline-flex items-center gap-2 px-6 py-3 bg-muted hover:bg-muted/80 text-foreground rounded-lg font-medium transition shadow-sm">
- Read the Workflow Guide
- <ArrowRight className="w-4 h-4" />
- </Link>
- </div>
- </div>
- <div className="flex-1 w-full flex items-center justify-center bg-card rounded-2xl border border-border p-12 shadow-2xl relative overflow-hidden group">
- <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500"></div>
- <div className="relative group-hover:scale-105 transition-transform duration-500 flex flex-col items-center">
- <div className="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center shadow-lg shadow-indigo-600/30 mb-6 group-hover:shadow-indigo-600/50 transition-shadow">
- <Copy className="w-10 h-10 text-white" />
- </div>
- <div className="text-xl font-bold text-foreground">Copy CAD Command</div>
- <div className="text-sm text-muted-foreground mt-2">Click to copy script to clipboard</div>
- </div>
- </div>
- </div>
- </section>
+      {/* CAD Integration Section */}
+      <Box sx={{ py: 12, px: { xs: 2, md: 4 }, borderTop: 1, borderColor: 'divider', bgcolor: 'background.paper', position: 'relative', zIndex: 10 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={6} sx={{ alignItems: 'center' }}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Chip label="Workflow Upgrade" color="info" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
+              <Typography variant="h3" fontWeight="bold" gutterBottom>Seamless AutoCAD Integration</Typography>
+              <Typography variant="h6" color="text.secondary" gutterBottom>
+                Downloading DXF files is just the beginning. We provide a lightweight AutoLISP companion script that bridges the gap between RDCAD Express and your local AutoCAD environment.
+              </Typography>
+              <Stack spacing={2} sx={{ mb: 4, mt: 2 }}>
+                {['Instantly imports your most recent download', 'Attaches block to cursor for immediate placement', 'No file-browser navigation required'].map((text, i) => (
+                  <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ width: 24, height: 24, borderRadius: '50%', bgcolor: 'success.light', color: 'success.dark', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 'bold' }}>✓</Box>
+                    <Typography>{text}</Typography>
+                  </Box>
+                ))}
+              </Stack>
+              <Button component={Link} href="/setup" variant="contained" color="primary" endIcon={<ArrowRight size={16} />} sx={{ borderRadius: 2 }}>
+                Learn How to Install
+              </Button>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Box sx={{ bgcolor: 'background.default', borderRadius: 4, border: 1, borderColor: 'divider', p: 4, boxShadow: 6, position: 'relative', overflow: 'hidden' }}>
+                <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(90deg, #3f51b5, #00bcd4, #4caf50)' }} />
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2, borderBottom: 1, borderColor: 'divider', pb: 2 }}>
+                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#f44336' }} />
+                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#ff9800' }} />
+                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#4caf50' }} />
+                  <Typography variant="caption" color="text.secondary" fontFamily="monospace" sx={{ ml: 1 }}>AutoCAD Command Line</Typography>
+                </Box>
+                <Box sx={{ fontFamily: 'monospace', fontSize: 14, color: 'text.secondary' }}>
+                  <Box>Command: <Typography component="span" color="success.main" fontFamily="monospace">RDCAD_IMPORT</Typography></Box>
+                  <Box sx={{ mt: 1 }}>Importing: C:\Users\Engineer\Downloads\Beam_B1_300x450.dxf</Box>
+                  <Box sx={{ mt: 1 }}>Specify insertion point or [Basepoint/Scale/X/Y/Z/Rotate]:</Box>
+                  <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', color: 'primary.main', animation: 'pulse 2s infinite' }}>_</Box>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
- {/* Reliability Section */}
- <section className="py-24 px-8 border-t border-slate-900/50 bg-background relative z-10">
- <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
- <div className="flex-1 space-y-6">
- <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-sm font-semibold tracking-wide uppercase">
- Quality Assured
- </div>
- <h2 className="text-3xl md:text-5xl font-bold">Tested & Reliable Core</h2>
- <p className="text-lg text-muted-foreground leading-relaxed">
- We know that structural detailing requires absolute precision. That&apos;s why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <span className="text-foreground font-medium">Vitest</span> test suite.
- </p>
- <ul className="space-y-4 text-foreground">
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-600 dark:text-rose-400">✓</div>
- Rigorous testing for accurate BBS calculations
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-600 dark:text-rose-400">✓</div>
- Automated validation of generated DXF structural integrity
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-600 dark:text-rose-400">✓</div>
- Deterministic outputs across different environments
- </li>
- </ul>
- </div>
- <div className="flex-1 w-full bg-card rounded-2xl border border-border p-6 shadow-2xl relative overflow-hidden group">
- <div className="flex items-center gap-2 mb-4 text-muted-foreground text-sm font-mono border-b border-border pb-4">
- <div className="w-3 h-3 rounded-full bg-muted"></div>
- <div className="w-3 h-3 rounded-full bg-muted"></div>
- <div className="w-3 h-3 rounded-full bg-muted"></div>
- <span className="ml-2">vitest run</span>
- </div>
- <div className="font-mono text-sm space-y-2">
- <div className="text-emerald-600 dark:text-emerald-400">✓ packages/core-math/src/index.test.ts (8 tests)</div>
- <div className="text-emerald-600 dark:text-emerald-400">✓ packages/dxf-exporter/src/index.test.ts (5 tests)</div>
- <div className="text-muted-foreground mt-4">Test Files 2 passed (2)</div>
- <div className="text-muted-foreground">Tests 13 passed (13)</div>
- <div className="text-muted-foreground">Duration 843ms</div>
- </div>
- </div>
- </div>
- </section>
+      {/* Copy CAD Command Section */}
+      <Box sx={{ py: 12, px: { xs: 2, md: 4 }, borderTop: 1, borderColor: 'divider', position: 'relative', zIndex: 10 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={6} sx={{ alignItems: 'center' }} direction={{ xs: 'column', md: 'row-reverse' }}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Chip label="Instant Drafting" color="secondary" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
+              <Typography variant="h3" fontWeight="bold" gutterBottom>Copy CAD Command</Typography>
+              <Typography variant="h6" color="text.secondary" gutterBottom>
+                Say goodbye to downloading and importing files. Use the <strong>Copy CAD Command</strong> feature to instantly grab the LISP script of your structural element, and paste it directly into AutoCAD.
+              </Typography>
+              <Stack spacing={2} sx={{ mb: 4, mt: 2 }}>
+                {['Generates drawing instantly at your cursor', 'Completely eliminates file clutter', 'Faster than standard DXF exports'].map((text, i) => (
+                  <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ width: 24, height: 24, borderRadius: '50%', bgcolor: 'secondary.light', color: 'secondary.dark', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 'bold' }}>✓</Box>
+                    <Typography>{text}</Typography>
+                  </Box>
+                ))}
+              </Stack>
+              <Button component={Link} href="/guide" variant="outlined" color="inherit" endIcon={<ArrowRight size={16} />} sx={{ borderRadius: 2 }}>
+                Read the Workflow Guide
+              </Button>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Box sx={{ bgcolor: 'background.paper', borderRadius: 4, border: 1, borderColor: 'divider', p: 6, boxShadow: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', '&:hover': { transform: 'scale(1.02)', transition: 'transform 0.3s' } }}>
+                <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(90deg, #9c27b0, #f50057, #ff9800)' }} />
+                <Box sx={{ width: 96, height: 96, borderRadius: '50%', bgcolor: 'secondary.main', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 3, mb: 3 }}>
+                  <Copy size={40} color="white" />
+                </Box>
+                <Typography variant="h5" fontWeight="bold">Copy CAD Command</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Click to copy script to clipboard</Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
- {/* Features Section */}
- <section className="py-24 px-8 border-t border-slate-900/50 bg-background/50 relative z-10">
- <div className="max-w-7xl mx-auto">
- <div className="text-center mb-16">
- <h2 className="text-3xl md:text-4xl font-bold mb-4">Engineering Suite</h2>
- <p className="text-muted-foreground">Everything you need to detail structures efficiently.</p>
- </div>
+      {/* Reliability Section */}
+      <Box sx={{ py: 12, px: { xs: 2, md: 4 }, borderTop: 1, borderColor: 'divider', bgcolor: 'background.paper', position: 'relative', zIndex: 10 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={6} sx={{ alignItems: 'center' }}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Chip label="Quality Assured" color="error" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
+              <Typography variant="h3" fontWeight="bold" gutterBottom>Tested & Reliable Core</Typography>
+              <Typography variant="h6" color="text.secondary" gutterBottom>
+                We know that structural detailing requires absolute precision. That's why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <strong>Vitest</strong> test suite.
+              </Typography>
+              <Stack spacing={2} sx={{ mt: 2 }}>
+                {['Rigorous testing for accurate BBS calculations', 'Automated validation of generated DXF structural integrity', 'Deterministic outputs across different environments'].map((text, i) => (
+                  <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ width: 24, height: 24, borderRadius: '50%', bgcolor: 'error.light', color: 'error.dark', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 'bold' }}>✓</Box>
+                    <Typography>{text}</Typography>
+                  </Box>
+                ))}
+              </Stack>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Box sx={{ bgcolor: 'background.default', borderRadius: 4, border: 1, borderColor: 'divider', p: 4, boxShadow: 6 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2, borderBottom: 1, borderColor: 'divider', pb: 2 }}>
+                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: 'text.disabled' }} />
+                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: 'text.disabled' }} />
+                  <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: 'text.disabled' }} />
+                  <Typography variant="caption" color="text.secondary" fontFamily="monospace" sx={{ ml: 1 }}>vitest run</Typography>
+                </Box>
+                <Box sx={{ fontFamily: 'monospace', fontSize: 14 }}>
+                  <Typography color="success.main" fontFamily="monospace">✓ packages/core-math/src/index.test.ts (8 tests)</Typography>
+                  <Typography color="success.main" fontFamily="monospace">✓ packages/dxf-exporter/src/index.test.ts (5 tests)</Typography>
+                  <Typography color="text.secondary" fontFamily="monospace" sx={{ mt: 2 }}>Test Files 2 passed (2)</Typography>
+                  <Typography color="text.secondary" fontFamily="monospace">Tests 13 passed (13)</Typography>
+                  <Typography color="text.secondary" fontFamily="monospace">Duration 843ms</Typography>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
- <FeatureCard 
- icon={<Code className="w-8 h-8 text-primary" />}
- title="BBS Generator"
- description="Real-time parametric rebar weight calculations and scheduling."
- link="/bbs"
- />
- <FeatureCard 
- icon={<Layers className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />}
- title="Beam Detailing"
- description="Generate detailed beam reinforcements and exports."
- link="/beam"
- />
- <FeatureCard 
- icon={<Cpu className="w-8 h-8 text-purple-600 dark:text-purple-400" />}
- title="Column Detailing"
- description="Automated column schedules and link calculations."
- link="/column"
- />
- <FeatureCard 
- icon={<Compass className="w-8 h-8 text-amber-600 dark:text-amber-400" />}
- title="Foundation"
- description="Isolated footing calculations and base detailing."
- link="/foundation"
- />
- <FeatureCard 
- icon={<Layers className="w-8 h-8 text-rose-600 dark:text-rose-400" />}
- title="Slab Detailing"
- description="Two-way and one-way slab reinforcement generation."
- link="/slab"
- />
- <FeatureCard 
- icon={<Code className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />}
- title="Tank Detailing"
- description="Water tank structural components and drawings."
- link="/tank"
- />
- <FeatureCard 
- icon={<Layers className="w-8 h-8 text-orange-600 dark:text-orange-400" />}
- title="Stairs Detailing"
- description="Parametric dog-legged stair reinforcements and profiles."
- link="/stairs"
- />
- <FeatureCard 
- icon={<Code className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />}
- title="Grid Utils"
- description="Drafting utilities for grids, elevations, and revisions."
- link="/utilities"
- />
- <FeatureCard 
- icon={<Compass className="w-8 h-8 text-pink-600 dark:text-pink-400" />}
- title="Asset Library"
- description="Pre-built CAD blocks for architecture and plumbing."
- link="/library"
- />
- <FeatureCard 
- icon={<Cpu className="w-8 h-8 text-teal-600 dark:text-teal-400" />}
- title="Templates"
- description="Standardized title blocks and project templates."
- link="/templates"
- />
- </div>
- </div>
- </section>
+      {/* Features Section */}
+      <Box sx={{ py: 12, borderTop: 1, borderColor: 'divider' }}>
+        <Container maxWidth="lg">
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
+            <Typography variant="h4" fontWeight="bold" gutterBottom>Engineering Suite</Typography>
+            <Typography color="text.secondary">Everything you need to detail structures efficiently.</Typography>
+          </Box>
 
- {/* Project Feature Section */}
- <section className="py-24 px-8 border-t border-slate-900/50 bg-card/20 relative z-10">
- <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
- <div className="flex-1 w-full bg-background rounded-2xl border border-border p-6 shadow-2xl relative overflow-hidden group">
- <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-blue-500 via-indigo-500 to-purple-500"></div>
- <div className="flex items-center gap-2 mb-6 border-b border-border pb-4">
- <div className="w-8 h-8 rounded bg-primary/20 flex items-center justify-center text-primary font-bold">P</div>
- <span className="text-foreground font-medium text-sm">Project Active Summary</span>
- </div>
- <div className="flex flex-col gap-4">
- <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-border">
- <span className="text-sm text-muted-foreground">Beam Detail B1</span>
- <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded">Ready</span>
- </div>
- <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-border">
- <span className="text-sm text-muted-foreground">Column Schedule C1-C4</span>
- <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded">Ready</span>
- </div>
- <div className="mt-2 flex gap-3">
- <div className="flex-1 h-10 bg-primary/20 border border-blue-500/30 rounded flex items-center justify-center text-primary text-xs font-bold transition hover:bg-primary/30 cursor-pointer">GENERATE REPORT</div>
- <div className="flex-1 h-10 bg-emerald-600/20 border border-emerald-500/30 rounded flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xs font-bold transition hover:bg-emerald-600/30 cursor-pointer">EXPORT ALL DXF</div>
- </div>
- </div>
- </div>
- <div className="flex-1 space-y-6">
- <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-primary/10 border border-blue-500/20 text-primary text-sm font-semibold tracking-wide uppercase">
- Project Management
- </div>
- <h2 className="text-3xl md:text-5xl font-bold">Unified Project Reports</h2>
- <p className="text-lg text-muted-foreground leading-relaxed">
- Consolidate your structural designs into a single, cohesive project. RDCAD Express allows you to queue multiple elements—beams, columns, slabs—and generate a comprehensive engineering report.
- </p>
- <ul className="space-y-4 text-foreground">
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary">✓</div>
- Batch export multiple DXF files simultaneously
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary">✓</div>
- Generate unified PDF calculation reports
- </li>
- <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary">✓</div>
- Track your active designs in one centralized view
- </li>
- </ul>
- <div className="pt-4">
- <Link href="/project" className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary text-primary-foreground rounded-lg font-medium transition shadow-lg shadow-blue-500/20">
- View Project Dashboard
- <ArrowRight className="w-4 h-4" />
- </Link>
- </div>
- </div>
- </div>
- </section>
+          <Grid container spacing={3}>
+            {[
+              { icon: <Code />, title: "BBS Generator", desc: "Real-time parametric rebar weight calculations and scheduling.", link: "/bbs" },
+              { icon: <Layers />, title: "Beam Detailing", desc: "Generate detailed beam reinforcements and exports.", link: "/beam" },
+              { icon: <Cpu />, title: "Column Detailing", desc: "Automated column schedules and link calculations.", link: "/column" },
+              { icon: <Compass />, title: "Foundation", desc: "Isolated footing calculations and base detailing.", link: "/foundation" },
+              { icon: <Layers />, title: "Slab Detailing", desc: "Two-way and one-way slab reinforcement generation.", link: "/slab" },
+              { icon: <Code />, title: "Tank Detailing", desc: "Water tank structural components and drawings.", link: "/tank" },
+              { icon: <Layers />, title: "Stairs Detailing", desc: "Parametric dog-legged stair reinforcements and profiles.", link: "/stairs" },
+              { icon: <Code />, title: "Grid Utils", desc: "Drafting utilities for grids, elevations, and revisions.", link: "/utilities" },
+              { icon: <Compass />, title: "Asset Library", desc: "Pre-built CAD blocks for architecture and plumbing.", link: "/library" },
+              { icon: <Cpu />, title: "Templates", desc: "Standardized title blocks and project templates.", link: "/templates" }
+            ].map((feature, idx) => (
+              <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={idx}>
+                <FeatureCard {...feature} />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
 
- {/* Reporting Issues Section */}
- <section className="py-24 px-8 border-t border-slate-900/50 bg-background relative z-10">
- <div className="max-w-4xl mx-auto text-center space-y-8">
- <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-card border border-border mb-4 shadow-xl">
- <GitBranch className="w-8 h-8 text-foreground" />
- </div>
- <h2 className="text-3xl md:text-5xl font-bold">Found a Bug? Have an Idea?</h2>
- <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
- RDCAD Express is open-source, and we rely on community feedback to improve. If you encounter a bug or have a feature request, you can easily report it on our GitHub repository.
- </p>
- 
- <div className="grid md:grid-cols-3 gap-6 text-left mt-12">
- <div className="bg-card border border-border p-6 rounded-2xl relative overflow-hidden group hover:border-border transition-colors">
- <div className="text-4xl font-black text-muted-foreground/50 absolute -right-2 -bottom-4 group-hover:text-muted-foreground transition-colors">1</div>
- <h3 className="text-xl font-bold mb-3 relative z-10 text-foreground">Create an Account</h3>
- <p className="text-muted-foreground text-sm relative z-10">If you don&apos;t have one, sign up for a free account at GitHub.com.</p>
- </div>
- <div className="bg-card border border-border p-6 rounded-2xl relative overflow-hidden group hover:border-border transition-colors">
- <div className="text-4xl font-black text-muted-foreground/50 absolute -right-2 -bottom-4 group-hover:text-muted-foreground transition-colors">2</div>
- <h3 className="text-xl font-bold mb-3 relative z-10 text-foreground">Go to Issues</h3>
- <p className="text-muted-foreground text-sm relative z-10">Navigate to the &quot;Issues&quot; tab on our GitHub repository and click &quot;New Issue&quot;.</p>
- </div>
- <div className="bg-card border border-border p-6 rounded-2xl relative overflow-hidden group hover:border-border transition-colors">
- <div className="text-4xl font-black text-muted-foreground/50 absolute -right-2 -bottom-4 group-hover:text-muted-foreground transition-colors">3</div>
- <h3 className="text-xl font-bold mb-3 relative z-10 text-foreground">Provide Details</h3>
- <p className="text-muted-foreground text-sm relative z-10">Describe the problem clearly. Include screenshots or error messages if possible.</p>
- </div>
- </div>
- 
- <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
- <a href="https://github.com/rahuldhole/rdcad-express/issues/new" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-muted hover:bg-background text-foreground rounded-full font-bold transition-all shadow-lg hover:scale-105">
- Report an Issue Now
- </a>
- <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-border hover:border-slate-600 dark:hover:border-slate-400 text-foreground rounded-full font-bold transition-all hover:bg-muted">
- Explore Repository
- </a>
- </div>
- 
- <div className="pt-6 text-muted-foreground text-sm">
- Need direct support? Email me at <ProtectedEmail />
- </div>
- </div>
- </section>
- </div>
- );
+      {/* Project Feature Section */}
+      <Box sx={{ py: 12, px: { xs: 2, md: 4 }, borderTop: 1, borderColor: 'divider', bgcolor: 'background.paper', position: 'relative', zIndex: 10 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={6} sx={{ alignItems: 'center' }} direction={{ xs: 'column-reverse', md: 'row' }}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Box sx={{ bgcolor: 'background.default', borderRadius: 4, border: 1, borderColor: 'divider', p: 4, boxShadow: 6, position: 'relative', overflow: 'hidden' }}>
+                <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(270deg, #3f51b5, #9c27b0)' }} />
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3, borderBottom: 1, borderColor: 'divider', pb: 2 }}>
+                  <Box sx={{ width: 32, height: 32, borderRadius: 1, bgcolor: 'primary.light', color: 'primary.contrastText', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>P</Box>
+                  <Typography variant="subtitle2" fontWeight="bold">Project Active Summary</Typography>
+                </Box>
+                <Stack spacing={2}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 1.5, borderRadius: 2, bgcolor: 'background.paper', border: 1, borderColor: 'divider' }}>
+                    <Typography variant="body2" color="text.secondary">Beam Detail B1</Typography>
+                    <Chip label="Ready" color="success" size="small" sx={{ borderRadius: 1 }} />
+                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 1.5, borderRadius: 2, bgcolor: 'background.paper', border: 1, borderColor: 'divider' }}>
+                    <Typography variant="body2" color="text.secondary">Column Schedule C1-C4</Typography>
+                    <Chip label="Ready" color="success" size="small" sx={{ borderRadius: 1 }} />
+                  </Box>
+                  <Grid container spacing={1} sx={{ mt: 1 }}>
+                    <Grid size={{ xs: 6 }}>
+                      <Button variant="outlined" color="primary" fullWidth size="small" sx={{ fontWeight: 'bold' }}>GENERATE REPORT</Button>
+                    </Grid>
+                    <Grid size={{ xs: 6 }}>
+                      <Button variant="outlined" color="success" fullWidth size="small" sx={{ fontWeight: 'bold' }}>EXPORT ALL DXF</Button>
+                    </Grid>
+                  </Grid>
+                </Stack>
+              </Box>
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Chip label="Project Management" color="primary" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
+              <Typography variant="h3" fontWeight="bold" gutterBottom>Unified Project Reports</Typography>
+              <Typography variant="h6" color="text.secondary" gutterBottom>
+                Consolidate your structural designs into a single, cohesive project. RDCAD Express allows you to queue multiple elements—beams, columns, slabs—and generate a comprehensive engineering report.
+              </Typography>
+              <Stack spacing={2} sx={{ mb: 4, mt: 2 }}>
+                {['Batch export multiple DXF files simultaneously', 'Generate unified PDF calculation reports', 'Track your active designs in one centralized view'].map((text, i) => (
+                  <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ width: 24, height: 24, borderRadius: '50%', bgcolor: 'primary.light', color: 'primary.dark', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 'bold' }}>✓</Box>
+                    <Typography>{text}</Typography>
+                  </Box>
+                ))}
+              </Stack>
+              <Button component={Link} href="/project" variant="contained" color="primary" endIcon={<ArrowRight size={16} />} sx={{ borderRadius: 2 }}>
+                View Project Dashboard
+              </Button>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Footer Info */}
+      <Box sx={{ py: 12, bgcolor: 'background.default', borderTop: 1, borderColor: 'divider', textAlign: 'center' }}>
+        <Container maxWidth="md">
+          <GitBranch size={48} style={{ margin: '0 auto 24px', opacity: 0.7 }} />
+          <Typography variant="h4" fontWeight="bold" gutterBottom>Found a Bug? Have an Idea?</Typography>
+          <Typography color="text.secondary" sx={{ mb: 6 }}>
+            RDCAD Express is open-source, and we rely on community feedback to improve. If you encounter a bug or have a feature request, you can easily report it on our GitHub repository.
+          </Typography>
+          
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 4 }}>
+            <Button 
+              component="a"
+              href="https://github.com/rahuldhole/rdcad-express/issues/new"
+              target="_blank"
+              variant="contained"
+              color="secondary"
+              size="large"
+              sx={{ borderRadius: 8, px: 4 }}
+            >
+              Report an Issue Now
+            </Button>
+          </Box>
+          <Typography variant="body2" color="text.secondary">
+            Need direct support? Email me at <ProtectedEmail />
+          </Typography>
+        </Container>
+      </Box>
+    </Box>
+  );
 }
 
-function FeatureCard({ icon, title, description, link }: { icon: React.ReactNode, title: string, description: string, link: string }) {
- return (
- <Link href={link} className="block group p-8 rounded-2xl bg-card/40 border border-border hover:bg-card hover:border-border transition-all">
- <div className="mb-6 p-4 rounded-xl bg-background inline-block group-hover:scale-110 transition-transform shadow-lg shadow-black/20">
- {icon}
- </div>
- <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{title}</h3>
- <p className="text-muted-foreground leading-relaxed">{description}</p>
- </Link>
- );
+function FeatureCard({ icon, title, desc, link }: { icon: React.ReactNode, title: string, desc: string, link: string }) {
+  return (
+    <Card 
+      component={Link} 
+      href={link} 
+      sx={{ 
+        height: '100%', 
+        textDecoration: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'all 0.3s',
+        '&:hover': { transform: 'translateY(-4px)', boxShadow: 6, borderColor: 'primary.main' },
+        border: 1,
+        borderColor: 'divider',
+        bgcolor: 'background.paper'
+      }}
+      elevation={0}
+    >
+      <CardContent>
+        <Box sx={{ color: 'primary.main', mb: 2 }}>
+          {icon}
+        </Box>
+        <Typography variant="h6" fontWeight="bold" gutterBottom color="text.primary">
+          {title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {desc}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }

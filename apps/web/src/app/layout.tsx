@@ -46,6 +46,7 @@ import Navbar from "@/components/Navbar";
 import ProjectModal from "@/components/ProjectModal";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
  return (
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
  className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
  >
  <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
+ <AppRouterCacheProvider>
  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
  <Navbar />
  <ProjectModal />
@@ -93,6 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
  </div>
  </footer>
  </ThemeProvider>
+ </AppRouterCacheProvider>
  </body>
  </html>
  );

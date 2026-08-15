@@ -2,32 +2,29 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { IconButton } from "@mui/material";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 export function ThemeToggle() {
- const { theme, setTheme } = useTheme();
- const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
- useEffect(() => {
- // eslint-disable-next-line react-hooks/set-state-in-effect
- setMounted(true);
- }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
- if (!mounted) {
- return <div className="w-8 h-8" />;
- }
+  if (!mounted) {
+    return <div style={{ width: 40, height: 40 }} />;
+  }
 
- return (
- <button
- onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
- className="p-2 rounded-md hover:bg-muted dark:hover:bg-muted transition text-muted-foreground hover:text-foreground dark:hover:text-foreground"
- title="Toggle theme"
- >
- {theme === "dark" ? (
- <Sun className="w-5 h-5" />
- ) : (
- <Moon className="w-5 h-5" />
- )}
- </button>
- );
+  return (
+    <IconButton
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      title="Toggle theme"
+      color="inherit"
+    >
+      {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+    </IconButton>
+  );
 }

@@ -1,11 +1,12 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft, PlayCircle, Settings, Copy, Code } from "lucide-react";
 import { PwaInstallButton } from "@/components/PwaInstallButton";
-export const metadata = {
-  title: "Startup Guide - RDCAD Express",
-  description: "Learn how to use RDCAD Express to automate structural detailing.",
-};
+import { 
+  Box, Typography, Button, Container, Card, CardContent, Grid 
+} from "@mui/material";
 
 const features = [
   {
@@ -22,21 +23,21 @@ const features = [
     icon: <Copy className="w-8 h-8 text-indigo-500" />,
     title: "Export & Integration Options",
     description: (
-      <div className="space-y-4">
-        <div>
-          <strong className="text-foreground">Option A: Copy CAD Command (Recommended)</strong> - The fastest way to get your drawing into CAD. Click the copy icon in the toolbar, switch to your local AutoCAD window, paste the script directly into the command line, and press Enter. The drawing will generate instantly at your cursor.
-        </div>
-        <div>
-          <strong className="text-foreground">Option B: Export DXF</strong> - Save the file or share it with a colleague. A standard .dxf file will download to your device, which is compatible with almost all drafting software.{" "}
-          <Link href="/setup" className="text-primary hover:underline font-medium">
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box>
+          <Typography component="strong" color="text.primary">Option A: Copy CAD Command (Recommended)</Typography> - The fastest way to get your drawing into CAD. Click the copy icon in the toolbar, switch to your local AutoCAD window, paste the script directly into the command line, and press Enter. The drawing will generate instantly at your cursor.
+        </Box>
+        <Box>
+          <Typography component="strong" color="text.primary">Option B: Export DXF</Typography> - Save the file or share it with a colleague. A standard .dxf file will download to your device, which is compatible with almost all drafting software.{" "}
+          <Typography component={Link} href="/setup" color="primary.main" fontWeight="medium" sx={{ textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Set up the LISP extension
-          </Link>{" "}
+          </Typography>{" "}
           to auto-detect downloaded DXF files directly in CAD.
-        </div>
-        <div>
-          <strong className="text-foreground">Option C: Add to Project</strong> - Save multiple elements to a project for batch processing. You can generate a unified BBS report and get a zipped export of all your drawings at once from the Projects dashboard.
-        </div>
-      </div>
+        </Box>
+        <Box>
+          <Typography component="strong" color="text.primary">Option C: Add to Project</Typography> - Save multiple elements to a project for batch processing. You can generate a unified BBS report and get a zipped export of all your drawings at once from the Projects dashboard.
+        </Box>
+      </Box>
     )
   },
   {
@@ -48,68 +49,118 @@ const features = [
 
 export default function GuidePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden pb-24">
+    <Box sx={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', pb: 12 }}>
       {/* Background decorations */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-900/10 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-900/10 blur-[100px] pointer-events-none" />
+      <Box sx={{ position: 'absolute', top: '-10%', left: '-10%', width: '40%', height: '40%', borderRadius: '50%', bgcolor: 'primary.main', opacity: 0.05, filter: 'blur(100px)', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '40%', height: '40%', borderRadius: '50%', bgcolor: 'info.main', opacity: 0.05, filter: 'blur(100px)', pointerEvents: 'none' }} />
 
-      <div className="max-w-5xl mx-auto px-6 pt-24 relative z-10">
-        <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
-          <ArrowLeft className="w-4 h-4" /> Back to Home
-        </Link>
+      <Container maxWidth="lg" sx={{ pt: 12, position: 'relative', zIndex: 10 }}>
+        <Button 
+          component={Link} 
+          href="/" 
+          startIcon={<ArrowLeft size={16} />}
+          color="inherit"
+          sx={{ mb: 4, color: 'text.secondary', '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+        >
+          Back to Home
+        </Button>
         
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-            Startup <span className="bg-gradient-to-r from-blue-500 to-indigo-400 bg-clip-text text-transparent">Guide</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+        <Box sx={{ textAlign: 'center', mb: 8 }}>
+          <Typography variant="h2" component="h1" fontWeight="extrabold" sx={{ mb: 3 }}>
+            Startup <Typography component="span" variant="h2" fontWeight="extrabold" color="primary.main">Guide</Typography>
+          </Typography>
+          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', fontWeight: 'normal' }}>
             Explore the RDCAD Express core features and flexible workflows to drastically reduce your drafting time.
-          </p>
-        </div>
+          </Typography>
+        </Box>
 
-        <div className="grid gap-8">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {features.map((feature, idx) => (
-            <div key={idx} className="flex flex-col md:flex-row gap-6 p-8 bg-card border border-border rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary/50 to-transparent group-hover:from-primary transition-colors" />
-              
-              <div className="shrink-0 flex items-center justify-center w-16 h-16 rounded-2xl bg-background border border-border group-hover:scale-110 transition-transform">
-                {feature.icon}
-              </div>
-              
-              <div>
-                <h3 className="text-2xl font-bold mb-3 text-foreground">{feature.title}</h3>
-                <div className="text-muted-foreground leading-relaxed text-lg">
-                  {feature.description}
-                </div>
-              </div>
-            </div>
+            <Card key={idx} variant="outlined" sx={{ borderRadius: 4, overflow: 'hidden', position: 'relative', transition: 'box-shadow 0.3s', '&:hover': { boxShadow: 4 } }}>
+              <Box sx={{ position: 'absolute', top: 0, left: 0, width: 4, height: '100%', bgcolor: 'primary.main', opacity: 0.5 }} />
+              <CardContent sx={{ p: { xs: 4, md: 5 }, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4, alignItems: { xs: 'flex-start', md: 'center' } }}>
+                <Box sx={{ 
+                  flexShrink: 0, 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  width: 80, 
+                  height: 80, 
+                  borderRadius: 4, 
+                  bgcolor: 'background.default', 
+                  border: 1, 
+                  borderColor: 'divider',
+                  transition: 'transform 0.3s',
+                  '&:hover': { transform: 'scale(1.1)' }
+                }}>
+                  {feature.icon}
+                </Box>
+                
+                <Box>
+                  <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>{feature.title}</Typography>
+                  <Typography color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
+                    {feature.description}
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
           ))}
-        </div>
+        </Box>
 
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
-          <div className="p-8 bg-card border border-border rounded-2xl">
-            <h4 className="text-xl font-bold mb-2">LISP Extension (Optional)</h4>
-            <p className="text-muted-foreground mb-6">To use advanced CAD integration features, follow our one-time setup guide for AutoCAD.</p>
-            <Link href="/setup" className="inline-flex items-center justify-center w-full px-6 py-3 bg-muted hover:bg-muted/80 text-foreground font-semibold rounded-lg transition-colors">
-              View Setup Guide
-            </Link>
-          </div>
-          <div className="p-8 bg-card border border-border rounded-2xl">
-            <h4 className="text-xl font-bold mb-2">Install App (Optional)</h4>
-            <p className="text-muted-foreground mb-6">You can install RDCAD Express as a Progressive Web App (PWA) using your browser&apos;s install button.</p>
-            <div className="w-full flex justify-center [&>*]:w-full [&>*]:justify-center">
-              <PwaInstallButton />
-            </div>
-          </div>
-          <div className="p-8 bg-card border border-border rounded-2xl">
-            <h4 className="text-xl font-bold mb-2">Have more questions?</h4>
-            <p className="text-muted-foreground mb-6">Check out our frequently asked questions for troubleshooting and tips.</p>
-            <Link href="/faq" className="inline-flex items-center justify-center w-full px-6 py-3 bg-muted hover:bg-muted/80 text-foreground font-semibold rounded-lg transition-colors">
-              Read the FAQ
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+        <Grid container spacing={4} sx={{ mt: 6 }}>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Card variant="outlined" sx={{ height: '100%', borderRadius: 4, display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>LISP Extension (Optional)</Typography>
+                <Typography color="text.secondary" sx={{ mb: 4, flexGrow: 1 }}>
+                  To use advanced CAD integration features, follow our one-time setup guide for AutoCAD.
+                </Typography>
+                <Button 
+                  component={Link} 
+                  href="/setup" 
+                  variant="outlined" 
+                  fullWidth
+                  sx={{ py: 1.5, borderRadius: 2 }}
+                >
+                  View Setup Guide
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Card variant="outlined" sx={{ height: '100%', borderRadius: 4, display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>Install App (Optional)</Typography>
+                <Typography color="text.secondary" sx={{ mb: 4, flexGrow: 1 }}>
+                  You can install RDCAD Express as a Progressive Web App (PWA) using your browser's install button.
+                </Typography>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', '& > *': { width: '100%' } }}>
+                  <PwaInstallButton />
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Card variant="outlined" sx={{ height: '100%', borderRadius: 4, display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>Have more questions?</Typography>
+                <Typography color="text.secondary" sx={{ mb: 4, flexGrow: 1 }}>
+                  Check out our frequently asked questions for troubleshooting and tips.
+                </Typography>
+                <Button 
+                  component={Link} 
+                  href="/faq" 
+                  variant="outlined" 
+                  fullWidth
+                  sx={{ py: 1.5, borderRadius: 2 }}
+                >
+                  Read the FAQ
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 }

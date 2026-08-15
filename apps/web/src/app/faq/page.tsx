@@ -1,11 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft, ChevronDown } from "lucide-react";
-
-export const metadata = {
-  title: "FAQ - RDCAD Express",
-  description: "Frequently asked questions about RDCAD Express",
-};
+import { 
+  Box, Typography, Button, Container, Accordion, AccordionSummary, AccordionDetails, Card, CardContent 
+} from "@mui/material";
 
 const faqs = [
   {
@@ -45,50 +45,74 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden pb-24">
+    <Box sx={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', pb: 12 }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
       {/* Background decorations */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-900/10 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-900/10 blur-[100px] pointer-events-none" />
+      <Box sx={{ position: 'absolute', top: '-10%', left: '-10%', width: '40%', height: '40%', borderRadius: '50%', bgcolor: 'primary.main', opacity: 0.05, filter: 'blur(100px)', pointerEvents: 'none' }} />
+      <Box sx={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '40%', height: '40%', borderRadius: '50%', bgcolor: 'success.main', opacity: 0.05, filter: 'blur(100px)', pointerEvents: 'none' }} />
 
-      <div className="max-w-4xl mx-auto px-6 pt-24 relative z-10">
-        <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
-          <ArrowLeft className="w-4 h-4" /> Back to Home
-        </Link>
+      <Container maxWidth="md" sx={{ pt: 12, position: 'relative', zIndex: 10 }}>
+        <Button 
+          component={Link} 
+          href="/" 
+          startIcon={<ArrowLeft size={16} />}
+          color="inherit"
+          sx={{ mb: 4, color: 'text.secondary', '&:hover': { color: 'text.primary', bgcolor: 'transparent' } }}
+        >
+          Back to Home
+        </Button>
         
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-          Frequently Asked <span className="bg-gradient-to-r from-blue-500 to-emerald-400 bg-clip-text text-transparent">Questions</span>
-        </h1>
-        <p className="text-lg text-muted-foreground mb-12">
+        <Typography variant="h3" component="h1" fontWeight="extrabold" sx={{ mb: 2 }}>
+          Frequently Asked <Typography component="span" variant="h3" fontWeight="extrabold" color="primary.main">Questions</Typography>
+        </Typography>
+        
+        <Typography variant="h6" color="text.secondary" sx={{ mb: 6, fontWeight: 'normal' }}>
           Everything you need to know about using RDCAD Express to its full potential.
-        </p>
+        </Typography>
 
-        <div className="space-y-4">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {faqs.map((faq, idx) => (
-            <details key={idx} className="group bg-card border border-border rounded-xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg hover:bg-muted/50 transition-colors">
-                {faq.question}
-                <ChevronDown className="w-5 h-5 text-muted-foreground group-open:-rotate-180 transition-transform duration-300" />
-              </summary>
-              <div className="p-6 pt-0 text-muted-foreground leading-relaxed border-t border-border/50 bg-muted/20">
-                {faq.answer}
-              </div>
-            </details>
+            <Accordion key={idx} variant="outlined" sx={{ borderRadius: 2, '&:before': { display: 'none' } }}>
+              <AccordionSummary
+                expandIcon={<ChevronDown size={20} />}
+                sx={{ p: 3, '& .MuiAccordionSummary-content': { my: 0 } }}
+              >
+                <Typography variant="h6" fontWeight="bold">{faq.question}</Typography>
+              </AccordionSummary>
+              <AccordionDetails sx={{ px: 3, pb: 3, pt: 0 }}>
+                <Typography color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                  {faq.answer}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
           ))}
-        </div>
+        </Box>
         
-        <div className="mt-16 p-8 bg-card border border-border rounded-2xl text-center shadow-lg">
-          <h2 className="text-2xl font-bold mb-4">Still have questions?</h2>
-          <p className="text-muted-foreground mb-6">Read our step-by-step startup guide to learn the workflow in detail.</p>
-          <Link href="/guide" className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full font-semibold transition-all">
-            Read Startup Guide
-          </Link>
-        </div>
-      </div>
-    </div>
+        <Card variant="outlined" sx={{ mt: 8, textAlign: 'center', p: { xs: 4, md: 6 }, borderRadius: 4, boxShadow: 4 }}>
+          <CardContent>
+            <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>
+              Still have questions?
+            </Typography>
+            <Typography color="text.secondary" sx={{ mb: 4 }}>
+              Read our step-by-step startup guide to learn the workflow in detail.
+            </Typography>
+            <Button 
+              component={Link} 
+              href="/guide" 
+              variant="contained" 
+              size="large"
+              color="primary"
+              sx={{ borderRadius: 8, px: 4, py: 1.5 }}
+            >
+              Read Startup Guide
+            </Button>
+          </CardContent>
+        </Card>
+      </Container>
+    </Box>
   );
 }
