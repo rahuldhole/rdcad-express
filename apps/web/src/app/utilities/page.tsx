@@ -90,16 +90,13 @@ export default function GridUtilities() {
  const Text = KonvaComps?.Text;
 
  return (
- <div className="p-4 md:p-8 pt-4">
+ <div className="min-h-screen bg-background text-foreground p-4 md:p-8 pt-4">
  <div className="max-w-7xl mx-auto space-y-4">
- <header className="pb-4 border-b border-border">
+ <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-4 border-b border-border">
  <div>
- <h1 className="text-2xl font-bold text-foreground">Grid & Label Utilities</h1>
- <p className="text-muted-foreground mt-1 text-sm">Place auto-incrementing text labels and bulk replace</p>
+ <h1 className="text-2xl font-bold text-foreground">Drafting Utilities</h1>
+ <p className="text-sm text-muted-foreground mt-1">Smart tools for auto-numbering and finding text</p>
  </div>
- <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
- <Download className="w-4 h-4" /> Export Labels to DXF
- </button>
  </header>
 
  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -139,7 +136,8 @@ export default function GridUtilities() {
  </button>
  </div>
 
- <div className="md:col-span-2 bg-card rounded border border-border flex items-center justify-center relative overflow-hidden" style={{ minHeight: "600px", cursor: "crosshair" }}>
+ <div className="md:col-span-2 flex flex-col gap-4">
+ <div className="bg-card rounded border border-border flex items-center justify-center relative overflow-hidden" style={{ minHeight: "600px", cursor: "crosshair" }}>
  <div className="absolute top-4 left-4 text-xs font-mono text-muted-foreground bg-background px-2 py-1 rounded z-10 pointer-events-none">Interactive Schematic (Click to place)</div>
  {Stage && (
  <Stage width={800} height={600} onClick={handleCanvasClick}>
@@ -160,6 +158,12 @@ export default function GridUtilities() {
  </Layer>
  </Stage>
  )}
+ </div>
+ <div className="flex flex-wrap items-center justify-end gap-2 mt-2">
+ <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+ <Download className="w-4 h-4" /> <span className="hidden sm:inline text-sm font-medium">Export Labels to DXF</span>
+ </button>
+ </div>
  </div>
  </div>
  </div>

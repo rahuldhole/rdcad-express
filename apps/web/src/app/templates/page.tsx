@@ -27,11 +27,8 @@ export default function TemplatesDetailing() {
  <header className="pb-4 border-b border-border">
  <div>
  <h1 className="text-2xl font-bold text-foreground">Drawing Templates</h1>
- <p className="text-muted-foreground mt-1 text-sm">Generate standard title blocks and sheet borders</p>
+ <p className="text-sm text-muted-foreground mt-1">Generate standard title blocks and sheet borders</p>
  </div>
- <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
- <Download className="w-4 h-4" /> Export DXF
- </button>
  </header>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -71,6 +68,11 @@ export default function TemplatesDetailing() {
  <label className="block text-sm text-muted-foreground mb-1">Date</label>
  <input type="date" value={templateData.date} onChange={e => setTemplateData({...templateData, date: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
+ </div>
+ <div className="flex flex-wrap items-center justify-end gap-2 mt-4 pt-4 border-t border-border">
+ <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+ <Download className="w-4 h-4" /> <span className="hidden sm:inline text-sm font-medium">Export DXF</span>
+ </button>
  </div>
  </div>
 

@@ -111,37 +111,17 @@ export default function BBSGenerator() {
  }, [rows]);
 
  return (
- <div className="min-h-screen bg-background text-foreground p-8">
+ <div className="min-h-screen bg-background text-foreground p-4 md:p-8 pt-4">
  <div className="max-w-7xl mx-auto space-y-4">
- <header className="flex flex-col md:flex-row md:items-center md:justify-between items-start gap-4 pb-6 border-b border-border">
+ <header className="flex flex-col md:flex-row md:items-center md:justify-between items-start gap-4 pb-4 border-b border-border">
  <div>
- <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent flex items-center gap-3">
- <Table2 className="w-8 h-8 text-primary" />
+ <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent flex items-center gap-3">
+ <Table2 className="w-6 h-6 text-primary" />
  Bar Bending Schedule (BBS)
  </h1>
  <p className="text-muted-foreground mt-1 text-sm">Real-time parametric rebar weight calculations</p>
  </div>
  
- <div className="flex gap-4">
- <button 
- onClick={handleExportCSV}
- className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-muted transition rounded-lg border border-border"
- >
- <Download className="w-4 h-4" /> Export CSV
- </button>
- <button 
- onClick={handleExportExcel}
- className="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-600 transition rounded-lg border border-green-600 dark:border-green-400 text-foreground shadow-lg shadow-green-900/20"
- >
- <FileSpreadsheet className="w-4 h-4" /> Export Excel
- </button>
- <button 
- onClick={handleAddRow}
- className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary transition rounded-lg font-medium shadow-lg shadow-blue-500/20"
- >
- <Plus className="w-4 h-4" /> Add Row
- </button>
- </div>
  </header>
 
  <div className="bg-card rounded-xl border border-border overflow-hidden shadow-2xl">
@@ -230,7 +210,8 @@ export default function BBSGenerator() {
  </table>
  </div>
  
- <div className="bg-background/80 p-6 border-t border-border flex justify-between items-center">
+ <div className="bg-background/80 p-6 border-t border-border flex flex-col gap-4">
+ <div className="flex justify-between items-center">
  <div className="text-muted-foreground text-sm">
  * Weight calculation is based on standard formula (D²/162.2) × L × Qty.
  </div>
@@ -239,6 +220,27 @@ export default function BBSGenerator() {
  <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 tracking-tight">
  {(totalTonnage / 1000).toFixed(3)} <span className="text-xl text-emerald-700 dark:text-emerald-500/50">MT</span>
  </span>
+ </div>
+ </div>
+ <div className="flex flex-wrap justify-end gap-2 pt-4 border-t border-border">
+ <button 
+ onClick={handleExportCSV}
+ className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-muted transition rounded-lg border border-border"
+ >
+ <Download className="w-4 h-4" /> <span className="hidden sm:inline">Export CSV</span>
+ </button>
+ <button 
+ onClick={handleExportExcel}
+ className="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-600 transition rounded-lg border border-green-600 dark:border-green-400 text-foreground shadow-lg shadow-green-900/20"
+ >
+ <FileSpreadsheet className="w-4 h-4" /> <span className="hidden sm:inline">Export Excel</span>
+ </button>
+ <button 
+ onClick={handleAddRow}
+ className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary transition rounded-lg font-medium shadow-lg shadow-blue-500/20"
+ >
+ <Plus className="w-4 h-4" /> <span className="hidden sm:inline">Add Row</span>
+ </button>
  </div>
  </div>
  </div>
