@@ -43,12 +43,12 @@ export default function ColumnDetailing() {
   };
 
  return (
- <div className="p-8">
- <div className="max-w-7xl mx-auto space-y-8">
- <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-border">
+ <div className="p-4 md:p-8 pt-4">
+ <div className="max-w-7xl mx-auto space-y-4">
+ <header className="pb-4 border-b border-border">
  <div>
- <h1 className="text-3xl font-bold text-foreground">Column Detailing</h1>
- <p className="text-muted-foreground mt-2">Parametric column sections with real-time 2D preview</p>
+ <h1 className="text-2xl font-bold text-foreground">Column Detailing</h1>
+ <p className="text-muted-foreground mt-1 text-sm">Parametric column sections with real-time 2D preview</p>
  </div>
  
  </header>

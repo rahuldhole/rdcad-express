@@ -112,14 +112,14 @@ export default function BBSGenerator() {
 
  return (
  <div className="min-h-screen bg-background text-foreground p-8">
- <div className="max-w-7xl mx-auto space-y-8">
+ <div className="max-w-7xl mx-auto space-y-4">
  <header className="flex flex-col md:flex-row md:items-center md:justify-between items-start gap-4 pb-6 border-b border-border">
  <div>
  <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent flex items-center gap-3">
  <Table2 className="w-8 h-8 text-primary" />
  Bar Bending Schedule (BBS)
  </h1>
- <p className="text-muted-foreground mt-2">Real-time parametric rebar weight calculations</p>
+ <p className="text-muted-foreground mt-1 text-sm">Real-time parametric rebar weight calculations</p>
  </div>
  
  <div className="flex gap-4">

@@ -66,12 +66,12 @@ export default function AssetLibrary() {
   };
 
   return (
-    <div className="p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="p-4 md:p-8 pt-4">
+      <div className="max-w-7xl mx-auto space-y-4">
         <header className="flex flex-col md:flex-row md:justify-between md:items-end pb-6 border-b border-border gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Architectural Asset Library</h1>
-            <p className="text-muted-foreground mt-2">Browse and download standard DXF blocks for your drawings.</p>
+            <h1 className="text-2xl font-bold text-foreground">Architectural Asset Library</h1>
+            <p className="text-muted-foreground mt-1 text-sm">Browse and download standard DXF blocks for your drawings.</p>
           </div>
           <div className="relative w-full md:w-64">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />

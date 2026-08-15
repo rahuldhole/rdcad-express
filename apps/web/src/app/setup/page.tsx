@@ -5,12 +5,12 @@ import { Download, Terminal } from "lucide-react";
 
 export default function DownloadPage() {
  return (
- <div className="p-8">
+ <div className="p-4 md:p-8 pt-4">
  <div className="max-w-4xl mx-auto space-y-8">
- <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-border">
+ <header className="pb-4 border-b border-border">
  <div>
- <h1 className="text-3xl font-bold text-foreground">AutoCAD Integration</h1>
- <p className="text-muted-foreground mt-2">Bridge the gap between RDCAD Express and your local AutoCAD environment.</p>
+ <h1 className="text-2xl font-bold text-foreground">AutoCAD Integration</h1>
+ <p className="text-muted-foreground mt-1 text-sm">Bridge the gap between RDCAD Express and your local AutoCAD environment.</p>
  </div>
  <a 
  href="/rdcad-import.lsp" 

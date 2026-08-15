@@ -90,12 +90,12 @@ export default function GridUtilities() {
  const Text = KonvaComps?.Text;
 
  return (
- <div className="p-8">
- <div className="max-w-7xl mx-auto space-y-8">
- <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-border">
+ <div className="p-4 md:p-8 pt-4">
+ <div className="max-w-7xl mx-auto space-y-4">
+ <header className="pb-4 border-b border-border">
  <div>
- <h1 className="text-3xl font-bold text-foreground">Grid & Label Utilities</h1>
- <p className="text-muted-foreground mt-2">Place auto-incrementing text labels and bulk replace</p>
+ <h1 className="text-2xl font-bold text-foreground">Grid & Label Utilities</h1>
+ <p className="text-muted-foreground mt-1 text-sm">Place auto-incrementing text labels and bulk replace</p>
  </div>
  <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
  <Download className="w-4 h-4" /> Export Labels to DXF

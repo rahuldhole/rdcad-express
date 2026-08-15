@@ -75,12 +75,12 @@ export default function ProjectDashboard() {
 
  return (
  <div className="p-4 md:p-8">
- <div className="max-w-7xl mx-auto space-y-8">
+ <div className="max-w-7xl mx-auto space-y-4">
  {/* Header */}
- <header className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 pb-6 border-b border-border">
+ <header className="pb-4 border-b border-border">
  <div>
- <h1 className="text-3xl font-bold text-foreground">Project Dashboard</h1>
- <p className="text-muted-foreground mt-2">
+ <h1 className="text-2xl font-bold text-foreground">Project Dashboard</h1>
+ <p className="text-muted-foreground mt-1 text-sm">
  {projectItems.length === 0 
  ? "Configure structural elements, then add them here for batch export." 
  : `${projectItems.length} element${projectItems.length > 1 ? 's' : ''} · ${(totalSize / 1024).toFixed(1)} KB total`}
