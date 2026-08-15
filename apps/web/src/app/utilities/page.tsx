@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Download, Search } from "lucide-react";
 import { exportTextNodesToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
+import { useTheme } from "next-themes";
 
 type TextNode = {
  id: string;
@@ -13,6 +14,7 @@ type TextNode = {
 };
 
 export default function GridUtilities() {
+ const { resolvedTheme } = useTheme();
  const nodes = useAppStore(state => state.nodes);
  const setNodes = useAppStore(state => state.setNodes);
  const prefix = useAppStore(state => state.prefix);
@@ -149,7 +151,7 @@ export default function GridUtilities() {
  x={node.x}
  y={node.y}
  fontSize={24}
- fill="#e2e8f0"
+ fill={resolvedTheme === 'dark' ? "#e2e8f0" : "#0f172a"}
  draggable
  // eslint-disable-next-line @typescript-eslint/no-explicit-any
  onDragEnd={(e: any) => handleDragEnd(e, node.id)}
