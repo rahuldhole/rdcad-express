@@ -70,7 +70,7 @@ export default function ProjectModal() {
  <div className="p-6 space-y-4">
  {showSuccess ? (
  <div className="flex flex-col items-center justify-center py-6 space-y-3">
- <CheckCircle className="w-16 h-16 text-emerald-500" />
+ <CheckCircle className="w-16 h-16 text-emerald-700 dark:text-emerald-500" />
  <p className="text-lg font-medium text-foreground">
  {existingItem ? "Updated in Project!" : "Added to Project!"}
  </p>
@@ -103,7 +103,7 @@ export default function ProjectModal() {
  type="text" 
  value={name}
  onChange={(e) => setName(e.target.value)}
- className="flex-1 bg-background border border-border rounded-l-lg px-4 py-3 text-foreground focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition font-mono text-sm"
+ className="flex-1 bg-background border border-border rounded-l-lg px-4 py-3 text-foreground focus:outline-none focus:border-blue-700 dark:border-blue-500 focus:ring-1 focus:ring-blue-500 transition font-mono text-sm"
  placeholder={projectModalData.defaultName}
  autoFocus
  onKeyDown={(e) => {
@@ -117,7 +117,7 @@ export default function ProjectModal() {
 
  {/* Duplicate warning */}
  {existingItem && (
- <div className="flex items-start gap-2 p-3 rounded-lg bg-amber-900/20 border border-amber-500/20 text-amber-300 text-sm">
+ <div className="flex items-start gap-2 p-3 rounded-lg bg-amber-900/20 border border-amber-500/20 text-amber-500 dark:text-amber-300 text-sm">
  <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
  <span>An item named <strong>{existingItem.name}.dxf</strong> already exists. It will be replaced with the new version.</span>
  </div>

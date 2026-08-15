@@ -68,16 +68,16 @@ export default function SlabDetailing() {
  <div className="grid grid-cols-2 gap-4">
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Mark</label>
- <input type="text" value={slabData.slabId} onChange={e => setSlabData({...slabData, slabId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={slabData.slabId} onChange={e => setSlabData({...slabData, slabId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div />
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Lx (mm)</label>
- <input type="number" value={slabData.lx} onChange={e => setSlabData({...slabData, lx: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={slabData.lx} onChange={e => setSlabData({...slabData, lx: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Ly (mm)</label>
- <input type="number" value={slabData.ly} onChange={e => setSlabData({...slabData, ly: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={slabData.ly} onChange={e => setSlabData({...slabData, ly: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  </div>
  </div>

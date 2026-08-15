@@ -48,7 +48,7 @@ export function PwaInstallButton() {
 
  if (isInstalled) {
  return (
- <div className="flex items-center gap-2 px-6 py-3 bg-emerald-500/10 text-emerald-400 rounded-full font-semibold border border-emerald-500/20 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]">
+ <div className="flex items-center gap-2 px-6 py-3 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full font-semibold border border-emerald-500/20 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]">
  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
  Installed Desktop App
  </div>

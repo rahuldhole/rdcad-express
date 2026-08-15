@@ -47,8 +47,8 @@ export default function Navbar() {
  href={link.href} 
  className={`flex items-center gap-1.5 text-sm font-medium transition whitespace-nowrap ${
  pathname === link.href ? "text-foreground" : 
- link.isSpecial ? "text-primary hover:text-blue-300" : 
- link.isBeta ? "text-emerald-500/70 hover:text-emerald-400" : 
+ link.isSpecial ? "text-primary hover:text-blue-500 dark:hover:text-blue-300" : 
+ link.isBeta ? "text-emerald-700 dark:text-emerald-500/70 hover:text-emerald-600 dark:hover:text-emerald-400" : 
  "text-muted-foreground hover:text-foreground"
  }`}
  >
@@ -100,7 +100,7 @@ export default function Navbar() {
  className={`flex items-center justify-between px-4 py-3 rounded-lg transition ${
  pathname === link.href ? "bg-muted text-foreground" : 
  link.isSpecial ? "text-primary hover:bg-muted/50" : 
- link.isBeta ? "text-emerald-500 hover:bg-muted/50" : 
+ link.isBeta ? "text-emerald-700 dark:text-emerald-500 hover:bg-muted/50" : 
  "text-muted-foreground hover:bg-muted hover:text-foreground"
  }`}
  >

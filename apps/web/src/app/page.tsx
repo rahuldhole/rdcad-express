@@ -13,7 +13,7 @@ export default function MarketingPage() {
 
  {/* Hero Section */}
  <section className="relative pt-32 pb-20 px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
- <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/80 /80 border border-slate-200 text-sm font-medium text-primary dark:text-primary mb-8 backdrop-blur-sm transition-colors">
+ <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/80 /80 border border-slate-400 dark:border-slate-200 text-sm font-medium text-primary dark:text-primary mb-8 backdrop-blur-sm transition-colors">
  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
  RDCAD Express Open Source
  </div>
@@ -40,7 +40,7 @@ export default function MarketingPage() {
  </div>
  <div className="mt-8">
  <a href="https://github.com/rahuldhole/rdcad-express/issues" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground dark:hover:text-foreground transition flex items-center gap-2">
- Found a bug or have a suggestion? <span className="text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 underline decoration-red-400/30 underline-offset-4">Report an Issue</span>
+ Found a bug or have a suggestion? <span className="text-red-700 dark:text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-400 dark:hover:text-red-300 underline decoration-red-400/30 underline-offset-4">Report an Issue</span>
  </a>
  </div>
  </section>
@@ -49,7 +49,7 @@ export default function MarketingPage() {
  <section className="py-24 px-8 border-t border-slate-900/50 bg-card/20 relative z-10">
  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
  <div className="flex-1 space-y-6">
- <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-semibold tracking-wide uppercase">
+ <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-semibold tracking-wide uppercase">
  Workflow Upgrade
  </div>
  <h2 className="text-3xl md:text-5xl font-bold">Seamless AutoCAD Integration</h2>
@@ -58,15 +58,15 @@ export default function MarketingPage() {
  </p>
  <ul className="space-y-4 text-foreground">
  <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">✓</div>
+ <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</div>
  Instantly imports your most recent download
  </li>
  <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">✓</div>
+ <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</div>
  Attaches block to cursor for immediate placement
  </li>
  <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">✓</div>
+ <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</div>
  No file-browser navigation required
  </li>
  </ul>
@@ -86,7 +86,7 @@ export default function MarketingPage() {
  <span className="ml-2">AutoCAD Command Line</span>
  </div>
  <div className="font-mono text-sm space-y-2">
- <div className="text-muted-foreground">Command: <span className="text-emerald-400">RDCAD_IMPORT</span></div>
+ <div className="text-muted-foreground">Command: <span className="text-emerald-600 dark:text-emerald-400">RDCAD_IMPORT</span></div>
  <div className="text-muted-foreground">Importing: C:\Users\Engineer\Downloads\Beam_B1_300x450.dxf</div>
  <div className="text-muted-foreground">Specify insertion point or [Basepoint/Scale/X/Y/Z/Rotate]:</div>
  <div className="text-primary flex items-center gap-2 mt-4 animate-pulse">
@@ -101,7 +101,7 @@ export default function MarketingPage() {
  <section className="py-24 px-8 border-t border-slate-900/50 bg-background relative z-10">
  <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
  <div className="flex-1 space-y-6">
- <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm font-semibold tracking-wide uppercase">
+ <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-sm font-semibold tracking-wide uppercase">
  Quality Assured
  </div>
  <h2 className="text-3xl md:text-5xl font-bold">Tested & Reliable Core</h2>
@@ -110,15 +110,15 @@ export default function MarketingPage() {
  </p>
  <ul className="space-y-4 text-foreground">
  <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">✓</div>
+ <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-600 dark:text-rose-400">✓</div>
  Rigorous testing for accurate BBS calculations
  </li>
  <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">✓</div>
+ <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-600 dark:text-rose-400">✓</div>
  Automated validation of generated DXF structural integrity
  </li>
  <li className="flex items-center gap-3">
- <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">✓</div>
+ <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-600 dark:text-rose-400">✓</div>
  Deterministic outputs across different environments
  </li>
  </ul>
@@ -131,8 +131,8 @@ export default function MarketingPage() {
  <span className="ml-2">vitest run</span>
  </div>
  <div className="font-mono text-sm space-y-2">
- <div className="text-emerald-400">✓ packages/core-math/src/index.test.ts (8 tests)</div>
- <div className="text-emerald-400">✓ packages/dxf-exporter/src/index.test.ts (5 tests)</div>
+ <div className="text-emerald-600 dark:text-emerald-400">✓ packages/core-math/src/index.test.ts (8 tests)</div>
+ <div className="text-emerald-600 dark:text-emerald-400">✓ packages/dxf-exporter/src/index.test.ts (5 tests)</div>
  <div className="text-muted-foreground mt-4">Test Files 2 passed (2)</div>
  <div className="text-muted-foreground">Tests 13 passed (13)</div>
  <div className="text-muted-foreground">Duration 843ms</div>
@@ -157,55 +157,55 @@ export default function MarketingPage() {
  link="/bbs"
  />
  <FeatureCard 
- icon={<Layers className="w-8 h-8 text-emerald-400" />}
+ icon={<Layers className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />}
  title="Beam Detailing"
  description="Generate detailed beam reinforcements and exports."
  link="/beam"
  />
  <FeatureCard 
- icon={<Cpu className="w-8 h-8 text-purple-400" />}
+ icon={<Cpu className="w-8 h-8 text-purple-600 dark:text-purple-400" />}
  title="Column Detailing"
  description="Automated column schedules and link calculations."
  link="/column"
  />
  <FeatureCard 
- icon={<Compass className="w-8 h-8 text-amber-400" />}
+ icon={<Compass className="w-8 h-8 text-amber-600 dark:text-amber-400" />}
  title="Foundation"
  description="Isolated footing calculations and base detailing."
  link="/foundation"
  />
  <FeatureCard 
- icon={<Layers className="w-8 h-8 text-rose-400" />}
+ icon={<Layers className="w-8 h-8 text-rose-600 dark:text-rose-400" />}
  title="Slab Detailing"
  description="Two-way and one-way slab reinforcement generation."
  link="/slab"
  />
  <FeatureCard 
- icon={<Code className="w-8 h-8 text-cyan-400" />}
+ icon={<Code className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />}
  title="Tank Detailing"
  description="Water tank structural components and drawings."
  link="/tank"
  />
  <FeatureCard 
- icon={<Layers className="w-8 h-8 text-orange-400" />}
+ icon={<Layers className="w-8 h-8 text-orange-600 dark:text-orange-400" />}
  title="Stairs Detailing"
  description="Parametric dog-legged stair reinforcements and profiles."
  link="/stairs"
  />
  <FeatureCard 
- icon={<Code className="w-8 h-8 text-indigo-400" />}
+ icon={<Code className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />}
  title="Grid Utils"
  description="Drafting utilities for grids, elevations, and revisions."
  link="/utilities"
  />
  <FeatureCard 
- icon={<Compass className="w-8 h-8 text-pink-400" />}
+ icon={<Compass className="w-8 h-8 text-pink-600 dark:text-pink-400" />}
  title="Asset Library"
  description="Pre-built CAD blocks for architecture and plumbing."
  link="/library"
  />
  <FeatureCard 
- icon={<Cpu className="w-8 h-8 text-teal-400" />}
+ icon={<Cpu className="w-8 h-8 text-teal-600 dark:text-teal-400" />}
  title="Templates"
  description="Standardized title blocks and project templates."
  link="/templates"
@@ -226,15 +226,15 @@ export default function MarketingPage() {
  <div className="flex flex-col gap-4">
  <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-border">
  <span className="text-sm text-muted-foreground">Beam Detail B1</span>
- <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded">Ready</span>
+ <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded">Ready</span>
  </div>
  <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-border">
  <span className="text-sm text-muted-foreground">Column Schedule C1-C4</span>
- <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded">Ready</span>
+ <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded">Ready</span>
  </div>
  <div className="mt-2 flex gap-3">
  <div className="flex-1 h-10 bg-primary/20 border border-blue-500/30 rounded flex items-center justify-center text-primary text-xs font-bold transition hover:bg-primary/30 cursor-pointer">GENERATE REPORT</div>
- <div className="flex-1 h-10 bg-emerald-600/20 border border-emerald-500/30 rounded flex items-center justify-center text-emerald-400 text-xs font-bold transition hover:bg-emerald-600/30 cursor-pointer">EXPORT ALL DXF</div>
+ <div className="flex-1 h-10 bg-emerald-600/20 border border-emerald-500/30 rounded flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xs font-bold transition hover:bg-emerald-600/30 cursor-pointer">EXPORT ALL DXF</div>
  </div>
  </div>
  </div>
@@ -303,7 +303,7 @@ export default function MarketingPage() {
  <a href="https://github.com/rahuldhole/rdcad-express/issues/new" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-muted hover:bg-background text-foreground rounded-full font-bold transition-all shadow-lg hover:scale-105">
  Report an Issue Now
  </a>
- <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-border hover:border-slate-600 text-foreground rounded-full font-bold transition-all hover:bg-muted">
+ <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-border hover:border-slate-600 dark:hover:border-slate-400 text-foreground rounded-full font-bold transition-all hover:bg-muted">
  Explore Repository
  </a>
  </div>

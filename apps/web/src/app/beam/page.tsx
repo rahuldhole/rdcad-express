@@ -69,24 +69,24 @@ export default function BeamDetailing() {
  <div className="grid grid-cols-2 gap-4">
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Mark</label>
- <input type="text" value={beamData.elementId} onChange={e => setBeamData({...beamData, elementId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={beamData.elementId} onChange={e => setBeamData({...beamData, elementId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div />
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Width (mm)</label>
- <input type="number" value={beamData.width} onChange={e => setBeamData({...beamData, width: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={beamData.width} onChange={e => setBeamData({...beamData, width: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Depth (mm)</label>
- <input type="number" value={beamData.depth} onChange={e => setBeamData({...beamData, depth: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={beamData.depth} onChange={e => setBeamData({...beamData, depth: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Bottom Bars Count</label>
- <input type="number" value={beamData.bottomBarCount} onChange={e => setBeamData({...beamData, bottomBarCount: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={beamData.bottomBarCount} onChange={e => setBeamData({...beamData, bottomBarCount: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Bottom Bar Dia (mm)</label>
- <input type="number" value={beamData.bottomBarDia} onChange={e => setBeamData({...beamData, bottomBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={beamData.bottomBarDia} onChange={e => setBeamData({...beamData, bottomBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  </div>
  </div>

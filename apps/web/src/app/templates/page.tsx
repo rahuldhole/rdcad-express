@@ -43,7 +43,7 @@ export default function TemplatesDetailing() {
  <select 
  value={templateData.sheetSize} 
  onChange={e => setTemplateData({...templateData, sheetSize: e.target.value as 'A1' | 'A2' | 'A3'})} 
- className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500"
+ className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500"
  >
  <option value="A1">A1 (841 x 594)</option>
  <option value="A2">A2 (594 x 420)</option>
@@ -53,23 +53,23 @@ export default function TemplatesDetailing() {
  <div />
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Project Name</label>
- <input type="text" value={templateData.projectName} onChange={e => setTemplateData({...templateData, projectName: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={templateData.projectName} onChange={e => setTemplateData({...templateData, projectName: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Client Name</label>
- <input type="text" value={templateData.clientName} onChange={e => setTemplateData({...templateData, clientName: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={templateData.clientName} onChange={e => setTemplateData({...templateData, clientName: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Drawing Title</label>
- <input type="text" value={templateData.drawingTitle} onChange={e => setTemplateData({...templateData, drawingTitle: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={templateData.drawingTitle} onChange={e => setTemplateData({...templateData, drawingTitle: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Drawn By</label>
- <input type="text" value={templateData.drawnBy} onChange={e => setTemplateData({...templateData, drawnBy: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={templateData.drawnBy} onChange={e => setTemplateData({...templateData, drawnBy: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Date</label>
- <input type="date" value={templateData.date} onChange={e => setTemplateData({...templateData, date: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="date" value={templateData.date} onChange={e => setTemplateData({...templateData, date: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  </div>
  </div>

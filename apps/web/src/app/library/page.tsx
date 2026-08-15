@@ -79,7 +79,7 @@ export default function AssetLibrary() {
  placeholder="Search assets..." 
  value={search}
  onChange={(e) => setSearch(e.target.value)}
- className="w-full bg-card border border-border rounded-md pl-10 pr-4 py-2 text-sm text-foreground focus:border-blue-500 outline-none"
+ className="w-full bg-card border border-border rounded-md pl-10 pr-4 py-2 text-sm text-foreground focus:border-blue-700 dark:border-blue-500 outline-none"
  />
  </div>
  </header>

@@ -131,7 +131,7 @@ export default function BBSGenerator() {
  </button>
  <button 
  onClick={handleExportExcel}
- className="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-600 transition rounded-lg border border-green-600 text-foreground shadow-lg shadow-green-900/20"
+ className="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-600 transition rounded-lg border border-green-600 dark:border-green-400 text-foreground shadow-lg shadow-green-900/20"
  >
  <FileSpreadsheet className="w-4 h-4" /> Export Excel
  </button>
@@ -169,7 +169,7 @@ export default function BBSGenerator() {
  type="text" 
  value={row.elementMark} 
  onChange={(e) => handleChange(idx, "elementMark", e.target.value)}
- className="w-full bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-500 focus:outline-none transition"
+ className="w-full bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-700 dark:border-blue-500 focus:outline-none transition"
  />
  </td>
  <td className="p-3">
@@ -177,7 +177,7 @@ export default function BBSGenerator() {
  type="text" 
  value={row.shapeCode} 
  onChange={(e) => handleChange(idx, "shapeCode", e.target.value)}
- className="w-20 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-500 focus:outline-none transition"
+ className="w-20 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-700 dark:border-blue-500 focus:outline-none transition"
  />
  </td>
  <td className="p-3">
@@ -185,7 +185,7 @@ export default function BBSGenerator() {
  type="number" 
  value={row.diameter} 
  onChange={(e) => handleChange(idx, "diameter", parseFloat(e.target.value) || 0)}
- className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-500 focus:outline-none transition"
+ className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-700 dark:border-blue-500 focus:outline-none transition"
  />
  </td>
  <td className="p-3">
@@ -193,7 +193,7 @@ export default function BBSGenerator() {
  type="number" 
  value={row.numberOfMembers} 
  onChange={(e) => handleChange(idx, "numberOfMembers", parseFloat(e.target.value) || 0)}
- className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-500 focus:outline-none transition"
+ className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-700 dark:border-blue-500 focus:outline-none transition"
  />
  </td>
  <td className="p-3">
@@ -201,7 +201,7 @@ export default function BBSGenerator() {
  type="number" 
  value={row.barsPerMember} 
  onChange={(e) => handleChange(idx, "barsPerMember", parseFloat(e.target.value) || 0)}
- className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-500 focus:outline-none transition"
+ className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-700 dark:border-blue-500 focus:outline-none transition"
  />
  </td>
  <td className="p-3">
@@ -209,16 +209,16 @@ export default function BBSGenerator() {
  type="number" 
  value={row.cuttingLength} 
  onChange={(e) => handleChange(idx, "cuttingLength", parseFloat(e.target.value) || 0)}
- className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-500 focus:outline-none transition"
+ className="w-24 bg-background/50 border border-border rounded px-3 py-2 text-sm focus:border-blue-700 dark:border-blue-500 focus:outline-none transition"
  />
  </td>
- <td className="p-3 text-right font-mono text-emerald-400">
+ <td className="p-3 text-right font-mono text-emerald-600 dark:text-emerald-400">
  {calculatedWeight.toFixed(2)}
  </td>
  <td className="p-3 text-center">
  <button 
  onClick={() => handleRemoveRow(idx)}
- className="p-2 text-muted-foreground hover:text-red-400 hover:bg-red-400/10 rounded transition opacity-0 group-hover:opacity-100"
+ className="p-2 text-muted-foreground hover:text-red-600 dark:hover:text-red-400 hover:bg-red-400/10 rounded transition opacity-0 group-hover:opacity-100"
  >
  <Trash2 className="w-4 h-4" />
  </button>
@@ -236,8 +236,8 @@ export default function BBSGenerator() {
  </div>
  <div className="flex items-center gap-4">
  <span className="text-muted-foreground">Total Steel Tonnage:</span>
- <span className="text-3xl font-bold text-emerald-400 tracking-tight">
- {(totalTonnage / 1000).toFixed(3)} <span className="text-xl text-emerald-500/50">MT</span>
+ <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 tracking-tight">
+ {(totalTonnage / 1000).toFixed(3)} <span className="text-xl text-emerald-700 dark:text-emerald-500/50">MT</span>
  </span>
  </div>
  </div>

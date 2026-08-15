@@ -17,7 +17,7 @@ export function ProtectedEmail() {
  return (
  <a 
  href={`mailto:${address}`} 
- className="text-primary hover:text-blue-300 font-medium transition-colors"
+ className="text-primary hover:text-blue-500 dark:hover:text-blue-300 font-medium transition-colors"
  >
  {address}
  </a>
@@ -27,7 +27,7 @@ export function ProtectedEmail() {
  return (
  <button 
  onClick={handleClick}
- className="text-primary hover:text-blue-300 font-medium transition-colors underline decoration-dashed underline-offset-4 bg-primary/10 px-2 py-0.5 rounded"
+ className="text-primary hover:text-blue-500 dark:hover:text-blue-300 font-medium transition-colors underline decoration-dashed underline-offset-4 bg-primary/10 px-2 py-0.5 rounded"
  >
  Click to reveal email
  </button>

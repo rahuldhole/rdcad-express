@@ -7,12 +7,12 @@ import Link from "next/link";
 import JSZip from "jszip";
 
 const elementPages = [
- { href: "/beam", label: "Beam", color: "text-emerald-400", bg: "bg-emerald-500/10 border-emerald-500/20" },
- { href: "/column", label: "Column", color: "text-purple-400", bg: "bg-purple-500/10 border-purple-500/20" },
- { href: "/slab", label: "Slab", color: "text-rose-400", bg: "bg-rose-500/10 border-rose-500/20" },
- { href: "/foundation", label: "Foundation", color: "text-amber-400", bg: "bg-amber-500/10 border-amber-500/20" },
- { href: "/tank", label: "Tank", color: "text-cyan-400", bg: "bg-cyan-500/10 border-cyan-500/20" },
- { href: "/stairs", label: "Stairs", color: "text-orange-400", bg: "bg-orange-500/10 border-orange-500/20" },
+ { href: "/beam", label: "Beam", color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-500/10 border-emerald-500/20" },
+ { href: "/column", label: "Column", color: "text-purple-600 dark:text-purple-400", bg: "bg-purple-500/10 border-purple-500/20" },
+ { href: "/slab", label: "Slab", color: "text-rose-600 dark:text-rose-400", bg: "bg-rose-500/10 border-rose-500/20" },
+ { href: "/foundation", label: "Foundation", color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-500/10 border-amber-500/20" },
+ { href: "/tank", label: "Tank", color: "text-cyan-600 dark:text-cyan-400", bg: "bg-cyan-500/10 border-cyan-500/20" },
+ { href: "/stairs", label: "Stairs", color: "text-orange-600 dark:text-orange-400", bg: "bg-orange-500/10 border-orange-500/20" },
 ];
 
 export default function ProjectDashboard() {
@@ -96,7 +96,7 @@ export default function ProjectDashboard() {
  </button>
  <button 
  onClick={() => { if (confirm("Remove all items from this project?")) clearProject(); }}
- className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium transition whitespace-nowrap bg-muted hover:bg-red-900/50 text-muted-foreground hover:text-red-400 border border-border hover:border-red-900/50"
+ className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium transition whitespace-nowrap bg-muted hover:bg-red-900/50 text-muted-foreground hover:text-red-600 dark:hover:text-red-400 border border-border hover:border-red-900/50"
  >
  <Trash2 className="w-4 h-4" /> Clear All
  </button>
@@ -153,14 +153,14 @@ export default function ProjectDashboard() {
  type="text"
  value={editName}
  onChange={e => setEditName(e.target.value)}
- className="flex-1 bg-background border border-blue-500 rounded px-3 py-1.5 text-sm text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-blue-500"
+ className="flex-1 bg-background border border-blue-700 dark:border-blue-500 rounded px-3 py-1.5 text-sm text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-blue-500"
  autoFocus
  onKeyDown={e => {
  if (e.key === "Enter") confirmRename(item.id);
  if (e.key === "Escape") setEditingId(null);
  }}
  />
- <button onClick={() => confirmRename(item.id)} className="text-emerald-400 hover:text-emerald-300 p-1"><Check className="w-4 h-4" /></button>
+ <button onClick={() => confirmRename(item.id)} className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 p-1"><Check className="w-4 h-4" /></button>
  <button onClick={() => setEditingId(null)} className="text-muted-foreground hover:text-foreground p-1"><X className="w-4 h-4" /></button>
  </div>
  ) : (
@@ -182,14 +182,14 @@ export default function ProjectDashboard() {
  </button>
  <button 
  onClick={() => handleExportSingle(item)}
- className="p-2 text-muted-foreground hover:text-emerald-400 hover:bg-muted rounded-lg transition"
+ className="p-2 text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-muted rounded-lg transition"
  title="Download this file"
  >
  <Download className="w-4 h-4" />
  </button>
  <button 
  onClick={() => removeFromProject(item.id)}
- className="p-2 text-muted-foreground hover:text-red-400 hover:bg-muted rounded-lg transition"
+ className="p-2 text-muted-foreground hover:text-red-600 dark:hover:text-red-400 hover:bg-muted rounded-lg transition"
  title="Remove from project"
  >
  <Trash2 className="w-4 h-4" />

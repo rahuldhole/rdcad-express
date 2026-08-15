@@ -68,40 +68,40 @@ export default function StairsDetailing() {
  <div className="grid grid-cols-2 gap-4">
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Mark</label>
- <input type="text" value={stairsData.stairId} onChange={e => setStairsData({...stairsData, stairId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={stairsData.stairId} onChange={e => setStairsData({...stairsData, stairId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div />
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Tread (mm)</label>
- <input type="number" value={stairsData.tread} onChange={e => setStairsData({...stairsData, tread: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.tread} onChange={e => setStairsData({...stairsData, tread: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Rise (mm)</label>
- <input type="number" value={stairsData.rise} onChange={e => setStairsData({...stairsData, rise: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.rise} onChange={e => setStairsData({...stairsData, rise: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">No. of Steps</label>
- <input type="number" value={stairsData.numberOfSteps} onChange={e => setStairsData({...stairsData, numberOfSteps: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.numberOfSteps} onChange={e => setStairsData({...stairsData, numberOfSteps: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Waist Slab Thk (mm)</label>
- <input type="number" value={stairsData.waistSlabThickness} onChange={e => setStairsData({...stairsData, waistSlabThickness: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.waistSlabThickness} onChange={e => setStairsData({...stairsData, waistSlabThickness: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Main Bar Dia (mm)</label>
- <input type="number" value={stairsData.mainBarDia} onChange={e => setStairsData({...stairsData, mainBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.mainBarDia} onChange={e => setStairsData({...stairsData, mainBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Main Bar Spacing (mm)</label>
- <input type="number" value={stairsData.mainBarSpacing} onChange={e => setStairsData({...stairsData, mainBarSpacing: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.mainBarSpacing} onChange={e => setStairsData({...stairsData, mainBarSpacing: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Dist Bar Dia (mm)</label>
- <input type="number" value={stairsData.distBarDia} onChange={e => setStairsData({...stairsData, distBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.distBarDia} onChange={e => setStairsData({...stairsData, distBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Dist Bar Spacing (mm)</label>
- <input type="number" value={stairsData.distBarSpacing} onChange={e => setStairsData({...stairsData, distBarSpacing: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={stairsData.distBarSpacing} onChange={e => setStairsData({...stairsData, distBarSpacing: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  </div>
  </div>

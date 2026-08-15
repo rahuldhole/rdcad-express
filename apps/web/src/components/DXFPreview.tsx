@@ -143,7 +143,7 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
  {isVisible && <div ref={containerRef} className="w-full h-full absolute inset-0" />}
  </div>
  {error && (
- <div className="absolute inset-0 flex items-center justify-center bg-card/80 text-red-500 z-30 font-medium p-4 text-center">
+ <div className="absolute inset-0 flex items-center justify-center bg-card/80 text-red-700 dark:text-red-500 z-30 font-medium p-4 text-center">
  Render Error: {error}
  </div>
  )}

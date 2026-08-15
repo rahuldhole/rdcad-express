@@ -69,23 +69,23 @@ export default function ColumnDetailing() {
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Mark</label>
- <input type="text" value={colData.columnId} onChange={e => setColData({...colData, columnId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={colData.columnId} onChange={e => setColData({...colData, columnId: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Width (mm)</label>
- <input type="number" value={colData.width ?? 400} onChange={e => setColData({...colData, width: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={colData.width ?? 400} onChange={e => setColData({...colData, width: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Depth (mm)</label>
- <input type="number" value={colData.depth ?? 400} onChange={e => setColData({...colData, depth: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={colData.depth ?? 400} onChange={e => setColData({...colData, depth: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Main Bar Count</label>
- <input type="number" value={colData.mainBarCount} onChange={e => setColData({...colData, mainBarCount: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={colData.mainBarCount} onChange={e => setColData({...colData, mainBarCount: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Main Bar Dia (mm)</label>
- <input type="number" value={colData.mainBarDia} onChange={e => setColData({...colData, mainBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={colData.mainBarDia} onChange={e => setColData({...colData, mainBarDia: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  </div>
  </div>

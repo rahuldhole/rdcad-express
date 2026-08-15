@@ -106,11 +106,11 @@ export default function GridUtilities() {
  <h3 className="text-xl font-bold border-b border-border pb-2">Auto-Numbering</h3>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Prefix</label>
- <input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Next Number</label>
- <input type="number" value={startNum} onChange={e => setStartNum(Number(e.target.value))} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="number" value={startNum} onChange={e => setStartNum(Number(e.target.value))} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <p className="text-xs text-muted-foreground">Click on the canvas to place &apos;{prefix}{startNum}&apos;</p>
  </div>
@@ -119,11 +119,11 @@ export default function GridUtilities() {
  <h3 className="text-xl font-bold border-b border-border pb-2">Find & Replace</h3>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Find Prefix/String</label>
- <input type="text" value={findText} onChange={e => setFindText(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={findText} onChange={e => setFindText(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Replace With</label>
- <input type="text" value={replaceText} onChange={e => setReplaceText(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-500" />
+ <input type="text" value={replaceText} onChange={e => setReplaceText(e.target.value)} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  <button onClick={handleReplace} className="w-full flex justify-center items-center gap-2 px-4 py-2 bg-primary hover:bg-primary rounded font-medium transition">
  <Search className="w-4 h-4" /> Replace All
@@ -132,7 +132,7 @@ export default function GridUtilities() {
  
 
  
- <button onClick={() => setNodes([])} className="w-full px-4 py-2 bg-red-900/50 hover:bg-red-900/80 text-red-400 rounded transition border border-red-900/50">
+ <button onClick={() => setNodes([])} className="w-full px-4 py-2 bg-red-900/50 hover:bg-red-900/80 text-red-600 dark:text-red-400 rounded transition border border-red-900/50">
  Clear Canvas
  </button>
  </div>

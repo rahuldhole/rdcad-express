@@ -42,10 +42,10 @@ export default function DownloadPage() {
  <span className="text-foreground">Download the script</span> using the button above.
  </li>
  <li>
- <span className="text-foreground">Drag and drop</span> the downloaded <code className="px-1.5 py-0.5 bg-muted rounded text-indigo-300">rdcad-import.lsp</code> file directly into your open AutoCAD window to load it for the current session.
+ <span className="text-foreground">Drag and drop</span> the downloaded <code className="px-1.5 py-0.5 bg-muted rounded text-indigo-500 dark:text-indigo-300">rdcad-import.lsp</code> file directly into your open AutoCAD window to load it for the current session.
  </li>
  <li>
- Type <code className="px-1.5 py-0.5 bg-muted rounded text-emerald-300">RDCAD_IMPORT</code> in the AutoCAD command line and press Enter.
+ Type <code className="px-1.5 py-0.5 bg-muted rounded text-emerald-500 dark:text-emerald-300">RDCAD_IMPORT</code> in the AutoCAD command line and press Enter.
  </li>
  <li>
  The newest `.dxf` file from your Downloads folder will instantly appear on your cursor. Click to place!
@@ -58,7 +58,7 @@ export default function DownloadPage() {
  <Terminal className="w-4 h-4" /> Pro Tip: Persistent Loading
  </div>
  <p className="text-sm text-muted-foreground">
- To avoid dragging and dropping the file every time you open AutoCAD, you can add it to your <strong>Startup Suite</strong>. Type <code className="px-1.5 py-0.5 bg-muted rounded text-foreground">APPLOAD</code> in AutoCAD, click the &quot;Contents...&quot; button under the Startup Suite section, and add the <code className="px-1.5 py-0.5 bg-muted rounded text-indigo-300">rdcad-import.lsp</code> file there.
+ To avoid dragging and dropping the file every time you open AutoCAD, you can add it to your <strong>Startup Suite</strong>. Type <code className="px-1.5 py-0.5 bg-muted rounded text-foreground">APPLOAD</code> in AutoCAD, click the &quot;Contents...&quot; button under the Startup Suite section, and add the <code className="px-1.5 py-0.5 bg-muted rounded text-indigo-500 dark:text-indigo-300">rdcad-import.lsp</code> file there.
  </p>
  </div>
  </div>
