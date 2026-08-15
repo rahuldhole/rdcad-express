@@ -68,13 +68,6 @@ export default function Navbar() {
  </span>
  )}
  </Link>
- <Link 
- href="/setup" 
- className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 bg-primary hover:bg-indigo-500 text-primary-foreground rounded transition shadow-lg shadow-indigo-500/20"
- title="Setup AutoCAD LISP Script"
- >
- <Settings className="w-3.5 h-3.5" /> Setup
- </Link>
  </div>
 
  </nav>
@@ -120,12 +113,6 @@ export default function Navbar() {
  {projectItems.length}
  </span>
  )}
- </Link>
- <Link 
- href="/setup" 
- className="flex items-center gap-2 text-base font-medium px-4 py-3 bg-primary hover:bg-indigo-500 text-primary-foreground rounded-lg transition"
- >
- <Settings className="w-4 h-4" /> AutoCAD Integration
  </Link>
  </div>
 
