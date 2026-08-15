@@ -50,33 +50,15 @@ export default function StairsDetailing() {
  <h1 className="text-3xl font-bold text-foreground">Stairs Detailing</h1>
  <p className="text-muted-foreground mt-2">Parametric staircase calculation and preview</p>
  </div>
- <div className="flex flex-wrap items-center gap-2">
- <ExampleSelector examples={stairsExamples} onSelect={setStairsData} />
- <button 
- onClick={() => {
- useAppStore.getState().setProjectModalData({ 
- defaultName: `Stairs_${stairsData.stairId}_${stairsData.tread}x${stairsData.rise}`, 
- type: 'stairs', 
- dxfString 
- });
- }}
- className="flex items-center justify-center p-2 bg-muted hover:bg-muted/80 text-foreground rounded transition"
-  title="Save"
-  >
-  <Save className="w-4 h-4" />
-  </button>
- <button onClick={handleExport} className="flex items-center justify-center p-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded transition shadow-lg shadow-emerald-500/20" title="Export DXF">
-  <Download className="w-4 h-4" />
-  </button>
-          <button onClick={handleCopyScript} className="flex items-center justify-center p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded transition shadow-lg shadow-indigo-500/20" title="Copy CAD Command">
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-          </button>
- </div>
+ 
  </header>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
  <div className="bg-card rounded border border-border p-6 space-y-4">
- <h3 className="text-xl font-bold border-b border-border pb-2">Properties</h3>
+ <div className="flex items-center justify-between border-b border-border pb-2">
+ <h3 className="text-xl font-bold">Properties</h3>
+ <ExampleSelector examples={stairsExamples} onSelect={setStairsData} />
+ </div>
  <div className="grid grid-cols-2 gap-4">
  <div>
  <label className="block text-sm text-muted-foreground mb-1">Mark</label>
@@ -116,7 +98,31 @@ export default function StairsDetailing() {
  <input type="number" value={stairsData.distBarSpacing} onChange={e => setStairsData({...stairsData, distBarSpacing: Number(e.target.value)})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  </div>
+   <div className="flex flex-wrap items-center justify-end gap-2 mt-4 pt-4 border-t border-border">
+ <button 
+ onClick={() => {
+ useAppStore.getState().setProjectModalData({ 
+ defaultName: `Stairs_${stairsData.stairId}_${stairsData.tread}x${stairsData.rise}`, 
+ type: 'stairs', 
+ dxfString 
+ });
+ }}
+ className="flex items-center justify-center p-2 bg-muted hover:bg-muted/80 text-foreground rounded transition"
+  title="Save"
+  >
+  <Save className="w-4 h-4" />
+  <span className="hidden sm:inline ml-2 text-sm font-medium">Save</span>
+  </button>
+ <button onClick={handleExport} className="flex items-center justify-center p-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded transition shadow-lg shadow-emerald-500/20" title="Export DXF">
+  <Download className="w-4 h-4" />
+  <span className="hidden sm:inline ml-2 text-sm font-medium">Download</span>
+  </button>
+          <button onClick={handleCopyScript} className="flex items-center justify-center p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded transition shadow-lg shadow-indigo-500/20" title="Copy CAD Command">
+            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            <span className="hidden sm:inline ml-2 text-sm font-medium">{copied ? "Copied!" : "Copy"}</span>
+          </button>
  </div>
+</div>
 
  <div className="bg-card rounded border border-border flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>
  <div className="absolute top-4 left-4 text-xs font-mono text-muted-foreground bg-background px-2 py-1 rounded z-10">Live DXF Render</div>
