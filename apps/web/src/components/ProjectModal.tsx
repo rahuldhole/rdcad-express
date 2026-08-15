@@ -50,7 +50,7 @@ export default function ProjectModal() {
 
  return (
  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setProjectModalData(null)}>
- <div className="bg-card border border-border rounded-xl w-full max-w-md shadow-2xl overflow-hidden relative" onClick={e => e.stopPropagation()}>
+ <div className="bg-card border border-border rounded-xl w-[calc(100%-2rem)] max-w-md shadow-2xl overflow-hidden relative" onClick={e => e.stopPropagation()}>
  
  {/* Header */}
  <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-background/50">
@@ -98,12 +98,12 @@ export default function ProjectModal() {
  <label className="block text-sm font-medium text-muted-foreground mb-1.5">
  File Name
  </label>
- <div className="flex items-center gap-0">
+ <div className="flex items-center">
  <input 
  type="text" 
  value={name}
  onChange={(e) => setName(e.target.value)}
- className="flex-1 bg-background border border-border rounded-l-lg px-4 py-3 text-foreground focus:outline-none focus:border-blue-700 dark:border-blue-500 focus:ring-1 focus:ring-blue-500 transition font-mono text-sm"
+ className="flex-1 min-w-0 bg-background border border-border rounded-l-lg px-4 py-3 text-foreground focus:outline-none focus:border-blue-700 dark:border-blue-500 focus:ring-1 focus:ring-blue-500 transition font-mono text-sm"
  placeholder={projectModalData.defaultName}
  autoFocus
  onKeyDown={(e) => {
@@ -111,7 +111,7 @@ export default function ProjectModal() {
  if (e.key === 'Escape') setProjectModalData(null);
  }}
  />
- <span className="px-3 py-3 bg-muted border border-l-0 border-border rounded-r-lg text-muted-foreground text-sm">.dxf</span>
+ <span className="px-3 py-3 bg-muted border border-l-0 border-border rounded-r-lg text-muted-foreground text-sm shrink-0">.dxf</span>
  </div>
  </div>
 

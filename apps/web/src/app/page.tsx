@@ -27,13 +27,15 @@ export default function MarketingPage() {
  An advanced suite of open-source engineering tools for generating accurate Bar Bending Schedules, DXF exports, and detailed structural designs instantly.
  </p>
  
- <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap w-full max-w-4xl mx-auto">
- <Link href="/setup" className="group flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary text-primary-foreground rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] flex-1 sm:flex-none">
+ <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full max-w-3xl mx-auto">
+ <Link href="/setup" className="group flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary text-primary-foreground rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] w-full sm:w-auto">
  Setup Guide
  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
  </Link>
+ <div className="w-full sm:w-auto">
  <PwaInstallButton />
- <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-8 py-4 bg-background hover:bg-background dark:hover:bg-muted text-foreground rounded-full font-semibold transition-all border border-border hover:border-border dark:hover:border-border flex-1 sm:flex-none">
+ </div>
+ <a href="https://github.com/rahuldhole/rdcad-express" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-8 py-4 bg-background hover:bg-background dark:hover:bg-muted text-foreground rounded-full font-semibold transition-all border border-border hover:border-border dark:hover:border-border w-full sm:w-auto">
  <GitBranch className="w-5 h-5" />
  GitHub
  </a>
