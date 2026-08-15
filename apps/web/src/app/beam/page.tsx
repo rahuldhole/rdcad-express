@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Download } from "lucide-react";
-import { exportBeamSectionToDXF } from "@rdcad-express/dxf-exporter";
+import { Download, Copy, Check } from "lucide-react";
+import {  exportBeamSectionToDXF, exportBeamSectionToScript  } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
 import ExampleSelector, { Example } from "@/components/ExampleSelector";
@@ -34,6 +34,14 @@ export default function BeamDetailing() {
  URL.revokeObjectURL(url);
  };
 
+  const [copied, setCopied] = React.useState(false);
+  const handleCopyScript = () => {
+    const scriptString = exportBeamSectionToScript(beamData);
+    navigator.clipboard.writeText(scriptString);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
  return (
  <div className="p-8">
  <div className="max-w-7xl mx-auto space-y-8">
@@ -59,6 +67,10 @@ export default function BeamDetailing() {
  <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
  <Download className="w-4 h-4" /> Export DXF
  </button>
+          <button onClick={handleCopyScript} className="flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium transition shadow-lg shadow-indigo-500/20 whitespace-nowrap">
+            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            Copy CAD Command
+          </button>
  </div>
  </header>
 

@@ -1,16 +1,37 @@
 import type { BeamScheduleRow, ColumnScheduleRow, SlabScheduleRow, FoundationScheduleRow, TankScheduleRow, StairsScheduleRow, TitleBlockRow } from '@rdcad-express/dwg-schemas';
+export declare class ScriptWriter {
+    commands: string[];
+    addLayer(name: string, color: number, lineType: string): void;
+    setActiveLayer(name: string): void;
+    drawLine(x1: number, y1: number, x2: number, y2: number): void;
+    drawCircle(x: number, y: number, r: number): void;
+    drawText(x: number, y: number, height: number, rotation: number, text: string): void;
+    getScriptString(): string;
+}
 export declare function exportBeamSectionToDXF(data: BeamScheduleRow): string;
+export declare function exportBeamSectionToScript(data: BeamScheduleRow): string;
 export declare function exportColumnSectionToDXF(data: ColumnScheduleRow): string;
+export declare function exportColumnSectionToScript(data: ColumnScheduleRow): string;
 export declare function exportTextNodesToDXF(nodes: {
     id: string;
     text: string;
     x: number;
     y: number;
 }[]): string;
+export declare function exportTextNodesToScript(nodes: {
+    id: string;
+    text: string;
+    x: number;
+    y: number;
+}[]): string;
 export declare function exportSlabSectionToDXF(data: SlabScheduleRow): string;
+export declare function exportSlabSectionToScript(data: SlabScheduleRow): string;
 export declare function exportFoundationSectionToDXF(data: FoundationScheduleRow): string;
+export declare function exportFoundationSectionToScript(data: FoundationScheduleRow): string;
 export declare function exportTankSectionToDXF(data: TankScheduleRow): string;
+export declare function exportTankSectionToScript(data: TankScheduleRow): string;
 export declare function exportStairsSectionToDXF(data: StairsScheduleRow): string;
+export declare function exportStairsSectionToScript(data: StairsScheduleRow): string;
 export declare function exportDoorDXF(): string;
 export declare function exportWindowDXF(): string;
 export declare function exportNorthSymbolDXF(): string;
@@ -34,3 +55,4 @@ export declare function exportSocketSwitchDXF(): string;
 export declare function exportDistributionBoardDXF(): string;
 export declare function exportHVACVentDXF(): string;
 export declare function exportTemplateToDXF(data: TitleBlockRow): string;
+export declare function exportTemplateToScript(data: TitleBlockRow): string;

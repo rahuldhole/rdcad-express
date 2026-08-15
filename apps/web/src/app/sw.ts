@@ -50,7 +50,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.mode === "navigate") {
     const url = new URL(event.request.url);
-    let path = url.pathname;
+    const path = url.pathname;
     
     // We only provide a fallback if the network fails
     event.respondWith(

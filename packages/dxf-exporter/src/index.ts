@@ -1,8 +1,40 @@
 import DXFWriter from 'dxf-writer';
 import type { BeamScheduleRow, ColumnScheduleRow, SlabScheduleRow, FoundationScheduleRow, TankScheduleRow, StairsScheduleRow, TitleBlockRow } from '@rdcad-express/dwg-schemas';
 
-export function exportBeamSectionToDXF(data: BeamScheduleRow): string {
-  const dxf = new DXFWriter();
+
+export class ScriptWriter {
+  commands: string[] = [];
+  
+  addLayer(name: string, color: number, lineType: string) {
+    let c = 7;
+    if (color === 1) c = 1;
+    else if (color === 2) c = 2;
+    else if (color === 3) c = 3;
+    else if (color === 4) c = 4;
+    else if (color === 5) c = 5;
+    else if (color === 6) c = 6;
+    this.commands.push(`_-LAYER M ${name} C ${c}  `);
+  }
+  setActiveLayer(name: string) {
+    this.commands.push(`_-LAYER S ${name} `);
+  }
+  drawLine(x1: number, y1: number, x2: number, y2: number) {
+    this.commands.push(`_LINE ${x1.toFixed(3)},${y1.toFixed(3)} ${x2.toFixed(3)},${y2.toFixed(3)} `);
+  }
+  drawCircle(x: number, y: number, r: number) {
+    this.commands.push(`_CIRCLE ${x.toFixed(3)},${y.toFixed(3)} ${r.toFixed(3)} `);
+  }
+  drawText(x: number, y: number, height: number, rotation: number, text: string) {
+    this.commands.push(`_TEXT ${x.toFixed(3)},${y.toFixed(3)} ${height.toFixed(3)} ${rotation.toFixed(3)} ${text} `);
+  }
+  getScriptString(): string {
+    return this.commands.join('\n') + '\n_ZOOM E\n';
+  }
+}
+
+
+function drawBeamSection(dxf: any, data: BeamScheduleRow) {
+  
 
   dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
   dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
@@ -40,11 +72,22 @@ export function exportBeamSectionToDXF(data: BeamScheduleRow): string {
     dxf.drawCircle(cover + i * topSpacingX, d - cover, barRadius);
   }
 
+  }
+
+export function exportBeamSectionToDXF(data: BeamScheduleRow): string {
+  const dxf = new DXFWriter();
+  drawBeamSection(dxf, data);
   return getDxfStringWithExtents(dxf);
 }
 
-export function exportColumnSectionToDXF(data: ColumnScheduleRow): string {
-  const dxf = new DXFWriter();
+export function exportBeamSectionToScript(data: BeamScheduleRow): string {
+  const script = new ScriptWriter();
+  drawBeamSection(script, data);
+  return script.getScriptString();
+}
+
+function drawColumnSection(dxf: any, data: ColumnScheduleRow) {
+  
   
   dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
   dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
@@ -96,11 +139,22 @@ export function exportColumnSectionToDXF(data: ColumnScheduleRow): string {
     currentDist += spacing;
   }
   
+  }
+
+export function exportColumnSectionToDXF(data: ColumnScheduleRow): string {
+  const dxf = new DXFWriter();
+  drawColumnSection(dxf, data);
   return getDxfStringWithExtents(dxf);
 }
 
-export function exportTextNodesToDXF(nodes: { id: string, text: string, x: number, y: number }[]): string {
-  const dxf = new DXFWriter();
+export function exportColumnSectionToScript(data: ColumnScheduleRow): string {
+  const script = new ScriptWriter();
+  drawColumnSection(script, data);
+  return script.getScriptString();
+}
+
+function drawTextNodes(dxf: any, nodes: { id: string, text: string, x: number, y: number }[]) {
+  
   
   dxf.addLayer('TEXT', DXFWriter.ACI.YELLOW, 'CONTINUOUS');
   dxf.setActiveLayer('TEXT');
@@ -115,11 +169,22 @@ export function exportTextNodesToDXF(nodes: { id: string, text: string, x: numbe
     }
   });
   
+  }
+
+export function exportTextNodesToDXF(nodes: { id: string, text: string, x: number, y: number }[]): string {
+  const dxf = new DXFWriter();
+  drawTextNodes(dxf, nodes);
   return getDxfStringWithExtents(dxf);
 }
 
-export function exportSlabSectionToDXF(data: SlabScheduleRow): string {
-  const dxf = new DXFWriter();
+export function exportTextNodesToScript(nodes: { id: string, text: string, x: number, y: number }[]): string {
+  const script = new ScriptWriter();
+  drawTextNodes(script, nodes);
+  return script.getScriptString();
+}
+
+function drawSlabSection(dxf: any, data: SlabScheduleRow) {
+  
   dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
   dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
   
@@ -148,11 +213,22 @@ export function exportSlabSectionToDXF(data: SlabScheduleRow): string {
     dxf.drawCircle(cover + i * actualSpacing, distBarY, distBarRadius);
   }
   
+  }
+
+export function exportSlabSectionToDXF(data: SlabScheduleRow): string {
+  const dxf = new DXFWriter();
+  drawSlabSection(dxf, data);
   return getDxfStringWithExtents(dxf);
 }
 
-export function exportFoundationSectionToDXF(data: FoundationScheduleRow): string {
-  const dxf = new DXFWriter();
+export function exportSlabSectionToScript(data: SlabScheduleRow): string {
+  const script = new ScriptWriter();
+  drawSlabSection(script, data);
+  return script.getScriptString();
+}
+
+function drawFoundationSection(dxf: any, data: FoundationScheduleRow) {
+  
   dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
   dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
   
@@ -181,11 +257,22 @@ export function exportFoundationSectionToDXF(data: FoundationScheduleRow): strin
     dxf.drawCircle(cover + i * actualSpacing, yBarY, yBarRadius);
   }
   
+  }
+
+export function exportFoundationSectionToDXF(data: FoundationScheduleRow): string {
+  const dxf = new DXFWriter();
+  drawFoundationSection(dxf, data);
   return getDxfStringWithExtents(dxf);
 }
 
-export function exportTankSectionToDXF(data: TankScheduleRow): string {
-  const dxf = new DXFWriter();
+export function exportFoundationSectionToScript(data: FoundationScheduleRow): string {
+  const script = new ScriptWriter();
+  drawFoundationSection(script, data);
+  return script.getScriptString();
+}
+
+function drawTankSection(dxf: any, data: TankScheduleRow) {
+  
   dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
   dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
   
@@ -277,11 +364,22 @@ export function exportTankSectionToDXF(data: TankScheduleRow): string {
     }
   }
 
+  }
+
+export function exportTankSectionToDXF(data: TankScheduleRow): string {
+  const dxf = new DXFWriter();
+  drawTankSection(dxf, data);
   return getDxfStringWithExtents(dxf);
 }
 
-export function exportStairsSectionToDXF(data: StairsScheduleRow): string {
-  const dxf = new DXFWriter();
+export function exportTankSectionToScript(data: TankScheduleRow): string {
+  const script = new ScriptWriter();
+  drawTankSection(script, data);
+  return script.getScriptString();
+}
+
+function drawStairsSection(dxf: any, data: StairsScheduleRow) {
+  
   dxf.addLayer('CONCRETE', DXFWriter.ACI.WHITE, 'CONTINUOUS');
   dxf.addLayer('REBAR', DXFWriter.ACI.RED, 'CONTINUOUS');
   
@@ -335,7 +433,18 @@ export function exportStairsSectionToDXF(data: StairsScheduleRow): string {
   const ry2 = bottomEndY + cover;
   dxf.drawLine(rx1, ry1, rx2, ry2);
   
+  }
+
+export function exportStairsSectionToDXF(data: StairsScheduleRow): string {
+  const dxf = new DXFWriter();
+  drawStairsSection(dxf, data);
   return getDxfStringWithExtents(dxf);
+}
+
+export function exportStairsSectionToScript(data: StairsScheduleRow): string {
+  const script = new ScriptWriter();
+  drawStairsSection(script, data);
+  return script.getScriptString();
 }
 
 // ==========================================
@@ -1096,8 +1205,8 @@ export function exportHVACVentDXF(): string {
 // Milestone 8: Drawing Templates & Title Blocks
 // ==========================================
 
-export function exportTemplateToDXF(data: TitleBlockRow): string {
-  const dxf = new DXFWriter();
+function drawTemplate(dxf: any, data: TitleBlockRow) {
+  
   dxf.addLayer('BORDER', DXFWriter.ACI.CYAN, 'CONTINUOUS');
   dxf.addLayer('TEXT', DXFWriter.ACI.YELLOW, 'CONTINUOUS');
   
@@ -1148,7 +1257,18 @@ export function exportTemplateToDXF(data: TitleBlockRow): string {
     console.error("Text rendering failed", e);
   }
   
+  }
+
+export function exportTemplateToDXF(data: TitleBlockRow): string {
+  const dxf = new DXFWriter();
+  drawTemplate(dxf, data);
   return getDxfStringWithExtents(dxf);
+}
+
+export function exportTemplateToScript(data: TitleBlockRow): string {
+  const script = new ScriptWriter();
+  drawTemplate(script, data);
+  return script.getScriptString();
 }
 
 function getDxfStringWithExtents(dxf: any): string {

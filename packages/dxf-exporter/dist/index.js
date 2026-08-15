@@ -3,13 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ScriptWriter = void 0;
 exports.exportBeamSectionToDXF = exportBeamSectionToDXF;
+exports.exportBeamSectionToScript = exportBeamSectionToScript;
 exports.exportColumnSectionToDXF = exportColumnSectionToDXF;
+exports.exportColumnSectionToScript = exportColumnSectionToScript;
 exports.exportTextNodesToDXF = exportTextNodesToDXF;
+exports.exportTextNodesToScript = exportTextNodesToScript;
 exports.exportSlabSectionToDXF = exportSlabSectionToDXF;
+exports.exportSlabSectionToScript = exportSlabSectionToScript;
 exports.exportFoundationSectionToDXF = exportFoundationSectionToDXF;
+exports.exportFoundationSectionToScript = exportFoundationSectionToScript;
 exports.exportTankSectionToDXF = exportTankSectionToDXF;
+exports.exportTankSectionToScript = exportTankSectionToScript;
 exports.exportStairsSectionToDXF = exportStairsSectionToDXF;
+exports.exportStairsSectionToScript = exportStairsSectionToScript;
 exports.exportDoorDXF = exportDoorDXF;
 exports.exportWindowDXF = exportWindowDXF;
 exports.exportNorthSymbolDXF = exportNorthSymbolDXF;
@@ -33,9 +41,46 @@ exports.exportSocketSwitchDXF = exportSocketSwitchDXF;
 exports.exportDistributionBoardDXF = exportDistributionBoardDXF;
 exports.exportHVACVentDXF = exportHVACVentDXF;
 exports.exportTemplateToDXF = exportTemplateToDXF;
+exports.exportTemplateToScript = exportTemplateToScript;
 const dxf_writer_1 = __importDefault(require("dxf-writer"));
-function exportBeamSectionToDXF(data) {
-    const dxf = new dxf_writer_1.default();
+class ScriptWriter {
+    constructor() {
+        this.commands = [];
+    }
+    addLayer(name, color, lineType) {
+        let c = 7;
+        if (color === 1)
+            c = 1;
+        else if (color === 2)
+            c = 2;
+        else if (color === 3)
+            c = 3;
+        else if (color === 4)
+            c = 4;
+        else if (color === 5)
+            c = 5;
+        else if (color === 6)
+            c = 6;
+        this.commands.push(`_-LAYER M ${name} C ${c}  `);
+    }
+    setActiveLayer(name) {
+        this.commands.push(`_-LAYER S ${name} `);
+    }
+    drawLine(x1, y1, x2, y2) {
+        this.commands.push(`_LINE ${x1.toFixed(3)},${y1.toFixed(3)} ${x2.toFixed(3)},${y2.toFixed(3)} `);
+    }
+    drawCircle(x, y, r) {
+        this.commands.push(`_CIRCLE ${x.toFixed(3)},${y.toFixed(3)} ${r.toFixed(3)} `);
+    }
+    drawText(x, y, height, rotation, text) {
+        this.commands.push(`_TEXT ${x.toFixed(3)},${y.toFixed(3)} ${height.toFixed(3)} ${rotation.toFixed(3)} ${text} `);
+    }
+    getScriptString() {
+        return this.commands.join('\n') + '\n_ZOOM E\n';
+    }
+}
+exports.ScriptWriter = ScriptWriter;
+function drawBeamSection(dxf, data) {
     dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
     dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
     const w = data.width;
@@ -66,10 +111,18 @@ function exportBeamSectionToDXF(data) {
     for (let i = 0; i < topBars; i++) {
         dxf.drawCircle(cover + i * topSpacingX, d - cover, barRadius);
     }
+}
+function exportBeamSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    drawBeamSection(dxf, data);
     return getDxfStringWithExtents(dxf);
 }
-function exportColumnSectionToDXF(data) {
-    const dxf = new dxf_writer_1.default();
+function exportBeamSectionToScript(data) {
+    const script = new ScriptWriter();
+    drawBeamSection(script, data);
+    return script.getScriptString();
+}
+function drawColumnSection(dxf, data) {
     dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
     dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
     const w = data.width || 400;
@@ -116,10 +169,18 @@ function exportColumnSectionToDXF(data) {
         dxf.drawCircle(x, y, barRadius);
         currentDist += spacing;
     }
+}
+function exportColumnSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    drawColumnSection(dxf, data);
     return getDxfStringWithExtents(dxf);
 }
-function exportTextNodesToDXF(nodes) {
-    const dxf = new dxf_writer_1.default();
+function exportColumnSectionToScript(data) {
+    const script = new ScriptWriter();
+    drawColumnSection(script, data);
+    return script.getScriptString();
+}
+function drawTextNodes(dxf, nodes) {
     dxf.addLayer('TEXT', dxf_writer_1.default.ACI.YELLOW, 'CONTINUOUS');
     dxf.setActiveLayer('TEXT');
     nodes.forEach(node => {
@@ -132,10 +193,18 @@ function exportTextNodesToDXF(nodes) {
             // fallback for different library signatures if needed
         }
     });
+}
+function exportTextNodesToDXF(nodes) {
+    const dxf = new dxf_writer_1.default();
+    drawTextNodes(dxf, nodes);
     return getDxfStringWithExtents(dxf);
 }
-function exportSlabSectionToDXF(data) {
-    const dxf = new dxf_writer_1.default();
+function exportTextNodesToScript(nodes) {
+    const script = new ScriptWriter();
+    drawTextNodes(script, nodes);
+    return script.getScriptString();
+}
+function drawSlabSection(dxf, data) {
     dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
     dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
     dxf.setActiveLayer('CONCRETE');
@@ -157,10 +226,18 @@ function exportSlabSectionToDXF(data) {
     for (let i = 0; i < numDistBars; i++) {
         dxf.drawCircle(cover + i * actualSpacing, distBarY, distBarRadius);
     }
+}
+function exportSlabSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    drawSlabSection(dxf, data);
     return getDxfStringWithExtents(dxf);
 }
-function exportFoundationSectionToDXF(data) {
-    const dxf = new dxf_writer_1.default();
+function exportSlabSectionToScript(data) {
+    const script = new ScriptWriter();
+    drawSlabSection(script, data);
+    return script.getScriptString();
+}
+function drawFoundationSection(dxf, data) {
     dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
     dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
     dxf.setActiveLayer('CONCRETE');
@@ -182,10 +259,18 @@ function exportFoundationSectionToDXF(data) {
     for (let i = 0; i < numYBars; i++) {
         dxf.drawCircle(cover + i * actualSpacing, yBarY, yBarRadius);
     }
+}
+function exportFoundationSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    drawFoundationSection(dxf, data);
     return getDxfStringWithExtents(dxf);
 }
-function exportTankSectionToDXF(data) {
-    const dxf = new dxf_writer_1.default();
+function exportFoundationSectionToScript(data) {
+    const script = new ScriptWriter();
+    drawFoundationSection(script, data);
+    return script.getScriptString();
+}
+function drawTankSection(dxf, data) {
     dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
     dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
     dxf.setActiveLayer('CONCRETE');
@@ -262,10 +347,18 @@ function exportTankSectionToDXF(data) {
             dxf.drawCircle(outerW - wt + cover + barRadius * 2, y, barRadius); // right inner
         }
     }
+}
+function exportTankSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    drawTankSection(dxf, data);
     return getDxfStringWithExtents(dxf);
 }
-function exportStairsSectionToDXF(data) {
-    const dxf = new dxf_writer_1.default();
+function exportTankSectionToScript(data) {
+    const script = new ScriptWriter();
+    drawTankSection(script, data);
+    return script.getScriptString();
+}
+function drawStairsSection(dxf, data) {
     dxf.addLayer('CONCRETE', dxf_writer_1.default.ACI.WHITE, 'CONTINUOUS');
     dxf.addLayer('REBAR', dxf_writer_1.default.ACI.RED, 'CONTINUOUS');
     dxf.setActiveLayer('CONCRETE');
@@ -309,7 +402,16 @@ function exportStairsSectionToDXF(data) {
     const rx2 = bottomEndX - cover;
     const ry2 = bottomEndY + cover;
     dxf.drawLine(rx1, ry1, rx2, ry2);
+}
+function exportStairsSectionToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    drawStairsSection(dxf, data);
     return getDxfStringWithExtents(dxf);
+}
+function exportStairsSectionToScript(data) {
+    const script = new ScriptWriter();
+    drawStairsSection(script, data);
+    return script.getScriptString();
 }
 // ==========================================
 // Milestone 7: Starter Asset Library
@@ -926,8 +1028,7 @@ function exportHVACVentDXF() {
 // ==========================================
 // Milestone 8: Drawing Templates & Title Blocks
 // ==========================================
-function exportTemplateToDXF(data) {
-    const dxf = new dxf_writer_1.default();
+function drawTemplate(dxf, data) {
     dxf.addLayer('BORDER', dxf_writer_1.default.ACI.CYAN, 'CONTINUOUS');
     dxf.addLayer('TEXT', dxf_writer_1.default.ACI.YELLOW, 'CONTINUOUS');
     // Sheet sizes (landscape)
@@ -970,7 +1071,16 @@ function exportTemplateToDXF(data) {
     catch (e) {
         console.error("Text rendering failed", e);
     }
+}
+function exportTemplateToDXF(data) {
+    const dxf = new dxf_writer_1.default();
+    drawTemplate(dxf, data);
     return getDxfStringWithExtents(dxf);
+}
+function exportTemplateToScript(data) {
+    const script = new ScriptWriter();
+    drawTemplate(script, data);
+    return script.getScriptString();
 }
 function getDxfStringWithExtents(dxf) {
     let str = dxf.toDxfString();
