@@ -41,6 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 # serwist generated files
-public/sw.js
-public/sw.js.map
-public/workbox-*.js
+**/public/sw.js
+**/public/sw.js.map
+**/public/workbox-*.js
