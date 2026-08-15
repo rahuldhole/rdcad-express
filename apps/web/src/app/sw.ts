@@ -19,7 +19,7 @@ const serwist = new Serwist({
  runtimeCaching: defaultCache,
 });
 
-serwist.addEventListeners();
+// serwist.addEventListeners() moved to the bottom
 
 const HTML_ROUTES = [
  "/",
@@ -74,3 +74,5 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
+
+serwist.addEventListeners();
