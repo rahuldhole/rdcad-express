@@ -38,35 +38,39 @@ const HTML_ROUTES = [
 ];
 
 self.addEventListener("install", (event) => {
- event.waitUntil(
- caches.open("offline-html-cache").then((cache) => {
- const urls = HTML_ROUTES.map(r => r === "/" ? "/" : r + ".html");
- return cache.addAll(urls).catch(err => console.error("Cache addAll failed", err));
- })
- );
+  event.waitUntil(
+    caches.open("offline-html-cache").then((cache) => {
+      // Fetch the routes exactly as defined (e.g. "/beam")
+      // This works on both Next.js dev server and static hosting (which maps /beam to beam.html)
+      return cache.addAll(HTML_ROUTES).catch(err => console.error("Cache addAll failed", err));
+    })
+  );
 });
 
 self.addEventListener("fetch", (event) => {
- if (event.request.mode === "navigate") {
- const url = new URL(event.request.url);
- let htmlUrl = url.pathname === "/" ? "/" : url.pathname + ".html";
- if (htmlUrl.includes("?")) htmlUrl = htmlUrl.split("?")[0];
- 
- // We only provide a fallback if the network fails
- event.respondWith(
- fetch(event.request).catch(async () => {
- const cache = await caches.open("offline-html-cache");
- const cachedResponse = await cache.match(htmlUrl);
- if (cachedResponse) return cachedResponse;
- 
- const fallbackResponse = await cache.match("/");
- if (fallbackResponse) return fallbackResponse;
- 
- return new Response("Network error happened", {
- status: 408,
- headers: { "Content-Type": "text/plain" },
- });
- })
- );
- }
+  if (event.request.mode === "navigate") {
+    const url = new URL(event.request.url);
+    let path = url.pathname;
+    
+    // We only provide a fallback if the network fails
+    event.respondWith(
+      fetch(event.request).catch(async () => {
+        const cache = await caches.open("offline-html-cache");
+        
+        // 1. Try to find the exact route HTML in our offline cache
+        const cachedResponse = await cache.match(path);
+        if (cachedResponse) return cachedResponse;
+        
+        // 2. Try falling back to the home page if specific route isn't cached
+        const fallbackResponse = await cache.match("/");
+        if (fallbackResponse) return fallbackResponse;
+        
+        // 3. Complete failure
+        return new Response("Network error happened and offline cache is empty.", {
+          status: 408,
+          headers: { "Content-Type": "text/plain" },
+        });
+      })
+    );
+  }
 });
