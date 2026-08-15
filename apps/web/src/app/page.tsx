@@ -151,7 +151,7 @@ export default function MarketingPage() {
               <Chip label="Quality Assured" color="error" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
               <Typography variant="h3" fontWeight="bold" gutterBottom>Tested & Reliable Core</Typography>
               <Typography variant="h6" color="text.secondary" gutterBottom>
-                We know that structural detailing requires absolute precision. That's why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <strong>Vitest</strong> test suite.
+                We know that structural detailing requires absolute precision. That&apos;s why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <strong>Vitest</strong> test suite.
               </Typography>
               <Stack spacing={2} sx={{ mt: 2 }}>
                 {['Rigorous testing for accurate BBS calculations', 'Automated validation of generated DXF structural integrity', 'Deterministic outputs across different environments'].map((text, i) => (

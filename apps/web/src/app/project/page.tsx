@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useAppStore } from "@/store/useStore";
-import { Download, Trash2, FolderArchive, Plus, Pencil, Check, X, FileText, FolderOpen } from "lucide-react";
+import { Download, Trash2, FolderArchive, Plus, Pencil, Check, X, FileText } from "lucide-react";
 import Link from "next/link";
 import JSZip from "jszip";
 import { 
@@ -117,7 +117,7 @@ export default function ProjectDashboard() {
         <Card variant="outlined" sx={{ bgcolor: 'background.default' }}>
           <CardContent>
             <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
-              Quick Add — configure an element & click "Save"
+              Quick Add — configure an element & click &quot;Save&quot;
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
               {elementPages.map(page => (
@@ -163,7 +163,7 @@ export default function ProjectDashboard() {
             </Box>
             <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>Your project is empty.</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 500 }}>
-              Use the buttons above to navigate to a detailing page. Configure your element's properties, then click <strong>"Save"</strong> to collect it here. Once you've gathered all elements, export them as a single ZIP file.
+              Use the buttons above to navigate to a detailing page. Configure your element&apos;s properties, then click <strong>&quot;Save&quot;</strong> to collect it here. Once you&apos;ve gathered all elements, export them as a single ZIP file.
             </Typography>
           </Box>
         ) : (

@@ -12,7 +12,7 @@ import {
 } from "@rdcad-express/dxf-exporter";
 import DXFPreview from "@/components/DXFPreview";
 import { 
-  Box, Typography, TextField, Button, Grid, Card, CardContent, CardActions, 
+  Box, Typography, TextField, Button, Grid, Card, CardActions, 
   IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Chip, InputAdornment 
 } from "@mui/material";
 
@@ -119,10 +119,9 @@ export default function AssetLibrary() {
                           }
                         }}
                       >
-                        <Box sx={{ height: 200, bgcolor: 'background.default', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                        <Box sx={{ height: 200, bgcolor: 'background.default', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', borderBottom: 1, borderColor: 'divider' }}>
                           <DXFPreview dxfString={dxfString} staticMode={true} />
                         </Box>
-                        <Divider />
                         <CardActions sx={{ p: 2, justifyContent: 'space-between', bgcolor: 'background.paper' }}>
                           <Typography variant="body2" fontWeight="medium" noWrap sx={{ pr: 2 }}>
                             {asset.name}
@@ -159,7 +158,7 @@ export default function AssetLibrary() {
         {filteredAssets.length === 0 && (
           <Box sx={{ textAlign: 'center', py: 10 }}>
             <Typography variant="body1" color="text.secondary">
-              No assets found matching "{search}".
+              No assets found matching &quot;{search}&quot;.
             </Typography>
           </Box>
         )}

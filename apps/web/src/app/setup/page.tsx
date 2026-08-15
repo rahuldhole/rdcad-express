@@ -35,7 +35,7 @@ export default function DownloadPage() {
             <Box>
               <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>How it works</Typography>
               <Typography color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
-                Downloading DXF files is only half the battle. To truly speed up your workflow, we've created a tiny (1KB) AutoLISP companion script. When executed, this script instantly locates the most recent DXF file in your Downloads folder and attaches it to your cursor for immediate insertion into your drawing.
+                Downloading DXF files is only half the battle. To truly speed up your workflow, we&apos;ve created a tiny (1KB) AutoLISP companion script. When executed, this script instantly locates the most recent DXF file in your Downloads folder and attaches it to your cursor for immediate insertion into your drawing.
               </Typography>
             </Box>
             
@@ -73,7 +73,7 @@ export default function DownloadPage() {
                 <Typography variant="subtitle2" fontWeight="bold">Pro Tip: Persistent Loading</Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
-                To avoid dragging and dropping the file every time you open AutoCAD, you can add it to your <strong>Startup Suite</strong>. Type <Box component="code" sx={{ px: 1, py: 0.5, bgcolor: 'action.hover', borderRadius: 1, color: 'text.primary', fontFamily: 'monospace' }}>APPLOAD</Box> in AutoCAD, click the "Contents..." button under the Startup Suite section, and add the <Box component="code" sx={{ px: 1, py: 0.5, bgcolor: 'action.hover', borderRadius: 1, color: 'primary.main', fontFamily: 'monospace' }}>rdcad-import.lsp</Box> file there.
+                To avoid dragging and dropping the file every time you open AutoCAD, you can add it to your <strong>Startup Suite</strong>. Type <Box component="code" sx={{ px: 1, py: 0.5, bgcolor: 'action.hover', borderRadius: 1, color: 'text.primary', fontFamily: 'monospace' }}>APPLOAD</Box> in AutoCAD, click the &quot;Contents...&quot; button under the Startup Suite section, and add the <Box component="code" sx={{ px: 1, py: 0.5, bgcolor: 'action.hover', borderRadius: 1, color: 'primary.main', fontFamily: 'monospace' }}>rdcad-import.lsp</Box> file there.
               </Typography>
             </Box>
           </CardContent>

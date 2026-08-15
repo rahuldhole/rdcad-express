@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button, Chip, Box, keyframes } from "@mui/material";
+import { Button, Chip, keyframes } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloudDoneIcon from "@mui/icons-material/CloudDone";

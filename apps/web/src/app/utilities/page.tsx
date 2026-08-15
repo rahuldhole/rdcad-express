@@ -6,7 +6,7 @@ import { exportTextNodesToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import { useTheme } from "next-themes";
 import { 
-  Box, Typography, TextField, Button, Grid, Card, CardContent, Divider, Stack 
+  Box, Typography, TextField, Button, Grid, Card, CardContent, Stack 
 } from "@mui/material";
 
 type TextNode = {
@@ -126,7 +126,7 @@ export default function GridUtilities() {
                   />
                   
                   <Typography variant="caption" color="text.secondary">
-                    Click on the canvas to place '{prefix}{startNum}'
+                    Click on the canvas to place &apos;{prefix}{startNum}&apos;
                   </Typography>
                 </CardContent>
               </Card>

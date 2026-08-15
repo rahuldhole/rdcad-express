@@ -132,7 +132,7 @@ export default function GuidePage() {
               <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                 <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>Install App (Optional)</Typography>
                 <Typography color="text.secondary" sx={{ mb: 4, flexGrow: 1 }}>
-                  You can install RDCAD Express as a Progressive Web App (PWA) using your browser's install button.
+                  You can install RDCAD Express as a Progressive Web App (PWA) using your browser&apos;s install button.
                 </Typography>
                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', '& > *': { width: '100%' } }}>
                   <PwaInstallButton />
