@@ -29,7 +29,7 @@ const features = [
         </Box>
         <Box>
           <Typography component="strong" color="text.primary">Option B: Export DXF</Typography> - Save the file or share it with a colleague. A standard .dxf file will download to your device, which is compatible with almost all drafting software.{" "}
-          <Typography component={Link} href="/setup" color="primary.main" fontWeight="medium" sx={{ textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          <Typography component={Link} href="/setup" color="primary.main"  sx={{ fontWeight: 'medium',  textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Set up the LISP extension
           </Typography>{" "}
           to auto-detect downloaded DXF files directly in CAD.
@@ -66,8 +66,8 @@ export default function GuidePage() {
         </Button>
         
         <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography variant="h2" component="h1" fontWeight="extrabold" sx={{ mb: 3 }}>
-            Startup <Typography component="span" variant="h2" fontWeight="extrabold" color="primary.main">Guide</Typography>
+          <Typography variant="h2" component="h1"  sx={{ fontWeight: 'extrabold',  mb: 3 }}>
+            Startup <Typography component="span" variant="h2"  color="primary.main" sx={{ fontWeight: 'extrabold' }}>Guide</Typography>
           </Typography>
           <Typography variant="h6" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', fontWeight: 'normal' }}>
             Explore the RDCAD Express core features and flexible workflows to drastically reduce your drafting time.
@@ -97,7 +97,7 @@ export default function GuidePage() {
                 </Box>
                 
                 <Box>
-                  <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>{feature.title}</Typography>
+                  <Typography variant="h5"  sx={{ fontWeight: 'bold',  mb: 2 }}>{feature.title}</Typography>
                   <Typography color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
                     {feature.description}
                   </Typography>
@@ -111,7 +111,7 @@ export default function GuidePage() {
           <Grid size={{ xs: 12, md: 4 }}>
             <Card variant="outlined" sx={{ height: '100%', borderRadius: 4, display: 'flex', flexDirection: 'column' }}>
               <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>LISP Extension (Optional)</Typography>
+                <Typography variant="h6"  sx={{ fontWeight: 'bold',  mb: 2 }}>LISP Extension (Optional)</Typography>
                 <Typography color="text.secondary" sx={{ mb: 4, flexGrow: 1 }}>
                   To use advanced CAD integration features, follow our one-time setup guide for AutoCAD.
                 </Typography>
@@ -130,7 +130,7 @@ export default function GuidePage() {
           <Grid size={{ xs: 12, md: 4 }}>
             <Card variant="outlined" sx={{ height: '100%', borderRadius: 4, display: 'flex', flexDirection: 'column' }}>
               <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>Install App (Optional)</Typography>
+                <Typography variant="h6"  sx={{ fontWeight: 'bold',  mb: 2 }}>Install App (Optional)</Typography>
                 <Typography color="text.secondary" sx={{ mb: 4, flexGrow: 1 }}>
                   You can install RDCAD Express as a Progressive Web App (PWA) using your browser&apos;s install button.
                 </Typography>
@@ -143,7 +143,7 @@ export default function GuidePage() {
           <Grid size={{ xs: 12, md: 4 }}>
             <Card variant="outlined" sx={{ height: '100%', borderRadius: 4, display: 'flex', flexDirection: 'column' }}>
               <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>Have more questions?</Typography>
+                <Typography variant="h6"  sx={{ fontWeight: 'bold',  mb: 2 }}>Have more questions?</Typography>
                 <Typography color="text.secondary" sx={{ mb: 4, flexGrow: 1 }}>
                   Check out our frequently asked questions for troubleshooting and tips.
                 </Typography>

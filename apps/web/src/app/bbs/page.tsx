@@ -118,9 +118,9 @@ export default function BBSGenerator() {
     <Box sx={{ p: { xs: 2, md: 4 }, pt: { xs: 2, md: 2 } }}>
       <Box sx={{ maxWidth: '1200px', mx: 'auto', display: 'flex', flexDirection: 'column', gap: 4 }}>
         <Box sx={{ pb: 2, borderBottom: 1, borderColor: 'divider' }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
             <Table2 className="w-8 h-8 text-primary" />
-            <Typography variant="h4" fontWeight="bold">Bar Bending Schedule</Typography>
+            <Typography variant="h4"  sx={{ fontWeight: 'bold' }}>Bar Bending Schedule</Typography>
           </Stack>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Real-time parametric rebar weight calculations</Typography>
         </Box>
@@ -198,7 +198,7 @@ export default function BBSGenerator() {
                         />
                       </TableCell>
                       <TableCell align="right">
-                        <Typography variant="body2" fontWeight="bold" color="success.main" fontFamily="monospace">
+                        <Typography  variant="body2"  color="success.main"  sx={{ fontFamily: 'monospace',  fontWeight: 'bold' }}>
                           {calculatedWeight.toFixed(2)}
                         </Typography>
                       </TableCell>
@@ -219,20 +219,20 @@ export default function BBSGenerator() {
           </TableContainer>
           
           <Box sx={{ bgcolor: 'background.default', p: 3, borderTop: 1, borderColor: 'divider' }}>
-            <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', md: 'center' }} spacing={2}>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'center' } }}>
               <Typography variant="caption" color="text.secondary">
                 * Weight calculation is based on standard formula (D²/162.2) × L × Qty.
               </Typography>
               
-              <Stack direction="row" alignItems="center" spacing={2}>
+              <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
                 <Typography variant="body1" color="text.secondary">Total Steel Tonnage:</Typography>
-                <Typography variant="h4" fontWeight="bold" color="success.main">
+                <Typography variant="h4"  color="success.main" sx={{ fontWeight: 'bold' }}>
                   {(totalTonnage / 1000).toFixed(3)} <Typography component="span" variant="h6" color="success.light">MT</Typography>
                 </Typography>
               </Stack>
             </Stack>
 
-            <Stack direction="row" spacing={2} justifyContent="flex-end" sx={{ mt: 3, pt: 3, borderTop: 1, borderColor: 'divider' }} flexWrap="wrap">
+            <Stack direction="row" spacing={2} sx={{ justifyContent: 'flex-end', flexWrap: 'wrap', mt: 3, pt: 3, borderTop: 1, borderColor: 'divider' }}>
               <Button 
                 variant="outlined" 
                 color="inherit"

@@ -12,7 +12,7 @@ export default function DownloadPage() {
       <Container maxWidth="md" sx={{ px: 0 }}>
         <Box sx={{ pb: 3, borderBottom: 1, borderColor: 'divider', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'center' }, gap: 3 }}>
           <Box>
-            <Typography variant="h4" fontWeight="bold">AutoCAD Integration</Typography>
+            <Typography variant="h4"  sx={{ fontWeight: 'bold' }}>AutoCAD Integration</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
               Bridge the gap between RDCAD Express and your local AutoCAD environment.
             </Typography>
@@ -33,7 +33,7 @@ export default function DownloadPage() {
         <Card variant="outlined" sx={{ mt: 4, borderRadius: 4 }}>
           <CardContent sx={{ p: { xs: 3, md: 5 }, display: 'flex', flexDirection: 'column', gap: 4 }}>
             <Box>
-              <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>How it works</Typography>
+              <Typography variant="h5"  sx={{ fontWeight: 'bold',  mb: 2 }}>How it works</Typography>
               <Typography color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.6 }}>
                 Downloading DXF files is only half the battle. To truly speed up your workflow, we&apos;ve created a tiny (1KB) AutoLISP companion script. When executed, this script instantly locates the most recent DXF file in your Downloads folder and attaches it to your cursor for immediate insertion into your drawing.
               </Typography>
@@ -50,7 +50,7 @@ export default function DownloadPage() {
             </Alert>
 
             <Box>
-              <Typography variant="h6" fontWeight="bold" sx={{ mb: 3 }}>Installation & Usage</Typography>
+              <Typography variant="h6"  sx={{ fontWeight: 'bold',  mb: 3 }}>Installation & Usage</Typography>
               <Box component="ol" sx={{ pl: 2, m: 0, '& li': { mb: 2, color: 'text.secondary' } }}>
                 <Typography component="li" variant="body1">
                   <Typography component="span" color="text.primary">Download the script</Typography> using the button above.
@@ -70,7 +70,7 @@ export default function DownloadPage() {
             <Box sx={{ p: 3, bgcolor: 'background.default', borderRadius: 2, border: 1, borderColor: 'divider' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5, color: 'text.secondary' }}>
                 <Terminal size={18} />
-                <Typography variant="subtitle2" fontWeight="bold">Pro Tip: Persistent Loading</Typography>
+                <Typography variant="subtitle2"  sx={{ fontWeight: 'bold' }}>Pro Tip: Persistent Loading</Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
                 To avoid dragging and dropping the file every time you open AutoCAD, you can add it to your <strong>Startup Suite</strong>. Type <Box component="code" sx={{ px: 1, py: 0.5, bgcolor: 'action.hover', borderRadius: 1, color: 'text.primary', fontFamily: 'monospace' }}>APPLOAD</Box> in AutoCAD, click the &quot;Contents...&quot; button under the Startup Suite section, and add the <Box component="code" sx={{ px: 1, py: 0.5, bgcolor: 'action.hover', borderRadius: 1, color: 'primary.main', fontFamily: 'monospace' }}>rdcad-import.lsp</Box> file there.

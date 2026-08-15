@@ -23,7 +23,7 @@ export default function MarketingPage() {
           sx={{ mb: 4, fontWeight: 'bold' }} 
         />
         
-        <Typography variant="h2" component="h1" fontWeight="900" gutterBottom sx={{ background: 'linear-gradient(45deg, #1e3a5f, #f50057)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <Typography variant="h2" component="h1"  gutterBottom sx={{ fontWeight: '900',  background: 'linear-gradient(45deg, #1e3a5f, #f50057)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           Parametric Structural <br /> Detailing Reimagined
         </Typography>
         
@@ -70,7 +70,7 @@ export default function MarketingPage() {
           <Grid container spacing={6} sx={{ alignItems: 'center' }}>
             <Grid size={{ xs: 12, md: 6 }}>
               <Chip label="Workflow Upgrade" color="info" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
-              <Typography variant="h3" fontWeight="bold" gutterBottom>Seamless AutoCAD Integration</Typography>
+              <Typography variant="h3"  gutterBottom sx={{ fontWeight: 'bold' }}>Seamless AutoCAD Integration</Typography>
               <Typography variant="h6" color="text.secondary" gutterBottom>
                 Downloading DXF files is just the beginning. We provide a lightweight AutoLISP companion script that bridges the gap between RDCAD Express and your local AutoCAD environment.
               </Typography>
@@ -93,10 +93,10 @@ export default function MarketingPage() {
                   <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#f44336' }} />
                   <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#ff9800' }} />
                   <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#4caf50' }} />
-                  <Typography variant="caption" color="text.secondary" fontFamily="monospace" sx={{ ml: 1 }}>AutoCAD Command Line</Typography>
+                  <Typography  variant="caption" color="text.secondary"  sx={{ fontFamily: 'monospace',  ml: 1 }}>AutoCAD Command Line</Typography>
                 </Box>
                 <Box sx={{ fontFamily: 'monospace', fontSize: 14, color: 'text.secondary' }}>
-                  <Box>Command: <Typography component="span" color="success.main" fontFamily="monospace">RDCAD_IMPORT</Typography></Box>
+                  <Box>Command: <Typography  component="span" color="success.main"  sx={{ fontFamily: 'monospace' }}>RDCAD_IMPORT</Typography></Box>
                   <Box sx={{ mt: 1 }}>Importing: C:\Users\Engineer\Downloads\Beam_B1_300x450.dxf</Box>
                   <Box sx={{ mt: 1 }}>Specify insertion point or [Basepoint/Scale/X/Y/Z/Rotate]:</Box>
                   <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', color: 'primary.main', animation: 'pulse 2s infinite' }}>_</Box>
@@ -110,10 +110,10 @@ export default function MarketingPage() {
       {/* Copy CAD Command Section */}
       <Box sx={{ py: 12, px: { xs: 2, md: 4 }, borderTop: 1, borderColor: 'divider', position: 'relative', zIndex: 10 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={6} sx={{ alignItems: 'center' }} direction={{ xs: 'column', md: 'row-reverse' }}>
+          <Grid container spacing={6} sx={{ alignItems: 'center', flexDirection: { xs: 'column', md: 'row-reverse' } }}>
             <Grid size={{ xs: 12, md: 6 }}>
               <Chip label="Instant Drafting" color="secondary" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
-              <Typography variant="h3" fontWeight="bold" gutterBottom>Copy CAD Command</Typography>
+              <Typography variant="h3"  gutterBottom sx={{ fontWeight: 'bold' }}>Copy CAD Command</Typography>
               <Typography variant="h6" color="text.secondary" gutterBottom>
                 Say goodbye to downloading and importing files. Use the <strong>Copy CAD Command</strong> feature to instantly grab the LISP script of your structural element, and paste it directly into AutoCAD.
               </Typography>
@@ -135,7 +135,7 @@ export default function MarketingPage() {
                 <Box sx={{ width: 96, height: 96, borderRadius: '50%', bgcolor: 'secondary.main', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 3, mb: 3 }}>
                   <Copy size={40} color="white" />
                 </Box>
-                <Typography variant="h5" fontWeight="bold">Copy CAD Command</Typography>
+                <Typography variant="h5"  sx={{ fontWeight: 'bold' }}>Copy CAD Command</Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Click to copy script to clipboard</Typography>
               </Box>
             </Grid>
@@ -149,7 +149,7 @@ export default function MarketingPage() {
           <Grid container spacing={6} sx={{ alignItems: 'center' }}>
             <Grid size={{ xs: 12, md: 6 }}>
               <Chip label="Quality Assured" color="error" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
-              <Typography variant="h3" fontWeight="bold" gutterBottom>Tested & Reliable Core</Typography>
+              <Typography variant="h3"  gutterBottom sx={{ fontWeight: 'bold' }}>Tested & Reliable Core</Typography>
               <Typography variant="h6" color="text.secondary" gutterBottom>
                 We know that structural detailing requires absolute precision. That&apos;s why the core mathematical engine and DXF generator of RDCAD Express are backed by a comprehensive <strong>Vitest</strong> test suite.
               </Typography>
@@ -168,14 +168,14 @@ export default function MarketingPage() {
                   <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: 'text.disabled' }} />
                   <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: 'text.disabled' }} />
                   <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: 'text.disabled' }} />
-                  <Typography variant="caption" color="text.secondary" fontFamily="monospace" sx={{ ml: 1 }}>vitest run</Typography>
+                  <Typography  variant="caption" color="text.secondary"  sx={{ fontFamily: 'monospace',  ml: 1 }}>vitest run</Typography>
                 </Box>
                 <Box sx={{ fontFamily: 'monospace', fontSize: 14 }}>
-                  <Typography color="success.main" fontFamily="monospace">✓ packages/core-math/src/index.test.ts (8 tests)</Typography>
-                  <Typography color="success.main" fontFamily="monospace">✓ packages/dxf-exporter/src/index.test.ts (5 tests)</Typography>
-                  <Typography color="text.secondary" fontFamily="monospace" sx={{ mt: 2 }}>Test Files 2 passed (2)</Typography>
-                  <Typography color="text.secondary" fontFamily="monospace">Tests 13 passed (13)</Typography>
-                  <Typography color="text.secondary" fontFamily="monospace">Duration 843ms</Typography>
+                  <Typography  color="success.main"  sx={{ fontFamily: 'monospace' }}>✓ packages/core-math/src/index.test.ts (8 tests)</Typography>
+                  <Typography  color="success.main"  sx={{ fontFamily: 'monospace' }}>✓ packages/dxf-exporter/src/index.test.ts (5 tests)</Typography>
+                  <Typography  color="text.secondary"  sx={{ fontFamily: 'monospace',  mt: 2 }}>Test Files 2 passed (2)</Typography>
+                  <Typography  color="text.secondary"  sx={{ fontFamily: 'monospace' }}>Tests 13 passed (13)</Typography>
+                  <Typography  color="text.secondary"  sx={{ fontFamily: 'monospace' }}>Duration 843ms</Typography>
                 </Box>
               </Box>
             </Grid>
@@ -187,7 +187,7 @@ export default function MarketingPage() {
       <Box sx={{ py: 12, borderTop: 1, borderColor: 'divider' }}>
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 8 }}>
-            <Typography variant="h4" fontWeight="bold" gutterBottom>Engineering Suite</Typography>
+            <Typography variant="h4"  gutterBottom sx={{ fontWeight: 'bold' }}>Engineering Suite</Typography>
             <Typography color="text.secondary">Everything you need to detail structures efficiently.</Typography>
           </Box>
 
@@ -215,13 +215,13 @@ export default function MarketingPage() {
       {/* Project Feature Section */}
       <Box sx={{ py: 12, px: { xs: 2, md: 4 }, borderTop: 1, borderColor: 'divider', bgcolor: 'background.paper', position: 'relative', zIndex: 10 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={6} sx={{ alignItems: 'center' }} direction={{ xs: 'column-reverse', md: 'row' }}>
+          <Grid container spacing={6} sx={{ flexDirection: { xs: 'column-reverse', md: 'row' },  alignItems: 'center' }} >
             <Grid size={{ xs: 12, md: 6 }}>
               <Box sx={{ bgcolor: 'background.default', borderRadius: 4, border: 1, borderColor: 'divider', p: 4, boxShadow: 6, position: 'relative', overflow: 'hidden' }}>
                 <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(270deg, #3f51b5, #9c27b0)' }} />
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3, borderBottom: 1, borderColor: 'divider', pb: 2 }}>
                   <Box sx={{ width: 32, height: 32, borderRadius: 1, bgcolor: 'primary.light', color: 'primary.contrastText', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>P</Box>
-                  <Typography variant="subtitle2" fontWeight="bold">Project Active Summary</Typography>
+                  <Typography variant="subtitle2"  sx={{ fontWeight: 'bold' }}>Project Active Summary</Typography>
                 </Box>
                 <Stack spacing={2}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 1.5, borderRadius: 2, bgcolor: 'background.paper', border: 1, borderColor: 'divider' }}>
@@ -245,7 +245,7 @@ export default function MarketingPage() {
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
               <Chip label="Project Management" color="primary" size="small" sx={{ mb: 2, fontWeight: 'bold', borderRadius: 1 }} />
-              <Typography variant="h3" fontWeight="bold" gutterBottom>Unified Project Reports</Typography>
+              <Typography variant="h3"  gutterBottom sx={{ fontWeight: 'bold' }}>Unified Project Reports</Typography>
               <Typography variant="h6" color="text.secondary" gutterBottom>
                 Consolidate your structural designs into a single, cohesive project. RDCAD Express allows you to queue multiple elements—beams, columns, slabs—and generate a comprehensive engineering report.
               </Typography>
@@ -269,7 +269,7 @@ export default function MarketingPage() {
       <Box sx={{ py: 12, bgcolor: 'background.default', borderTop: 1, borderColor: 'divider', textAlign: 'center' }}>
         <Container maxWidth="md">
           <GitBranch size={48} style={{ margin: '0 auto 24px', opacity: 0.7 }} />
-          <Typography variant="h4" fontWeight="bold" gutterBottom>Found a Bug? Have an Idea?</Typography>
+          <Typography variant="h4"  gutterBottom sx={{ fontWeight: 'bold' }}>Found a Bug? Have an Idea?</Typography>
           <Typography color="text.secondary" sx={{ mb: 6 }}>
             RDCAD Express is open-source, and we rely on community feedback to improve. If you encounter a bug or have a feature request, you can easily report it on our GitHub repository.
           </Typography>
@@ -318,7 +318,7 @@ function FeatureCard({ icon, title, desc, link }: { icon: React.ReactNode, title
         <Box sx={{ color: 'primary.main', mb: 2 }}>
           {icon}
         </Box>
-        <Typography variant="h6" fontWeight="bold" gutterBottom color="text.primary">
+        <Typography variant="h6"  gutterBottom color="text.primary" sx={{ fontWeight: 'bold' }}>
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">

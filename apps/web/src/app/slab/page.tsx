@@ -49,7 +49,7 @@ export default function SlabDetailing() {
     <Box sx={{ p: { xs: 2, md: 4 }, pt: { xs: 2, md: 2 } }}>
       <Box sx={{ maxWidth: '1200px', mx: 'auto', display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ pb: 2, borderBottom: 1, borderColor: 'divider' }}>
-          <Typography variant="h4" fontWeight="bold">Slab Detailing</Typography>
+          <Typography variant="h4"  sx={{ fontWeight: 'bold' }}>Slab Detailing</Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Parametric 1-way and 2-way slab preview</Typography>
         </Box>
 
@@ -58,7 +58,7 @@ export default function SlabDetailing() {
             <Card variant="outlined">
               <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pb: 2, borderBottom: 1, borderColor: 'divider' }}>
-                  <Typography variant="h6" fontWeight="bold">Properties</Typography>
+                  <Typography variant="h6"  sx={{ fontWeight: 'bold' }}>Properties</Typography>
                   <ExampleSelector examples={slabExamples} onSelect={setSlabData} />
                 </Box>
                 
@@ -98,7 +98,7 @@ export default function SlabDetailing() {
 
                 <Divider sx={{ my: 1 }} />
                 
-                <Stack direction="row" spacing={1} justifyContent="flex-end" flexWrap="wrap">
+                <Stack direction="row" spacing={1} sx={{ justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                   <Button 
                     variant="outlined" 
                     color="inherit"

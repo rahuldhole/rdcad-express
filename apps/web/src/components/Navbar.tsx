@@ -38,7 +38,7 @@ export default function Navbar() {
     <Box onClick={toggleDrawer} sx={{ textAlign: 'center' }}>
       <Box sx={{ my: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
         <Image src="/logo.svg" alt="RDCAD Express Logo" width={32} height={32} />
-        <Typography variant="h6" color="primary" fontWeight="bold">RDCAD Express</Typography>
+        <Typography variant="h6" color="primary"  sx={{ fontWeight: 'bold' }}>RDCAD Express</Typography>
       </Box>
       <Divider />
       <List>
@@ -73,7 +73,7 @@ export default function Navbar() {
         <Toolbar sx={{ justifyContent: 'space-between', maxWidth: 1280, mx: 'auto', width: '100%' }}>
           <Box component={Link} href="/" sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none', color: 'inherit' }}>
             <Image src="/logo.svg" alt="RDCAD Express Logo" width={32} height={32} />
-            <Typography variant="h6" color="primary" fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography variant="h6" color="primary"  sx={{ fontWeight: 'bold',  display: 'flex', alignItems: 'center', gap: 1 }}>
               RDCAD Express
               <Chip label="Beta" size="small" color="primary" variant="outlined" sx={{ height: 20, fontSize: '0.625rem' }} />
             </Typography>

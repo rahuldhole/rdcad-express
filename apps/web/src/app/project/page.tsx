@@ -82,7 +82,7 @@ export default function ProjectDashboard() {
         {/* Header */}
         <Box sx={{ pb: 2, borderBottom: 1, borderColor: 'divider', display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', sm: 'center' }, gap: 2 }}>
           <Box>
-            <Typography variant="h4" fontWeight="bold">Project Dashboard</Typography>
+            <Typography variant="h4"  sx={{ fontWeight: 'bold' }}>Project Dashboard</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
               {projectItems.length === 0 
                 ? "Configure structural elements, then add them here for batch export." 
@@ -210,7 +210,7 @@ export default function ProjectDashboard() {
                     </Box>
                   ) : (
                     <Box>
-                      <Typography variant="body2" fontWeight="medium" fontFamily="monospace" noWrap>
+                      <Typography  variant="body2"   noWrap sx={{ fontFamily: 'monospace',  fontWeight: 'medium' }}>
                         {item.name}<Typography component="span" color="text.secondary">.dxf</Typography>
                       </Typography>
                       <Typography variant="caption" color="text.secondary" sx={{ textTransform: 'capitalize', display: 'block', mt: 0.5 }}>

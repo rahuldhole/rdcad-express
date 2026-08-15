@@ -74,7 +74,7 @@ export default function AssetLibrary() {
       <Box sx={{ maxWidth: '1200px', mx: 'auto', display: 'flex', flexDirection: 'column', gap: 4 }}>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'flex-end' }, gap: 2, pb: 3, borderBottom: 1, borderColor: 'divider' }}>
           <Box>
-            <Typography variant="h4" fontWeight="bold">Architectural Asset Library</Typography>
+            <Typography variant="h4"  sx={{ fontWeight: 'bold' }}>Architectural Asset Library</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Browse and download standard DXF blocks for your drawings.</Typography>
           </Box>
           <TextField 
@@ -98,7 +98,7 @@ export default function AssetLibrary() {
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {Object.entries(groupedAssets).map(([category, assets]) => (
             <Box key={category}>
-              <Typography variant="h6" fontWeight="bold" sx={{ mb: 3, pb: 1, borderBottom: 1, borderColor: 'divider' }}>
+              <Typography variant="h6"  sx={{ fontWeight: 'bold',  mb: 3, pb: 1, borderBottom: 1, borderColor: 'divider' }}>
                 {category}
               </Typography>
               <Grid container spacing={3}>
@@ -123,7 +123,7 @@ export default function AssetLibrary() {
                           <DXFPreview dxfString={dxfString} staticMode={true} />
                         </Box>
                         <CardActions sx={{ p: 2, justifyContent: 'space-between', bgcolor: 'background.paper' }}>
-                          <Typography variant="body2" fontWeight="medium" noWrap sx={{ pr: 2 }}>
+                          <Typography variant="body2"  noWrap sx={{ fontWeight: 'medium',  pr: 2 }}>
                             {asset.name}
                           </Typography>
                           <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
@@ -169,13 +169,13 @@ export default function AssetLibrary() {
         onClose={() => setPreviewAsset(null)}
         fullWidth
         maxWidth="lg"
-        PaperProps={{ sx: { height: '80vh' } }}
+        sx={{ '& .MuiDialog-paper': { height: '80vh' } }}
       >
         {previewAsset && (
           <>
             <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: 1, borderColor: 'divider', pb: 2 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Typography variant="h6" fontWeight="bold">{previewAsset.name}</Typography>
+                <Typography variant="h6"  sx={{ fontWeight: 'bold' }}>{previewAsset.name}</Typography>
                 <Chip label={previewAsset.category} size="small" color="secondary" variant="outlined" />
               </Box>
               <IconButton onClick={() => setPreviewAsset(null)} size="small">

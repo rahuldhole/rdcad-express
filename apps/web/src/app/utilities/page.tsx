@@ -96,7 +96,7 @@ export default function GridUtilities() {
     <Box sx={{ p: { xs: 2, md: 4 }, pt: { xs: 2, md: 2 } }}>
       <Box sx={{ maxWidth: '1200px', mx: 'auto', display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ pb: 2, borderBottom: 1, borderColor: 'divider' }}>
-          <Typography variant="h4" fontWeight="bold">Drafting Utilities</Typography>
+          <Typography variant="h4"  sx={{ fontWeight: 'bold' }}>Drafting Utilities</Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Smart tools for auto-numbering and finding text</Typography>
         </Box>
 
@@ -105,7 +105,7 @@ export default function GridUtilities() {
             <Stack spacing={4}>
               <Card variant="outlined">
                 <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  <Typography variant="h6" fontWeight="bold" sx={{ pb: 2, borderBottom: 1, borderColor: 'divider' }}>
+                  <Typography variant="h6"  sx={{ fontWeight: 'bold',  pb: 2, borderBottom: 1, borderColor: 'divider' }}>
                     Auto-Numbering
                   </Typography>
                   
@@ -133,7 +133,7 @@ export default function GridUtilities() {
 
               <Card variant="outlined">
                 <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  <Typography variant="h6" fontWeight="bold" sx={{ pb: 2, borderBottom: 1, borderColor: 'divider' }}>
+                  <Typography variant="h6"  sx={{ fontWeight: 'bold',  pb: 2, borderBottom: 1, borderColor: 'divider' }}>
                     Find & Replace
                   </Typography>
                   
@@ -202,7 +202,7 @@ export default function GridUtilities() {
                 )}
               </Card>
               
-              <Stack direction="row" justifyContent="flex-end">
+              <Stack direction="row" sx={{ justifyContent: 'flex-end' }}>
                 <Button 
                   variant="contained" 
                   color="success"

@@ -28,7 +28,7 @@ export default function TemplatesDetailing() {
     <Box sx={{ p: { xs: 2, md: 4 }, pt: { xs: 2, md: 2 } }}>
       <Box sx={{ maxWidth: '1200px', mx: 'auto', display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ pb: 2, borderBottom: 1, borderColor: 'divider' }}>
-          <Typography variant="h4" fontWeight="bold">Drawing Templates</Typography>
+          <Typography variant="h4"  sx={{ fontWeight: 'bold' }}>Drawing Templates</Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Generate standard title blocks and sheet borders</Typography>
         </Box>
 
@@ -36,7 +36,7 @@ export default function TemplatesDetailing() {
           <Grid size={{ xs: 12, md: 6 }}>
             <Card variant="outlined">
               <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                <Typography variant="h6" fontWeight="bold" sx={{ pb: 2, borderBottom: 1, borderColor: 'divider' }}>
+                <Typography variant="h6"  sx={{ fontWeight: 'bold',  pb: 2, borderBottom: 1, borderColor: 'divider' }}>
                   Properties
                 </Typography>
                 
@@ -110,7 +110,7 @@ export default function TemplatesDetailing() {
 
                 <Divider sx={{ my: 1 }} />
                 
-                <Stack direction="row" spacing={1} justifyContent="flex-end">
+                <Stack direction="row" spacing={1} sx={{ justifyContent: 'flex-end' }}>
                   <Button 
                     variant="contained" 
                     color="success"

@@ -56,7 +56,7 @@ export default function ProjectModal() {
       <DialogTitle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <FolderPlusIcon color="primary" />
-          <Typography variant="h6" fontWeight="bold">Add {typeLabel} to Project</Typography>
+          <Typography variant="h6"  sx={{ fontWeight: 'bold' }}>Add {typeLabel} to Project</Typography>
         </Box>
         <IconButton onClick={handleClose} size="small">
           <CloseIcon />
@@ -75,16 +75,16 @@ export default function ProjectModal() {
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 1 }}>
             <Box sx={{ p: 2, bgcolor: 'background.default', borderRadius: 1, border: 1, borderColor: 'divider' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="caption" color="text.secondary" textTransform="uppercase">Element Type</Typography>
-                <Typography variant="body2" color="primary" fontWeight="medium" textTransform="capitalize">{projectModalData.type}</Typography>
+                <Typography  variant="caption" color="text.secondary"  sx={{ textTransform: 'uppercase' }}>Element Type</Typography>
+                <Typography  variant="body2" color="primary"   sx={{ textTransform: 'capitalize',  fontWeight: 'medium' }}>{projectModalData.type}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="caption" color="text.secondary" textTransform="uppercase">File Size</Typography>
-                <Typography variant="body2" fontFamily="monospace">{(projectModalData.dxfString.length / 1024).toFixed(1)} KB</Typography>
+                <Typography  variant="caption" color="text.secondary"  sx={{ textTransform: 'uppercase' }}>File Size</Typography>
+                <Typography  variant="body2"  sx={{ fontFamily: 'monospace' }}>{(projectModalData.dxfString.length / 1024).toFixed(1)} KB</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="caption" color="text.secondary" textTransform="uppercase">Items in Project</Typography>
-                <Typography variant="body2" fontFamily="monospace">{projectItems.length}</Typography>
+                <Typography  variant="caption" color="text.secondary"  sx={{ textTransform: 'uppercase' }}>Items in Project</Typography>
+                <Typography  variant="body2"  sx={{ fontFamily: 'monospace' }}>{projectItems.length}</Typography>
               </Box>
             </Box>
 
@@ -96,9 +96,11 @@ export default function ProjectModal() {
               onChange={(e) => setName(e.target.value)}
               placeholder={projectModalData.defaultName}
               autoFocus
-              InputProps={{
-                endAdornment: <InputAdornment position="end">.dxf</InputAdornment>,
-                sx: { fontFamily: 'monospace' }
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">.dxf</InputAdornment>,
+                  sx: { fontFamily: 'monospace' }
+                }
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleSave();

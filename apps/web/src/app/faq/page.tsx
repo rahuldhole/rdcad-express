@@ -66,8 +66,8 @@ export default function FAQPage() {
           Back to Home
         </Button>
         
-        <Typography variant="h3" component="h1" fontWeight="extrabold" sx={{ mb: 2 }}>
-          Frequently Asked <Typography component="span" variant="h3" fontWeight="extrabold" color="primary.main">Questions</Typography>
+        <Typography variant="h3" component="h1"  sx={{ fontWeight: 'extrabold',  mb: 2 }}>
+          Frequently Asked <Typography component="span" variant="h3"  color="primary.main" sx={{ fontWeight: 'extrabold' }}>Questions</Typography>
         </Typography>
         
         <Typography variant="h6" color="text.secondary" sx={{ mb: 6, fontWeight: 'normal' }}>
@@ -81,7 +81,7 @@ export default function FAQPage() {
                 expandIcon={<ChevronDown size={20} />}
                 sx={{ p: 3, '& .MuiAccordionSummary-content': { my: 0 } }}
               >
-                <Typography variant="h6" fontWeight="bold">{faq.question}</Typography>
+                <Typography variant="h6"  sx={{ fontWeight: 'bold' }}>{faq.question}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ px: 3, pb: 3, pt: 0 }}>
                 <Typography color="text.secondary" sx={{ lineHeight: 1.7 }}>
@@ -94,7 +94,7 @@ export default function FAQPage() {
         
         <Card variant="outlined" sx={{ mt: 8, textAlign: 'center', p: { xs: 4, md: 6 }, borderRadius: 4, boxShadow: 4 }}>
           <CardContent>
-            <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>
+            <Typography variant="h5"  sx={{ fontWeight: 'bold',  mb: 2 }}>
               Still have questions?
             </Typography>
             <Typography color="text.secondary" sx={{ mb: 4 }}>
