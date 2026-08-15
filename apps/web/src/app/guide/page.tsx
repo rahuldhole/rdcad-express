@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, PlayCircle, Settings, Download, Copy, Code } from "lucide-react";
+import { ArrowLeft, PlayCircle, Settings, Copy, Code } from "lucide-react";
 import { PwaInstallButton } from "@/components/PwaInstallButton";
 export const metadata = {
   title: "Startup Guide - RDCAD Express",
@@ -96,7 +96,7 @@ export default function GuidePage() {
           </div>
           <div className="p-8 bg-card border border-border rounded-2xl">
             <h4 className="text-xl font-bold mb-2">Install App (Optional)</h4>
-            <p className="text-muted-foreground mb-6">You can install RDCAD Express as a Progressive Web App (PWA) using your browser's install button.</p>
+            <p className="text-muted-foreground mb-6">You can install RDCAD Express as a Progressive Web App (PWA) using your browser&apos;s install button.</p>
             <div className="w-full flex justify-center [&>*]:w-full [&>*]:justify-center">
               <PwaInstallButton />
             </div>

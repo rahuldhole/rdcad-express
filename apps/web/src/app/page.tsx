@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, GitBranch, Code, Layers, Cpu, Compass, Copy, FileQuestion, BookOpen } from "lucide-react";
+import { ArrowRight, GitBranch, Code, Layers, Cpu, Compass, Copy } from "lucide-react";
 import { ProtectedEmail } from "@/components/ProtectedEmail";
 import { PwaInstallButton } from "@/components/PwaInstallButton";
 
