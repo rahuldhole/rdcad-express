@@ -120,8 +120,18 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
  }
  };
 
+ const handleFullscreen = () => {
+ if (containerWrapperRef.current) {
+ if (document.fullscreenElement) {
+ document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+ } else {
+ containerWrapperRef.current.requestFullscreen().catch(err => console.error("Error entering fullscreen:", err));
+ }
+ }
+ };
+
  return (
- <div ref={containerWrapperRef} className="w-full h-full flex flex-col relative overflow-hidden" style={staticMode ? {} : { minHeight: "500px" }}>
+ <div ref={containerWrapperRef} className="w-full h-full flex flex-col relative overflow-hidden bg-background" style={staticMode ? {} : { minHeight: "500px" }}>
  {!staticMode && (
  <div className="flex items-center gap-2 p-2 border-b border-border bg-background/80 z-10 relative shadow-sm">
  <button onClick={handleFit} className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors" title="Reset View">
@@ -133,7 +143,7 @@ export default function DXFPreview({ dxfString, staticMode = false }: DXFPreview
  <button onClick={() => handleZoom(0.8)} className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors" title="Zoom Out">
  <ZoomOut className="w-4 h-4" />
  </button>
- <button onClick={handleFit} className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors ml-auto" title="Fit to Screen">
+ <button onClick={handleFullscreen} className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors ml-auto" title="Full Screen">
  <Maximize className="w-4 h-4" />
  </button>
  </div>
