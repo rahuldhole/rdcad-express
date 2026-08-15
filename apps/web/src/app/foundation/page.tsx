@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Download, Copy, Check } from "lucide-react";
+import { Download, Copy, Check, Save } from "lucide-react";
 import {  exportFoundationSectionToDXF, exportFoundationSectionToScript  } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
@@ -50,7 +50,7 @@ export default function FoundationDetailing() {
  <h1 className="text-3xl font-bold text-foreground">Foundation Detailing</h1>
  <p className="text-muted-foreground mt-2">Parametric footing plan and section with DXF export</p>
  </div>
- <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
+ <div className="flex flex-wrap items-center gap-2">
  <ExampleSelector examples={foundationExamples} onSelect={setFdnData} />
  <button 
  onClick={() => {
@@ -60,16 +60,16 @@ export default function FoundationDetailing() {
  dxfString 
  });
  }}
- className="flex items-center justify-center gap-2 px-4 py-2 bg-muted hover:bg-muted text-foreground rounded font-medium transition whitespace-nowrap"
- >
- Save
- </button>
- <button onClick={handleExport} className="flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20 whitespace-nowrap">
- <Download className="w-4 h-4" /> Export DXF
- </button>
-          <button onClick={handleCopyScript} className="flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium transition shadow-lg shadow-indigo-500/20 whitespace-nowrap">
+ className="flex items-center justify-center p-2 bg-muted hover:bg-muted/80 text-foreground rounded transition"
+  title="Save"
+  >
+  <Save className="w-4 h-4" />
+  </button>
+ <button onClick={handleExport} className="flex items-center justify-center p-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded transition shadow-lg shadow-emerald-500/20" title="Export DXF">
+  <Download className="w-4 h-4" />
+  </button>
+          <button onClick={handleCopyScript} className="flex items-center justify-center p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded transition shadow-lg shadow-indigo-500/20" title="Copy CAD Command">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-            Copy CAD Command
           </button>
  </div>
  </header>
