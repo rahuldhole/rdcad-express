@@ -135,7 +135,7 @@ export default function FoundationDetailing() {
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }}>
-            <Card variant="outlined" sx={{ minHeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+            <Card variant="outlined" sx={{ minHeight: 500, position: 'relative', overflow: 'hidden' }}>
               <Box sx={{ position: 'absolute', top: 16, left: 16, zIndex: 10, bgcolor: 'background.paper', px: 1, py: 0.5, borderRadius: 1, fontSize: '0.75rem', fontFamily: 'monospace', color: 'text.secondary' }}>
                 Live DXF Render
               </Box>

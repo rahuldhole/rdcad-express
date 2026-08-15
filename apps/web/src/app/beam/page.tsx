@@ -156,7 +156,7 @@ export default function BeamDetailing() {
           </Grid>
 
           <Grid size={{ xs: 12, md: 6 }}>
-            <Card variant="outlined" sx={{ minHeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+            <Card variant="outlined" sx={{ minHeight: 500, position: 'relative', overflow: 'hidden' }}>
               {dxfString && <DXFPreview dxfString={dxfString} />}
             </Card>
           </Grid>
