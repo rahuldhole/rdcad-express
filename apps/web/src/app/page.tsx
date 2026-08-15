@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, GitBranch, Code, Layers, Cpu, Compass } from "lucide-react";
+import { ArrowRight, GitBranch, Code, Layers, Cpu, Compass, Copy, FileQuestion, BookOpen } from "lucide-react";
 import { ProtectedEmail } from "@/components/ProtectedEmail";
 import { PwaInstallButton } from "@/components/PwaInstallButton";
 
@@ -28,8 +28,8 @@ export default function MarketingPage() {
  </p>
  
  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full max-w-3xl mx-auto">
- <Link href="/setup" className="group flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary text-primary-foreground rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] w-full sm:w-auto">
- Setup Guide
+ <Link href="/guide" className="group flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)] w-full sm:w-auto">
+ Startup Guide
  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
  </Link>
  <div className="w-full sm:w-auto">
@@ -94,6 +94,51 @@ export default function MarketingPage() {
  <div className="text-primary flex items-center gap-2 mt-4 animate-pulse">
  <span>_</span>
  </div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ {/* Copy CAD Command Section */}
+ <section className="py-24 px-8 border-t border-slate-900/50 bg-background relative z-10">
+ <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
+ <div className="flex-1 space-y-6">
+ <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-sm font-semibold tracking-wide uppercase">
+ Instant Drafting
+ </div>
+ <h2 className="text-3xl md:text-5xl font-bold">Copy CAD Command</h2>
+ <p className="text-lg text-muted-foreground leading-relaxed">
+ Say goodbye to downloading and importing files. Use the <span className="font-semibold text-foreground">Copy CAD Command</span> feature to instantly grab the LISP script of your structural element, and paste it directly into AutoCAD.
+ </p>
+ <ul className="space-y-4 text-foreground">
+ <li className="flex items-center gap-3">
+ <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">✓</div>
+ Generates drawing instantly at your cursor
+ </li>
+ <li className="flex items-center gap-3">
+ <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">✓</div>
+ Completely eliminates file clutter
+ </li>
+ <li className="flex items-center gap-3">
+ <div className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">✓</div>
+ Faster than standard DXF exports
+ </li>
+ </ul>
+ <div className="pt-4">
+ <Link href="/guide" className="inline-flex items-center gap-2 px-6 py-3 bg-muted hover:bg-muted/80 text-foreground rounded-lg font-medium transition shadow-sm">
+ Read the Workflow Guide
+ <ArrowRight className="w-4 h-4" />
+ </Link>
+ </div>
+ </div>
+ <div className="flex-1 w-full flex items-center justify-center bg-card rounded-2xl border border-border p-12 shadow-2xl relative overflow-hidden group">
+ <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500"></div>
+ <div className="relative group-hover:scale-105 transition-transform duration-500 flex flex-col items-center">
+ <div className="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center shadow-lg shadow-indigo-600/30 mb-6 group-hover:shadow-indigo-600/50 transition-shadow">
+ <Copy className="w-10 h-10 text-white" />
+ </div>
+ <div className="text-xl font-bold text-foreground">Copy CAD Command</div>
+ <div className="text-sm text-muted-foreground mt-2">Click to copy script to clipboard</div>
  </div>
  </div>
  </div>

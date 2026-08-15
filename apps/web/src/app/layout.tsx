@@ -41,6 +41,7 @@ export const metadata: Metadata = {
  },
 };
 
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ProjectModal from "@/components/ProjectModal";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -72,6 +73,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
  </div>
  </div>
  <div className="flex items-center gap-4">
+ <Link href="/guide" className="hover:text-foreground transition-colors hidden sm:inline font-medium">Guide</Link>
+ <Link href="/faq" className="hover:text-foreground transition-colors hidden sm:inline font-medium">FAQ</Link>
  <ThemeToggle />
  <a 
  href="https://github.com/rahuldhole/rdcad-express/issues" 
