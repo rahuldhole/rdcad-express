@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { Download } from "lucide-react";
+import React, { useState } from "react";
+import { Download, Copy, Check } from "lucide-react";
 import { exportTemplateToDXF } from "@rdcad-express/dxf-exporter";
 import { useAppStore } from "@/store/useStore";
 import DXFPreview from "@/components/DXFPreview";
@@ -10,6 +10,7 @@ export default function TemplatesDetailing() {
  const templateData = useAppStore(state => state.templateData);
  const setTemplateData = useAppStore(state => state.setTemplateData);
  const dxfString = React.useMemo(() => exportTemplateToDXF(templateData), [templateData]);
+ const [copied, setCopied] = useState(false);
 
  const handleExport = () => {
  const blob = new Blob([dxfString], { type: "text/plain" });
@@ -19,6 +20,16 @@ export default function TemplatesDetailing() {
  a.download = `${templateData.projectName.replace(/\s+/g, "_")}-TitleBlock.dxf`;
  a.click();
  URL.revokeObjectURL(url);
+ };
+
+ const handleCopy = async () => {
+   try {
+     await navigator.clipboard.writeText(dxfString);
+     setCopied(true);
+     setTimeout(() => setCopied(false), 2000);
+   } catch (err) {
+     console.error("Failed to copy DXF", err);
+   }
  };
 
  return (
@@ -69,11 +80,14 @@ export default function TemplatesDetailing() {
  <input type="date" value={templateData.date} onChange={e => setTemplateData({...templateData, date: e.target.value})} className="w-full bg-background border border-border rounded p-2 text-sm focus:border-blue-700 dark:border-blue-500" />
  </div>
  </div>
- <div className="flex flex-wrap items-center justify-end gap-2 mt-4 pt-4 border-t border-border">
- <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
- <Download className="w-4 h-4" /> <span className="hidden sm:inline text-sm font-medium">Export DXF</span>
- </button>
- </div>
+  <div className="flex flex-wrap items-center justify-end gap-2 mt-4 pt-4 border-t border-border">
+  <button onClick={handleCopy} className="flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded font-medium transition shadow-sm border border-border">
+  {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />} <span className="hidden sm:inline text-sm font-medium">Copy DXF</span>
+  </button>
+  <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded font-medium transition shadow-lg shadow-emerald-500/20">
+  <Download className="w-4 h-4" /> <span className="hidden sm:inline text-sm font-medium">Export DXF</span>
+  </button>
+  </div>
  </div>
 
  <div className="bg-card rounded border border-border flex items-center justify-center relative overflow-hidden" style={{ minHeight: "500px" }}>

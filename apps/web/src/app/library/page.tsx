@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Download, Search, Maximize, X } from "lucide-react";
+import { Download, Search, Maximize, X, Copy, Check } from "lucide-react";
 import { 
   exportDoorDXF, exportWindowDXF, exportNorthSymbolDXF,
   exportDoubleDoorDXF, exportSlidingDoorDXF, exportGarageDoorDXF,
@@ -42,6 +42,7 @@ type AssetType = { id: string; name: string; category: string; generate: () => s
 export default function AssetLibrary() {
   const [search, setSearch] = useState("");
   const [previewAsset, setPreviewAsset] = useState<AssetType | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const filteredAssets = ASSETS.filter(a => 
     a.name.toLowerCase().includes(search.toLowerCase()) || 
@@ -63,6 +64,17 @@ export default function AssetLibrary() {
     a.download = `${asset.id}.dxf`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleCopy = async (asset: AssetType) => {
+    const dxfString = asset.generate();
+    try {
+      await navigator.clipboard.writeText(dxfString);
+      setCopiedId(asset.id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error("Failed to copy DXF", err);
+    }
   };
 
   return (
@@ -116,6 +128,16 @@ export default function AssetLibrary() {
                           <button 
                             onClick={(e) => {
                               e.stopPropagation();
+                              handleCopy(asset);
+                            }}
+                            className="p-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md transition-colors"
+                            title="Copy DXF"
+                          >
+                            {copiedId === asset.id ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                          </button>
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
                               handleExport(asset);
                             }}
                             className="p-2 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground rounded-md transition-colors"
@@ -148,6 +170,12 @@ export default function AssetLibrary() {
               <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-md">{previewAsset.category}</span>
             </div>
             <div className="flex items-center gap-2">
+              <button 
+                onClick={() => handleCopy(previewAsset)}
+                className="flex items-center gap-2 px-3 py-1.5 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors text-sm"
+              >
+                {copiedId === previewAsset.id ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />} Copy
+              </button>
               <button 
                 onClick={() => handleExport(previewAsset)}
                 className="flex items-center gap-2 px-3 py-1.5 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm"
