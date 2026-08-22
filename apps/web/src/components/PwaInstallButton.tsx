@@ -67,9 +67,9 @@ export function PwaInstallButton() {
  return (
  <button
  onClick={handleInstallClick}
- className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-foreground rounded-full font-bold border border-blue-400/30 hover:border-blue-400/50 transition-all shadow-[0_0_20px_-5px_rgba(59,130,246,0.5)] hover:scale-105 cursor-pointer"
+ className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-full font-bold border border-blue-400/30 hover:border-blue-400/50 transition-all shadow-[0_0_20px_-5px_rgba(59,130,246,0.5)] hover:scale-105 cursor-pointer"
  >
- <Download className="w-5 h-5" />
+ <Download className="w-6 h-6 animate-bounce" />
  Install Desktop App
  </button>
  );

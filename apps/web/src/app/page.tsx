@@ -18,12 +18,12 @@ export default function MarketingPage() {
  RDCAD Express Open Source
  </div>
  
- <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 bg-clip-text text-transparent transition-colors">
+ <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-200 bg-clip-text text-transparent transition-colors">
  Parametric Structural <br className="hidden md:block" />
  <span className="bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-400 bg-clip-text text-transparent">Detailing Reimagined</span>
  </h1>
  
- <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-12 transition-colors">
+ <p className="text-lg md:text-xl text-muted-foreground dark:text-slate-300 max-w-3xl mb-12 transition-colors">
  An advanced suite of open-source engineering tools for generating accurate Bar Bending Schedules, DXF exports, and detailed structural designs instantly.
  </p>
  
