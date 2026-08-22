@@ -1,6 +1,16 @@
 name: Deploy Next.js site to Pages
 
 on:
+  push:
+    branches: ["main"]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - ".github/workflows/deploy.yml"
+    paths-ignore:
+      - "docs/**"
+      - "packages/**/test/**"
+      - "packages/**/playwright/**"
   workflow_dispatch:
 
 permissions:
