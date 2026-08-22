@@ -7,10 +7,9 @@ on:
       - "apps/web/**"
       - "packages/**"
       - ".github/workflows/deploy.yml"
-    paths-ignore:
-      - "docs/**"
-      - "packages/**/test/**"
-      - "packages/**/playwright/**"
+      - "!docs/**"
+      - "!packages/**/test/**"
+      - "!packages/**/playwright/**"
   workflow_dispatch:
 
 permissions:
